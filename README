@@ -6,6 +6,8 @@ Test2
 
 test 3
 
+git hash test
+
 Repo layout
 ===========
 php/ - Externally exposed php code goes here
