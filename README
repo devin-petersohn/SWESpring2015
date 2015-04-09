@@ -4,6 +4,8 @@ TEST dpvx8
 
 Test2
 
+git hash test
+
 Repo layout
 ===========
 php/ - Externally exposed php code goes here
