@@ -1,5 +1,7 @@
 Feel free to change or remove this file, it is informational only.
 
+TEST dpvx8
+
 Repo layout
 ===========
 php/ - Externally exposed php code goes here
