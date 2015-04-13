@@ -222,7 +222,7 @@ h3 {
 <body>
 <section class='container'>
     <hgroup>
-      <h1>Welcome to your Zend Server application on OpenShift</h1>
+      <h1>Welcome to the TA/PLA Website Application.</h1>
     </hgroup>
     <div class="row">
       <section class="col-md-12">
