@@ -5,4 +5,5 @@
         <release>1.0.0</release>
     </version>
     <appdir>data</appdir>
+    <docroot>data/public</docroot>
 </package>

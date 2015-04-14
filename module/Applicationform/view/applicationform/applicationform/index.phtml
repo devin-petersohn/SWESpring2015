@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>Application Form</title>
+	
+	 <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/swe-style.css')
+    ?>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js"></script>
+  
+</head>
+<body>
+	
+	<div id="container">
+        <form action="#" method="post">
+	
+            <!-- #first_step -->
+            <div id="first_step">
+                <h1>COMPUTER SCIENCE DEPARTMENT<br> <span>GRADUATE TEACHING ASSISTANT APPLICATION</span> </h1>
+
+                <div class="form">
+
+                    <select name="selection" id="selection" value="selection" >
+                    <option value="TA">TA (grad student)</option>
+                    <option value="PLA">PLA (undergrad student)!</option>
+      
+                    </select>
+                    <input type="text" name="name" id="name" value="name" />
+                    <label for="name">Please enter your full name.</label>
+
+                    <input type="text" name="gpa" id="gpa" value="gpa" />
+                    <label for="gpa">Please enter your GPA.</label>
+                </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
+                <input class="submit" type="submit" name="submit_first" id="submit_first" value="" />
+            </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
+
+
+            <!-- #second_step -->
+            <div id="second_step">
+                <h1>COMPUTER SCIENCE DEPARTMENT<br> <span>GRADUATE TEACHING ASSISTANT APPLICATION</span> </h1>
+
+                <div class="form">
+                    <input type="text" name="ID" id="ID" value="stu ID" />
+                    <label for="ID">Your student ID. </label>
+
+                    <input type="text" name="source" id="source" value="enter the full info" />
+                    <label for="source">If undergraduate applying for PLA, indicate program and level (ex.CS BA jr). If graduate, please enter advisor name. </label>
+                    <input type="text" name="email" id="email" value="email address" />
+                    <label for="email">Your email address. We send important administration notices to this address. </label>                    
+                </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
+                <input class="submit" type="submit" name="submit_second" id="submit_second" value="" />
+            </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
+
+
+            <!-- #third_step -->
+            <div id="third_step">
+                <h1>COMPUTER SCIENCE DEPARTMENT<br> <span>GRADUATE TEACHING ASSISTANT APPLICATION</span> </h1>
+                <div class="form">
+                    <input type="text" name="phoneNum" id="phoneNum" value="phone number" />
+                    <label for="phoneNum">Your phone number. </label>
+
+                    <input type="text" name="gradDate" id="gradDate" value="graduate date" />
+                    <label for="gradDate">Please enter your graduation date.(MM-YY)</label>
+                    <input type="text" name="currCourses" id="currCourses" value="current teaching courses" />
+                    <label for="currCourses">Course(s) You Are Currently Teaching </label>                    
+                </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->     
+                    
+                <input class="submit" type="submit" name="submit_third" id="submit_third" value="" />
+                
+            </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
+            
+            <!-- #fourth_step -->
+            <div id="fourth_step">
+                <h1>COMPUTER SCIENCE DEPARTMENT<br> <span>GRADUATE TEACHING ASSISTANT APPLICATION</span> </h1>
+                <div class="form">
+                    <input type="text" name="precourse" id="precourse" value="Previously Taught" />
+                    <label for="precourse">Course(s) You Have Previously Taught: </label>
+
+                    <input type="text" name="courseLike" id="courseLike" value="Course you would like and grade" />
+                    <label for="courseLike">Course(s) You Would Like to Teach (must have taken previously), include grades received:</label>
+                    <input type="text" name="otherPlace" id="otherPlace" value="other place" />
+                    <label for="otherPlace">Other Places You Work:</label>                    
+                </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->     
+                    
+                <input class="submit" type="submit" name="submit_fourth" id="submit_fourth" value="" />
+                
+            </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
+           <!-- #fifth_step -->
+            <div id="fifth_step">
+                <h1>COMPUTER SCIENCE DEPARTMENT<br> <span>GRADUATE TEACHING ASSISTANT APPLICATION</span> </h1>
+                <div class="form">
+                    <input type="text" name="speakScore" id="speakScore" value="speak score" />
+                    <label for="speakScore">SPEAK/OPT score, if applicable</label>
+                    <input type="text" name="semesterLast" id="semesterLast" value="enter the semster" />
+                    <label for="semesterLast">Semester of last test</label>
+                    <input type="text" name="semesterLast" id="semesterLast" value="enter the semster" />
+                    <label for="semesterLast">Semester of last test</label>
+                   
+                 
+                </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->     
+                    
+                <input class="submit" type="submit" name="submit_fifth" id="submit_fifth" value="" />
+                
+            </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
+             
+
+             <!-- #sixth_step -->
+            <div id="sixth_step">
+                <h1>COMPUTER SCIENCE DEPARTMENT<br> <span>GRADUATE TEACHING ASSISTANT APPLICATION</span> </h1>
+                <div class="form">
+                    <li>Please list the courses that you’d like to be a TA for</li>
+                    <li>Per CS Dept. policy, GTA’s must not exceed half-time total employmentwithin the University system including, but not limited to, the CS department.</li>
+                     <li>New TAs, ITAs, and PLAs who have received an appointment, are required to participate in the GATO (Graduate Assistant Teaching Orientation), which is offered just prior to the start of fall and winter terms. (You do not need to attend more than once.) </li>
+                 
+                </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->     
+                    
+                <input class="submit" type="submit" name="submit_sixth" id="submit_sixth" value="" />
+                
+            </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
+           
+            <!-- #xxth_step -->
+            <div id="xxth_step">
+                <h1>COMPUTER SCIENCE DEPARTMENT<br> <span>GRADUATE TEACHING ASSISTANT APPLICATION</span> </h1>
+
+                <div class="form">
+                    <h2>Summary</h2>
+                    
+                    <table>
+                        <tr><td>Name</td><td></td></tr>
+                        <tr><td>Gpa</td><td></td></tr>
+                        <tr><td>Email</td><td></td></tr>
+                        <tr><td>Name</td><td></td></tr>
+                        <tr><td>Age</td><td></td></tr>
+                        <tr><td>Gender</td><td></td></tr>
+                        <tr><td>Country</td><td></td></tr>
+                    </table>
+                </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
+                <input class="send submit" type="submit" name="submit_fourth" id="submit_fourth" value="" />            
+            </div>
+            
+        </form>
+	</div>
+	<div id="progress_bar">
+        <div id="progress"></div>
+        <div id="progress_text">0% Complete</div>
+	</div>
+	
+</body>
+</html>
