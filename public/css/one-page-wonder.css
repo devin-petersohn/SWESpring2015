@@ -1,0 +1,265 @@
+/*!
+ * Start Bootstrap - One Page Wonder HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+body {
+    margin-top: 50px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+#images{
+	position : absolute;
+	left : 0px;
+	top : 0px;
+	height : 51px;
+}
+
+#contain{
+	margin-left : 210px;
+}
+
+
+.navbars{
+	background-color : black;
+}
+
+.header-image {
+    display: block;
+    width: 100%;
+    text-align: center;
+	height: 470px;
+    background: url('https://reidfoster.files.wordpress.com/2012/05/dsc_69961.jpg') no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.headline {
+    padding: 120px 0;
+	padding-top : 90px;
+}
+
+.headline h1 {
+    font-size: 130px;
+    background: #fff;
+    background: rgba(255,255,255,0.9);
+}
+
+.headline h2 {
+    font-size: 77px;
+    background: transparent;
+    background: rgba(255,255,255,0.7);
+}
+
+#bground{
+	background: rgba(207,207,207,0.5);
+}
+
+.featurette-divider {
+    margin: 80px 0;
+	margin-top :40px;
+	margin-bottom : 40px;
+}
+
+.featurette {
+    overflow: hidden;
+	height : 500px;
+}
+
+.featurette-image.pull-left {
+    margin-right: 40px;
+}
+
+.featurette-image.pull-right {
+    margin-left: 40px;
+}
+
+.featurette-heading {
+    font-size: 50px;
+	width : 700px;
+}
+
+.lead{
+	width: 700px;
+}
+
+.login{
+	position: absolute;
+	top: 690px;
+	left: 900px;
+	-webkit-box-shadow: 3px 3px 8px #000000;
+	-moz-box-shadow: 3px 3px 8px #000000;
+	box-shadow: 3px 3px 8px #000000;
+	width: 300px;
+	height: 250px;
+	background: #F1B82D;
+	border-radius: 5px;
+	
+}
+
+.trumanface{
+	display: block;
+	width: 100%;
+	height: 60px;
+	background: transparent url(../img/truman-face.png) no-repeat center top;
+	background-size: 80px 83px;
+	position: absolute;
+	top: -59px;
+	z-index: 1;
+}
+
+
+
+.trumanpaws{
+	display: block;
+	width: 100%;
+	height: 22px;
+	background: transparent url(../img/truman-paws.png) no-repeat center center;
+	background-size: 140px 22px;
+	position: absolute;
+	top: -9px;
+	z-index: 3;
+}
+
+.loginbutton{
+	background: black;
+	box-shadow: 2px 2px 4px grey;
+	//background:-moz-linear-gradient(top,#828282,#000000);
+	//background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#828282), to(#000000));
+	width: 100px;
+	height: 45px;
+	margin-top: 20px;
+	font-size: 18px;
+	font-weight: 600;
+	color: rgba(255,193,37,0.8);
+}
+
+.text{
+	text-align: center;
+	margin-top: 35px;
+}
+
+footer {
+    margin-top: 60px;
+	margin-bottom: 20px;
+}
+
+@media(max-width:1200px) {
+    .headline h1 {
+        font-size: 140px;
+    }
+
+    .headline h2 {
+        font-size: 63px;
+    }
+
+    .featurette-divider {
+        margin: 50px 0;
+    }
+
+    .featurette-image.pull-left {
+        margin-right: 20px;
+    }
+
+    .featurette-image.pull-right {
+        margin-left: 20px;
+    }
+
+    .featurette-heading {
+        font-size: 35px;
+    }
+}
+
+@media(max-width:991px) {
+    .headline h1 {
+        font-size: 105px;
+    }
+
+    .headline h2 {
+        font-size: 50px;
+    }
+
+    .featurette-divider {
+        margin: 40px 0;
+    }
+
+    .featurette-image {
+        max-width: 50%;
+    }
+
+    .featurette-image.pull-left {
+        margin-right: 10px;
+    }
+
+    .featurette-image.pull-right {
+        margin-left: 10px;
+    }
+
+    .featurette-heading {
+        font-size: 30px;
+    }
+}
+
+@media(max-width:768px) {
+    .container {
+        margin: 0 15px;
+    }
+
+    .featurette-divider {
+        margin: 40px 0;
+    }
+
+    .featurette-heading {
+        font-size: 25px;
+    }
+}
+
+@media(max-width:668px) {
+    .headline h1 {
+        font-size: 70px;
+    }
+
+    .headline h2 {
+        font-size: 32px;
+    }
+
+    .featurette-divider {
+        margin: 30px 0;
+    }
+}
+
+@media(max-width:640px) {
+    .headline {
+        padding: 75px 0 25px 0;
+    }
+
+    .headline h1 {
+        font-size: 60px;
+    }
+
+    .headline h2 {
+        font-size: 30px;
+    }
+}
+
+@media(max-width:375px) {
+    .featurette-divider {
+        margin: 10px 0;
+    }
+
+    .featurette-image {
+        max-width: 100%;
+    }
+
+    .featurette-image.pull-left {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .featurette-image.pull-right {
+        margin-bottom: 10px;
+        margin-left: 0;
+    }
+}
