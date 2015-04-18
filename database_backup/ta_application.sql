@@ -45,7 +45,8 @@ resume_filepath VARCHAR(50),
 gpa FLOAT,
 gato_req_met BOOLEAN,
 app_submitted BOOLEAN,
-submit_date DATE
+submit_date DATE,
+score INT
 );
 
 CREATE TABLE applicant_prev_taught_course (
