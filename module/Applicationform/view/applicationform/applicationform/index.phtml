@@ -4,21 +4,24 @@
 
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 	<title>Application Form</title>
-	
 	 <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/swe-style.css')
+	           ->prependStylesheet('//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css');
     ?>
     <?php echo $this->headScript()
         ->prependFile($this->basePath() . '/js/jquery-ui.min.js')
         ->prependFile($this->basePath() . '/js/jquery.inputfocus-0.9.min.js')
-        ->prependFile($this->basePath() . '/js/jquery-applicationForm.js');
+        ->prependFile($this->basePath() . '/js/jquery-applicationForm.js')
         
+        ->prependFile('//code.jquery.com/ui/1.11.4/jquery-ui.js')
+        ->prependFile('//code.jquery.com/jquery-1.10.2.js');
+    
     
          ?>   
  
 </head>
 <body>
 	
-	<div id="container">
+<div id="container">
         <form action="#" method="post">
 	
             <!-- #first_step -->
@@ -66,8 +69,14 @@
                     <input type="text" name="phoneNum" id="phoneNum" value="phone number" />
                     <label for="phoneNum">Your phone number. </label>
 
-                    <input type="text" name="gradDate" id="gradDate" value="graduate date" />
-                    <label for="gradDate">Please enter your graduation date.(MM-YY)</label>
+
+
+                    <p> <input type="text" name="gradDate" id="gradDate" value="graduate date"></p>
+                    <label for="gradDate">Please enter your graduation date.</label>
+
+
+
+
                     <input type="text" name="currCourses" id="currCourses" value="current teaching courses" />
                     <label for="currCourses">Course(s) You Are Currently Teaching </label>                    
                 </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->     
@@ -98,10 +107,9 @@
                 <div class="form">
                     <input type="text" name="speakScore" id="speakScore" value="speak score" />
                     <label for="speakScore">SPEAK/OPT score, if applicable</label>
-                    <input type="text" name="semesterLast" id="semesterLast" value="enter the semster" />
-                    <label for="semesterLast">Semester of last test</label>
-                    <input type="text" name="semesterLast" id="semesterLast" value="enter the semster" />
-                    <label for="semesterLast">Semester of last test</label>
+                    <p><input type="text" name="semesterLast" id="semesterLast" value="enter the semster" /></p>
+                    <label for="semesterLast">Time of last test</label>
+                    
                    
                  
                 </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->     
@@ -115,9 +123,19 @@
             <div id="sixth_step">
                 <h1>COMPUTER SCIENCE DEPARTMENT<br> <span>GRADUATE TEACHING ASSISTANT APPLICATION</span> </h1>
                 <div class="form">
-                    <li>Please list the courses that you’d like to be a TA for</li>
-                    <li>Per CS Dept. policy, GTA’s must not exceed half-time total employmentwithin the University system including, but not limited to, the CS department.</li>
-                     <li>New TAs, ITAs, and PLAs who have received an appointment, are required to participate in the GATO (Graduate Assistant Teaching Orientation), which is offered just prior to the start of fall and winter terms. (You do not need to attend more than once.) </li>
+                    <li class="note">Please list the courses that you’d like to be a TA for</li>
+                    <br>
+                    <li class="note">Per CS Dept. policy, GTA’s must not exceed half-time total employmentwithin the University system including, but not limited to, the CS department.</li>
+                    <br>
+                     <li class="note">New TAs, ITAs, and PLAs who have received an appointment, are required to participate in the GATO (Graduate Assistant Teaching Orientation), which is offered just prior to the start of fall and winter terms. (You do not need to attend more than once.) </li>
+                     <select name="selectiontwo" id="selectiontwo" value="selectiontwo" >
+                    <option value="rm">Requirement met</option>
+                    <option value="will attend">Will attend in Aug./Jan. (if selected)</option>
+                    </select>
+                    <br>
+                    <li class="note">Please return this form to 244 EBW along with a current resume!</li>
+
+
                  
                 </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->     
                     
@@ -125,24 +143,89 @@
                 
             </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
            
+
+            <!-- #seventh_step -->
+            <div id="seventh_step">
+                <h1>COMPUTER SCIENCE DEPARTMENT<br> <span>GRADUATE TEACHING ASSISTANT APPLICATION</span> </h1>
+                <div class="form">
+                    <li class="note">INTERNATIONAL STUDENTS, PLEASE BE AWARE OF THE FOLLOWING:</li>
+                    <br>
+                    <li class="note">Prior to becoming a TA, any ITA (International Teaching Assistant) who received their primary and secondary education in a country where English is not the principal language are required by law to be assessed for English proficiency (SPEAK test). If you do not register for and satisfy applicable language assessment requirements, you will not be eligible to accept a TA appointment. Arrangements for language assessments must be made before the end of the semester prior to accepting a TA position.</li>
+                    <br>
+                     <li class="note">New TAs, ITAs, and PLAs who have received an appointment, are required to participate in the GATO (Graduate Assistant Teaching Orientation), which is offered just prior to the start of fall and winter terms. (You do not need to attend more than once.) </li>
+                     <select name="selectionthree" id="selectionthree" value="selectionthree" >
+                    <option value="rm">Requirement met</option>
+                    <option value="register">Registered for SPEAK (date)</option>
+                    </select>
+
+                    <br>
+                    <li class="note">A potential ITA is required to have satisfactorily completed at least one semester as a student at the University of Missouri before being considered for a TA position.</li>
+
+
+                 
+                </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->     
+                    
+                <input class="submit" type="submit" name="submit_seventh" id="submit_seventh" value="" />
+                
+            </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
+           
+
+           <!-- #eighth_step -->
+           <div id="eighth_step">
+                <h1>COMPUTER SCIENCE DEPARTMENT<br> <span>GRADUATE TEACHING ASSISTANT APPLICATION</span> </h1>
+                <div class="form">
+                   
+                    <li class="note">New TAs, ITAs, and PLAs who have received an appointment, are required to participate in the GATO (Graduate Assistant Teaching Orientation), which is offered just prior to the start of fall and winter terms. (You do not need to attend more than once.)</li>
+                    <br>
+                     <li class="note">New TAs, ITAs, and PLAs who have received an appointment, are required to participate in the GATO (Graduate Assistant Teaching Orientation), which is offered just prior to the start of fall and winter terms. (You do not need to attend more than once.) </li>
+                      <select name="selectionfour" id="selectionfour" value="selectionfour" >
+                     <option value="rm">Requirement met</option>
+                     <option value="will attend">Will attend in Aug./Jan. (if selected)</option>
+                     </select>
+
+                     <li class="note">ONITA, is a requirement for all international TAs and PLAs who have not previously attended this orientation. You cannot have a TA/PLA appointment until this requirement has been met. (You do not need to attend more than once.) </li>
+                     
+
+                    <br>
+                    <li class="note">A potential ITA is required to have satisfactorily completed at least one semester as a student at the University of Missouri before being considered for a TA position.</li>
+
+                    <select name="selectionfive" id="selectionfive" value="selectionfive" >
+                    <option value="rm">Requirement met</option>
+                    <option value="will attend">Will attend in Aug./Jan. (if selected)</option>
+                    </select>
+
+                 
+                </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->     
+                    
+                <input class="submit" type="submit" name="submit_eighth" id="submit_eighth" value="" />
+                
+            </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
             <!-- #xxth_step -->
-            <div id="xxth_step">
+            <div id="ninth_step">
                 <h1>COMPUTER SCIENCE DEPARTMENT<br> <span>GRADUATE TEACHING ASSISTANT APPLICATION</span> </h1>
 
                 <div class="form">
                     <h2>Summary</h2>
                     
+          
                     <table>
+                        <tr><td>TA? PLA?</td><td></td></tr>
                         <tr><td>Name</td><td></td></tr>
-                        <tr><td>Gpa</td><td></td></tr>
+                        <tr><td>GPA</td><td></td></tr>
+                        <tr><td>Stu ID</td><td></td></tr>
+                        <tr><td>Program and level</td><td></td></tr>
                         <tr><td>Email</td><td></td></tr>
-                        <tr><td>Name</td><td></td></tr>
-                        <tr><td>Age</td><td></td></tr>
-                        <tr><td>Gender</td><td></td></tr>
-                        <tr><td>Country</td><td></td></tr>
+                        <tr><td>Phone number</td><td></td></tr>
+                        <tr><td>Graduation Date</td><td></td></tr>
+                        <tr><td>Current teaching Courses</td><td></td></tr>
+                        <tr><td>Previous teaching courses</td><td></td></tr>
+                        <tr><td>Course you would lke to teach and grade</td><td></td></tr>
+                        <tr><td>Other place you work</td><td></td></tr>
+                        <tr><td>Speak score</td><td></td></tr>
+                        <tr><td>Semester of last test</td><td></td></tr>
                     </table>
                 </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
-                <input class="send submit" type="submit" name="submit_fourth" id="submit_fourth" value="" />            
+                <input class="send submit" type="submit" name="submit_ninth" id="submit_ninth" value="" />            
             </div>
             
         </form>
