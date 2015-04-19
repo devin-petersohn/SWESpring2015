@@ -24,6 +24,7 @@ if($conn) {
     }
     else {
         echo "error. \n \n";
+    }
 }
 
 ?>
