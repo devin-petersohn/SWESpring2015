@@ -1,30 +1,28 @@
 CREATE OR REPLACE FUNCTION insert_into_faculty()
-	RETURNS trigger AS
-$BODY$
+	RETURNS trigger AS $$
 BEGIN
 	INSERT INTO users(sso,domain) VALUES(NEW.sso, 'missouri.edu');
 	INSERT INTO faculty(sso) VALUES(NEW.sso);
 	RETURN NEW;
 END;
-$BODY$
+$$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION insert_into_users()
-	RETURNS trigger AS
-$BODY$
+	RETURNS trigger AS $$
 BEGIN
 	INSERT INTO users(sso,domain) VALUES(NEW.sso, 'mail.missouri.edu');
 	RETURN NEW;
 END;
-$BODY$
+$$ LANGUAGE plpgsql;
 
 CREATE TRIGGER instructor_faculty BEFORE INSERT ON Instructor 
-	FOR EACH ROW EXECUTE PROCEDURE insert_into_faculty;
+	FOR EACH ROW EXECUTE PROCEDURE insert_into_faculty();
 CREATE TRIGGER sys_admin_faculty BEFORE INSERT ON Sys_Admin 
-	FOR EACH ROW EXECUTE PROCEDURE insert_into_faculty;
+	FOR EACH ROW EXECUTE PROCEDURE insert_into_faculty();
 CREATE TRIGGER admin_faculty BEFORE INSERT ON Admin 
-	FOR EACH ROW EXECUTE PROCEDURE insert_into_faculty;
+	FOR EACH ROW EXECUTE PROCEDURE insert_into_faculty();
 CREATE TRIGGER applicant_user BEFORE INSERT ON Applicant 
-	FOR EACH ROW EXECUTE PROCEDURE insert_into_faculty;
+	FOR EACH ROW EXECUTE PROCEDURE insert_into_users();
 
 INSERT INTO Instructor (sso) VALUES ($sso);
 INSERT INTO Sys_Admin (sso) VALUES ($sso);
