@@ -5,7 +5,7 @@ require 'functions.php';
 
 //-------------------------------------------Variables--------------------------------------------------------
 //track the type of query
-$qtype = $_GET['query_type']
+$qtype = $_GET['query_type'];
 //Start the DB connection
 $conn = db_connect();
 // This will be the query for the db
