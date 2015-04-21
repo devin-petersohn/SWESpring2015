@@ -1,5 +1,5 @@
 <div style="width:300px; margin-left:auto; margin-right:auto; margin-top:200px;">
-    <form id='login' action='login.php' method='post' accept-charset='UTF-8'>
+    <form id='login' action='' method='post' accept-charset='UTF-8'>
         <fieldset style="text-align:center;" >
         <legend>Login</legend>
         <input type='hidden' name='submitted' id='submitted' value='1'/>
@@ -9,7 +9,7 @@
         <br>
         <br>
         <label for='password' >Password:</label>
-        <input type='password' name='password' id='password' maxlength="50" />
+        <input type='text' name='password' id='password' maxlength="50" />
         <br>
         <br>
         <input type='submit' name='login' value='Login' />
@@ -27,57 +27,68 @@
     </footer>
     
     <?php 
+    if(isset($_POST['login']))
+    {
+        Login();
+    }
+    
     function Login()
     {
         if(empty($_POST['pawprint']))
         {
-            $this->HandleError("PawPrint is empty!");
+            echo "<br>password is empty!";
             return false;
         }
          
         if(empty($_POST['password']))
         {
-            $this->HandleError("Password is empty!");
+            echo "<br>password is empty!";
             return false;
         }
          
         $pawprint = trim($_POST['pawprint']);
         $password = trim($_POST['password']);
          
-        if(!$this->CheckLoginInDB($pawprint,$password))
+        if(!CheckLoginInDB($pawprint,$password))
         {
             return false;
         }
-         
-        session_start();
-         
-        $_SESSION[$this->GetLoginSessionVar()] = $pawprint;
-         
+
+        echo "<br>YOU HAVE LOGGED IN!";
         return true;
     }
     
     function CheckLoginInDB($pawprint,$password)
     {
-        if(!$this->DBLogin())
+        
+        require "php/functions.php";
+        $DBconn = db_connect();
+        require "php/authentication.php";
+        $results = authenticate($pawprint, $password, $DBconn);
+        if($results['error'] == 1)
         {
-            $this->HandleError("Database login failed!");
+            echo "<p>Incorrect username or password</p>";
             return false;
         }
-        $pawprint = $this->SanitizeForSQL($pawprint);
-        $pwdmd5 = md5($password);
-        $qry = "Select name, email from $this->tablename ".
-            " where username='$username' and password='$pwdmd5' ".
-            " and confirmcode='y'";
-         
-        $result = mysql_query($qry,$this->connection);
-         
-        if(!$result || mysql_num_rows($result) <= 0)
+        else if($results['error'] == 2)
         {
-            $this->HandleError("Error logging in. ".
-                "The username or password does not match");
-            return false;
+            echo "<p>Unauthorized Access</p>";
         }
-        return true;
+        else if($results['error'] == 0){
+            if($results['type'] == "instructor"){
+                echo ("professorpage");
+            }
+            else if($results[type] == "applicant"){
+                echo("studentpage");
+            }
+            else if($results[type] == "admin"){
+                echo("adminpage");
+            }
+            else if($results[type] == "sysAdmin"){
+                echo("adminpage");
+            }
+          
+        }
     }
     
     ?>
