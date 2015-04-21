@@ -14,6 +14,7 @@ class Profile implements InputFilterAwareInterface
      
     public function exchangeArray($data)
     {
+        var_dump($data['fileupload']);
         $this->profilename  = (isset($data['profilename']))  ? $data['profilename']     : null; 
         $this->fileupload  = (isset($data['fileupload']))  ? $data['fileupload']     : null; 
     } 
