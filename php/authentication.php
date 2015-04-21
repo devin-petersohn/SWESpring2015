@@ -170,6 +170,7 @@ function authenticate($username, $password, $dbconn)
 				$isStudent = true;
 			}
 		}
+		$results['type'] = "applicant";
 		
 	}
 	//not successful login
@@ -243,6 +244,10 @@ function authenticate($username, $password, $dbconn)
 		}
 	}
 */
+	if(!$results['type'])
+	{
+	    $results['type'] = "instructor";
+	}
 	return $results;
 }
 
