@@ -247,7 +247,7 @@ $(function(){
 
     $('#submit_fourth').click(function(){
         //send information to server
-        $("#container").css("height", "280px");
+        $("#container").css("height", "370px");
         $('#fourth_step input').removeClass('error').removeClass('valid');
         var fields = $('#fourth_step input[type=text]');
         var error = 0;
@@ -270,10 +270,11 @@ $(function(){
                 
                 //slide steps
                 $('#fourth_step').slideUp();
-                $('#fifth_step').slideDown();       
+                $('#sixth_step').slideDown();       
         } else return false;
     });
 
+    //it's delete now. submit_fifth
     $('#submit_fifth').click(function(){
         //send information to server
         $("#container").css("height", "370px");
@@ -305,7 +306,7 @@ $(function(){
 
     $('#submit_sixth').click(function(){
         //send information to server
-        $("#container").css("height", "475px");
+        $("#container").css("height", "630px");
         $('#sixth_step input').removeClass('error').removeClass('valid');
         var fields = $('#sixth_step input[type=text]');
         var error = 0;
@@ -327,8 +328,19 @@ $(function(){
                 $('#progress').css('width','309.6px');
                 
                 //slide steps
-                $('#sixth_step').slideUp();
-                $('#senventh_step').slideDown();       
+                console.log($('#selectionifinternational').val());
+                if($('#selectionifinternational').val()=="yes")
+                {
+                	$('#sixth_step').slideUp();
+                    $('#senventh_step').slideDown(); 
+                }
+                else
+                {
+                	$('#sixth_step').slideUp();
+                    $('#eighth_step').slideDown(); 
+                }
+                
+                      
         } else return false;
     });
 
