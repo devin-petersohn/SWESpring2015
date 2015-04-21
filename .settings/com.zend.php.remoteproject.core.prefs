@@ -1,7 +1,11 @@
+=\=\=\=\=\=\=
+branch 'master' of ssh\://5521922ce0b8cd0d310000d2@swespring2015-grouph.rhcloud.com/~/git/swespring2015.git/
 LaunchURL=http\://server/folder
 Save\ Mode=ON_SAVE
 
+
 SelectedHostGUID=3640891b-64d8-40b9-a813-f947f7ce172c
+
 UploadFolder=/var/lib/openshift/5521922ce0b8cd0d310000d2/zend/php-5.4/var/apps/http/__default__/0/swespring2015/1.0.0
 eclipse.preferences.version=1
 isLocalProjectEnabled=false
