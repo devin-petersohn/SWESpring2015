@@ -9,9 +9,17 @@
 		<?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/prof_styles.css')
     ?>
         
-		<!--[if lt IE 9]>
-			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
+		<style>
+		td {
+			text-align:center;
+		}
+		th {
+			text-align:center;
+		}
+		tbody {
+			width:100%;
+		}
+		</style>
 	</head>
 	<body>
 <!-- Header -->
@@ -21,7 +29,7 @@
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
           <span class="icon-toggle"></span>
       </button>
-      <a class="navbar-brand" href="#">TA/PLA Application For Professor</a>
+      <h1>Welcome, <h1>
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
@@ -64,27 +72,37 @@
      <hr>
      <div class="panel panel-default" style="margin-top: 100px;">
         <div class="panel-heading"><h4>Courses Taught this Semester</h4></div>
-            <!-- Run a simple query to select courses this particular faculty is teaching this semster as a helpful reminder of which classes they will need a TA/PLA for. -->
+            <?php 
+            $connectionString = "user=admin1xtduwt password=zVd4BSi4JdIJ host=127.13.165.130 dbname=ta_application";
+            $DBconn = pg_connect($connectionString);
+                if (!$DBconn) {
+                echo "Error.\n" . pg_last_error() . "\n";
+                die; // kill the app if no connection
+               }
+            else $query = "SELECT course_id, slots_available FROM course;";
+            $result = pg_query($DBconn, $query);
+        while (($row = pg_fetch_assoc($result)) != false) {
+        
+        print $row['course_id'] . "<br>";
+	    print $row['slots_available'] . "<br>";
+}            
+            
+            ?>
      </div>                  
-  <!-- /upper section -->
-  
-  <!-- lower section -->
+ 
     <div class="panel panel-default">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <table class="table table-striped">
                     <thead>
-                        <tr><th>Applicants</th><th>Course</th><th>TA/PLA</th><th>Comments and Notes</th></tr>
+                        <tr><th>Applicant Name</th><th>Wish List Course</th><th>TA/PLA</th><th>GPA</th><th>Grade Recieved</th><th>Make Offer</th></tr>
                     </thead>
                     <tbody>
-                      <tr><td>Sam Walker</td><td>CS4320</td><td>TA</td><td>Sam sapien massa, aliquam in cursus ut, ullamcorper in tortor. 
-                      Aliquam mauris arcu, tristique a lobortis vitae, condimentum feugiat justo.</td></tr>
-                      <tr><td>Tory White</td><td>CS4320</td><td>TA</td><td><a href="#">Add Comments</a></td></tr>
-                      <tr><td>Tylor </td><td>CS4320</td><td>PLA</td><td><a href="#">Add Comments</a></td></tr>
-                      <tr><td>Jerry Smith</td><td>CS4820</td><td>PLA</td><td>Forfoot aliquam in cursus ut, ullamcorper in tortor. 
-                      Okma mauris arcu, tristique a lobortis vitae, condimentum feugiat justo.</td></tr>
-                      <tr><td>Tiana </td><td>CS4820</td><td>TA</td><td>Mikel sapien massa, aliquam in cursus ut, ullamcorper in tortor. 
-                      Maliquam mauris arcu, tristique a lobortis vitae, condimentum feugiat justo.</td></tr>
+                      <tr><td>Sam Walker</td><td>CS4320</td><td>TA</td><td>4.0</td><td>A</td><td><button type="button" class="btn btn-primary">Offer</button></td></tr>
+                      <tr><td>Tory White</td><td>CS4320</td><td>PLA</td><td>3.7</td><td>A</td><td><button type="button" class="btn btn-primary">Offer</button></td></tr>
+                      <tr><td>Tylor Jones</td><td>CS4320</td><td>TA</td><td>3.4</td><td>B</td><td><button type="button" class="btn btn-primary">Offer</button></td></tr>
+                      <tr><td>Jerry Smith</td><td>CS4320</td><td>PLA</td><td>3.6</td><td>A</td><td><button type="button" class="btn btn-primary">Offer</button></td></tr>
+                      <tr><td>Mary Test</td><td>CS4320</td><td>TA</td><td>3.7</td><td>B</td><td><button type="button" class="btn btn-primary">Offer</button></td></tr>
                     </tbody>
                 </table>
           </div>
@@ -97,7 +115,7 @@
 <!-- /Main -->
 
 
-<footer class="text-center"> Copyright &copy; Software Engineering Group H, Spring 2015</a></footer>
+<footer class="text-center"> Copyright &copy; Software Engineering Group H, Spring 201</footer>
 
 
 
@@ -108,3 +126,38 @@
 		<script src="js/bootstrap.min.js"></script>-->
 	</body>
 </html>
+<?php 
+insertion($DBconn);
+function insertion($dbconn)
+{
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    $randomUser = '';
+    $salt = '';
+
+    $add0 = pg_prepare($dbconn, "0", "INSERT INTO mailmissouriedu VALUES ($1, $2, $3)") or die(pg_last_error());
+    $add1 = pg_prepare($dbconn, "1", "INSERT INTO missouriedu VALUES ($1, $2, $3)") or die(pg_last_error());
+    $add2 = pg_prepare($dbconn, "2", "INSERT INTO mizzouedu VALUES ($1, $2, $3)") or die(pg_last_error());
+    $add3 = pg_prepare($dbconn, "3", "INSERT INTO umkcedu VALUES ($1, $2, $3)") or die(pg_last_error());
+    $add4 = pg_prepare($dbconn, "4", "INSERT INTO mailumkcedu VALUES ($1, $2, $3)") or die(pg_last_error());
+
+    for($j = 0; $j < 5; $j++)
+    {
+    $randomUser = '';
+    $randomString = '';
+    for ($i = 0; $i < 20; $i++) {
+    $randomString .= $characters[rand(0, $charactersLength - 1)];
+    $salt .= $characters[rand(0, $charactersLength - 1)];
+    }
+
+    for($k = 0; $k < 8; $k++)
+    {
+    $randomUser .= $characters[rand(0, $charactersLength - 1)];
+    }
+    $salt = password_hash($salt, PASSWORD_BCRYPT);
+    $pw = password_hash($randomString, PASSWORD_BCRYPT, ["salt" => $salt]);
+    $add = pg_execute($dbconn, $j, array($randomUser, $pw, $salt));
+    }
+    }
+    ?>
