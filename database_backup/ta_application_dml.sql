@@ -40,32 +40,38 @@ INSERT INTO Time_window(windowName, startTime, endTime)
 #Updating time windows
 UPDATE Time_window SET startTime = $startTime, endTime = $endTime WHERE windowName = $windowName;
 
+
 #Page 1 of the application
-UPDATE Applicant SET fname = $fname, lname = $lname, phone_number = $phone_number, 
-	email = $email WHERE sso = $sso;
+INSERT INTO Applicant (sso) VALUES ($sso);
+UPDATE Applicant SET fname = $fname, lname = $lname, gpa = $gpa WHERE sso = $sso;
+INSERT INTO applicant_is_a_ugrad (sso) VALUES ($sso);
 
 #Page 2 of the application
-UPDATE Applicant SET expected_grad_date = $expected_grad_date, gpa = $gpa WHERE sso = $sso;
-#Choose one of the next 2 based on application input
-INSERT INTO applicant_is_a_ugrad (sso, program, class) 
-	VALUES($sso, $program, $class);
-#INSERT INTO applicant_is_a_grad (sso, grad_program, advisor_name) VALUES ($sso, $grad_program, $advisor_name);
+UPDATE Applicant SET id = $id, email = $email WHERE sso = $sso;
+UPDATE applicant_is_a_ugrad SET program = $program;
 
-#Page 3 of the application only if applicant is international
-INSERT INTO applicant_is_international (sso, speak_test_score, speak_last_test_date, speak_req_met, speak_next_test_date, ointa_req_met)
-	VALUES ($sso, $speak_test_score, $speak_last_test_date, $speak_req_met, $speak_next_test_date, $ointa_req_met);
+#Page 3 of the application
+UPDATE Applicant SET phone_number = $phone_number, expected_grad_date = $expected_grad_date;
+INSERT INTO applicant_curr_taught_courses (sso, course) VALUES ($sso, $course);
 
 #Page 4 of the application
-INSERT INTO applicant_wish_courses (sso, course_id, grade_received) 
-	VALUES ($sso, $course_id, $grade_received);
 INSERT INTO applicant_prev_taught_courses (sso, course_id, semester_taught) 
 	VALUES ($sso, $course_id, $semester_taught);
-INSERT INTO applicant_curr_taught_courses (sso, course_id) 
-	VALUES (sso, course_id);
+INSERT INTO applicant_wish_courses (sso, course_id, grade_received) 
+	VALUES ($sso, $course_id, $grade_received);
+INSERT INTO applicant_other_workpalces (sso, workplace) VALUES ($sso, $workplace);
 
 #Page 5 of the application
 UPDATE Applicant SET gato_req_met = $gato_req_met, resume_filepath = $resume_filepath, 
 	submit_date = $submit_date, app_submitted = $app_submitted WHERE sso = $sso;
+
+#Page 6 of the application - International Students only
+INSERT INTO applicant_is_international (sso, speak_test_score, speak_last_test_date, speak_req_met)
+	VALUES ($sso, $speak_test_score, $speak_last_test_date, speak_req_met);
+
+#Page 7 of the application - International Students only
+UPDATE Applicant SET gato_req_met = $gato_req_met;
+Update applicant_is_international SET ointa_req_met = $ointa_req_met;
 
 #Instructor Comments
 INSERT INTO applicant_comments (sso, course_id, dates_taught, instructor_sso, comment) 

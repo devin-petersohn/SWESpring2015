@@ -21,7 +21,7 @@ sso VARCHAR(50) PRIMARY KEY REFERENCES Faculty(sso) ON DELETE CASCADE
 
 CREATE TABLE Course (
 course_id VARCHAR(50) NOT NULL,
-section VARCHAR(5) NOT NULL,
+section VARCHAR(50) NOT NULL,
 slots_available int
 PRIMARY KEY (course_id, section)
 );
@@ -29,7 +29,7 @@ PRIMARY KEY (course_id, section)
 CREATE TABLE instructor_teaches (
 instructor_sso VARCHAR(50) REFERENCES Instructor(sso) ON DELETE CASCADE,
 course_id VARCHAR(50) REFERENCES Course(course_id) ON DELETE CASCADE,
-section VARCHAR(5) NOT NULL,
+section VARCHAR(50) NOT NULL,
 PRIMARY KEY (instructor_sso, course_id)
 );
 
@@ -51,9 +51,9 @@ score INT
 
 CREATE TABLE applicant_prev_taught_course (
 sso VARCHAR(50) REFERENCES Applicant(sso) ON DELETE CASCADE,
-course_id VARCHAR(50) REFERENCES Course(course_id) ON DELETE CASCADE,
+course VARCHAR(50),
 semester_taught VARCHAR(20) NOT NULL,
-PRIMARY KEY (sso, course_id)
+PRIMARY KEY (sso, course, semester_taught)
 );
 
 CREATE TABLE applicant_other_workplaces (
@@ -63,23 +63,24 @@ workplace VARCHAR(50)
 
 CREATE TABLE applicant_curr_taught_courses (
 sso VARCHAR(50) REFERENCES Applicant(sso) ON DELETE CASCADE,
-course_id VARCHAR(50) REFERENCES Course(course_id) ON DELETE CASCADE,
-PRIMARY KEY (sso,course_id)
+course VARCHAR(50),
+PRIMARY KEY (sso,course)
 );
 
 CREATE TABLE applicant_offer_received (
 sso VARCHAR(50) REFERENCES Applicant(sso) ON DELETE CASCADE,
 course_id VARCHAR(50) REFERENCES Course(course_id) ON DELETE CASCADE,
-section VARCHAR(5),
+section VARCHAR(50) REFERENCES Course(section) ON DELETE CASCADE,
 offer_accepted BOOLEAN,
-PRIMARY KEY (sso, course_id)
+PRIMARY KEY (sso, course_id, section)
 );
 
 CREATE TABLE applicant_wish_course (
 sso VARCHAR(50) REFERENCES Applicant(sso) ON DELETE CASCADE,
 course_id VARCHAR(50) REFERENCES Course(course_id) ON DELETE CASCADE,
+section VARCHAR(50) REFERENCES Course(section) ON DELETE CASCADE,
 grade_received CHAR(2),
-PRIMARY KEY (sso,course_id)
+PRIMARY KEY (sso,course_id, section)
 );
 
 CREATE TABLE appliant_comments (
@@ -93,7 +94,7 @@ PRIMARY KEY (sso, course_id, dates_taught)
 
 CREATE TABLE applicant_is_a_ugrad (
 sso VARCHAR(50) PRIMARY KEY REFERENCES Applicant(sso) ON DELETE CASCADE,
-program CHAR(2),
+program VARCHAR(50),
 class VARCHAR(10)
 );
 
@@ -116,4 +117,11 @@ CREATE TABLE Time_window (
 windowName VARCHAR(50) PRIMARY KEY,
 startTime DATE,
 endTime DATE
+);
+
+CREATE TABLE applicant_course_assignments (
+sso VARCHAR(50) REFERENCES Applicant(sso) ON DELETE CASCADE,
+course_id VARCHAR(50) REFERENCES Course(course_id) ON DELETE CASCADE,
+section VARCHAR(50) REFERENCES Course(section) ON DELETE CASCADE,
+PRIMARY KEY (sso, course_id, section)
 );
