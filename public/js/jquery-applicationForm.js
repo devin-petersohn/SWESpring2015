@@ -72,7 +72,6 @@ $(function(){
 
         $(function() {
             $("#semesterLast").datepicker();
-            $("#semesterLast").datepicker.formatDate( "mm-yy", new Date() );
             });
 
         
@@ -119,7 +118,7 @@ $(function(){
                 //update progress bar
             $('#progress_text').html('16% Complete');
             $('#progress').css('width','54px');
-            
+            $('label').css('float','');
             //slide steps
             $('#first_step').slideUp();
             $('#second_step').slideDown();     
@@ -130,6 +129,37 @@ $(function(){
         else return false;
          
     });
+    
+    $('#submit_temp').click(function(){
+        //send information to server
+        $("#container").css("height", "570px");
+        $('#temp_step input').removeClass('error').removeClass('valid');
+        var fields = $('#temp_step input[type=text]');
+        var error = 0;
+        fields.each(function(){
+            var value = $(this).val();
+            if( value.length<1 || value==field_values[$(this).attr('id')] ) {
+                $(this).addClass('error');
+                $(this).effect("shake", { times:3 }, 50);
+                
+                error++;
+            } else {
+                $(this).addClass('valid');
+            }
+        });
+
+        if(!error) {
+                //update progress bar
+                $('#progress_text').html('20% Complete');
+                $('#progress').css('width','76px');
+                
+                //slide steps
+                $('#temp_step').slideUp();
+                $('#second_step').slideDown();       
+        } else return false;
+    });
+    
+    
 
 
     $('#submit_second').click(function(){
@@ -217,7 +247,7 @@ $(function(){
 
     $('#submit_fourth').click(function(){
         //send information to server
-        $("#container").css("height", "280px");
+        $("#container").css("height", "370px");
         $('#fourth_step input').removeClass('error').removeClass('valid');
         var fields = $('#fourth_step input[type=text]');
         var error = 0;
@@ -240,10 +270,11 @@ $(function(){
                 
                 //slide steps
                 $('#fourth_step').slideUp();
-                $('#fifth_step').slideDown();       
+                $('#sixth_step').slideDown();       
         } else return false;
     });
 
+    //it's delete now. submit_fifth
     $('#submit_fifth').click(function(){
         //send information to server
         $("#container").css("height", "370px");
@@ -275,7 +306,7 @@ $(function(){
 
     $('#submit_sixth').click(function(){
         //send information to server
-        $("#container").css("height", "475px");
+        $("#container").css("height", "630px");
         $('#sixth_step input').removeClass('error').removeClass('valid');
         var fields = $('#sixth_step input[type=text]');
         var error = 0;
@@ -297,8 +328,19 @@ $(function(){
                 $('#progress').css('width','309.6px');
                 
                 //slide steps
-                $('#sixth_step').slideUp();
-                $('#senventh_step').slideDown();       
+                console.log($('#selectionifinternational').val());
+                if($('#selectionifinternational').val()=="yes")
+                {
+                	$('#sixth_step').slideUp();
+                    $('#senventh_step').slideDown(); 
+                }
+                else
+                {
+                	$('#sixth_step').slideUp();
+                    $('#eighth_step').slideDown(); 
+                }
+                
+                      
         } else return false;
     });
 
