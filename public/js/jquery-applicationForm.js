@@ -72,7 +72,6 @@ $(function(){
 
         $(function() {
             $("#semesterLast").datepicker();
-            $("#semesterLast").datepicker.formatDate( "mm-yy", new Date() );
             });
 
         
@@ -119,10 +118,10 @@ $(function(){
                 //update progress bar
             $('#progress_text').html('16% Complete');
             $('#progress').css('width','54px');
-            
+            $('label').css('float','');
             //slide steps
             $('#first_step').slideUp();
-            $('#second_step').slideDown();     
+            $('#temp_step').slideDown();     
             
                          
         } 
@@ -130,6 +129,37 @@ $(function(){
         else return false;
          
     });
+    
+    $('#submit_temp').click(function(){
+        //send information to server
+        $("#container").css("height", "570px");
+        $('#temp_step input').removeClass('error').removeClass('valid');
+        var fields = $('#temp_step input[type=text]');
+        var error = 0;
+        fields.each(function(){
+            var value = $(this).val();
+            if( value.length<1 || value==field_values[$(this).attr('id')] ) {
+                $(this).addClass('error');
+                $(this).effect("shake", { times:3 }, 50);
+                
+                error++;
+            } else {
+                $(this).addClass('valid');
+            }
+        });
+
+        if(!error) {
+                //update progress bar
+                $('#progress_text').html('20% Complete');
+                $('#progress').css('width','76px');
+                
+                //slide steps
+                $('#temp_step').slideUp();
+                $('#second_step').slideDown();       
+        } else return false;
+    });
+    
+    
 
 
     $('#submit_second').click(function(){
