@@ -177,7 +177,7 @@ function authenticate($username, $password, $dbconn)
 	{
 		//Invalid username or password; could not login.
 		$results['error'] = 1;
-		$results['type'] = fail;
+		$results['type'] = "fail";
 	}
 
 	//Loads and prepares all data to send to renderer
