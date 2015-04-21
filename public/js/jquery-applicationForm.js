@@ -121,7 +121,7 @@ $(function(){
             $('label').css('float','');
             //slide steps
             $('#first_step').slideUp();
-            $('#temp_step').slideDown();     
+            $('#second_step').slideDown();     
             
                          
         } 

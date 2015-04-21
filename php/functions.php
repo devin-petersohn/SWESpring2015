@@ -3,7 +3,8 @@
 
 /*This function will establish a connection to the DB and return that connection */
 function db_connect() {
-    $DBconn = pg_connect();
+    $connectionString = "user=admin1xtduwt password=zVd4BSi4JdIJ host=127.13.165.130 dbname=ta_application";
+    $DBconn = pg_connect($connectionString);
     if (!$DBconn) {
         echo "Error.\n" . pg_last_error() . "\n";
         die; // kill the app if no connection

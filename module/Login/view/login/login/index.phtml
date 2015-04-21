@@ -1,60 +1,87 @@
- <!-- Full Width Image Header -->
-    <header class="header-image">
-	
-    </header>
+<div style="width:300px; margin-left:auto; margin-right:auto; margin-top:200px;">
+    <form id='login' action='login.php' method='post' accept-charset='UTF-8'>
+        <fieldset style="text-align:center;" >
+        <legend>Login</legend>
+        <input type='hidden' name='submitted' id='submitted' value='1'/>
+         
+        <label for='username' >PawPrint:</label>
+        <input type='text' name='pawprint' id='pawprint'  maxlength="50" />
+        <br>
+        <br>
+        <label for='password' >Password:</label>
+        <input type='password' name='password' id='password' maxlength="50" />
+        <br>
+        <br>
+        <input type='submit' name='login' value='Login' />
+        </fieldset>
+    </form>
+</div>
 
-<div style="margin-top:100px">
-            <div class="container">
-                <div class="panel panel-default" style="margin:0 auto;width:500px">
-                    <div class="panel-heading">
-                        <h2 class="panel-title">Login</h2>
-                    </div>
-                    <div class="panel-body">
-                        <form name="contactform" method="post" action="http://wedding-space.net/01_admin_resources/blog/contact_form/mailer.php" class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <label for="inputPawprint" class="col-lg-2 control-label">PawPrint</label>
-                                <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="inputPawprint" name="inputPawprint" placeholder="PawPrint">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputPassword" class="col-lg-2 control-label">Password</label>
-                                <div class="col-lg-10">
-                                    <input type="text" class="form-control" id="inputPassword" name="inputPassword" placeholder="Password">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-offset-2 col-lg-10">
-                                    <button type="submit" class="btn btn-default">
-                                        Login
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
+<!-- Footer -->
+    <footer style="position:fixed; bottom:0; margin-left:450px;">
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright &copy; Software Engineering Group H, Spring 2015</p>
             </div>
         </div>
-			<!--</div>
-        </div>-->
+    </footer>
+    
+    <?php 
+    function Login()
+    {
+        if(empty($_POST['pawprint']))
+        {
+            $this->HandleError("PawPrint is empty!");
+            return false;
+        }
+         
+        if(empty($_POST['password']))
+        {
+            $this->HandleError("Password is empty!");
+            return false;
+        }
+         
+        $pawprint = trim($_POST['pawprint']);
+        $password = trim($_POST['password']);
+         
+        if(!$this->CheckLoginInDB($pawprint,$password))
+        {
+            return false;
+        }
+         
+        session_start();
+         
+        $_SESSION[$this->GetLoginSessionVar()] = $pawprint;
+         
+        return true;
+    }
+    
+    function CheckLoginInDB($pawprint,$password)
+    {
+        if(!$this->DBLogin())
+        {
+            $this->HandleError("Database login failed!");
+            return false;
+        }
+        $pawprint = $this->SanitizeForSQL($pawprint);
+        $pwdmd5 = md5($password);
+        $qry = "Select name, email from $this->tablename ".
+            " where username='$username' and password='$pwdmd5' ".
+            " and confirmcode='y'";
+         
+        $result = mysql_query($qry,$this->connection);
+         
+        if(!$result || mysql_num_rows($result) <= 0)
+        {
+            $this->HandleError("Error logging in. ".
+                "The username or password does not match");
+            return false;
+        }
+        return true;
+    }
+    
+    ?>
 
-
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Software Engineering Group H, Spring 2015</p>
-                </div>
-            </div>
-        </footer>
-
-    </div>
-    <!-- /.container -->
-	</div>
-
-    <!-- jQuery -->
-
-    <!-- Bootstrap Core JavaScript -->
+<!-- jQuery -->
+<!-- Bootstrap Core JavaScript -->
 	
