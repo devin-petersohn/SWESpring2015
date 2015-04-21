@@ -59,24 +59,19 @@
       
   	</div><!-- /span-3 -->
     
-    <div class="col-md-6">
-        <hr>
-        <label class="btn">
-            <input checked type="radio" id="searchname" name="options">Search by Name
-        </label>
-        <label class="btn">
-            <input type="radio" id="searchpawprint" name="options">Search by Pawprint
-        </label>
-        
-            <div class="form-group form-group-sm">
-              <input type="text" class="form-control" placeholder="Search for...">
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Search!</button>
-              </span>
-            </div><!-- /input-group -->
-        
-        
-    </div>
+    <div class="col-md-6" style="margin-top: 40px;">
+       <div class="well">
+            <h3>Search for an Applicant</h3>
+            <form>
+                <input type="radio" name="choice" value="pawprint">Search by PawPrint
+                <br>
+                <input type="radio" name="choice" value="name">Search by Applicant Name
+                <br>
+                <input type="text" name="input">
+                <input type="submit" value="Submit">
+            </form>
+       </div>
+     </div>
     
   </div><!--/row-->
   <!-- /upper section -->
@@ -205,14 +200,14 @@
       
       <table class="table table-striped">
         <thead>
-          <tr><th>Applicants</th><th>Course</th><th>TA/PLA</th><th>GPA</th><th>Assign</th></tr>
+          <tr><th>Applicants</th><th>Course</th><th>TA/PLA</th><th>GPA</th><th>Offer Status</th><th>Assign</th></tr>
         </thead>
         <tbody>
-          <tr><td>Sam Walker</td><td>CS4320</td><td>TA</td><td>3.7</td><td><button class="btn btn-info btn-large" href="#">Assign</button></td></tr>
-          <tr><td>Tory White</td><td>CS4320</td><td>TA</td><td>3.8</td><td><button class="btn btn-info btn-large" href="#">Assign</button></td></tr>
-          <tr><td>Tylor</td><td>CS4320</td><td>PLA</td><td>3.5</td><td><button class="btn btn-info btn-large" href="#">Assign</button></td></tr>
-          <tr><td>Jerry Smith</td><td>CS4820</td><td>PLA</td><td>3.6</td><td><button class="btn btn-info btn-large" href="#">Assign</button></td></tr>
-          <tr><td>Tiana </td><td>CS4820</td><td>TA</td><td>3.4</td><td><button class="btn btn-info btn-large" href="#">Assign</button></td></tr>
+          <tr><td>Sam Walker</td><td>CS4320</td><td>TA</td><td>3.7</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button></td></tr>
+          <tr><td>Tory White</td><td>CS4320</td><td>TA</td><td>3.8</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button></td></tr>
+          <tr><td>Tylor</td><td>CS4320</td><td>PLA</td><td>3.5</td><td>Rejected</td><td><button class="btn btn-info btn-large" href="#">Assign</button></td></tr>
+          <tr><td>Jerry Smith</td><td>CS4820</td><td>PLA</td><td>3.6</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button></td></tr>
+          <tr><td>Tiana </td><td>CS4820</td><td>TA</td><td>3.4</td><td>Rejected</td><td><button class="btn btn-info btn-large" href="#">Assign</button></td></tr>
         </tbody>
       </table>
     </div>
