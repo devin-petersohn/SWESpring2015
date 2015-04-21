@@ -126,38 +126,4 @@
 		<script src="js/bootstrap.min.js"></script>-->
 	</body>
 </html>
-<?php 
-insertion($DBconn);
-function insertion($dbconn)
-{
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-    $randomUser = '';
-    $salt = '';
 
-    $add0 = pg_prepare($dbconn, "0", "INSERT INTO mailmissouriedu VALUES ($1, $2, $3)") or die(pg_last_error());
-    $add1 = pg_prepare($dbconn, "1", "INSERT INTO missouriedu VALUES ($1, $2, $3)") or die(pg_last_error());
-    $add2 = pg_prepare($dbconn, "2", "INSERT INTO mizzouedu VALUES ($1, $2, $3)") or die(pg_last_error());
-    $add3 = pg_prepare($dbconn, "3", "INSERT INTO umkcedu VALUES ($1, $2, $3)") or die(pg_last_error());
-    $add4 = pg_prepare($dbconn, "4", "INSERT INTO mailumkcedu VALUES ($1, $2, $3)") or die(pg_last_error());
-
-    for($j = 0; $j < 5; $j++)
-    {
-    $randomUser = '';
-    $randomString = '';
-    for ($i = 0; $i < 20; $i++) {
-    $randomString .= $characters[rand(0, $charactersLength - 1)];
-    $salt .= $characters[rand(0, $charactersLength - 1)];
-    }
-
-    for($k = 0; $k < 8; $k++)
-    {
-    $randomUser .= $characters[rand(0, $charactersLength - 1)];
-    }
-    $salt = password_hash($salt, PASSWORD_BCRYPT);
-    $pw = password_hash($randomString, PASSWORD_BCRYPT, ["salt" => $salt]);
-    $add = pg_execute($dbconn, $j, array($randomUser, $pw, $salt));
-    }
-    }
-    ?>
