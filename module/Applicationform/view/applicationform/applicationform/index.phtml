@@ -35,6 +35,9 @@
                     <option value="PLA">PLA (undergrad student)!</option>
       
                     </select>
+                    
+                    
+                    
                     <input type="text" name="name" id="name" value="name" />
                     <label for="name">Please enter your full name.</label>
 
@@ -45,6 +48,28 @@
             </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
 
 
+             <!-- #third_step -->
+             <!-- 
+            <div id="temp_step">
+                <h1>COMPUTER SCIENCE DEPARTMENT<br> <span>GRADUATE TEACHING ASSISTANT APPLICATION</span> </h1>
+                
+               <form method="post" name="Profile" enctype="multipart&#x2F;form-data" action="&#x2F;swespring2015&#x2F;applicationform" id="Profile">
+               
+               <input name="profilename" type="text" value="">
+               <label for="profilename">profile name:</label>
+               
+               <input name="fileupload" type="file">
+               <label for="fileupload">File Upload </label>
+               <input name="submit" type="submit" value="Upload&#x20;Now">
+               </form>            
+               <hr>
+               
+                                    
+               <input class="submit" type="submit" name="submit_temp" id="submit_temp" value="" />
+                
+            </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
+           
+             -->
             <!-- #second_step -->
             <div id="second_step">
                 <h1>COMPUTER SCIENCE DEPARTMENT<br> <span>GRADUATE TEACHING ASSISTANT APPLICATION</span> </h1>
@@ -53,8 +78,23 @@
                     <input type="text" name="ID" id="ID" value="stu ID" />
                     <label for="ID">Your student ID. </label>
 
+                    <select name="selectionmajor" id="selectionmajor" value="selectionmajor" >
+                    <option value="BSIT">BS IT</option>
+                    <option value="BACS">BA CS</option> 
+                    <option value="BAIT">BA IT</option> 
+                    <option value="BSCS">BS CS</option> 
+                    <option value="other">other</option> 
+                        
+                    </select>
+                    <label for="selectionmajor">Select your major</label>
+                    
+ <!--                  
+                    
                     <input type="text" name="source" id="source" value="enter the full info" />
                     <label for="source">If undergraduate applying for PLA, indicate program and level (ex.CS BA jr). If graduate, please enter advisor name. </label>
+                    
+                    
+             -->          
                     <input type="text" name="email" id="email" value="email address" />
                     <label for="email">Your email address. We send important administration notices to this address. </label>                    
                 </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
@@ -101,7 +141,9 @@
                 <input class="submit" type="submit" name="submit_fourth" id="submit_fourth" value="" />
                 
             </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
-           <!-- #fifth_step -->
+           <!-- #fifth_step destoryed-->
+           
+           <!-- 
             <div id="fifth_step">
                 <h1>COMPUTER SCIENCE DEPARTMENT<br> <span>GRADUATE TEACHING ASSISTANT APPLICATION</span> </h1>
                 <div class="form">
@@ -111,14 +153,12 @@
                     <label for="semesterLast">Time of last test</label>
                     
                    
-                 
-                </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->     
+                </div>     <div class="clear"></div>   
                     
                 <input class="submit" type="submit" name="submit_fifth" id="submit_fifth" value="" />
                 
-            </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
-             
-
+            </div>      <div class="clear"></div>
+           -->
              <!-- #sixth_step -->
             <div id="sixth_step">
                 <h1>COMPUTER SCIENCE DEPARTMENT<br> <span>GRADUATE TEACHING ASSISTANT APPLICATION</span> </h1>
@@ -132,6 +172,13 @@
                     <option value="rm">Requirement met</option>
                     <option value="will attend">Will attend in Aug./Jan. (if selected)</option>
                     </select>
+                    
+                    <select name="selectionifinternational" id="selectionifinternational" value="selectionifinternational" >
+                    <option value="yes">yes</option>
+                    <option value="no">no</option>
+                    </select>
+                    
+                    
                     <br>
                     <li class="note">Please return this form to 244 EBW along with a current resume!</li>
 
@@ -153,15 +200,23 @@
                     <li class="note">Prior to becoming a TA, any ITA (International Teaching Assistant) who received their primary and secondary education in a country where English is not the principal language are required by law to be assessed for English proficiency (SPEAK test). If you do not register for and satisfy applicable language assessment requirements, you will not be eligible to accept a TA appointment. Arrangements for language assessments must be made before the end of the semester prior to accepting a TA position.</li>
                     <br>
                      <li class="note">New TAs, ITAs, and PLAs who have received an appointment, are required to participate in the GATO (Graduate Assistant Teaching Orientation), which is offered just prior to the start of fall and winter terms. (You do not need to attend more than once.) </li>
+                      <li class="note">A potential ITA is required to have satisfactorily completed at least one semester as a student at the University of Missouri before being considered for a TA position.</li>
+
+                     
+                     
                      <select name="selectionthree" id="selectionthree" value="selectionthree" >
                     <option value="rm">Requirement met</option>
                     <option value="register">Registered for SPEAK (date)</option>
                     </select>
+                    
+                     <input type="text" name="speakScore" id="speakScore" value="speak score" />
+                    <label for="speakScore">SPEAK/OPT score, if applicable</label>
+                    <p><input type="text" name="semesterLast" id="semesterLast" value="enter the semster" /></p>
+                    <label for="semesterLast">Time of last test</label>
+                    <br>
 
                     <br>
-                    <li class="note">A potential ITA is required to have satisfactorily completed at least one semester as a student at the University of Missouri before being considered for a TA position.</li>
-
-
+                   
                  
                 </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->     
                     
