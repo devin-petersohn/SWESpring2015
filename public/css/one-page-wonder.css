@@ -76,8 +76,12 @@ body {
 
 .startApp{
 	float: right;
-	margin-top: 180px;
+	margin-top: 120px;
 	margin-right: 280px;
+}
+
+.appstatus{
+	margin-top: 40px;
 }
 
 .featurette-image.pull-left {

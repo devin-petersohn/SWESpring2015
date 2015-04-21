@@ -72,6 +72,7 @@ sso VARCHAR(50) REFERENCES Applicant(sso) ON DELETE CASCADE,
 course_id VARCHAR(50) REFERENCES Course(course_id) ON DELETE CASCADE,
 section VARCHAR(50) REFERENCES Course(section) ON DELETE CASCADE,
 offer_accepted BOOLEAN,
+assigned_to_course BOOLEAN,t
 PRIMARY KEY (sso, course_id, section)
 );
 
