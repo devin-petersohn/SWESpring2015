@@ -43,7 +43,7 @@ $(function(){
     document.onkeydown = function(event) {
             var target, code, tag;
             if (!event) {
-                event = window.event; //针对ie浏览器
+                event = window.event; 
                 target = event.srcElement;
                 code = event.keyCode;
                 if (code == 13) {
@@ -53,7 +53,7 @@ $(function(){
                 }
             }
             else {
-                target = event.target; //针对遵循w3c标准的浏览器，如Firefox
+                target = event.target; 
                 code = event.keyCode;
                 if (code == 13) {
                     tag = target.tagName;
@@ -121,7 +121,7 @@ $(function(){
             $('label').css('float','');
             //slide steps
             $('#first_step').slideUp();
-            $('#temp_step').slideDown();     
+            $('#second_step').slideDown();     
             
                          
         } 
@@ -247,7 +247,7 @@ $(function(){
 
     $('#submit_fourth').click(function(){
         //send information to server
-        $("#container").css("height", "280px");
+        $("#container").css("height", "370px");
         $('#fourth_step input').removeClass('error').removeClass('valid');
         var fields = $('#fourth_step input[type=text]');
         var error = 0;
@@ -270,10 +270,11 @@ $(function(){
                 
                 //slide steps
                 $('#fourth_step').slideUp();
-                $('#fifth_step').slideDown();       
+                $('#sixth_step').slideDown();       
         } else return false;
     });
 
+    //it's delete now. submit_fifth
     $('#submit_fifth').click(function(){
         //send information to server
         $("#container").css("height", "370px");
@@ -305,7 +306,7 @@ $(function(){
 
     $('#submit_sixth').click(function(){
         //send information to server
-        $("#container").css("height", "475px");
+        $("#container").css("height", "630px");
         $('#sixth_step input').removeClass('error').removeClass('valid');
         var fields = $('#sixth_step input[type=text]');
         var error = 0;
@@ -323,12 +324,31 @@ $(function(){
 
         if(!error) {
                 //update progress bar
-                $('#progress_text').html('86% Complete');
-                $('#progress').css('width','309.6px');
+                $('#progress_text').html('80% Complete');
+                $('#progress').css('width','288px');
                 
                 //slide steps
-                $('#sixth_step').slideUp();
-                $('#senventh_step').slideDown();       
+                console.log($('#selectionifinternational').val());
+                if($('#selectionifinternational').val()=="yes")
+                {
+                    console.log("I select yes");
+                    $('#sixth_step').slideUp();
+                    $('#senventh_step').slideDown(); 
+                }
+                else
+                {
+                    $('#selectionthree').hide();
+                    $('#speakScore').hide();
+                    $('#semesterLast').hide();
+                    $('label').hide();
+                    
+                    $("#container").css("height", "430px");
+                    $('#sixth_step').slideUp();
+                    $('#senventh_step').slideDown(); 
+                    
+                }
+                
+                      
         } else return false;
     });
 
@@ -336,20 +356,25 @@ $(function(){
     $('#submit_seventh').click(function(){
         //send information to server
         $("#container").css("height", "530px");
-        $('#seventh_step input').removeClass('error').removeClass('valid');
+
         var fields = $('#seventh_step input[type=text]');
         var error = 0;
-        fields.each(function(){
-            var value = $(this).val();
-            if( value.length<1 || value==field_values[$(this).attr('id')] ) {
-                $(this).addClass('error');
-                $(this).effect("shake", { times:3 }, 50);
-                
-                error++;
-            } else {
-                $(this).addClass('valid');
-            }
-        });
+        if($('#selectionifinternational').val()=="yes")
+        {
+            $('#seventh_step input').removeClass('error').removeClass('valid');
+            fields.each(function(){
+                var value = $(this).val();
+                if( value.length<1 || value==field_values[$(this).attr('id')] ) {
+                    $(this).addClass('error');
+                    $(this).effect("shake", { times:3 }, 50);
+                    
+                    error++;
+                } else {
+                    $(this).addClass('valid');
+                }
+            });
+
+        }
 
         if(!error) {
                 //update progress bar
