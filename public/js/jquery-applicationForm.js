@@ -43,7 +43,7 @@ $(function(){
     document.onkeydown = function(event) {
             var target, code, tag;
             if (!event) {
-                event = window.event; //针对ie浏览器
+                event = window.event; 
                 target = event.srcElement;
                 code = event.keyCode;
                 if (code == 13) {
@@ -53,7 +53,7 @@ $(function(){
                 }
             }
             else {
-                target = event.target; //针对遵循w3c标准的浏览器，如Firefox
+                target = event.target; 
                 code = event.keyCode;
                 if (code == 13) {
                     tag = target.tagName;
@@ -324,8 +324,8 @@ $(function(){
 
         if(!error) {
                 //update progress bar
-                $('#progress_text').html('86% Complete');
-                $('#progress').css('width','309.6px');
+                $('#progress_text').html('80% Complete');
+                $('#progress').css('width','288px');
                 
                 //slide steps
                 console.log($('#selectionifinternational').val());
@@ -336,7 +336,11 @@ $(function(){
                 }
                 else
                 {
+                	console.log("I select no");
                 	$('#sixth_step').slideUp();
+                    $('#senventh_step').slideDown();
+                    $('#seventh_step input').removeClass('error').removeClass('valid');
+                	$('#senventh_step').slideUp();
                     $('#eighth_step').slideDown(); 
                 }
                 
