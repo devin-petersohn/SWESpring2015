@@ -1,27 +1,18 @@
 <?php
-//TODO: get the DDL in place for this system
 //TODO: figure out conflicts with returning the array as is
-//TODO: put the connection in its own file
-//TODO: get the actual server information.
-//Insert the server information into their respective fields to connect to the db.  
-$dbconn = pg_connect("host= dbname= user= password=")
-		or die("Could not connect: " . pg_last_error());
-
-$path = pg_query($dbconn, 'SET search_path = mail');
-
-echo "Connected.<br>";
 
 //The following is for testing purposes.
 //insertion($dbconn);
 
+/*
 //manually inserted the tuple [username = asdf, password = password_hash(asdf, bcrypt, testSalt), salt = testSalt]
 //This call is used to verify that the user 'asdf' can login.
 $result = authenticate("asdf", "asdf", $dbconn);
-//TODO: can $dbconn be global?
+//TODO: check with other files for db connection?
 
 //test the array that comes from authenticate()
 print_r($result);
-
+*/
 //This function inserts random tuples into the database. For testing purposes only.
 function insertion($dbconn)
 {
@@ -94,7 +85,6 @@ function authenticate($username, $password, $dbconn)
 	{
 		$results[$i]['domain'] = $domains[$i];
 		$results[$i]['password'] = $line['password'];
-		$results[$i]['salt'] = $line['salt'];
 		$success[$i] = true;
 	}
 	else
@@ -107,7 +97,6 @@ function authenticate($username, $password, $dbconn)
 	{
 		$results[$i]['domain'] = $domains[$i];
 		$results[$i]['password'] = $line['password'];
-		$results[$i]['salt'] = $line['salt'];
 		$success[$i] = true;
 	}
 	else
@@ -121,7 +110,6 @@ function authenticate($username, $password, $dbconn)
 	{
 		$results[$i]['domain'] = $domains[$i];
 		$results[$i]['password'] = $line['password'];
-		$results[$i]['salt'] = $line['salt'];
 		$success[$i] = true;
 	}
 	else
@@ -135,7 +123,6 @@ function authenticate($username, $password, $dbconn)
 	{
 		$results[$i]['domain'] = $domains[$i];
 		$results[$i]['password'] = $line['password'];
-		$results[$i]['salt'] = $line['salt'];
 		$success[$i] = true;
 	}
 	else
@@ -149,7 +136,6 @@ function authenticate($username, $password, $dbconn)
 	{
 		$results[$i]['domain'] = $domains[$i];
 		$results[$i]['password'] = $line['password'];
-		$results[$i]['salt'] = $line['salt'];
 		$success[$i] = true;
 	}
 	else
@@ -166,8 +152,7 @@ function authenticate($username, $password, $dbconn)
 	{
 		if($success[$resultCount])
 		{
-			$pw = password_hash($password, PASSWORD_BCRYPT, ["salt" => $results[$resultCount]['salt']]);
-			if(strcmp($pw, $results[$resultCount]['password']) == 0)
+			if(strcmp($password, $results[$resultCount]['password']) == 0)
 			{
 				$valid = true;
 			}
