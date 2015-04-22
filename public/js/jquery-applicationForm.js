@@ -3,7 +3,9 @@ $(function(){
     var field_values = {
             //id        :  value
             'selection' : 'selection',
-            'name'  : 'name',
+            'fname' : 'fname',
+            'lname' : 'lname',
+            
             'gpa'  : 'gpa',
             'ID' : 'stu ID',
             'source' : 'enter the full info',
@@ -22,7 +24,9 @@ $(function(){
 
     //inputfocus
 
-    $('input#name').inputfocus({ value: field_values['name'] });
+    $('input#fname').inputfocus({ value: field_values['fname'] });
+    $('input#lname').inputfocus({ value: field_values['lname'] });
+    
     $('input#gpa').inputfocus({ value: field_values['gpa'] });
     $('input#ID').inputfocus({ value: field_values['ID'] }); 
     $('input#source').inputfocus({ value: field_values['source'] }); 
@@ -84,12 +88,17 @@ $(function(){
             //reset progress bar
     $('#progress').css('width','0');
     $('#progress_text').html('0% Complete');
-
+    $("#container").css("height", "410px");
+    $("#container label").css("line-height", "27px");
+    
+    
     //first_step
     $('form').submit(function(){ return false; });
     $(document).ready(function(){
     $('#submit_first').click(function(){
         //remove classes
+    	$("#container label").css("line-height", "14px");
+        
         $("#container").css("height", "370px");
         $('#first_step input').removeClass('error').removeClass('valid');
 
