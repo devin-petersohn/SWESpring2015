@@ -214,8 +214,8 @@ $(function(){
 	        	$.post("../../application.php",
 	            		{
 			            	ID: $("#ID").val(),
-			            	name: $("#selectionmajor").val(),
-			            	gpa: $("#email").val()
+			            	selectionmajor: $("#selectionmajor").val(),
+			            	email: $("#email").val()
 			            },
 	            		function(data){
 	            			console.log(data);

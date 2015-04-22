@@ -24,7 +24,7 @@
 
 	if( $_POST['ID'] && $_POST['selectionmajor'] && $_POST['email']){
 		pg_query($db, "UPDATE Applicant SET id = '". $_POST['ID']."', email = '". $_POST['email']. "' WHERE sso = '".$sso."';");
-		pg_query($db, "UPDATE applicant_is_a_ugrad SET program = ". $_POST['selectionmajor'].";");
+		pg_query($db, "UPDATE applicant_is_a_ugrad SET program = '". $_POST['selectionmajor']."';");
 	}
 
 	if( $_POST['phoneNum'] && $_POST['gradDate'] && $_POST['currCourses']){
