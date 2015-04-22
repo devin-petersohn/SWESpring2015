@@ -27,13 +27,8 @@ function test($dbconn)
 function authenticate($username, $password, $dbconn)
 { 
 	$returnResults = array();
-    $auth0 = '';
-    $auth1 = '';
-    $auth2 = '';
-    $auth3 = '';
-    $auth4 = '';
     
-	$queries = array($auth0, $auth1, $auth2, $auth3, $auth4);
+	
 	$domains = array("mailumkcedu", "missouriedu", "mizzouedu", "umkcedu", "mailmissouriedu");
 	$facultyType = array("instructor", "admin", "sysAdmin");
 	$results = array();
@@ -46,7 +41,7 @@ function authenticate($username, $password, $dbconn)
 	$auth3 = pg_prepare($dbconn, "3", "SELECT * FROM umkcedu WHERE username = $1") or die(pg_last_error());
 	$auth4 = pg_prepare($dbconn, "4", "SELECT * FROM mailmissouriedu WHERE username = $1") or die(pg_last_error());
 
-
+    $queries = array($auth0, $auth1, $auth2, $auth3, $auth4);
 	//TODO: implement this
 	//
 	//To double check later and ensure validity of above queries. 
