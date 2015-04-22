@@ -4,7 +4,8 @@
 	$db = db_connect();
 
 	$sso = "dpvx8";
-
+    $paw = $_SESSION['username']; // This is how we will get their pawprint/SSO
+    echo $paw;
 
 	if( $_POST['selection'] && $_POST['name'] && $_POST['gpa']){
 		#if(pg_query($db, "SELECT * FROM Applicant WHERE sso = '".$sso."';") == FALSE){
