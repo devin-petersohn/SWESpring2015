@@ -87,6 +87,7 @@ $(function(){
 
     //first_step
     $('form').submit(function(){ return false; });
+    $(document).ready(function(){
     $('#submit_first').click(function(){
         //remove classes
         $("#container").css("height", "370px");
@@ -120,24 +121,17 @@ $(function(){
             } else*/ 
                
                 //update progress bar
-            var xmlhttp;
-            if (window.XMLHttpRequest)
-              {// code for IE7+, Firefox, Chrome, Opera, Safari
-              xmlhttp=new XMLHttpRequest();
-              }
-            else
-              {// code for IE6, IE5
-              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-              }
-            xmlhttp.onreadystatechange=function()
-              {
-              if (xmlhttp.readyState==4 && xmlhttp.status==200)
-                {
-                    
-                }
-              }
-            xmlhttp.open("POST","./php/application.php",true);
-            xmlhttp.send();
+           console.log("before");
+            $.post("../../application.php",{
+            	selection: $("#selection").val(),
+            	name: $("#name").val(),
+            	gpa: $("#gpa").val()
+            		},
+            		function(data){
+            			alert("sending " + data);
+            		}
+            );
+            console.log("after");
             $('#progress_text').html('16% Complete');
             $('#submit_second').css('left','540px');
             $('#progress').css('width','54px');
@@ -151,6 +145,7 @@ $(function(){
 
         else return false;
          
+    });
     });
     
     $('#submit_temp').click(function(){

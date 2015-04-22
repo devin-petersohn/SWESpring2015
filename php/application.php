@@ -3,15 +3,18 @@
 	include 'functions.php';
 	$db = db_connect();
 
+	#$sso = "dpvx8";
 
 
 	if( $_POST['selection'] && $_POST['name'] && $_POST['gpa']){
-		pg_query($db, "INSERT INTO Applicant (sso) VALUES (".$sso.");");
-		pg_query($db, "UPDATE Applicant SET fname = ". $_POST['name'] .", lname = ". $_POST['name'] .", 
+		$temp = pg_query($db, "INSERT INTO Applicant (sso) VALUES (dpvx8);");
+		/*pg_query($db, "UPDATE Applicant SET fname = ". $_POST['name'] .", lname = ". $_POST['name'] .", 
 			gpa = ". $_POST['gpa'] ." WHERE sso =". $sso .";");
 		if($_POST['selection'] == "TA")
 			pg_query($db, "INSERT INTO applicant_is_a_ugrad (sso) VALUES (".$sso.");");
 		else pg_query($db, "INSERT INTO applicant_is_a_grad (sso) VALUES (".$sso.");");
+		*/
+		return $temp;
 	}
 
 	if( $_POST['ID'] && $_POST['selectionmajor'] && $_POST['email']){
