@@ -1,3 +1,7 @@
+<?php 
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -30,10 +34,7 @@
       </button> 
       <h1>test</h1>
       <?php 
-      if(isset($_SESSION['username']))
-      {
-          echo "Welcome, $pawprint!";
-      }
+       echo "Welcome," . $_SESSION["username"];
       ?> 
     </div>
     <div class="navbar-collapse collapse">
