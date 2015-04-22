@@ -158,9 +158,11 @@ function authenticate($username, $password, $dbconn)
 			}
 		}
 	}
+	$results['error'] = 0;
 	//successful login
 	if($valid)
 	{
+	    $results['error'] = 0;
 		//If successful login, check to see if they are a student
 		//This is classified by being in the mail.missouri.edu domain
 		for($domainCount = 0; $domainCount < 5; $domainCount++)
@@ -202,7 +204,7 @@ function authenticate($username, $password, $dbconn)
 			//New applicant
 			$results['type'] = "new";
 		}
-		$results['error'] = 0;
+		
 	}
 /*
 	TODO: implement below
