@@ -56,5 +56,25 @@ function query_table($DBconn,$q) {
 
 /*End of list for now */
 
+//During the application process, use a session var to track page #, then use a switch for the various number to control the insert / update
+//use an onpageload() to grab the pages info if it is there
+
+
+//Queries needed: search, add/delete/view comment, delete faculty, insert/delete course, select student who received offer, update student offer
+// Insert student offer, 
+
+//Page 1: ugrad/grad, fname, lname, gpa || Grab pawprint from session var
+//Page 2: Student ID, BS/BA, IT/CS, Jr/Sr
+//Page 3:  
+//Page 4: 
+//Page 5: 
+//Page 6: 
+//Page 7: 
+//Page 8: 
+//Page 9: 
+
+
+
+
 
 ?>

@@ -52,7 +52,7 @@ score INT
 CREATE TABLE applicant_prev_taught_course (
 sso VARCHAR(50) REFERENCES Applicant(sso) ON DELETE CASCADE,
 course VARCHAR(50),
-semester_taught VARCHAR(20) NOT NULL,
+semester_taught VARCHAR(20),
 PRIMARY KEY (sso, course, semester_taught)
 );
 

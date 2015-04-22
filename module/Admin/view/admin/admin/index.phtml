@@ -109,7 +109,7 @@
         <div class="panel-heading">
           <div class="panel-title">
             <i class="glyphicon glyphicon-wrench pull-right"></i>
-            <h4>Add Courses</h4>
+            <h4>Add/Delete Courses</h4>
           </div>
         </div>
         <div class="panel-body">
@@ -135,6 +135,9 @@
                 <button type="submit" class="btn btn-primary">
                   Add Course
                 </button>
+                <button type="submit" class="btn btn-warning">
+                  Delete Course
+                </button>
               </div>
             </div>   
             
@@ -149,30 +152,27 @@
         <div class="panel-heading">
           <div class="panel-title">
             <i class="glyphicon glyphicon-wrench pull-right"></i>
-            <h4>Delete Course</h4>
+            <h4>Add/Delete Instructor</h4>
           </div>
         </div>
         <div class="panel-body">
           
           <form class="form form-vertical">
             <div class="control-group">
-              <label>Course Name</label>
-              <div class="controls">
-                <input type="text" class="form-control" placeholder="Enter Course Name">
-              </div>
-            </div>      
-            <div class="control-group">
               <label>Instructor Name</label>
               <div class="controls">
                 <input type="text" class="form-control" placeholder="Enter Instructor Name">
               </div>
-            </div>    
+            </div>       
               
             <div class="control-group">
               <label></label>
               <div class="controls">
                 <button type="submit" class="btn btn-primary">
-                  Delete Course
+                  Add Instructor
+                </button>
+                <button type="submit" class="btn btn-warning">
+                  Delete Instructor
                 </button>
               </div>
             </div>   
@@ -200,14 +200,14 @@
       
       <table class="table table-striped">
         <thead>
-          <tr><th>Applicants</th><th>Course</th><th>TA/PLA</th><th>GPA</th><th>Offer Status</th><th>Assign</th></tr>
+          <tr><th>Applicants</th><th>Course</th><th>Grade</th><th>TA/PLA</th><th>GPA</th><th>Offer Status</th><th>Assign</th></tr>
         </thead>
         <tbody>
-          <tr><td>Sam Walker</td><td>CS4320</td><td>TA</td><td>3.7</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button></td></tr>
-          <tr><td>Tory White</td><td>CS4320</td><td>TA</td><td>3.8</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button></td></tr>
-          <tr><td>Tylor</td><td>CS4320</td><td>PLA</td><td>3.5</td><td>Rejected</td><td><button class="btn btn-info btn-large" href="#">Assign</button></td></tr>
-          <tr><td>Jerry Smith</td><td>CS4820</td><td>PLA</td><td>3.6</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button></td></tr>
-          <tr><td>Tiana </td><td>CS4820</td><td>TA</td><td>3.4</td><td>Rejected</td><td><button class="btn btn-info btn-large" href="#">Assign</button></td></tr>
+          <tr><td>Sam Walker</td><td>CS4320</td><td>89</td><td>TA</td><td>3.7</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-warning btn-large" href="#">Reject</button></td></tr>
+          <tr><td>Tory White</td><td>CS4320</td><td>90</td><td>TA</td><td>3.8</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-warning btn-large" href="#">Reject</button></td></tr>
+          <tr><td>Tylor</td><td>CS4320</td><td>86</td><td>PLA</td><td>3.5</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-warning btn-large" href="#">Reject</button></td></tr>
+          <tr><td>Jerry Smith</td><td>CS4820</td><td>92</td><td>PLA</td><td>3.6</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-warning btn-large" href="#">Reject</button></td></tr>
+          <tr><td>Tiana </td><td>CS4820</td><td>83</td><td>TA</td><td>3.4</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-warning btn-large" href="#">Reject</button></td></tr>
         </tbody>
       </table>
     </div>
