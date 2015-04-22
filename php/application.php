@@ -7,7 +7,9 @@
 
 
 	if( $_POST['selection'] && $_POST['name'] && $_POST['gpa']){
-		$temp = pg_query($db, "INSERT INTO Applicant (sso) VALUES ('".$sso."');");
+		if(pg_query($db, "SELECT * FROM Applicant WHERE sso = '".$sso."';") != FALSE){
+		    $temp = pg_query($db, "INSERT INTO Applicant (sso) VALUES ('".$sso."');");
+		}
 		pg_query($db, "UPDATE Applicant SET fname = '". $_POST['name'] ."', lname = '". $_POST['name'] ."', 
 			gpa = '". $_POST['gpa'] ."' WHERE sso = '". $sso ."';");
 		if($_POST['selection'] != "TA")
