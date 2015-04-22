@@ -15,8 +15,8 @@ $(function(){
             'courseLike' : 'Course you would like and grade',
             'otherPlace' : 'other place',
             'speakScore' : 'speak score',
-            'semesterLast' : 'enter the semster'
-
+            'semesterLast' : 'enter the semster',
+            'timetoregister' : 'enter the time'
     };
 
 
@@ -37,6 +37,8 @@ $(function(){
     $('input#otherPlace').inputfocus({ value: field_values['otherPlace'] }); 
     $('input#speakScore').inputfocus({ value: field_values['speakScore'] }); 
     $('input#semesterLast').inputfocus({ value: field_values['semesterLast'] }); 
+    $('input#timetoregister').inputfocus({ value: field_values['timetoregister'] }); 
+
 
 
 
@@ -73,7 +75,9 @@ $(function(){
         $(function() {
             $("#semesterLast").datepicker();
             });
-
+        $(function() {
+            $("#timetoregister").datepicker();
+            });
         
 
 
@@ -117,6 +121,7 @@ $(function(){
                
                 //update progress bar
             $('#progress_text').html('16% Complete');
+            $('#submit_second').css('left','540px');
             $('#progress').css('width','54px');
             $('label').css('float','');
             //slide steps
@@ -186,7 +191,7 @@ $(function(){
                 //update progress bar
                 $('#progress_text').html('32% Complete');
                 $('#progress').css('width','108px');
-                
+                $('#submit_third').css('left','540px');
                 //slide steps
                 $('#second_step').slideUp();
                 $('#third_step').slideDown();     
@@ -195,9 +200,20 @@ $(function(){
     });
 
 
+    $('#submit_second_back').click(function(){
+
+                $('#progress_text').html('0% Complete');
+                $('#progress').css('width','0px');
+                $("#container").css("height", "370px");
+                //slide steps
+                $('#second_step').slideUp();
+                $('#first_step').slideDown(); 
+    });
+
+
     $('#submit_third').click(function(){
         //update progress bar
-        $("#container").css("height", "370px");
+        
         $('#third_step input').removeClass('error').removeClass('valid');
         var fields = $('#third_step input[type=text]');
         var error = 0;
@@ -215,9 +231,10 @@ $(function(){
 
         if(!error) {
                 //update progress bar
+                $("#container").css("height", "370px");
                 $('#progress_text').html('48% Complete');
                 $('#progress').css('width','162px');
-                
+                $('#submit_fourth').css('left','540px');
                 //slide steps
                 $('#third_step').slideUp();
                 $('#fourth_step').slideDown();       
@@ -245,9 +262,21 @@ $(function(){
     });
 
 
+
+    $('#submit_third_back').click(function(){
+
+                $('#progress_text').html('16% Complete');
+                $('#progress').css('width','54px');
+                $("#container").css("height", "370px");
+                //slide steps
+                $('#third_step').slideUp();
+                $('#second_step').slideDown(); 
+    });
+
+
     $('#submit_fourth').click(function(){
         //send information to server
-        $("#container").css("height", "370px");
+        
         $('#fourth_step input').removeClass('error').removeClass('valid');
         var fields = $('#fourth_step input[type=text]');
         var error = 0;
@@ -265,15 +294,27 @@ $(function(){
 
         if(!error) {
                 //update progress bar
+                $("#container").css("height", "370px");
                 $('#progress_text').html('64% Complete');
                 $('#progress').css('width','216px');
-                
+                $('#submit_sixth').css('left','540px');
                 //slide steps
                 $('#fourth_step').slideUp();
                 $('#sixth_step').slideDown();       
         } else return false;
     });
 
+
+
+    $('#submit_fourth_back').click(function(){
+
+                $('#progress_text').html('32% Complete');
+                $('#progress').css('width','108px');
+                $("#container").css("height", "370px");
+                //slide steps
+                $('#fourth_step').slideUp();
+                $('#third_step').slideDown(); 
+    });
     //it's delete now. submit_fifth
     $('#submit_fifth').click(function(){
         //send information to server
@@ -306,7 +347,7 @@ $(function(){
 
     $('#submit_sixth').click(function(){
         //send information to server
-        $("#container").css("height", "630px");
+        
         $('#sixth_step input').removeClass('error').removeClass('valid');
         var fields = $('#sixth_step input[type=text]');
         var error = 0;
@@ -324,63 +365,173 @@ $(function(){
 
         if(!error) {
                 //update progress bar
-                $('#progress_text').html('80% Complete');
-                $('#progress').css('width','288px');
+
+                if($("#selectionifinternational").val()=="yes")
+                {
+                    $('#progress_text').html('80% Complete');
+                    $('#progress').css('width','288px');
+                    //slide steps
+                    console.log($('#selectionifinternational').val());
+                    $('#submit_seventh').css('left','540px');
+                    
+                    $('#speakScore').hide();
+                    $('#semesterLast').hide();
+                    $('#seventh_step label').hide();
+                    $('#timetoregister').hide();
+                    
+                    $("#container").css("height", "500px");
+                    $('#sixth_step').slideUp();
+                    $('#seventh_step').slideDown();
+                } 
+                else if($("#selectionifinternational").val()=="no")
+                {
+                    var fields = new Array(
+                    $('#selection').val(),
+                    $('#name').val(),
+                    $('#gpa').val(),
+                    $('#ID').val(),
+                    $('#source').val(),
+                    $('#email').val(),
+                    $('#phoneNum').val(),
+                    $('#gradDate').val(),
+                    $('#currCourses').val(),
+                    $('#precourse').val(),
+                    $('#courseLike').val(),
+                    $('#otherPlace').val(),
+                    $('#speakScore').val(),
+                    $('#semesterLast').val()
+                    
+                                             
+                    );
+                    var tr = $('#ninth_step tr');
+                    tr.each(function(){
+                        //alert( fields[$(this).index()] )
+                        $(this).children('td:nth-child(2)').html(fields[$(this).index()]);
+                    });
+
+                    $('#progress_text').html('100% Complete');
+                    $('#progress').css('width','360px');
+                    $('#submit_ninth').css('left','540px');  
+                    $("#container").css("height", "550px"); 
+                    $('#sixth_step').slideUp();
+                    $('#ninth_step').slideDown();
+                }
                 
-                //slide steps
-                console.log($('#selectionifinternational').val());
-                if($('#selectionifinternational').val()=="yes")
-                {
-                    $('#sixth_step').slideUp();
-                    $('#senventh_step').slideDown(); 
-                }
-                else
-                {
-                    console.log("I select no");
-                    $('#sixth_step').slideUp();
-                    $('#senventh_step').slideDown();
-                    $('#seventh_step input').removeClass('error').removeClass('valid');
-                    $('#senventh_step').slideUp();
-                    $('#eighth_step').slideDown(); 
-                }
+                
                 
                       
         } else return false;
     });
 
+    $('#submit_sixth_back').click(function(){
+
+                $('#progress_text').html('48% Complete');
+                $('#progress').css('width','162px');
+                $("#container").css("height", "370px");
+                //slide steps
+                $('#sixth_step').slideUp();
+                $('#fourth_step').slideDown(); 
+    });
+        
+    $(function(){
+
+        $("select#selectionthree").change(function(){
+            if($("#selectionthree").val()=="rm")
+            {
+                $("#container").css("height", "630px");
+                $('#speakScore').show();
+                $('#semesterLast').show();
+                $('#seventh_step label').show();
+                $('#labelregister').hide();
+                
+                $('#timetoregister').hide();
+                
+
+            }
+            else if($("#selectionthree").val()=="register")
+            {
+                $("#container").css("height", "530px");
+                $('#speakScore').hide();
+                $('#semesterLast').hide();
+                $('#seventh_step label').hide();
+                $('#timetoregister').show();
+                $('#labelregister').show();
+                                
+
+            }
+        });
+    });
+
+
 
     $('#submit_seventh').click(function(){
         //send information to server
-        $("#container").css("height", "530px");
-        $('#seventh_step input').removeClass('error').removeClass('valid');
-        var fields = $('#seventh_step input[type=text]');
+        
+
+        var fields1 = $('#seventh_step input[name=sub1]');
+        var fields2 = $('#seventh_step input[name=sub2]');
         var error = 0;
-        fields.each(function(){
-            var value = $(this).val();
-            if( value.length<1 || value==field_values[$(this).attr('id')] ) {
-                $(this).addClass('error');
-                $(this).effect("shake", { times:3 }, 50);
-                
-                error++;
-            } else {
-                $(this).addClass('valid');
-            }
-        });
+        if($("#selectionthree").val()=="rm")
+        {
+            $('#speakScore').removeClass('error').removeClass('valid');
+            $('#semesterLast').removeClass('error').removeClass('valid');
+            fields1.each(function(){
+                var value = $(this).val();
+                if( value.length<1 || value==field_values[$(this).attr('id')] ) {
+                    $(this).addClass('error');
+                    $(this).effect("shake", { times:3 }, 50);
+                    
+                    error++;
+                } else {
+                    $(this).addClass('valid');
+                }
+            });
+
+        }
+        else if($("#selectionthree").val()=="register")
+        {
+            $('#timetoregister').removeClass('error').removeClass('valid');
+            fields2.each(function(){
+                var value = $(this).val();
+                if( value.length<1 || value==field_values[$(this).attr('id')] ) {
+                    $(this).addClass('error');
+                    $(this).effect("shake", { times:3 }, 50);
+                    
+                    error++;
+                } else {
+                    $(this).addClass('valid');
+                }
+            });
+        }
+
+        
 
         if(!error) {
                 //update progress bar
                 $('#progress_text').html('86% Complete');
                 $('#progress').css('width','309.6px');
-                
+                $('#submit_eighth').css('left','540px');
+                $("#container").css("height", "530px");
                 //slide steps
                 $('#seventh_step').slideUp();
                 $('#eighth_step').slideDown();       
         } else return false;
     });
 
+
+    $('#submit_seventh_back').click(function(){
+
+                $('#progress_text').html('64% Complete');
+                $('#progress').css('width','216px');
+                $("#container").css("height", "370px");
+                //slide steps
+                $('#seventh_step').slideUp();
+                $('#sixth_step').slideDown(); 
+    });
+
     $('#submit_eighth').click(function(){
         //send information to server
-        $("#container").css("height", "550px");
+        
         $('#eighth_step input').removeClass('error').removeClass('valid');
         var fields = $('#eighth_step input[type=text]');
         var error = 0;
@@ -426,13 +577,63 @@ $(function(){
 
         if(!error) {
                 //update progress bar
-                
+                $("#container").css("height", "550px");
                 $('#progress_text').html('100% Complete');
-                $('#progress').css('width','339px');
+                $('#progress').css('width','360px');
+                $('#submit_ninth').css('left','540px');
                 //slide steps
                 $('#eighth_step').slideUp();
                 $('#ninth_step').slideDown();       
         } else return false;
+    });
+
+    $('#submit_eighth_back').click(function(){
+
+                if($('#selectionifinternational').val()=="yes")
+                {
+                    
+                }
+                else
+                {
+                    $('#selectionthree').hide();
+                    $('#speakScore').hide();
+                    $('#semesterLast').hide();
+                    $('#seventh_step label').hide();
+                    
+                    $("#container").css("height", "430px");
+                  
+                    
+                }
+
+                $('#progress_text').html('80% Complete');
+                $('#progress').css('width','288px');
+                $("#container").css("height", "630px");
+        
+                //slide steps
+                $('#eighth_step').slideUp();
+                $('#seventh_step').slideDown(); 
+    });
+    $('#submit_ninth_back').click(function(){
+                if($("#selectionifinternational").val()=="yes")
+                {
+                    $('#progress_text').html('86% Complete');
+                    $('#progress').css('width','309.6px');
+                    $("#container").css("height", "530px");
+                    //slide steps
+                    $('#ninth_step').slideUp();
+                    $('#eighth_step').slideDown(); 
+                }
+                else
+                {
+                    $("#container").css("height", "370px");
+                    $('#progress_text').html('64% Complete');
+                    $('#progress').css('width','216px');
+                    $('#submit_sixth').css('left','540px');
+                    $('#ninth_step').slideUp();
+                    $('#sixth_step').slideDown(); 
+
+                }
+
     });
 
 });
