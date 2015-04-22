@@ -88,12 +88,17 @@ $(function(){
             //reset progress bar
     $('#progress').css('width','0');
     $('#progress_text').html('0% Complete');
-
+    $("#container").css("height", "410px");
+    $("#container label").css("line-height", "27px");
+    
+    
     //first_step
     $('form').submit(function(){ return false; });
     $(document).ready(function(){
     $('#submit_first').click(function(){
         //remove classes
+    	$("#container label").css("line-height", "14px");
+        
         $("#container").css("height", "370px");
         $('#first_step input').removeClass('error').removeClass('valid');
 
