@@ -158,9 +158,11 @@ function authenticate($username, $password, $dbconn)
 			}
 		}
 	}
+	$results['error'] = 0;
 	//successful login
 	if($valid)
 	{
+	    $results['error'] = 0;
 		//If successful login, check to see if they are a student
 		//This is classified by being in the mail.missouri.edu domain
 		for($domainCount = 0; $domainCount < 5; $domainCount++)
@@ -170,13 +172,15 @@ function authenticate($username, $password, $dbconn)
 				$isStudent = true;
 			}
 		}
+		$results['type'] = "applicant";
+		
 	}
 	//not successful login
 	else
 	{
 		//Invalid username or password; could not login.
 		$results['error'] = 1;
-		return $results;
+		$results['type'] = "fail";
 	}
 
 	//Loads and prepares all data to send to renderer
@@ -200,8 +204,8 @@ function authenticate($username, $password, $dbconn)
 		{
 			//New applicant
 			$results['type'] = "new";
-			return $results;
 		}
+		
 	}
 /*
 	TODO: implement below
@@ -242,6 +246,11 @@ function authenticate($username, $password, $dbconn)
 		}
 	}
 */
+	if(!$results['type'])
+	{
+	    $results['type'] = "instructor";
+	}
+	return $results;
 }
 
 

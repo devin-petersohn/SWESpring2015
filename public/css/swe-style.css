@@ -33,7 +33,7 @@ input[type="submit"]:focus, input[type="button"]:focus { outline : none; }
     overflow: hidden;
     position: relative;
 }
-    #container #first_step, #second_step, #third_step, #fourth_step #fifth_step { display: none; }
+    #container #first_step, #second_step, #third_step, #fourth_step,#fifth_step,#sixth_step,#seventh_step,#eighth_step,#ninth_step{ display: none; }
     #container #first_step { display: block; }
 
     #container .form { margin: 66px 72px 0 72px; }
@@ -108,6 +108,18 @@ input[type="submit"]:focus, input[type="button"]:focus { outline : none; }
             bottom: 2px;
             left: 655px;
         }
+
+        #container input.submit_back {
+            background: url('../img/button.png') no-repeat;
+            border: none;
+            cursor: pointer;
+            width: 85px;
+            height: 38px;
+            position: relative;
+            bottom: 2px;
+            left: 55px;
+        }
+
             #container input.submit:focus { border: none; }
         
         #container input.send{ background: url('../img/send.png') no-repeat; }

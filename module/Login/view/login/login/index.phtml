@@ -9,7 +9,7 @@
         <br>
         <br>
         <label for='password' >Password:</label>
-        <input type='text' name='password' id='password' maxlength="50" />
+        <input type='password' name='password' id='password' maxlength="50" />
         <br>
         <br>
         <input type='submit' name='login' value='Login' />
@@ -51,11 +51,11 @@
          
         if(!CheckLoginInDB($pawprint,$password))
         {
-            return false;
+            
         }
 
         echo "<br>YOU HAVE LOGGED IN!";
-        return true;
+        
     }
     
     function CheckLoginInDB($pawprint,$password)
@@ -65,6 +65,7 @@
         $DBconn = db_connect();
         require "php/authentication.php";
         $results = authenticate($pawprint, $password, $DBconn);
+        echo "<br>" . $results['error'];
         if($results['error'] == 1)
         {
             echo "<p>Incorrect username or password</p>";
@@ -75,19 +76,22 @@
             echo "<p>Unauthorized Access</p>";
         }
         else if($results['error'] == 0){
-            if($results['type'] == "instructor"){
-                echo ("professorpage");
+           echo $results['type'];
+           if(strcmp($results['type'], "instructor") == 0){
+                echo "professorpage";
             }
-            else if($results[type] == "applicant"){
-                echo("studentpage");
+            else if(strcmp($results['type'], "applicant") == 0){
+                echo"studentpage";
             }
-            else if($results[type] == "admin"){
-                echo("adminpage");
+            else if(strcmp($results['type'], "admin") == 0){
+                echo"adminpage";
             }
-            else if($results[type] == "sysAdmin"){
-                echo("adminpage");
+            else if(strcmp($results['type'], "new") == 0){
+                echo"adminpage";
             }
-          
+            $_SESSION['username'] = $pawprint;
+            session_name("WebApplication");
+            session_start();
         }
     }
     

@@ -20,10 +20,10 @@
  
 </head>
 <body>
-	
+    
 <div id="container">
         <form action="#" method="post">
-	
+    
             <!-- #first_step -->
             <div id="first_step">
                 <h1>COMPUTER SCIENCE DEPARTMENT<br> <span>GRADUATE TEACHING ASSISTANT APPLICATION</span> </h1>
@@ -44,12 +44,12 @@
                     <input type="text" name="gpa" id="gpa" value="gpa" />
                     <label for="gpa">Please enter your GPA.</label>
                 </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
+
                 <input class="submit" type="submit" name="submit_first" id="submit_first" value="" />
             </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
 
 
-             <!-- #third_step -->
-             <!-- 
+             <!--  
             <div id="temp_step">
                 <h1>COMPUTER SCIENCE DEPARTMENT<br> <span>GRADUATE TEACHING ASSISTANT APPLICATION</span> </h1>
                 
@@ -67,8 +67,7 @@
                                     
                <input class="submit" type="submit" name="submit_temp" id="submit_temp" value="" />
                 
-            </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
-           
+            </div>      <div class="clear"></div>
              -->
             <!-- #second_step -->
             <div id="second_step">
@@ -98,6 +97,10 @@
                     <input type="text" name="email" id="email" value="email address" />
                     <label for="email">Your email address. We send important administration notices to this address. </label>                    
                 </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
+
+
+                <input class="submit_back" type="submit" name="submit_second_back" id="submit_second_back" value="" />
+            
                 <input class="submit" type="submit" name="submit_second" id="submit_second" value="" />
             </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
 
@@ -120,7 +123,8 @@
                     <input type="text" name="currCourses" id="currCourses" value="current teaching courses" />
                     <label for="currCourses">Course(s) You Are Currently Teaching </label>                    
                 </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->     
-                    
+                <input class="submit_back" type="submit" name="submit_third_back" id="submit_third_back" value="" />
+                
                 <input class="submit" type="submit" name="submit_third" id="submit_third" value="" />
                 
             </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
@@ -137,7 +141,8 @@
                     <input type="text" name="otherPlace" id="otherPlace" value="other place" />
                     <label for="otherPlace">Other Places You Work:</label>                    
                 </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->     
-                    
+                <input class="submit_back" type="submit" name="submit_fourth_back" id="submit_fourth_back" value="" />
+            
                 <input class="submit" type="submit" name="submit_fourth" id="submit_fourth" value="" />
                 
             </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
@@ -185,7 +190,8 @@
 
                  
                 </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->     
-                    
+                <input class="submit_back" type="submit" name="submit_sixth_back" id="submit_sixth_back" value="" />
+            
                 <input class="submit" type="submit" name="submit_sixth" id="submit_sixth" value="" />
                 
             </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
@@ -205,21 +211,27 @@
                      
                      
                      <select name="selectionthree" id="selectionthree" value="selectionthree" >
+                    <option value="default">Choose one...</option>
                     <option value="rm">Requirement met</option>
                     <option value="register">Registered for SPEAK (date)</option>
                     </select>
                     
-                     <input type="text" name="speakScore" id="speakScore" value="speak score" />
+
+                     <input type="text" name="sub1" id="speakScore" value="speak score" />
                     <label for="speakScore">SPEAK/OPT score, if applicable</label>
-                    <p><input type="text" name="semesterLast" id="semesterLast" value="enter the semster" /></p>
+                    <p><input type="text" name="sub1" id="semesterLast" value="enter the semster" /></p>
                     <label for="semesterLast">Time of last test</label>
-                    <br>
+                    <p><input type="text" name="sub2" id="timetoregister" value="enter the time" /></p>
+                    <label for="timetoregister" id="labelregister">Time to register</label>
+                    
+
 
                     <br>
                    
                  
                 </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->     
-                    
+                <input class="submit_back" type="submit" name="submit_seventh_back" id="submit_seventh_back" value="" />
+            
                 <input class="submit" type="submit" name="submit_seventh" id="submit_seventh" value="" />
                 
             </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
@@ -251,7 +263,8 @@
 
                  
                 </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->     
-                    
+                <input class="submit_back" type="submit" name="submit_eighth_back" id="submit_eighth_back" value="" />
+            
                 <input class="submit" type="submit" name="submit_eighth" id="submit_eighth" value="" />
                 
             </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
@@ -280,15 +293,17 @@
                         <tr><td>Semester of last test</td><td></td></tr>
                     </table>
                 </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
+                <input class="submit_back" type="submit" name="submit_ninth_back" id="submit_ninth_back" value="" />
+            
                 <input class="send submit" type="submit" name="submit_ninth" id="submit_ninth" value="" />            
             </div>
             
         </form>
-	</div>
-	<div id="progress_bar">
+    </div>
+    <div id="progress_bar">
         <div id="progress"></div>
         <div id="progress_text">0% Complete</div>
-	</div>
-	
+    </div>
+    
 </body>
 </html>
