@@ -25,8 +25,9 @@ if($conn) {
    else { // force the variable in the event of an error, assume it is lname search
         $qry = 'lname, fname';       
    }    
+   //Query returns: name, ta/pla?, gpa, make_offer button
     //build an array of the results
-   while ($row = $result->fetch_array()) {
+   while ($row = ($result->pg_fetch_array($result))) {
         $stu_info = $row;
         $all_stu[]= $stu_info;
    }
