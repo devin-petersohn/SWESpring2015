@@ -10,9 +10,9 @@
 		$temp = pg_query($db, "INSERT INTO Applicant (sso) VALUES ('".$sso."');");
 		pg_query($db, "UPDATE Applicant SET fname = '". $_POST['name'] ."', lname = '". $_POST['name'] ."', 
 			gpa = '". $_POST['gpa'] ."' WHERE sso = '". $sso ."';");
-		if($_POST['selection'] == "TA")
-			pg_query($db, "INSERT INTO applicant_is_a_ugrad (sso) VALUES (".$sso.");");
-		else pg_query($db, "INSERT INTO applicant_is_a_grad (sso) VALUES (".$sso.");");
+		if($_POST['selection'] != "TA")
+			pg_query($db, "INSERT INTO applicant_is_a_ugrad (sso) VALUES ('".$sso."');");
+		else pg_query($db, "INSERT INTO applicant_is_a_grad (sso) VALUES ('".$sso."');");
 		
 		return $temp;
 	}
