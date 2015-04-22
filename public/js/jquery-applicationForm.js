@@ -94,7 +94,6 @@ $(function(){
     
     //first_step
     $('form').submit(function(){ return false; });
-    $(document).ready(function(){
     $('#submit_first').click(function(){
         //remove classes
     	$("#container label").css("line-height", "14px");
@@ -131,15 +130,16 @@ $(function(){
                
                 //update progress bar
            console.log("before");
-            $.get("../../application.php",
-//            		{
-//            	selection: $("#selection").val(),
-//            	name: $("#name").val(),
-//            	gpa: $("#gpa").val()
-//            		},
+            $.post("../../application.php",
+            		{
+		            	selection: $("#selection").val(),
+		            	lname: $("#lname").val(),
+		            	fname: $("#fname").val(),
+		            	gpa: $("#gpa").val()
+		            },
             		function(data){
             			console.log(data);
-            			alert("sending done!");
+            			alert("This page has been sent to database!");
             		}
             );
             console.log("after");
@@ -156,7 +156,6 @@ $(function(){
 
         else return false;
          
-    });
     });
     
     $('#submit_temp').click(function(){
@@ -212,6 +211,17 @@ $(function(){
         });
 
         if(!error) {
+	        	$.post("../../application.php",
+	            		{
+			            	ID: $("#ID").val(),
+			            	name: $("#selectionmajor").val(),
+			            	gpa: $("#email").val()
+			            },
+	            		function(data){
+	            			console.log(data);
+	            			alert("This page has been sent to database!");
+	            		}
+	            );
                 //update progress bar
                 $('#progress_text').html('32% Complete');
                 $('#progress').css('width','108px');
@@ -255,6 +265,17 @@ $(function(){
 
         if(!error) {
                 //update progress bar
+        	$.post("../../application.php",
+            		{
+        				phoneNum: $("#phoneNum").val(),
+        				gradDate: $("#gradDate").val(),
+        				currCourses: $("#currCourses").val()
+		            },
+            		function(data){
+            			console.log(data);
+            			alert("This page has been sent to database!");
+            		}
+            );
                 $("#container").css("height", "370px");
                 $('#progress_text').html('48% Complete');
                 $('#progress').css('width','162px');
@@ -318,8 +339,19 @@ $(function(){
         });
 
         if(!error) {
+	        	$.post("../../application.php",
+	            		{
+	        				precourse: $("#precourse").val(),
+	        				courseLike: $("#courseLike").val(),
+	        				otherPlace: $("#otherPlace").val()
+			            },
+	            		function(data){
+	            			console.log(data);
+	            			alert("This page has been sent to database!");
+	            		}
+	            );
                 //update progress bar
-                $("#container").css("height", "370px");
+                $("#container").css("height", "420px");
                 $('#progress_text').html('64% Complete');
                 $('#progress').css('width','216px');
                 $('#submit_sixth').css('left','540px');
@@ -393,7 +425,17 @@ $(function(){
         if(!error) {
                 //update progress bar
 
-
+	        	$.post("../../application.php",
+	            		{
+	        				selectiontwo: $("#selectiontwo").val(),
+	        				selectionifinternational: $("#selectionifinternational").val(),
+	        				
+			            },
+	            		function(data){
+	            			console.log(data);
+	            			alert("This page has been sent to database!");
+	            		}
+	            );
                 if($("#selectionifinternational").val()=="yes")
                 {
                     $('#progress_text').html('80% Complete');
@@ -536,6 +578,20 @@ $(function(){
         
 
         if(!error) {
+        	
+	        	$.post("../../application.php",
+	            		{
+	        				selectionthree: $("#selectionthree").val(),
+	        				speakScore: $("#speakScore").val(),
+	        				semesterLast: $("#semesterLast").val(),
+	        				timetoregister: $("#timetoregister").val()
+	        				
+			            },
+	            		function(data){
+	            			console.log(data);
+	            			alert("This page has been sent to database!");
+	            		}
+	            );
                 //update progress bar
                 $('#progress_text').html('86% Complete');
                 $('#progress').css('width','309.6px');
@@ -552,7 +608,7 @@ $(function(){
 
                 $('#progress_text').html('64% Complete');
                 $('#progress').css('width','216px');
-                $("#container").css("height", "370px");
+                $("#container").css("height", "420px");
                 //slide steps
                 $('#seventh_step').slideUp();
                 $('#sixth_step').slideDown(); 
@@ -605,6 +661,17 @@ $(function(){
         });
 
         if(!error) {
+	        	$.post("../../application.php",
+	            		{
+		        		selectionfour: $("#selectionfour").val(),
+		        		selectionfive: $("#selectionfive").val()
+		        			
+			            },
+	            		function(data){
+	            			console.log(data);
+	            			alert("This page has been sent to database!");
+	            		}
+	            );
                 //update progress bar
                 $("#container").css("height", "550px");
                 $('#progress_text').html('100% Complete');

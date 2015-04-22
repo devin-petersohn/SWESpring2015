@@ -27,8 +27,8 @@ function test($dbconn)
 function authenticate($username, $password, $dbconn)
 { 
 	$returnResults = array();
-
-	$queries = array($auth0, $auth1, $auth2, $auth3, $auth4);
+    
+	
 	$domains = array("mailumkcedu", "missouriedu", "mizzouedu", "umkcedu", "mailmissouriedu");
 	$facultyType = array("instructor", "admin", "sysAdmin");
 	$results = array();
@@ -41,7 +41,7 @@ function authenticate($username, $password, $dbconn)
 	$auth3 = pg_prepare($dbconn, "3", "SELECT * FROM umkcedu WHERE username = $1") or die(pg_last_error());
 	$auth4 = pg_prepare($dbconn, "4", "SELECT * FROM mailmissouriedu WHERE username = $1") or die(pg_last_error());
 
-
+    $queries = array($auth0, $auth1, $auth2, $auth3, $auth4);
 	//TODO: implement this
 	//
 	//To double check later and ensure validity of above queries. 
@@ -75,8 +75,17 @@ function authenticate($username, $password, $dbconn)
 		{
 			if(strcmp($password, $results[$resultCount]['password']) == 0)
 			{
+				$results[$resultCount]['loggedin'] = true;
 				$valid = true;
 			}
+			else
+			{
+			    $results[$resultCount]['loggedin'] = false;
+			}
+		}
+		else
+		{
+		    $results[$resultCount]['loggedin'] = false;
 		}
 	}
 	$results['error'] = 0;
@@ -88,7 +97,7 @@ function authenticate($username, $password, $dbconn)
 		//This is classified by being in the mail.missouri.edu domain
 		for($domainCount = 0; $domainCount < 5; $domainCount++)
 		{
-			if($results[$domainCount]['domain'])
+			if($results[$domainCount]['loggedin'])
 			{
 				if(strcmp($results[$domainCount]['domain'], 'mailmissouriedu') == 0)
 				{
