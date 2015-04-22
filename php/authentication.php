@@ -170,13 +170,14 @@ function authenticate($username, $password, $dbconn)
 				$isStudent = true;
 			}
 		}
+		$results['type'] = "applicant";
+		
 	}
 	//not successful login
 	else
 	{
 		//Invalid username or password; could not login.
 		$results['error'] = 1;
-		return $results;
 		$results['type'] = "fail";
 	}
 
@@ -201,8 +202,8 @@ function authenticate($username, $password, $dbconn)
 		{
 			//New applicant
 			$results['type'] = "new";
-			return $results;
 		}
+		$results['error'] = 0;
 	}
 /*
 	TODO: implement below
@@ -243,6 +244,11 @@ function authenticate($username, $password, $dbconn)
 		}
 	}
 */
+	if(!$results['type'])
+	{
+	    $results['type'] = "instructor";
+	}
+	return $results;
 }
 
 
