@@ -3,7 +3,9 @@ $(function(){
     var field_values = {
             //id        :  value
             'selection' : 'selection',
-            'name'  : 'name',
+            'fname' : 'fname',
+            'lname' : 'lname',
+            
             'gpa'  : 'gpa',
             'ID' : 'stu ID',
             'source' : 'enter the full info',
@@ -22,7 +24,9 @@ $(function(){
 
     //inputfocus
 
-    $('input#name').inputfocus({ value: field_values['name'] });
+    $('input#fname').inputfocus({ value: field_values['fname'] });
+    $('input#lname').inputfocus({ value: field_values['lname'] });
+    
     $('input#gpa').inputfocus({ value: field_values['gpa'] });
     $('input#ID').inputfocus({ value: field_values['ID'] }); 
     $('input#source').inputfocus({ value: field_values['source'] }); 
