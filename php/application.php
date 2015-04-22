@@ -16,8 +16,8 @@
 			pg_query($db, "INSERT INTO applicant_is_a_ugrad (sso) VALUES ('".$sso."');");
 		else pg_query($db, "INSERT INTO applicant_is_a_grad (sso) VALUES ('".$sso."');");
 		
-		if($temp)
-		  return $temp;
+	//	if($temp)
+	//	  echo $temp;
 	}
 
 	if( $_POST['ID'] && $_POST['selectionmajor'] && $_POST['email']){
