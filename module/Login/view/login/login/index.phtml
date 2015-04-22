@@ -1,3 +1,8 @@
+<?php 
+session_start();
+
+?>
+
 <div style="width:300px; margin-left:auto; margin-right:auto; margin-top:200px;">
     <form id='login' action='' method='post' accept-charset='UTF-8'>
         <fieldset style="text-align:center;" >
@@ -48,6 +53,7 @@
          
         $pawprint = trim($_POST['pawprint']);
         $password = trim($_POST['password']);
+        $_SESSION['username'] = $pawprint;
          
         if(!CheckLoginInDB($pawprint,$password))
         {
@@ -89,9 +95,6 @@
             else if(strcmp($results['type'], "new") == 0){
                 echo"adminpage";
             }
-            $_SESSION['username'] = $pawprint;
-            session_name("WebApplication");
-            session_start();
         }
     }
     
