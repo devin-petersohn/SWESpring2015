@@ -122,13 +122,15 @@ $(function(){
                
                 //update progress bar
            console.log("before");
-            $.post("../../application.php",{
-            	selection: $("#selection").val(),
-            	name: $("#name").val(),
-            	gpa: $("#gpa").val()
-            		},
+            $.get("../../application.php",
+//            		{
+//            	selection: $("#selection").val(),
+//            	name: $("#name").val(),
+//            	gpa: $("#gpa").val()
+//            		},
             		function(data){
-            			alert("sending " + data);
+            			console.log(data);
+            			alert("sending done!");
             		}
             );
             console.log("after");
