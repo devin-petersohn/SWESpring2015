@@ -331,21 +331,17 @@ $(function(){
                 console.log($('#selectionifinternational').val());
                 if($('#selectionifinternational').val()=="yes")
                 {
-                    console.log("I select yes");
                     $('#sixth_step').slideUp();
                     $('#senventh_step').slideDown(); 
                 }
                 else
                 {
-                    $('#selectionthree').hide();
-                    $('#speakScore').hide();
-                    $('#semesterLast').hide();
-                    $('label').hide();
-                    
-                    $("#container").css("height", "430px");
+                    console.log("I select no");
                     $('#sixth_step').slideUp();
-                    $('#senventh_step').slideDown(); 
-                    
+                    $('#senventh_step').slideDown();
+                    $('#seventh_step input').removeClass('error').removeClass('valid');
+                    $('#senventh_step').slideUp();
+                    $('#eighth_step').slideDown(); 
                 }
                 
                       
@@ -356,25 +352,20 @@ $(function(){
     $('#submit_seventh').click(function(){
         //send information to server
         $("#container").css("height", "530px");
-
+        $('#seventh_step input').removeClass('error').removeClass('valid');
         var fields = $('#seventh_step input[type=text]');
         var error = 0;
-        if($('#selectionifinternational').val()=="yes")
-        {
-            $('#seventh_step input').removeClass('error').removeClass('valid');
-            fields.each(function(){
-                var value = $(this).val();
-                if( value.length<1 || value==field_values[$(this).attr('id')] ) {
-                    $(this).addClass('error');
-                    $(this).effect("shake", { times:3 }, 50);
-                    
-                    error++;
-                } else {
-                    $(this).addClass('valid');
-                }
-            });
-
-        }
+        fields.each(function(){
+            var value = $(this).val();
+            if( value.length<1 || value==field_values[$(this).attr('id')] ) {
+                $(this).addClass('error');
+                $(this).effect("shake", { times:3 }, 50);
+                
+                error++;
+            } else {
+                $(this).addClass('valid');
+            }
+        });
 
         if(!error) {
                 //update progress bar
