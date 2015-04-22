@@ -6,8 +6,7 @@
 		<title>Faculty Page</title>
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/prof_styles.css')
-    ?>
+		<?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/prof_styles.css')?>
         
 		<style>
 		td {
@@ -28,8 +27,14 @@
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
           <span class="icon-toggle"></span>
-      </button>
-      <h1>Welcome, <h1>
+      </button> 
+      <h1>test</h1>
+      <?php 
+      if(isset($_SESSION['username']))
+      {
+          echo "Welcome, $pawprint!";
+      }
+      ?> 
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
