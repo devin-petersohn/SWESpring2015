@@ -19,8 +19,7 @@ INSERT INTO applicant_wish_courses (sso, course_id, grade_received)
 INSERT INTO applicant_other_workpalces (sso, workplace) VALUES ($sso, $workplace);
 
 #Page 5 of the application
-UPDATE Applicant SET gato_req_met = $gato_req_met, resume_filepath = $resume_filepath, 
-	submit_date = $submit_date, app_submitted = $app_submitted WHERE sso = $sso;
+UPDATE Applicant SET gato_req_met = $gato_req_met WHERE sso = $sso;
 
 #Page 6 of the application - International Students only
 INSERT INTO applicant_is_international (sso, speak_test_score, speak_last_test_date, speak_req_met)
