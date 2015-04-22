@@ -110,7 +110,7 @@ input[type="submit"]:focus, input[type="button"]:focus { outline : none; }
         }
 
         #container input.submit_back {
-            background: url('../img/button.png') no-repeat;
+            background: url('../img/button_back.png') no-repeat;
             border: none;
             cursor: pointer;
             width: 85px;
