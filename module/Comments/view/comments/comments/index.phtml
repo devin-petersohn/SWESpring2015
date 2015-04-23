@@ -29,6 +29,27 @@
                           <tr><td>CS4820</td><td>Grant Scott</td><td></td></tr>
                           <tr><td>CS4820</td><td>Grant Scott</td><td></td></tr>
                         </tbody>
+                        <!--
+                        <tbody>
+                            <?php /* php script to grab all comments for a particular sso/ student
+                                require 'functions.php';
+                                $conn = db_connect();
+                                $sso = $_POST['pawprint'];
+                                $qry = 'SELECT comment, instructor_sso
+                                  FROM applicant_comments
+                                  WHERE (sso = '.$sso.')
+                                 ';
+                                $result = pg_prepare($conn, "comment_search", $qry);
+                                $result = pg_execute($conn, "comment_search", array());
+                                //fields for printing:  Author, comment, Date, course || DB values:  instructor_sso, comment
+                                if($result) {
+                                    while($row =  pg_fetch_array($result, null, PGSQL_ASSOC)) {
+                                        echo $row['instructor_sso'] . $row['comment'];
+                                    }
+                                }
+                           */ ?>
+                        </tbody>
+                        -->
                     </table>
                 </div>
             </div>   <!-- end row -->
