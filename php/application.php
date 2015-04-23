@@ -5,12 +5,14 @@
 
 	$sso = "dpvx8";
 
-
-	if( $_POST['selection'] && $_POST['name'] && $_POST['gpa']){
+	#$paw = $_SESSION['username']; // This is how we will get their pawprint/SSO
+	#echo $paw;
+	
+	if( $_POST['selection'] && $_POST['fname'] && $_POST['lname']&& $_POST['gpa']){
 		#if(pg_query($db, "SELECT * FROM Applicant WHERE sso = '".$sso."';") == FALSE){
-		    $temp = pg_query($db, "INSERT INTO Applicant (sso) VALUES ('".$sso."');");
+		$temp = pg_query($db, "INSERT INTO Applicant (sso) VALUES ('".$sso."');");
 		#}
-		pg_query($db, "UPDATE Applicant SET fname = '". $_POST['name'] ."', lname = '". $_POST['name'] ."', 
+		pg_query($db, "UPDATE Applicant SET fname = '". $_POST['fname'] ."', lname = '". $_POST['lname'] ."', 
 			gpa = '". $_POST['gpa'] ."' WHERE sso = '". $sso ."';");
 		if($_POST['selection'] != "TA")
 			pg_query($db, "INSERT INTO applicant_is_a_ugrad (sso) VALUES ('".$sso."');");
@@ -22,7 +24,7 @@
 
 	if( $_POST['ID'] && $_POST['selectionmajor'] && $_POST['email']){
 		pg_query($db, "UPDATE Applicant SET id = '". $_POST['ID']."', email = '". $_POST['email']. "' WHERE sso = '".$sso."';");
-		pg_query($db, "UPDATE applicant_is_a_ugrad SET program = ". $_POST['selectionmajor'].";");
+		pg_query($db, "UPDATE applicant_is_a_ugrad SET program = '". $_POST['selectionmajor']."';");
 	}
 
 	if( $_POST['phoneNum'] && $_POST['gradDate'] && $_POST['currCourses']){
@@ -49,16 +51,14 @@
 		} else pg_query($db, "UPDATE Applicant SET gato_req_met = FALSE WHERE sso = '".$sso."';");
 	}
 
-	if( $_POST['selectionifinternational'] && $_POST['selectionthree'] && $_POST['speakScore'] && $_POST['semesterLast']){
-		if($_POST['selectionifinternational'] == "yes"){
-			pg_query($db, "INSERT INTO applicant_is_international (sso) VALUES ('".$sso."');");
-			if($_POST['selectionthree'] == "rm"){
-				pg_query($db, "UPDATE applicant_is_international SET speak_test_score = '". $_POST['speakScore']."', 
-					speak_last_test_date = '". $_POST['semesterLast'] ."', speak_req_met = TRUE WHERE sso = '".$sso."';");
-			} else pg_query($db, "UPDATE applicant_is_international SET speak_req_met = FALSE,
-			     #need to input date of next test when variable is created in the form
-				 WHERE sso = '".$sso."');");
-		}
+	if($_POST['speak_next_test_date'] && $_POST['selectionthree'] && $_POST['speakScore'] && $_POST['semesterLast']){
+		pg_query($db, "DELETE FROM applicant_is_international WHERE sso = ". $sso.";");
+		pg_query($db, "INSERT INTO applicant_is_international (sso) VALUES ('".$sso."');");
+		if($_POST['selectionthree'] == "rm"){
+			pg_query($db, "UPDATE applicant_is_international SET speak_test_score = '". $_POST['speakScore']."', 
+				speak_last_test_date = '". $_POST['semesterLast'] ."', speak_req_met = TRUE WHERE sso = '".$sso."';");
+		} else pg_query($db, "UPDATE applicant_is_international SET speak_req_met = FALSE,
+		     speak_next_test_date = ".$_POST['timetoregister']." WHERE sso = '".$sso."');");
 	}
 
 	if( $_POST['selectionfour'] && $_POST['selectionfive']){
