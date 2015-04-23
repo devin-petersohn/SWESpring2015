@@ -19,7 +19,7 @@ class TestController extends AbstractActionController
     public function indexAction()
     {
     
-       $form = new ProfileForm();
+        $form = new ProfileForm();
         $request = $this->getRequest();  
         if ($request->isPost()) {
              
