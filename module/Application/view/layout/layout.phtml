@@ -1,4 +1,6 @@
-<?php echo $this->doctype(); ?>
+<?php 
+    session_start();
+    echo $this->doctype(); ?>
 
 <html lang="en">
     <head>
@@ -22,6 +24,7 @@
             ->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9',))
             ->prependFile($this->basePath() . '/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9',))
         ; ?>
+        
 
     </head>
     <body>
@@ -71,7 +74,7 @@
                 <ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
 					<a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
-						<i class="glyphicon glyphicon-user"></i> Username <span class="caret"></span></a>
+						<i class="glyphicon glyphicon-user"></i> <?php echo $_SESSION["username"];?> <span class="caret"></span></a>
 					<ul id="g-account-menu" class="dropdown-menu" role="menu">
 						<li><a href="#"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
 					</ul>
