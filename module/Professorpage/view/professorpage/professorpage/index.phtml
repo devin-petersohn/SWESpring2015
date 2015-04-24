@@ -157,7 +157,15 @@ if($status == PHP_SESSION_NONE){
 
                                 if($results) {
                                     while($row =  pg_fetch_array($results, null, PGSQL_ASSOC)) {
-                                        ?><tr><td><?echo $row['fname'].' '. $row['lname']?></td><td><?echo $row['course']?></td><td></td><td><?echo $row['gpa']?></td><td><?echo $row['grade_received']?></td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary" id="<?echo $row['sso']?>">Add/View Comments</button></form></td><tr><?
+                                        ?><tr><td><?echo $row['fname'].' '. $row['lname']?></td><td><?echo $row['course']?></td><td><?php $qry = "SELECT * FROM applicant_is_a_grad WHERE sso like $1";
+                                    $is_grad = pg_prepare($conn,"grad_search",$qry);
+                                    $is_grad = pg_execute($conn,"grad_search",array($row['sso']));
+                                    if($is_grad){
+                                        echo  $is_grad;
+                                    }
+                                    else {
+                                        echo 'nope';
+                                    } ?></td><td><?echo $row['gpa']?></td><td><?echo $row['grade_received']?></td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary" id="<?echo $row['sso']?>">Add/View Comments</button></form></td><tr><?
 
                                     }
                                 }
