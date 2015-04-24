@@ -143,16 +143,21 @@ if($status == PHP_SESSION_NONE){
                             if($conn) {
                                 $inst_sso = $_SESSION['username'];
                                 //query the DB to find what courses the instructor teaches
-                                $qry = "";
-                                $pg_prepare($conn,"find_courses",$qry);
-                                $teaches = $pg_execute($conn,"find_courses",array());
-                                if($teaches) {
-                                    while($row =  pg_fetch_array($teaches, null, PGSQL_ASSOC)) {
+                                $qry = "SELECT applicant.fname, applicant.lname, applicant.gpa, applicant_wish_course.grade_received, 
+                                        applicant_wish_course.course_id AS course FROM applicant
+                                        INNER JOIN applicant_wish_course
+                                        ON applicant.sso = applicant_wish_course.sso
+                                        WHERE applicant_wish_course.course_id IN (
+                                        	SELECT course_id FROM instructor_teaches
+                                        	WHERE instructor_sso = $1;
+                                        );
+                                        ";
+                                $pg_prepare($conn,"find_applicants",$qry);
+                                $results = pg_execute($conn,"find_applicants",array());
+                                if($results) {
+                                    while($row =  pg_fetch_array($results, null, PGSQL_ASSOC)) {
                                         echo $row['course_id'];
                                     }
-                                    $qry = "";
-                                    $pg_prepare($conn,"find_applicants",$qry);
-                                    $results = pg_execute($conn,"find_applicants",array());
                                 }
                             }
                             
