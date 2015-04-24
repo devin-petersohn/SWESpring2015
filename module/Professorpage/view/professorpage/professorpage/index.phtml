@@ -165,7 +165,7 @@ if($status == PHP_SESSION_NONE){
                                         }
                                         else {
                                             echo 'nope';
-                                        } ?></td><td><?echo $row['gpa']?></td><td><?echo $row['grade_received']?></td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary" id="<?echo $row['sso']?>">Add/View Comments</button></form></td><tr><?
+                                        } ?></td><td><?echo $row['gpa']?></td><td><?echo $row['grade_received']?></td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary" name="<?echo $row['sso']?>">Add/View Comments</button></form></td><tr><?
 
                                     }
                                 }
