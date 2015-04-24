@@ -1,5 +1,5 @@
 <?php
-	
+	start_session();
 	include 'functions.php';
 	$db = db_connect();
 
