@@ -1,5 +1,9 @@
 <?php 
-session_start();
+$status = session_status();
+if($status == PHP_SESSION_NONE){
+    //There is no active session
+    session_start();
+}
 ?>
 
 <!DOCTYPE html>
@@ -32,10 +36,23 @@ session_start();
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
           <span class="icon-toggle"></span>
       </button> 
-      <h1>test</h1>
       <?php 
-       echo "Welcome," . $_SESSION["username"];
-      ?> 
+        if(isset($_SESSION['username'])){
+            echo "Welcome," . $_SESSION["username"];
+        }
+        else {
+            echo "";
+        }
+      ?>
+      <form id='logout' action='' method='post' accept-charset='UTF-8' style="padding-top: 200px;">
+      <input type='submit' name='logout' value='Logout' /> 
+      </form>
+      <?php 
+        if(isset($_POST['logout'])){
+            session_destroy();
+        }
+      ?>
+      
     </div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
@@ -70,6 +87,11 @@ session_start();
                 <input type="text" name="input">
                 <input type="submit" value="Submit">
             </form>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
        </div>
      </div>
      
@@ -77,8 +99,8 @@ session_start();
      <hr>
      <hr>
      <hr>
-     <div class="panel panel-default" style="margin-top: 100px;">
-        <div class="panel-heading"><h4>Courses Taught this Semester</h4></div>
+     <div class="panel panel-default" style="margin-top: 200px; height:300px;">
+        <div class="panel-heading"><h4 style="text-align: left;">Courses Taught this Semester</h4></div>
             <?php 
             $connectionString = "user=admin1xtduwt password=zVd4BSi4JdIJ host=127.13.165.130 dbname=ta_application";
             $DBconn = pg_connect($connectionString);
@@ -95,7 +117,7 @@ session_start();
 }            
             
             ?>
-     </div>                  
+     </div>                 
  
     <div class="panel panel-default">
         <div class="row">
@@ -107,14 +129,32 @@ session_start();
                     <tbody>
                       <tr><td>Sam Walker</td><td>CS4320</td><td>TA</td><td>4.0</td><td>A</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary">Add/View Comments</button></form></td></tr>
                       <tr><td>Tory White</td><td>CS4320</td><td>PLA</td><td>3.7</td><td>A</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary">Add/View Comments</button></form></td></tr>
-                      <tr><td>Tylor Jones</td><td>CS4320</td><td>TA</td><td>3.4</td><td>B</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit/" class="btn btn-primary">Add/View Comments</button></form></td></tr>
+                      <tr><td>Tylor Jones</td><td>CS4320</td><td>TA</td><td>3.4</td><td>B</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary">Add/View Comments</button></form></td></tr>
                       <tr><td>Jerry Smith</td><td>CS4320</td><td>PLA</td><td>3.6</td><td>A</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="button" class="btn btn-primary">Add/View Comments</button></form></td></tr>
                       <tr><td>Mary Test</td><td>CS4320</td><td>TA</td><td>3.7</td><td>B</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="button" class="btn btn-primary">Add/View Comments</button></form></td></tr>
                     </tbody>
                     <!--
                     <tbody>
                         <?php /* 
-                            php script to grab applicants info
+                            //php script to find applicants
+                            require 'functions.php';
+                            
+                            $conn = db_connect();
+                            if($conn) {
+                                $inst_sso = $_SESSION['username'];
+                                //query the DB to find what courses the instructor teaches
+                                $qry = "";
+                                $pg_prepare($conn,"find_courses",$qry);
+                                $teaches = $pg_execute($conn,"find_courses",array());
+                                if($teaches) {
+                                    while($row =  pg_fetch_array($teaches, null, PGSQL_ASSOC)) {
+                                        echo $row['course_id'];
+                                    }
+                                    $qry = "";
+                                    $pg_prepare($conn,"find_applicants",$qry);
+                                    $results = pg_execute($conn,"find_applicants",array());
+                                }
+                            }
                             
                        */ ?>
                     </tbody>

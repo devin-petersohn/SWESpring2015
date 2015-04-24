@@ -6,8 +6,7 @@ function searchForWindow($dbconn)
     $line = pg_fetch_array($SR, null, PGSQL_ASSOC);
     while($line)
     {
-        $date = date("Y-m-d");
-        if(/*$line['startTime'] < $date && $line['endTime'] > $date */true)
+        if(time() - strtotime($line['startTime']) > 0 && time() - strtotime($line['endTime']) < 0)
         {
             return $line['windowname'];
         }
