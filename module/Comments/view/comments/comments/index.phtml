@@ -31,7 +31,7 @@
                         </tbody>
                         <!--
                         <tbody>
-                            <?php /* php script to grab all comments for a particular sso/ student
+                            <?php  /*php script to grab all comments for a particular sso/ student
                                 require 'functions.php';
                                 $conn = db_connect();
                                 $sso = $_POST['pawprint'];
@@ -43,8 +43,8 @@
                                 $result = pg_execute($conn, "comment_search", array());
                                 //fields for printing:  Author, comment, Date, course || DB values:  instructor_sso, comment
                                 if($result) {
-                                    while($row =  pg_fetch_array($result, null, PGSQL_ASSOC)) {
-                                        echo $row['instructor_sso'] . $row['comment'];
+                                    while($row =  pg_fetch_array($result, null, PGSQL_ASSOC)) {?>
+                                        <tr><td></td>echo $row['instructor_sso'] . $row['comment'];</tr>
                                     }
                                 }
                            */ ?>
