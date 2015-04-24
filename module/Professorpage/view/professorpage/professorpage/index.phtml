@@ -125,6 +125,7 @@ if($status == PHP_SESSION_NONE){
                     <thead>
                         <tr><th>Applicant Name</th><th>Wish List Course</th><th>TA/PLA</th><th>GPA</th><th>Grade Recieved</th><th>Make Offer</th><th>Add Comments</th></tr>
                     </thead>
+                    <!--
                     <tbody>
                       <tr><td>Sam Walker</td><td>CS4320</td><td>TA</td><td>4.0</td><td>A</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary">Add/View Comments</button></form></td></tr>
                       <tr><td>Tory White</td><td>CS4320</td><td>PLA</td><td>3.7</td><td>A</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary">Add/View Comments</button></form></td></tr>
@@ -132,9 +133,10 @@ if($status == PHP_SESSION_NONE){
                       <tr><td>Jerry Smith</td><td>CS4320</td><td>PLA</td><td>3.6</td><td>A</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="button" class="btn btn-primary">Add/View Comments</button></form></td></tr>
                       <tr><td>Mary Test</td><td>CS4320</td><td>TA</td><td>3.7</td><td>B</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="button" class="btn btn-primary">Add/View Comments</button></form></td></tr>
                     </tbody>
-                    <!--
+                    -->
+                    
                     <tbody>
-                        <?php /* 
+                        <?php
                             //php script to find applicants
                             require 'functions.php';
                             
@@ -151,18 +153,19 @@ if($status == PHP_SESSION_NONE){
                                         	WHERE instructor_sso = $1;
                                         );
                                         ";
-                                $pg_prepare($conn,"find_applicants",$qry);
+                                pg_prepare($conn,"find_applicants",$qry);
                                 $results = pg_execute($conn,"find_applicants",array());
                                 if($results) {
                                     while($row =  pg_fetch_array($results, null, PGSQL_ASSOC)) {
-                                        echo $row['course_id'];
+                                        ?><tr><td><?echo $row['applicant.fname']?></td><td><?echo $row['applicant.lname']?></td> <?
+                                        echo $row['applicant.fname'];
                                     }
                                 }
                             }
                             
-                       */ ?>
+                        ?>
                     </tbody>
-                      -->
+                    
                 </table>
           </div>
        </div>
