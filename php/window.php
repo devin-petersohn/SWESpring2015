@@ -12,6 +12,7 @@ function searchForWindow($dbconn)
         }
         $line = pg_fetch_array($SR, null, PGSQL_ASSOC);
     }
+    return NULL;
 }
     
 

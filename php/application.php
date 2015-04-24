@@ -3,7 +3,7 @@
 	include 'functions.php';
 	$db = db_connect();
 
-	$sso = "dpvx8";
+	$sso = $_SESSION['username'];
 
 	#$paw = $_SESSION['username']; // This is how we will get their pawprint/SSO
 	#echo $paw;
@@ -22,9 +22,14 @@
 	//	  echo $temp;
 	}
 
-	if( $_POST['ID'] && $_POST['selectionmajor'] && $_POST['email']){
+	if( $_POST['ID'] && $_POST['selectionmajor'] && $_POST['advisorname'] && $_POST['email'] && $_POST['masterphd']&& $_POST['selection']){
 		pg_query($db, "UPDATE Applicant SET id = '". $_POST['ID']."', email = '". $_POST['email']. "' WHERE sso = '".$sso."';");
-		pg_query($db, "UPDATE applicant_is_a_ugrad SET program = '". $_POST['selectionmajor']."';");
+		if($_POST['selection'] != "TA"){
+			pg_query($db, "UPDATE applicant_is_a_ugrad SET program = '". $_POST['selectionmajor']."';");
+		} else { 
+			pg_query($db, "UPDATE applicant_is_a_grad SET advisor_name = '". $_POST['advisorname']."' WHERE sso = '".$sso."';");
+			pg_query($db, "UPDATE applicant_is_a_grad SET grad_program = '". $_POST['masterphd']."' WHERE sso = '".$sso."';");
+		}
 	}
 
 	if( $_POST['phoneNum'] && $_POST['gradDate'] && $_POST['currCourses']){
