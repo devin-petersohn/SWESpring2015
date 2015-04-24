@@ -135,7 +135,25 @@ if($status == PHP_SESSION_NONE){
                     <!--
                     <tbody>
                         <?php /* 
-                            php script to grab applicants info
+                            //php script to find applicants
+                            require 'functions.php';
+                            
+                            $conn = db_connect();
+                            if($conn) {
+                                $inst_sso = $_SESSION['username'];
+                                //query the DB to find what courses the instructor teaches
+                                $qry = "";
+                                $pg_prepare($conn,"find_courses",$qry);
+                                $teaches = $pg_execute($conn,"find_courses",array());
+                                if($teaches) {
+                                    while($row =  pg_fetch_array($teaches, null, PGSQL_ASSOC)) {
+                                        echo $row['course_id'];
+                                    }
+                                    $qry = "";
+                                    $pg_prepare($conn,"find_applicants",$qry);
+                                    $results = pg_execute($conn,"find_applicants",array());
+                                }
+                            }
                             
                        */ ?>
                     </tbody>
