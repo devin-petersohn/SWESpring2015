@@ -44,7 +44,7 @@ function search($dbconn, $string, $type)
 
     if(strcmp($type, "pawprint") == 0)
     {
-        $test = strtok($string, " ");
+        $test = strtok($string, " \n");
         if(strcmp($test, $string) != 0)
         {
             return NULL;
@@ -54,8 +54,10 @@ function search($dbconn, $string, $type)
             pg_prepare($dbconn, "pawprint", "SELECT * FROM applicant WHERE sso LIKE $1");
             $SR = pg_execute($dbconn, "pawprint", array($test));
             $line = pg_fetch_array($SR, null, PGSQL_ASSOC);
+            
             $returnResults[0] = $line;
             $returnResults[0] = json_encode($returnResults[0]);
+
         }
     }
     else
@@ -113,8 +115,7 @@ function search($dbconn, $string, $type)
             }
         }
     }
-
-
+    return $returnResults;
 }
 
 
