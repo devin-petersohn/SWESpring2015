@@ -125,6 +125,7 @@ if($status == PHP_SESSION_NONE){
                     <thead>
                         <tr><th>Applicant Name</th><th>Wish List Course</th><th>TA/PLA</th><th>GPA</th><th>Grade Recieved</th><th>Make Offer</th><th>Add Comments</th></tr>
                     </thead>
+                    <!--
                     <tbody>
                       <tr><td>Sam Walker</td><td>CS4320</td><td>TA</td><td>4.0</td><td>A</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary">Add/View Comments</button></form></td></tr>
                       <tr><td>Tory White</td><td>CS4320</td><td>PLA</td><td>3.7</td><td>A</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary">Add/View Comments</button></form></td></tr>
@@ -132,37 +133,37 @@ if($status == PHP_SESSION_NONE){
                       <tr><td>Jerry Smith</td><td>CS4320</td><td>PLA</td><td>3.6</td><td>A</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="button" class="btn btn-primary">Add/View Comments</button></form></td></tr>
                       <tr><td>Mary Test</td><td>CS4320</td><td>TA</td><td>3.7</td><td>B</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="button" class="btn btn-primary">Add/View Comments</button></form></td></tr>
                     </tbody>
-                    <!--
+                    -->
+                    
                     <tbody>
-                        <?php /* 
+                        <?php
                             //php script to find applicants
-                            require 'functions.php';
+                            require 'php/functions.php';
                             
                             $conn = db_connect();
                             if($conn) {
                                 $inst_sso = $_SESSION['username'];
                                 //query the DB to find what courses the instructor teaches
-                                $qry = "SELECT applicant.fname, applicant.lname, applicant.gpa, applicant_wish_course.grade_received, 
+                               
+                                $results = pg_prepare($conn,"find_applicants",'SELECT applicant.sso, applicant.fname, applicant.lname, applicant.gpa, applicant_wish_course.grade_received, 
                                         applicant_wish_course.course_id AS course FROM applicant
                                         INNER JOIN applicant_wish_course
                                         ON applicant.sso = applicant_wish_course.sso
                                         WHERE applicant_wish_course.course_id IN (
                                         	SELECT course_id FROM instructor_teaches
-                                        	WHERE instructor_sso = $1;
-                                        );
-                                        ";
-                                $pg_prepare($conn,"find_applicants",$qry);
-                                $results = pg_execute($conn,"find_applicants",array());
+                                        	WHERE instructor_sso like $1
+                                        )');
+                                $results = pg_execute($conn,"find_applicants",array($inst_sso));
                                 if($results) {
                                     while($row =  pg_fetch_array($results, null, PGSQL_ASSOC)) {
-                                        echo $row['course_id'];
+                                        ?><tr><td><?echo $row['fname'].' '. $row['lname']?></td><td><?echo $row['course']?></td><td></td><td><?echo $row['gpa']?></td><td><?echo $row['grade_received']?></td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary" id="<?echo $row['sso']?>">Add/View Comments</button></form></td><tr><?
                                     }
                                 }
                             }
                             
-                       */ ?>
+                        ?>
                     </tbody>
-                      -->
+                    
                 </table>
           </div>
        </div>
