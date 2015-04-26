@@ -59,17 +59,50 @@
       
   	</div><!-- /span-3 -->
     
-    <div class="col-md-6" style="margin-top: 40px;">
-       <div class="well">
+    <div class="col-md-12" style="margin-top: 40px;">
+       <div class="well" style="height:300px;">
             <h3>Search for an Applicant</h3>
-            <form>
-                <input type="radio" name="choice" value="pawprint">Search by PawPrint
+            <form id='search' action='' method='post' accept-charset='UTF-8'>
+                <input type="radio" name="choice" id="pawprint" value="pawprint">Search by PawPrint
                 <br>
-                <input type="radio" name="choice" value="name">Search by Applicant Name
+                <input type="radio" name="choice" id="name" value="name">Search by Applicant Name
                 <br>
                 <input type="text" name="input">
-                <input type="submit" value="Submit">
+                <input type='submit' name='submit' value='Submit'>
             </form>
+            <?php 
+            
+            echo "made it here";
+            if(isset($_POST['submit'])){
+                include 'php/functions.php';
+                include 'php/DB_Search.php';
+                echo "also here";
+                $type = $_POST['choice'];
+                $conn = db_connect();
+                $arr = search($conn, $_POST['input'], $type);
+                
+   
+              /*foreach ($arr as $t)
+               {
+                   print_r($t);
+                   echo "<br>"; 
+               }*/
+                if($arr != NULL){
+               
+                    foreach ($arr as $t){
+                        $t = json_decode($t, TRUE);
+                        echo $t['fname'] . "<br>";
+                        echo $t['lname'] . "<br>";
+                        }
+                    }
+                else {
+                    echo "no results found";
+                }
+            }
+                
+            
+            
+            ?>
        </div>
      </div>
     
@@ -114,7 +147,7 @@
         </div>
         <div class="panel-body">
           
-          <form class="form form-vertical">
+          <form class="form form-vertical" action="" method="GET">
             <div class="control-group">
               <label>Course ID</label>
               <div class="controls">

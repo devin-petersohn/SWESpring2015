@@ -1,10 +1,11 @@
 <?php 
+use Studentpage\Module;
 session_start();
 
 ?>
 
 <div style="width:300px; margin-left:auto; margin-right:auto; margin-top:200px;">
-    <form id='login' action='' method='post' accept-charset='UTF-8'>
+    <form id='login' action=' ' method='post' accept-charset='UTF-8'>
         <fieldset style="text-align:center;" >
         <legend>Login</legend>
         <input type='hidden' name='submitted' id='submitted' value='1'/>
@@ -84,16 +85,21 @@ session_start();
         else if($results['error'] == 0){
            echo $results['type'];
            if(strcmp($results['type'], "instructor") == 0){
-                echo "professorpage";
+               header('Location:professorpage');
+               exit;
             }
+            
             else if(strcmp($results['type'], "applicant") == 0){
-                echo "studentpage";
+                header('Location:studentpage');
+                exit;
             }
             else if(strcmp($results['type'], "admin") == 0){
-                echo"adminpage";
+                header('Location:admin');
+                exit;
             }
             else if(strcmp($results['type'], "new") == 0){
-                echo"adminpage";
+                header('Location:studentpage');
+                exit;
             }
         }
     }
