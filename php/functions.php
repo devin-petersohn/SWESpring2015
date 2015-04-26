@@ -12,15 +12,6 @@ function db_connect() {
     return $DBconn;
 }
 
-function testSendEmail()
-{
-    $to = 'djry35@mail.missouri.edu';
-    $subject = 'Your Application Was Received';
-    $message = 'Hello,\nYour application has been received. You will be notified in 3-4 weeks if we have an offer for you\n';
-    $headers = 'From: draymon212@gmail.com' . "\r\n";
-    mail($to, $subject, $message, $headers);
-}
-
 function addRank($dbconn, $applicant, $rank)
 {
     pg_prepare($dbconn, "addition", "UPDATE applicant SET ranking = $1 WHERE sso LIKE $applicant");
@@ -29,22 +20,22 @@ function addRank($dbconn, $applicant, $rank)
 
 function offerPosition($dbconn, $applicant, $course, $section)
 {
-    pg_prepare($dbconn, "position", "INSERT INTO applicant_offer_received VALUES($1, $2, $3, FALSE, FALSE)");
+    pg_prepare($dbconn, "position", "INSERT INTO applicant_offer_received VALUES($1, $2, $3, NULL, NULL)");
     pg_execute($dbconn, "position", array($applicant, $course, $section));
 }
 
-function updateOfferStatus($dbconn, $applicant, $course, $section)
+function updateOfferStatus($dbconn, $applicant, $course, $section, $didAccept)
 {
-    pg_prepare($dbconn, "position", "UPDATE applicant_offer_received SET offer_accepted = TRUE WHERE sso LIKE $1"
-                . " AND course_id LIKE $2 AND section LIKE $3");
-    pg_execute($dbconn, "position", array($applicant, $course, $section));
+    pg_prepare($dbconn, "position", "UPDATE applicant_offer_received SET offer_accepted = $1 WHERE sso LIKE $2"
+                . " AND course_id LIKE $3 AND section LIKE $4");
+    pg_execute($dbconn, "position", array($didAccept, $applicant, $course, $section));
 }
 
-function confirmOfferStatus($dbconn, $applicant, $course, $section)
+function confirmOfferStatus($dbconn, $applicant, $course, $section, $didConfirm)
 {
-    pg_prepare($dbconn, "position", "UPDATE applicant_offer_received SET assigned_to_course = TRUE WHERE sso LIKE $1"
-        . " AND course_id LIKE $2 AND section LIKE $3");
-        pg_execute($dbconn, "position", array($applicant, $course, $section));
+    pg_prepare($dbconn, "position", "UPDATE applicant_offer_received SET assigned_to_course = $1 WHERE sso LIKE $2"
+        . " AND course_id LIKE $3 AND section LIKE $4");
+        pg_execute($dbconn, "position", array($didConfirm, $applicant, $course, $section));
 }
 
 /*This function will take in what we want to search for ($find), what type of search ($type) it is (pawprint or ???) and the connection to the DB */
