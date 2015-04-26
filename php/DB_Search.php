@@ -51,7 +51,7 @@ function search($dbconn, $string, $type)
         }
         else
         {
-            pg_prepare($dbconn, "pawprint", "SELECT * FROM applicant WHERE sso LIKE $1");
+            pg_prepare($dbconn, "pawprint", "SELECT * FROM applicant WHERE sso ILIKE $1");
             $SR = pg_execute($dbconn, "pawprint", array($test));
             $line = pg_fetch_array($SR, null, PGSQL_ASSOC);
             
@@ -65,7 +65,7 @@ function search($dbconn, $string, $type)
         $test = strtok($string, " ,\n");
         if(strcmp($test, $string) == 0)
         {
-            pg_prepare($dbconn, "fname", "SELECT * FROM applicant WHERE fname LIKE $1");
+            pg_prepare($dbconn, "fname", "SELECT * FROM applicant WHERE fname ILIKE $1");
             $SR = pg_execute($dbconn, "fname", array($test));
             $i = 0;
             while($line = pg_fetch_array($SR, null, PGSQL_ASSOC))
@@ -74,7 +74,7 @@ function search($dbconn, $string, $type)
                 $returnResults[$i] = json_encode($returnResults[$i]);
                 $i++;
             }
-            pg_prepare($dbconn, "lname", "SELECT * FROM applicant WHERE lname LIKE $1");
+            pg_prepare($dbconn, "lname", "SELECT * FROM applicant WHERE lname ILIKE $1");
             $SR = pg_execute($dbconn, "lname", array($test));
             $i = 0;
             while($line = pg_fetch_array($SR, null, PGSQL_ASSOC))
@@ -94,7 +94,7 @@ function search($dbconn, $string, $type)
             }
             else
             {
-                pg_prepare($dbconn, "fname", "SELECT * FROM applicant WHERE fname LIKE $1 AND lname LIKE $2");
+                pg_prepare($dbconn, "fname", "SELECT * FROM applicant WHERE fname ILIKE $1 AND lname ILIKE $2");
                 $SR = pg_execute($dbconn, "fname", array($test, $second));
                 $i = 0;
                 while($line = pg_fetch_array($SR, null, PGSQL_ASSOC))
@@ -103,7 +103,7 @@ function search($dbconn, $string, $type)
                     $returnResults[$i] = json_encode($returnResults[$i]);
                     $i++;
                 }
-                pg_prepare($dbconn, "lname", "SELECT * FROM applicant WHERE lname LIKE $1 AND fname LIKE $2");
+                pg_prepare($dbconn, "lname", "SELECT * FROM applicant WHERE lname ILIKE $1 AND fname ILIKE $2");
                 $SR = pg_execute($dbconn, "lname", array($test, $second));
                 $i = 0;
                 while($line = pg_fetch_array($SR, null, PGSQL_ASSOC))
