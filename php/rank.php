@@ -3,7 +3,7 @@
 include "functions.php";
 $dbconn = db_connect();
 
-addRank($dbconn, $_POST['sso'], $_POST['rank'])
+addRank($dbconn, $_POST['sso'], $_POST['rank']);
 
 function addRank($dbconn, $sso, $rank)
 {
