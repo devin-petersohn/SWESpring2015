@@ -12,6 +12,15 @@ function db_connect() {
     return $DBconn;
 }
 
+
+
+function addRank($dbconn, $applicant, $rank)
+{
+    pg_prepare($dbconn, "addition", "UPDATE applicant SET ranking = $1 WHERE sso LIKE $applicant");
+    pg_execute($dbconn, "addition", array(htmlspecialchars($rank)));
+}
+
+
 /*This function will take in what we want to search for ($find), what type of search ($type) it is (pawprint or ???) and the connection to the DB */
 function db_search($find, $type, $DBconn) {
     switch ($type) { /*The type will be expanded based on what our search parameters are based on */
