@@ -8,18 +8,29 @@
 	#$paw = $_SESSION['username']; // This is how we will get their pawprint/SSO
 	#echo $paw;
 	
-	if( $_POST['selection'] && $_POST['fname'] && $_POST['lname']&& $_POST['gpa']){
-		#if(pg_query($db, "SELECT * FROM Applicant WHERE sso = '".$sso."';") == FALSE){
-		$temp = pg_query($db, "INSERT INTO Applicant (sso) VALUES ('".$sso."');");
-		#}
-		pg_query($db, "UPDATE Applicant SET fname = '". $_POST['fname'] ."', lname = '". $_POST['lname'] ."', 
-			gpa = '". $_POST['gpa'] ."' WHERE sso = '". $sso ."';");
-		if($_POST['selection'] != "TA")
-			pg_query($db, "INSERT INTO applicant_is_a_ugrad (sso) VALUES ('".$sso."');");
-		else pg_query($db, "INSERT INTO applicant_is_a_grad (sso) VALUES ('".$sso."');");
+	if( $_POST['selection'] && $_POST['fname'] && $_POST['lname'] && $_POST['gpa']){
+		pg_query($db, "DELETE FROM Applicant WHERE sso = '".$sso."';");
+		pg_query($db, "DELETE FROM applicant_is_a_grad WHERE sso = '".$sso."';");
+		pg_query($db, "DELETE FROM applicant_is_a_ugrad WHERE sso = '".$sso."';");
 		
-	//	if($temp)
-	//	  echo $temp;
+		pg_prepare($db, "q1", 'INSERT INTO Applicant (sso) VALUES ($1);');
+		pg_execute($db, "q1", array($sso));
+		#pg_query($db, "INSERT INTO Applicant (sso) VALUES ('".$sso."');");
+		pg_prepare($db, "q2", 'UPDATE Applicant SET fname = $1, lname = $2, gpa = $3 WHERE sso = $4;');
+		pg_execute($db, "q2", array($_POST['fname'], $_POST['lname'], $_POST['gpa']), $sso);
+		#pg_query($db, "UPDATE Applicant SET fname = '". $_POST['fname'] ."', lname = '". $_POST['lname'] ."', 
+		#	gpa = '". $_POST['gpa'] ."' WHERE sso = '". $sso ."';");
+		if($_POST['selection'] != "TA"){
+			pg_prepare($db, "q3", 'INSERT INTO applicant_is_a_ugrad (sso) VALUES ($1);');
+			pg_execute($db, "q3", array($sso));
+		}
+			#pg_query($db, "INSERT INTO applicant_is_a_ugrad (sso) VALUES ('".$sso."');");
+		else {
+			pg_prepare($db, "q4", 'INSERT INTO applicant_is_a_grad (sso) VALUES ($1);');
+			pg_execute($db, "q4", array($sso));
+		}
+			#pg_query($db, "INSERT INTO applicant_is_a_grad (sso) VALUES ('".$sso."');");
+		
 	}
 
 	if( $_POST['ID'] && $_POST['selectionmajor'] && $_POST['advisorname'] && $_POST['email'] && $_POST['masterphd']&& $_POST['selection']){
