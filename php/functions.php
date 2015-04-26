@@ -12,7 +12,14 @@ function db_connect() {
     return $DBconn;
 }
 
-
+function testSendEmail()
+{
+    $to = 'djry35@mail.missouri.edu';
+    $subject = 'Your Application Was Received';
+    $message = 'Hello,\nYour application has been received. You will be notified in 3-4 weeks if we have an offer for you\n';
+    $headers = 'From: draymon212@gmail.com' . "\r\n";
+    mail($to, $subject, $message, $headers);
+}
 
 function addRank($dbconn, $applicant, $rank)
 {
