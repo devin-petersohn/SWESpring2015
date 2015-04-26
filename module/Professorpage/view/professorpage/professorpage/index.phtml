@@ -156,17 +156,20 @@ if($status == PHP_SESSION_NONE){
                                 $results = pg_execute($conn,"find_applicants",array($inst_sso));
 
                                 if($results) {
+                                    $qry = "SELECT * FROM applicant_is_a_ugrad WHERE sso like $1";
+                                    $is_ugrad = pg_prepare($conn,"ugrad_search",$qry);
                                     while($row =  pg_fetch_array($results, null, PGSQL_ASSOC)) {
-                                        ?><tr><td><?echo $row['fname'].' '. $row['lname']?></td><td><?echo $row['course']?></td><td><?php $qry = "SELECT * FROM applicant_is_a_grad WHERE sso like $1";
-                                        $is_grad = pg_prepare($conn,"grad_search",$qry);
-                                        $is_grad = pg_execute($conn,"grad_search",array($row['sso']));
-                                        if($is_grad){
-                                            echo  $is_grad;
+                                        ?><tr><td><?echo $row['fname'].' '. $row['lname']?></td><td><?echo $row['course']?></td><td><?php 
+                                        $is_ugrad = pg_execute($conn,"ugrad_search",array($row['sso']));
+                                        $is_ugrad =pg_fetch_array($is_ugrad,null,PGSQL_ASSOC);
+                                        if($is_ugrad['program']!=null){
+                                            echo 'PLA';
                                         }
                                         else {
-                                            echo 'nope';
-                                        } ?></td><td><?echo $row['gpa']?></td><td><?echo $row['grade_received']?></td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary" id="<?echo $row['sso']?>">Add/View Comments</button></form></td><tr><?
-
+                                            
+                                            echo 'TA';
+                                        } ?></td><td><?echo $row['gpa']?></td><td><?echo $row['grade_received']?></td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary" name="sso" value="<?echo $row['sso']?>">Add/View Comments</button></form></td><tr><?
+                                        $is_ugrad=NULL;
                                     }
                                 }
                             }

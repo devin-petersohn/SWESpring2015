@@ -22,6 +22,7 @@
                         <thead>
                           <tr><th>Course</th><th>Instructor</th><th>Comments</th></tr>
                         </thead>
+                        <!--
                         <tbody>
                           <tr><td>CS4320</td><td>Grant Scott</td><td></td></tr>
                           <tr><td>CS4320</td><td>Grant Scott</td><td></td></tr>
@@ -29,7 +30,7 @@
                           <tr><td>CS4820</td><td>Grant Scott</td><td></td></tr>
                           <tr><td>CS4820</td><td>Grant Scott</td><td></td></tr>
                         </tbody>
-                        <!--
+                        -->
                         <tbody>
                             <?php  
                                 //php script to grab all comments for a particular sso/ student
@@ -45,12 +46,12 @@
                                 //fields for printing:  Author, comment, Date, course || DB values:  instructor_sso, comment
                                 if($result) {
                                     while($row =  pg_fetch_array($result, null, PGSQL_ASSOC)) {?>
-                                        <tr><td></td>echo $row['instructor_sso'] . $row['comment'];</tr> <?
+                                        <tr><td><?echo $row[course_id]?></td><td><?echo $row['instructor_sso']?></td><td><?echo $row['comment']?></td></tr> <?
                                     }
                                 }
                             ?>
                         </tbody>
-                        -->
+                       
                     </table>
                 </div>
             </div>   <!-- end row -->
@@ -59,7 +60,7 @@
             <div class="row"> 
                 <h4><strong>Add Comments</strong></h4>
                 <div class="well" style="height: 225px; width:900px">
-                <form role="form" style="margin-top:20px">
+                <form role="form" style="margin-top:20px" action="add_comment.php" method="POST">
                        
                     <div class="col-md-8">
                         <label for="comment">Comment:</label>
