@@ -71,32 +71,37 @@
                 <input type='submit' name='submit' value='Submit'>
             </form>
             <?php 
-            
-            echo "made it here";
             if(isset($_POST['submit'])){
                 include 'php/functions.php';
                 include 'php/DB_Search.php';
-                echo "also here";
                 $type = $_POST['choice'];
                 $conn = db_connect();
                 $arr = search($conn, $_POST['input'], $type);
-                $t = "";
-   
-              /*foreach ($arr as $t)
-               {
-                   print_r($t);
-                   echo "<br>"; 
-               }*/
+              
                 if($arr != NULL){
-                    foreach ($arr as $t){
-                        echo "$t <br>";
-                        echo $t['lname'] . "<br>";
-                }
-                }
+                        ?>
+                           <table class="table table-striped">
+                                <thead>
+                                  <tr><th>First Name</th><th>Last Name</th><th>GPA</th><th>E-mail</th></tr>
+                                </thead>
+                                <tbody>
+                                <?php 
+                                foreach ($arr as $t){
+                                $t = json_decode($t, TRUE);
+                                ?>
+                                  <tr><td><? echo $t['fname']; ?></td><td><? echo $t['lname']; ?></td><td><? echo $t['gpa']; ?></td><td><? echo $t['email']; ?></td></tr>
+                                <? } ?>
+                                </tbody>
+                              </table>
+                           
+                           <?php 
+                        
+                        }
+                    }
                 else {
                     echo "no results found";
                 }
-                }
+            
                 
             
             
@@ -123,7 +128,7 @@
         <tbody>
           <tr><td>Sam Walker</td><td>CS4320</td><td>TA</td><td>92</td></tr>
           <tr><td>Tory White</td><td>CS4320</td><td>TA</td><td>94</td></tr>
-          <tr><td>Tylor </td><td>CS4320</td><td>PLA</td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" value="Submit"></td><</tr>
+          <tr><td>Tylor </td><td>CS4320</td><td>PLA</td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" value="Submit"></td></tr>
           <tr><td>Jerry Smith</td><td>CS4820</td><td>PLA</td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" value="Submit"></td></tr>
           <tr><td>Tiana </td><td>CS4820</td><td>TA</td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" value="Submit"></td></tr>
         </tbody>
@@ -191,9 +196,9 @@
           
           <form class="form form-vertical">
             <div class="control-group">
-              <label>Instructor Name</label>
+              <label>Instructor SSO</label>
               <div class="controls">
-                <input type="text" class="form-control" placeholder="Enter Instructor Name">
+                <input type="text" class="form-control" placeholder="Enter Instructor SSO">
               </div>
             </div>       
               
@@ -235,21 +240,16 @@
           <tr><th>Applicants</th><th>Course</th><th>Grade</th><th>TA/PLA</th><th>GPA</th><th>Offer Status</th><th>Assign</th></tr>
         </thead>
         <tbody>
-          <tr><td>Sam Walker</td><td>CS4320</td><td>89</td><td>TA</td><td>3.7</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-warning btn-large" href="#">Reject</button></td></tr>
-          <tr><td>Tory White</td><td>CS4320</td><td>90</td><td>TA</td><td>3.8</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-warning btn-large" href="#">Reject</button></td></tr>
-          <tr><td>Tylor</td><td>CS4320</td><td>86</td><td>PLA</td><td>3.5</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-warning btn-large" href="#">Reject</button></td></tr>
-          <tr><td>Jerry Smith</td><td>CS4820</td><td>92</td><td>PLA</td><td>3.6</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-warning btn-large" href="#">Reject</button></td></tr>
-          <tr><td>Tiana </td><td>CS4820</td><td>83</td><td>TA</td><td>3.4</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-warning btn-large" href="#">Reject</button></td></tr>
+          <tr><td>Sam Walker</td><td>CS4320</td><td>89</td><td>TA</td><td>3.7</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-danger btn-large" href="#">Reject</button></td></tr>
+          <tr><td>Tory White</td><td>CS4320</td><td>90</td><td>TA</td><td>3.8</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-danger btn-large" href="#">Reject</button></td></tr>
+          <tr><td>Tylor</td><td>CS4320</td><td>86</td><td>PLA</td><td>3.5</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-danger btn-large" href="#">Reject</button></td></tr>
+          <tr><td>Jerry Smith</td><td>CS4820</td><td>92</td><td>PLA</td><td>3.6</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-danger btn-large" href="#">Reject</button></td></tr>
+          <tr><td>Tiana </td><td>CS4820</td><td>83</td><td>TA</td><td>3.4</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-danger btn-large" href="#">Reject</button></td></tr>
         </tbody>
       </table>
     </div>
   </div>  
   <hr>              
-  
-  <div class="alert alert-info">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        Please remember to <a href="#">Logout</a> for classified security.
-  </div>
   
   
 </div><!--/container-->
