@@ -80,7 +80,7 @@
                 $type = $_POST['choice'];
                 $conn = db_connect();
                 $arr = search($conn, $_POST['input'], $type);
-                $t = "";
+                
    
               /*foreach ($arr as $t)
                {
@@ -88,15 +88,17 @@
                    echo "<br>"; 
                }*/
                 if($arr != NULL){
+               
                     foreach ($arr as $t){
-                        echo "$t <br>";
+                        $t = json_decode($t, TRUE);
+                        echo $t['fname'] . "<br>";
                         echo $t['lname'] . "<br>";
-                }
-                }
+                        }
+                    }
                 else {
                     echo "no results found";
                 }
-                }
+            }
                 
             
             
