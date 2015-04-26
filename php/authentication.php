@@ -177,7 +177,7 @@ function isInSystem($user, $domain_intended, $dbconn)
             {
                 pg_prepare($dbconn, "adminQ",
                 "SELECT * FROM admin WHERE sso LIKE $1");
-                $SR = pg_execute($dbconn, "instructorQ",
+                $SR = pg_execute($dbconn, "adminQ",
                     array(htmlspecialchars($user)));
                 	
                 if(pg_num_rows($SR) == 0)
