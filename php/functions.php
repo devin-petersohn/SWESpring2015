@@ -12,14 +12,31 @@ function db_connect() {
     return $DBconn;
 }
 
-
-
 function addRank($dbconn, $applicant, $rank)
 {
     pg_prepare($dbconn, "addition", "UPDATE applicant SET ranking = $1 WHERE sso LIKE $applicant");
     pg_execute($dbconn, "addition", array(htmlspecialchars($rank)));
 }
 
+function offerPosition($dbconn, $applicant, $course, $section)
+{
+    pg_prepare($dbconn, "position", "INSERT INTO applicant_offer_received VALUES($1, $2, $3, NULL, NULL)");
+    pg_execute($dbconn, "position", array($applicant, $course, $section));
+}
+
+function updateOfferStatus($dbconn, $applicant, $course, $section, $didAccept)
+{
+    pg_prepare($dbconn, "position", "UPDATE applicant_offer_received SET offer_accepted = $1 WHERE sso LIKE $2"
+                . " AND course_id LIKE $3 AND section LIKE $4");
+    pg_execute($dbconn, "position", array($didAccept, $applicant, $course, $section));
+}
+
+function confirmOfferStatus($dbconn, $applicant, $course, $section, $didConfirm)
+{
+    pg_prepare($dbconn, "position", "UPDATE applicant_offer_received SET assigned_to_course = $1 WHERE sso LIKE $2"
+        . " AND course_id LIKE $3 AND section LIKE $4");
+        pg_execute($dbconn, "position", array($didConfirm, $applicant, $course, $section));
+}
 
 /*This function will take in what we want to search for ($find), what type of search ($type) it is (pawprint or ???) and the connection to the DB */
 function db_search($find, $type, $DBconn) {
