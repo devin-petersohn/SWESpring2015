@@ -38,12 +38,12 @@
                                 require 'php/functions.php';
                                 $conn = db_connect();
                                 //$sso = $_POST['sso'];
-                                if ($_POST['sso']){
-                                    $sso = $_POST['sso'];
-                                }
-                                else {
-                                    $sso = $_SESSION['stu_sso'];
-                                }
+                               // if ($_POST['sso']){
+                               //     $sso = $_POST['sso'];
+                               // }
+                               // else {
+                                $sso = $_SESSION['stu_sso'];
+                               // }
                                 echo $sso;
                                 $qry = 'SELECT comment, instructor_sso, course_id 
                                   FROM applicant_comments
@@ -70,9 +70,9 @@
                 require 'php/functions.php';
                 $conn = db_connect();
                 if($conn) {
-                    $sso = $_POST['stu_sso'];
-                    $_SESSION['stu_sso'] = $sso;
-                    echo $sso;
+                    //$sso = $_POST['stu_sso'];
+                    $sso = $_SESSION['stu_sso'];
+                    //echo $sso;
                     $course_id = $_POST['course_id'];
                     //$dates_taught = $_POST['dates-taught'];
                     $instructor_sso = $_SESSION['username'];
