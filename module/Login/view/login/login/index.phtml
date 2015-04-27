@@ -54,7 +54,7 @@ session_start();
          
         $pawprint = trim($_POST['pawprint']);
         $password = trim($_POST['password']);
-        $_SESSION['username'] = $pawprint;
+        //$_SESSION['username'] = $pawprint;
          
         if(!CheckLoginInDB($pawprint,$password))
         {
@@ -85,19 +85,23 @@ session_start();
         else if($results['error'] == 0){
            echo $results['type'];
            if(strcmp($results['type'], "instructor") == 0){
+               $_SESSION['username'] = $pawprint;
                header('Location:professorpage');
                exit;
             }
             
             else if(strcmp($results['type'], "applicant") == 0){
+                $_SESSION['username'] = $pawprint;
                 header('Location:studentpage');
                 exit;
             }
             else if(strcmp($results['type'], "admin") == 0){
+                $_SESSION['username'] = $pawprint;
                 header('Location:admin');
                 exit;
             }
             else if(strcmp($results['type'], "new") == 0){
+                $_SESSION['username'] = $pawprint;
                 header('Location:studentpage');
                 exit;
             }
@@ -105,7 +109,7 @@ session_start();
     }
     
     ?>
-
+  
 <!-- jQuery -->
 <!-- Bootstrap Core JavaScript -->
 	
