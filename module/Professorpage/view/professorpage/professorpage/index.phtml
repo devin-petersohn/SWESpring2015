@@ -107,7 +107,7 @@ if($status == PHP_SESSION_NONE){
                 echo "Error.\n" . pg_last_error() . "\n";
                 die; // kill the app if no connection
                }
-            else $query = "SELECT course_id, slots_available FROM course;";
+            else $query = "SELECT course_id, slots_available FROM course WHERE sso='".$_SESSION['username']."';";
             $result = pg_query($DBconn, $query);
         while (($row = pg_fetch_assoc($result)) != false) {
         

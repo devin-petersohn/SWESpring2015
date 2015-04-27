@@ -82,14 +82,16 @@
                         ?>
                            <table class="table table-striped">
                                 <thead>
-                                  <tr><th>First Name</th><th>Last Name</th><th>GPA</th><th>E-mail</th></tr>
+                                  <tr><th>SSO</th><th>First Name</th><th>Last Name</th><th>GPA</th><th>E-mail</th><th>Ranking</th><th>Add/Change Rank</th></tr>
                                 </thead>
                                 <tbody>
                                 <?php 
                                 foreach ($arr as $t){
                                 $t = json_decode($t, TRUE);
                                 ?>
-                                  <tr><td><? echo $t['fname']; ?></td><td><? echo $t['lname']; ?></td><td><? echo $t['gpa']; ?></td><td><? echo $t['email']; ?></td></tr>
+                                  <form action="rank.php" method="POST">
+                                  <tr><td><? echo $t['sso'];?></td><td><? echo $t['fname']; ?></td><td><? echo $t['lname']; ?></td><td><? echo $t['gpa']; ?></td><td><? echo $t['email']; ?><td><? echo $t['ranking']; ?></td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" value="Submit"></td></tr>
+                                  </form>
                                 <? } ?>
                                 </tbody>
                               </table>
@@ -114,6 +116,7 @@
   
   
   <!-- lower section -->
+  <!-- 
   <div class="row">
     
     <div class="col-md-12" id="rankta">
@@ -131,6 +134,7 @@
           <tr><td>Tylor </td><td>CS4320</td><td>PLA</td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" value="Submit"></td></tr>
           <tr><td>Jerry Smith</td><td>CS4820</td><td>PLA</td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" value="Submit"></td></tr>
           <tr><td>Tiana </td><td>CS4820</td><td>TA</td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" value="Submit"></td></tr>
+       
         </tbody>
       </table>
     </div>
