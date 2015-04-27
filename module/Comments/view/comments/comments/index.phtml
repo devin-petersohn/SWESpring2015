@@ -37,6 +37,7 @@
                                 require 'php/functions.php';
                                 $conn = db_connect();
                                 $sso = $_POST['sso'];
+                                echo $sso;
                                 $qry = 'SELECT comment, instructor_sso, course_id
                                   FROM applicant_comments
                                   WHERE (sso like $1)
@@ -61,11 +62,18 @@
                 <h4><strong>Add Comments</strong></h4>
                 <div class="well" style="height: 225px; width:900px">
                 <form role="form" style="margin-top:20px" action="add_comment.php" method="POST">
-                       
+                    <input type="hidden" name="stu_sso" value="<?php echo $_POST['sso']?>">
+                    <div class="col-md-8">
+                        <label for="course_id">Course:</label>
+                        <input type="text" name="course_id">
+                    </div>   
+                    <br>
+                    <br>
+                    <br>
                     <div class="col-md-8">
                         <label for="comment">Comment:</label>
-                            <textarea class="form-control" rows="5" id="comment"></textarea>
-                        <input type="button" value="Add Comments">
+                            <textarea class="form-control" name="stu_comment" rows="5" id="comment"></textarea>
+                        <input type="submit">
                     </div>
                 </form>
                 </div>
