@@ -18,11 +18,12 @@ if($conn) {
     pg_prepare($conn, "add_comment", $qry);
     if(pg_execute($conn, "add_comment", array())) {
         echo "Comment added.\n";
-        echo"<br> Return to <a href = 'swespring2015/module/Comments/view/comments/comments/index.phtml'>comments page</a>\n";
+        header ('Location: swespring2015-grouph.rhcloud.com/swespring2015/comments ');
+        
     }
     else {
         echo "Delete Failed <br />";
-        echo"<br> Return to <a href = 'swespring2015/module/Comments/view/comments/comments/index.phtml'>comment page</a>\n";
+        header ('Location: swespring2015-grouph.rhcloud.com/swespring2015/comments ');
     }
 }
 ?>
