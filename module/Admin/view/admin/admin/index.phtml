@@ -58,6 +58,7 @@
               
                 if($arr != NULL){
                         ?>
+                        <form action="rank.php" method="POST">
                            <table class="table table-striped">
                                 <thead>
                                   <tr><th>SSO</th><th>First Name</th><th>Last Name</th><th>GPA</th><th>E-mail</th><th>Ranking</th><th>Add/Change Rank</th></tr>
@@ -67,13 +68,11 @@
                                 foreach ($arr as $t){
                                 $t = json_decode($t, TRUE);
                                 ?>
-                                  <form action="rank.php" method="POST">
                                   <tr><td><? echo $t['sso'];?></td><td><? echo $t['fname']; ?></td><td><? echo $t['lname']; ?></td><td><? echo $t['gpa']; ?></td><td><? echo $t['email']; ?><td><? echo $t['ranking']; ?></td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" value="Submit"></td></tr>
-                                  </form>
                                 <? } ?>
                                 </tbody>
                               </table>
-                           
+                           </form>
                            <?php 
                         
                         }
@@ -81,11 +80,7 @@
                 else {
                     echo "no results found";
                 }
-            
-                
-            
-            
-            ?>
+                ?>
        </div>
      </div>
     
@@ -108,35 +103,45 @@
         </div>
         <div class="panel-body">
           
-          <form class="form form-vertical" action="" method="GET">
+          <form class="form form-vertical" action="" method="POST">
             <div class="control-group">
               <label>Course ID</label>
               <div class="controls">
-                <input type="text" class="form-control" placeholder="Enter Course ID (ex: CMP_SC 3050)">
+                <input type="text" class="form-control" name="courseID" placeholder="Enter Course ID (ex: CMP_SC 3050)">
               </div>
             </div>   
+            <br>
+            <div class="control-group">
+              <label>Course Section</label>
+              <div class="controls">
+                <input type="text" class="form-control" name="section" placeholder="Enter Course ID (ex: CMP_SC 3050)">
+              </div>
+            </div>
             <br>   
             <div class="control-group">
-              <label>Instructor SSO/ID</label>
+              <label>Positions Available</label>
               <div class="controls">
-                <input type="text" class="form-control" placeholder="Enter Instructor SSO/ID (ex: musserda)">
+                <input type="text" class="form-control" name="position" placeholder="Enter Instructor SSO/ID (ex: musserda)">
               </div>
             </div>      
             
                 
             <div class="control-group">
-              <label></label>
               <div class="controls">
-                <button type="submit" class="btn btn-primary">
-                  Add Course
-                </button>
-                <button type="submit" class="btn btn-danger">
-                  Delete Course
-                </button>
+                <button type="submit" class="btn btn-primary" name="addCourse">Add Course</button>
+                <button type="submit" class="btn btn-danger" name="delCourse">Delete Course</button>
               </div>
             </div>   
             
           </form>
+          <?php 
+          if(isset($_GET['addCourse'])){
+              include 'add_course.php';
+          }
+          if (isset($_GET['delCourse'])){
+              include 'delete_course.php';
+          }
+          ?>
           
           
         </div><!--/panel content-->
@@ -152,27 +157,45 @@
         </div>
         <div class="panel-body">
           
-          <form class="form form-vertical">
+          <form class="form form-vertical" action="" method="POST">
             <div class="control-group">
               <label>Instructor SSO</label>
               <div class="controls">
-                <input type="text" class="form-control" placeholder="Enter Instructor SSO">
+                <input type="text" class="form-control" name="sso" placeholder="Enter Instructor SSO">
+              </div>
+            </div>
+            <br>
+            <div class="control-group">
+              <label>Instructor First Name</label>
+              <div class="controls">
+                <input type="text" class="form-control" name="fname" placeholder="Enter Instructor First Name">
+              </div>
+            </div>
+            <br>
+            <div class="control-group">
+              <label>Instructor Last Name</label>
+              <div class="controls">
+                <input type="text" class="form-control" name="lname" placeholder="Enter Instructor Last Name">
               </div>
             </div>       
               
             <div class="control-group">
-              <label></label>
+              <!--  <label></label>-->
               <div class="controls">
-                <button type="submit" class="btn btn-primary">
-                  Add Instructor
-                </button>
-                <button type="submit" class="btn btn-danger">
-                  Delete Instructor
-                </button>
+                <button type="submit" class="btn btn-primary" name="addInst">Add Instructor</button>
+                <button type="submit" class="btn btn-danger" name="delInst">Delete Instructor</button>
               </div>
             </div>   
             
           </form>
+           <?php 
+          if(isset($_GET['addInst'])){
+              include 'add_instructor.php';
+          }
+          if (isset($_GET['delInst'])){
+              include 'delete_instructor.php';
+          }
+          ?>
           
           
         </div><!--/panel content-->
