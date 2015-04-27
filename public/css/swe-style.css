@@ -33,7 +33,7 @@ input[type="submit"]:focus, input[type="button"]:focus { outline : none; }
     overflow: hidden;
     position: relative;
 }
-    #container #first_step, #second_step, #third_step, #fourth_step,#fifth_step,#sixth_step,#seventh_step,#eighth_step,#ninth_step{ display: none; }
+    #container #first_step, #second_step, #third_step, #fourth_step,#fifth_step,#sixth_step,#seventh_step,#eighth_step,#ninth_step,#sign_step{ display: none; }
     #container #first_step { display: block; }
 
     #container .form { margin: 66px 72px 0 72px; }
@@ -120,6 +120,9 @@ input[type="submit"]:focus, input[type="button"]:focus { outline : none; }
             left: 55px;
         }
 
+
+        
+
             #container input.submit:focus { border: none; }
         
         #container input.send{ background: url('../img/send.png') no-repeat; }
@@ -176,7 +179,12 @@ input[type="submit"]:focus, input[type="button"]:focus { outline : none; }
     left: 0;
 }
 
+input#btRemove {
+  left: 93px;
+  position: relative;
+}
 
 
 
->>>>>>> refs/heads/zzff8
+
+

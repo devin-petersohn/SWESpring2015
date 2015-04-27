@@ -43,9 +43,21 @@
                     <label for="lname">Please enter your last name.</label>
 
                     <input type="text" name="gpa" id="gpa" value="gpa" />
-                    <label for="gpa">Please enter your GPA.</label>
+                    <label for="gpa" id='label_gpa'>Please enter your GPA.</label>
+
+
+
+<!-- Testing !-->
+                
+<br>
+
+                    <br/>
+                
+
+
                 </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
 
+     
                 <input class="submit" type="submit" name="submit_first" id="submit_first" value="" />
             </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
 
@@ -84,6 +96,14 @@
                     <input type="text" name="advisorname" id="advisorname" value="advisor name" />
                     <label for="advisorname" id="label_advisor">Your advisor name</label>
                     
+                    <select name="masterphd" id="masterphd" value="masterphd" >
+                    <option value="default">choose one..</option>
+                    <option value="master">master</option>
+                    <option value="phd">phd</option> 
+                 
+                        
+                    </select>
+
                     <select name="selectionmajor" id="selectionmajor" value="selectionmajor" >
                     <option value="BSIT">BS IT</option>
                     <option value="BACS">BA CS</option> 
@@ -122,14 +142,15 @@
 
 
 
-                    <p> <input type="text" name="gradDate" id="gradDate" value="graduate date"></p>
-                    <label for="gradDate">Please enter your graduation date.</label>
-
-
-
-
+                    <p> <input type="text" name="gradDate" id="gradDate" value="graduate date">
+                        <label for="gradDate">Please enter your graduation date.</label>
+                    </p>
                     <input type="text" name="currCourses" id="currCourses" value="current teaching courses" />
                     <label for="currCourses">Course(s) You Are Currently Teaching </label>                    
+           
+                             
+                    
+
                 </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->     
                 <input class="submit_back" type="submit" name="submit_third_back" id="submit_third_back" value="" />
                 
@@ -144,8 +165,9 @@
                     <input type="text" name="precourse" id="precourse" value="Previously Taught" />
                     <label for="precourse">Course(s) You Have Previously Taught: </label>
 
-                    <input type="text" name="courseLike" id="courseLike" value="Course you would like and grade" />
-                    <label for="courseLike">Course(s) You Would Like to Teach (must have taken previously), include grades received:</label>
+                    <input type="button" id="btAdd" name="btset" value="Add a Course" class="bt" />
+                    <input type="button" id="btRemove" name="btset" value="Remove a Course" class="bt" />
+
                     <input type="text" name="otherPlace" id="otherPlace" value="other place" />
                     <label for="otherPlace">Other Places You Work:</label>                    
                 </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->     
@@ -305,8 +327,31 @@
                 </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
                 <input class="submit_back" type="submit" name="submit_ninth_back" id="submit_ninth_back" value="" />
             
-                <input class="send submit" type="submit" name="submit_ninth" id="submit_ninth" value="" />            
+                <input class="submit" type="submit" name="submit_ninth" id="submit_ninth" value="" />            
             </div>
+
+            <!-- #third_step -->
+            <div id="sign_step">
+                <h1>COMPUTER SCIENCE DEPARTMENT<br> <span>GRADUATE TEACHING ASSISTANT APPLICATION</span> </h1>
+                <div class="form">
+                    <input type="text" name="phoneNum" id="phoneNum" value="phone number" />
+                    <label for="phoneNum">Signiture</label>
+
+
+                    <p> <input type="text" name="presentDate" id="presentDate" value="Date">
+                        <label for="presentDate">Date</label>
+                    </p>
+                   
+                    
+
+                </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->     
+                <input class="submit_back" type="submit" name="submit_sign_back" id="submit_sign_back" value="" />
+                
+                <input class="submit" type="submit" name="submit_sign" id="submit_sign" value="" />
+                
+            </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
+            
+
             
         </form>
     </div>
