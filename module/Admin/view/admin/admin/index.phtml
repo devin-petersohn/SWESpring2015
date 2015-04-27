@@ -74,9 +74,8 @@
                               </table>
                            </form>
                            <?php 
-                        
-                        }
-                    }
+                                }
+                            }
                 else {
                     echo "no results found";
                 }
@@ -125,7 +124,7 @@
               </div>
             </div>      
             
-                
+            <br>    
             <div class="control-group">
               <div class="controls">
                 <button type="submit" class="btn btn-primary" name="addCourse">Add Course</button>
@@ -137,6 +136,7 @@
           <?php 
           if(isset($_GET['addCourse'])){
               include 'add_course.php';
+              addCourse($_POST['courseID'], $_POST['section'], $_POST['position']);
           }
           if (isset($_GET['delCourse'])){
               include 'delete_course.php';
@@ -178,7 +178,7 @@
                 <input type="text" class="form-control" name="lname" placeholder="Enter Instructor Last Name">
               </div>
             </div>       
-              
+            <br>  
             <div class="control-group">
               <!--  <label></label>-->
               <div class="controls">
