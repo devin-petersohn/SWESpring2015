@@ -126,15 +126,16 @@ function authenticate($username, $password, $dbconn)
 		{
 		    pg_prepare($dbconn, "userQ",
 		    "SELECT * FROM users WHERE domain LIKE 'missouri.edu'"
-		          . "AND sso LIKE $1");
+		          . "AND sso LIKE $1") or die(pg_last_error());
 		    pg_prepare($dbconn, "instructorQ",
-		    "SELECT * FROM instructor WHERE sso LIKE $1");
+		    "SELECT * FROM instructor WHERE sso LIKE $1") or die(pg_last_error());
 		    pg_prepare($dbconn, "adminQ",
-		    "SELECT * FROM admin WHERE sso LIKE $1");
+		    "SELECT * FROM admin WHERE sso LIKE $1") or die(pg_last_error());
 		    pg_prepare($dbconn, "sysAdminQ",
-		    "SELECT * FROM sys_admin WHERE sso LIKE $1");
+		    "SELECT * FROM sys_admin WHERE sso LIKE $1") or die(pg_last_error());
 		    pg_prepare($dbconn, "applicantQ",
-		    "SELECT sso FROM users WHERE sso LIKE $1 AND domain LIKE 'mail.missouri.edu'");
+	       	    "SELECT sso FROM users WHERE sso LIKE $1 AND domain LIKE 'mail.missouri.edu'")
+	       	    or die(pg_last_error());
 		    
 		    $queries = array("userQ", "instructorQ", "adminQ", "sysAdminQ", "applicantQ");
 			$flag = false;
