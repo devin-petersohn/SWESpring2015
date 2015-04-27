@@ -1,29 +1,6 @@
 <?php
 //TODO: figure out conflicts with returning the array as is
 
-//The following 2 functions are for testing purposes only
-function connect()
-{
-	//Insert the server information into their respective fields to connect to the db.  
-	$dbconn = pg_connect("host= dbname= user= password=")
-		or die("Could not connect: " . pg_last_error());
-
-	echo "Connected.<br>";
-	return $dbconn;
-}
-
-function test($dbconn)
-{
-	$result = array();
-	//This call is used to verify that the user 'asdf' can login.
-	$result[1] = authenticate("mcs526", "test", $dbconn);
-	//TODO: can $dbconn be global?
-
-	//test the array that comes from authenticate()
-	print_r($result);
-}
-
-
 function authenticate($username, $password, $dbconn)
 { 
 	$returnResults = array();
