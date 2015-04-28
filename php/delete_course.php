@@ -1,19 +1,12 @@
 <?php
-require'functions.php';
 
-//get the connection
-$conn = db_connect();
-if($conn){
-    $cid = $_POST['course_id'];
-    $qry = 'DELETE';
-    pg_prepare($conn,"add_course",$qry);
-    if(pg_execute($conn,"add_course",array())) {
-        echo "success";
-    }
-    else {
-        echo "fail";
-    }
-    
+include 'functions.php';
+
+function deleteCourse($cid){
+	$db = db_connect();
+	pg_prepare($db, "q1", "DELETE FROM Course WHERE course_id = $1");
+	pg_execute($db, "q1", array($cid));
 }
+
 
 ?>

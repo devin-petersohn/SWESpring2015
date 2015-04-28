@@ -7,6 +7,7 @@
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/prof_styles.css')
+		
     ?>
 		<!--[if lt IE 9]>
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -14,29 +15,7 @@
 	</head>
 	<body>
 <!-- Header -->
-<div id="top-nav" class="navbar navbar-inverse navbar-static-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="icon-toggle"></span>
-      </button>
-      <a class="navbar-brand" href="#">TA/PLA Application For Admin</a>
-    </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
-        
-        <li class="dropdown">
-          <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
-            <i class="glyphicon glyphicon-user"></i> Admin: Dove <span class="caret"></span></a>
-          <ul id="g-account-menu" class="dropdown-menu" role="menu">
-            <li><a href="#">My Profile</a></li>
-            <li><a href="#"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div><!-- /container -->
-</div>
+
 <!-- /Header -->
 
 <!-- Main -->
@@ -80,32 +59,28 @@
               
                 if($arr != NULL){
                         ?>
+                        <form action="rank.php" method="POST">
                            <table class="table table-striped">
                                 <thead>
-                                  <tr><th>First Name</th><th>Last Name</th><th>GPA</th><th>E-mail</th></tr>
+                                  <tr><th>SSO</th><th>First Name</th><th>Last Name</th><th>GPA</th><th>E-mail</th><th>Ranking</th><th>Add/Change Rank</th></tr>
                                 </thead>
                                 <tbody>
                                 <?php 
                                 foreach ($arr as $t){
                                 $t = json_decode($t, TRUE);
                                 ?>
-                                  <tr><td><? echo $t['fname']; ?></td><td><? echo $t['lname']; ?></td><td><? echo $t['gpa']; ?></td><td><? echo $t['email']; ?></td></tr>
+                                  <tr><td><? echo $t['sso'];?></td><td><? echo $t['fname']; ?></td><td><? echo $t['lname']; ?></td><td><? echo $t['gpa']; ?></td><td><? echo $t['email']; ?><td><? echo $t['ranking']; ?></td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" value="Submit"></td></tr>
                                 <? } ?>
                                 </tbody>
                               </table>
-                           
+                           </form>
                            <?php 
-                        
-                        }
-                    }
+                                }
+                            }
                 else {
                     echo "no results found";
                 }
-            
-                
-            
-            
-            ?>
+                ?>
        </div>
      </div>
     
@@ -114,28 +89,6 @@
   
   
   <!-- lower section -->
-  <div class="row">
-    
-    <div class="col-md-12" id="rankta">
-    
-     <h4><strong><i class="glyphicon glyphicon-list-alt"></i> Application Forms</strong></h4>
-         
-    
-      <table class="table table-striped">
-        <thead>
-          <tr><th>Applicants</th><th>Course</th><th>TA/PLA</th><th>Add Rank</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Sam Walker</td><td>CS4320</td><td>TA</td><td>92</td></tr>
-          <tr><td>Tory White</td><td>CS4320</td><td>TA</td><td>94</td></tr>
-          <tr><td>Tylor </td><td>CS4320</td><td>PLA</td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" value="Submit"></td></tr>
-          <tr><td>Jerry Smith</td><td>CS4820</td><td>PLA</td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" value="Submit"></td></tr>
-          <tr><td>Tiana </td><td>CS4820</td><td>TA</td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" value="Submit"></td></tr>
-        </tbody>
-      </table>
-    </div>
-   </div>   <!-- end row -->
-      
   <hr>            
       
   <div class="row">    
@@ -150,35 +103,54 @@
         </div>
         <div class="panel-body">
           
-          <form class="form form-vertical" action="" method="GET">
+          <form class="form form-vertical" action="" method="POST">
             <div class="control-group">
               <label>Course ID</label>
               <div class="controls">
-                <input type="text" class="form-control" placeholder="Enter Course ID (ex: CMP_SC 3050)">
+                <input type="text" class="form-control" name="courseID" placeholder="Enter Course ID (ex: CMP_SC 3050)">
               </div>
             </div>   
+            <br>
+            <div class="control-group">
+              <label>Course Section</label>
+              <div class="controls">
+                <input type="text" class="form-control" name="section" placeholder="Enter Course ID (ex: CMP_SC 3050)">
+              </div>
+            </div>
             <br>   
             <div class="control-group">
-              <label>Instructor SSO/ID</label>
+              <label>Positions Available</label>
               <div class="controls">
-                <input type="text" class="form-control" placeholder="Enter Instructor SSO/ID (ex: musserda)">
+                <input type="text" class="form-control" name="position" placeholder="Enter Number of Positions Available">
               </div>
             </div>      
             
-                
+            <br>    
             <div class="control-group">
-              <label></label>
               <div class="controls">
-                <button type="submit" class="btn btn-primary">
-                  Add Course
-                </button>
-                <button type="submit" class="btn btn-danger">
-                  Delete Course
-                </button>
+                <button type="submit" class="btn btn-primary" name="addCourse">Add Course</button>
+                <button type="submit" class="btn btn-danger" name="delCourse">Delete Course</button>
               </div>
             </div>   
             
           </form>
+          <?php 
+          include 'php/add_course.php';
+          if(isset($_POST['addCourse'])){
+              echo "made it here";
+              echo "<br>";
+              echo $_POST['courseID'];
+              echo "<br>";
+              echo $_POST['section'];
+              echo "<br>";
+              echo $_POST['position'];
+              
+              addCourse($_POST['courseID'], $_POST['section'], $_POST['position']);
+          }
+          if (isset($_POST['delCourse'])){
+              include 'delete_course.php';
+          }
+          ?>
           
           
         </div><!--/panel content-->
@@ -194,27 +166,45 @@
         </div>
         <div class="panel-body">
           
-          <form class="form form-vertical">
+          <form class="form form-vertical" action="" method="POST">
             <div class="control-group">
               <label>Instructor SSO</label>
               <div class="controls">
-                <input type="text" class="form-control" placeholder="Enter Instructor SSO">
+                <input type="text" class="form-control" name="sso" placeholder="Enter Instructor SSO">
+              </div>
+            </div>
+            <br>
+            <div class="control-group">
+              <label>Instructor First Name</label>
+              <div class="controls">
+                <input type="text" class="form-control" name="fname" placeholder="Enter Instructor First Name">
+              </div>
+            </div>
+            <br>
+            <div class="control-group">
+              <label>Instructor Last Name</label>
+              <div class="controls">
+                <input type="text" class="form-control" name="lname" placeholder="Enter Instructor Last Name">
               </div>
             </div>       
-              
+            <br>  
             <div class="control-group">
-              <label></label>
+              <!--  <label></label>-->
               <div class="controls">
-                <button type="submit" class="btn btn-primary">
-                  Add Instructor
-                </button>
-                <button type="submit" class="btn btn-danger">
-                  Delete Instructor
-                </button>
+                <button type="submit" class="btn btn-primary" name="addInst">Add Instructor</button>
+                <button type="submit" class="btn btn-danger" name="delInst">Delete Instructor</button>
               </div>
             </div>   
             
           </form>
+           <?php 
+          if(isset($_GET['addInst'])){
+              include 'add_instructor.php';
+          }
+          if (isset($_GET['delInst'])){
+              include 'delete_instructor.php';
+          }
+          ?>
           
           
         </div><!--/panel content-->

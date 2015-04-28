@@ -26,12 +26,17 @@ if($conn) {
         case "add":
             $sso = $_POST['sso'];
             $course_id = $_POST['course_id'];
-            $dates_taught = $_POST['dates-taught'];
-            $instructor_sso = $_POST['instructor_sso'];
+            //$dates_taught = $_POST['dates-taught'];
+            $instructor_sso = $_SESSION['username'];
+            $comment = $_POST['comment'];
             
-            $qry = 'INSERT INTO applicant_comments (sso, course_id, dates_taught, instructor_sso, comment)
+           /* $qry = 'INSERT INTO applicant_comments (sso, course_id, dates_taught, instructor_sso, comment)
             VALUES ('.$sso.','. $course_id.','. $dates_taught.','. $instructor_sso.','. $comment.')
+           '; */
+            $qry = 'INSERT INTO applicant_comments (sso, course_id, instructor_sso, comment)
+            VALUES ('.$sso.','. $course_id.','. $instructor_sso.','. $comment.')
            ';
+            
             pg_prepare($conn, "add_comment", $qry);
             if(pg_execute($conn, "add_comment", array())) {
                 echo "Comment added.\n";

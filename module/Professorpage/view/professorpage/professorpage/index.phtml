@@ -28,6 +28,13 @@ if($status == PHP_SESSION_NONE){
 		}
 		</style>
 	</head>
+	<script type="text/javascript">
+	   function buildSession(){
+		   var sso = document.getElementById('bSession').value
+		   console.dir(sso);
+		   '<%Session["sso"] = "' + sso + '"; %>';
+		}
+	</script>
 	<body>
 <!-- Header -->
 <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
@@ -36,14 +43,6 @@ if($status == PHP_SESSION_NONE){
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
           <span class="icon-toggle"></span>
       </button> 
-      <?php 
-        if(isset($_SESSION['username'])){
-            echo "Welcome," . $_SESSION["username"];
-        }
-        else {
-            echo "";
-        }
-      ?>
       <form id='logout' action='' method='post' accept-charset='UTF-8' style="padding-top: 200px;">
       <input type='submit' name='logout' value='Logout' /> 
       </form>
@@ -54,19 +53,7 @@ if($status == PHP_SESSION_NONE){
       ?>
       
     </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
-        
-        <li class="dropdown">
-          <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
-            <i class="glyphicon glyphicon-user"></i> Grant Scott <span class="caret"></span></a>
-          <ul id="g-account-menu" class="dropdown-menu" role="menu">
-            <li><a href="#">My Profile</a></li>
-            <li><a href="#"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
+    
   </div><!-- /container -->
 </div>
 <!-- /Header -->
@@ -87,6 +74,38 @@ if($status == PHP_SESSION_NONE){
                 <input type="text" name="input">
                 <input type="submit" value="Submit">
             </form>
+            <?php 
+            if(isset($_POST['submit'])){
+                include 'php/functions.php';
+                include 'php/DB_Search.php';
+                $type = $_POST['choice'];
+                $conn = db_connect();
+                $arr = search($conn, $_POST['input'], $type);
+            
+                if($arr != NULL){
+                    ?>
+                    <table class="table table-striped">
+                    <thead>
+                    <tr><th>SSO</th><th>First Name</th><th>Last Name</th><th>GPA</th><th>E-mail</th></tr>
+                    </thead>
+                    <tbody>
+                    <?php 
+                        foreach ($arr as $t){
+                            $t = json_decode($t, TRUE);
+                     ?>
+                        <tr><td><? echo $t['sso'];?></td><td><? echo $t['fname']; ?></td><td><? echo $t['lname']; ?></td><td><? echo $t['gpa']; ?></td><td><? echo $t['email']; ?></tr>
+                    <? } ?>
+                    </tbody>
+                    </table>
+                                       
+                    <?php 
+                                    
+                                    }
+                                }
+                            else {
+                                echo "no results found";
+                            }
+            ?>
             <br>
             <br>
             <br>
@@ -124,17 +143,7 @@ if($status == PHP_SESSION_NONE){
                 <table class="table table-striped">
                     <thead>
                         <tr><th>Applicant Name</th><th>Wish List Course</th><th>TA/PLA</th><th>GPA</th><th>Grade Recieved</th><th>Make Offer</th><th>Add Comments</th></tr>
-                    </thead>
-                    <!--
-                    <tbody>
-                      <tr><td>Sam Walker</td><td>CS4320</td><td>TA</td><td>4.0</td><td>A</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary">Add/View Comments</button></form></td></tr>
-                      <tr><td>Tory White</td><td>CS4320</td><td>PLA</td><td>3.7</td><td>A</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary">Add/View Comments</button></form></td></tr>
-                      <tr><td>Tylor Jones</td><td>CS4320</td><td>TA</td><td>3.4</td><td>B</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary">Add/View Comments</button></form></td></tr>
-                      <tr><td>Jerry Smith</td><td>CS4320</td><td>PLA</td><td>3.6</td><td>A</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="button" class="btn btn-primary">Add/View Comments</button></form></td></tr>
-                      <tr><td>Mary Test</td><td>CS4320</td><td>TA</td><td>3.7</td><td>B</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="button" class="btn btn-primary">Add/View Comments</button></form></td></tr>
-                    </tbody>
-                    -->
-                    
+                    </thead> 
                     <tbody>
                         <?php
                             //php script to find applicants
@@ -156,16 +165,19 @@ if($status == PHP_SESSION_NONE){
                                 $results = pg_execute($conn,"find_applicants",array($inst_sso));
 
                                 if($results) {
+                                    $qry = "SELECT * FROM applicant_is_a_ugrad WHERE sso like $1";
+                                    $is_ugrad = pg_prepare($conn,"ugrad_search",$qry);
                                     while($row =  pg_fetch_array($results, null, PGSQL_ASSOC)) {
-                                        ?><tr><td><?echo $row['fname'].' '. $row['lname']?></td><td><?echo $row['course']?></td><td><?php $qry = "SELECT * FROM applicant_is_a_grad WHERE sso like $1";
-                                        $is_grad = pg_prepare($conn,"grad_search",$qry);
-                                        $is_grad = pg_execute($conn,"grad_search",array($row['sso']));
-                                        if($is_grad){
-                                            echo  $is_grad;
+                                        ?><tr><td><?echo $row['fname'].' '. $row['lname']?></td><td><?echo $row['course']?></td><td><?php 
+                                        $is_ugrad = pg_execute($conn,"ugrad_search",array($row['sso']));
+                                        $is_ugrad =pg_fetch_array($is_ugrad,null,PGSQL_ASSOC);
+                                        if($is_ugrad['program']!=null){
+                                            echo 'PLA';
                                         }
                                         else {
-                                            echo 'nope';
-                                        } ?></td><td><?echo $row['gpa']?></td><td><?echo $row['grade_received']?></td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary" id="<?echo $row['sso']?>">Add/View Comments</button></form></td><tr><?
+                                            
+                                            echo 'TA';
+                                        } ?></td><td><?echo $row['gpa']?></td><td><?echo $row['grade_received']?></td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary" id="bSession" name="sso" value="<?echo $row['sso']?>" onclick="buildSession()">Add/View Comments</button></form></td><tr><?
 
                                     }
                                 }
