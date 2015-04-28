@@ -7,6 +7,7 @@
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/prof_styles.css')
+		
     ?>
 		<!--[if lt IE 9]>
 			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -120,7 +121,7 @@
             <div class="control-group">
               <label>Positions Available</label>
               <div class="controls">
-                <input type="text" class="form-control" name="position" placeholder="Enter Instructor SSO/ID (ex: musserda)">
+                <input type="text" class="form-control" name="position" placeholder="Enter Number of Positions Available">
               </div>
             </div>      
             
@@ -134,11 +135,19 @@
             
           </form>
           <?php 
-          if(isset($_GET['addCourse'])){
-              include 'add_course.php';
+          include 'php/add_course.php';
+          if(isset($_POST['addCourse'])){
+              echo "made it here";
+              echo "<br>";
+              echo $_POST['courseID'];
+              echo "<br>";
+              echo $_POST['section'];
+              echo "<br>";
+              echo $_POST['position'];
+              
               addCourse($_POST['courseID'], $_POST['section'], $_POST['position']);
           }
-          if (isset($_GET['delCourse'])){
+          if (isset($_POST['delCourse'])){
               include 'delete_course.php';
           }
           ?>
