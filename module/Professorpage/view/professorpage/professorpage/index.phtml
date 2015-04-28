@@ -63,16 +63,16 @@ if($status == PHP_SESSION_NONE){
   
   <!-- upper section -->
   
-    <div class="col-md-9" style="margin-bottom: 20px;">
-       <div class="well">
+    <div class="col-md-12" style="margin-top: 40px;">
+       <div class="well" style="height:300px;">
             <h3>Search for an Applicant</h3>
-            <form>
-                <input type="radio" name="choice" value="pawprint">Search by PawPrint
+            <form id='search' action='' method='post' accept-charset='UTF-8'>
+                <input type="radio" name="choice" id="pawprint" value="pawprint">Search by PawPrint
                 <br>
-                <input type="radio" name="choice" value="name">Search by Applicant Name
+                <input type="radio" name="choice" id="name" value="name">Search by Applicant Name
                 <br>
                 <input type="text" name="input">
-                <input type="submit" value="Submit">
+                <input type='submit' name='submit' value='Submit'>
             </form>
             <?php 
             if(isset($_POST['submit'])){
@@ -84,41 +84,36 @@ if($status == PHP_SESSION_NONE){
             
                 if($arr != NULL){
                     ?>
-                    <table class="table table-striped">
-                    <thead>
-                    <tr><th>SSO</th><th>First Name</th><th>Last Name</th><th>GPA</th><th>E-mail</th></tr>
-                    </thead>
-                    <tbody>
-                    <?php 
-                        foreach ($arr as $t){
-                            $t = json_decode($t, TRUE);
-                     ?>
-                        <tr><td><? echo $t['sso'];?></td><td><? echo $t['fname']; ?></td><td><? echo $t['lname']; ?></td><td><? echo $t['gpa']; ?></td><td><? echo $t['email']; ?></tr>
-                    <? } ?>
-                    </tbody>
-                    </table>
-                                       
-                    <?php 
-                                    
-                                    }
-                                }
+                                    <form action="rank.php" method="POST">
+                                       <table class="table table-striped">
+                                            <thead>
+                                              <tr><th>SSO</th><th>First Name</th><th>Last Name</th><th>GPA</th><th>E-mail</th><th>Ranking</th><th>Add/Change Rank</th></tr>
+                                            </thead>
+                                            <tbody>
+                                            <?php 
+                                            foreach ($arr as $t){
+                                            $t = json_decode($t, TRUE);
+                                            ?>
+                                              <tr><td><? echo $t['sso'];?></td><td><? echo $t['fname']; ?></td><td><? echo $t['lname']; ?></td><td><? echo $t['gpa']; ?></td><td><? echo $t['email']; ?><td><? echo $t['ranking']; ?></td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" value="Submit"></td></tr>
+                                            <? } ?>
+                                            </tbody>
+                                          </table>
+                                       </form>
+                                       <?php 
+                                            }
+                                        }
                             else {
                                 echo "no results found";
                             }
-            ?>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
+                            ?>
        </div>
      </div>
      <hr>
      <hr>
      <hr>
      <hr>
-     <div class="panel panel-default" style="margin-top: 200px; height:300px;">
-        <div class="panel-heading"><h4 style="text-align: left;">Courses Taught this Semester</h4></div>
+     <div class="panel panel-default" style="margin-top: 400px; height:300px;">
+        <div class="panel-heading"><h4 style="text-align: left;">Courses You Are teaching this Semester</h4></div>
             <?php 
             $connectionString = "user=admin1xtduwt password=zVd4BSi4JdIJ host=127.13.165.130 dbname=ta_application";
             $DBconn = pg_connect($connectionString);
@@ -126,15 +121,23 @@ if($status == PHP_SESSION_NONE){
                 echo "Error.\n" . pg_last_error() . "\n";
                 die; // kill the app if no connection
                }
-            else $query = "SELECT course_id, slots_available FROM course;";
-            $result = pg_query($DBconn, $query);
-        while (($row = pg_fetch_assoc($result)) != false) {
-        
-        print $row['course_id'] . "<br>";
-	    print $row['slots_available'] . "<br>";
-}            
+               else 
+                $result = pg_query($DBconn, "SELECT course_id, section FROM instructor_teaches WHERE instructor_sso='".$_SESSION['username']."';");
+               ?>
+                           <table class="table table-striped">
+                               <thead>
+                                   <tr><th>Course ID</th><th>Section</th></tr>
+                               </thead>
+                               <tbody>
+                                   <?php 
+                                   while (($row = pg_fetch_assoc($result)) != false) {    
+                                   ?>
+                                   <tr><td><? echo $row['course_id'];?></td><td><? echo $row['section']; ?></td></tr>
+                                   <?php } ?>
+                               </tbody>
+                           </table>
             
-            ?>
+            
      </div>                 
  
     <div class="panel panel-default">

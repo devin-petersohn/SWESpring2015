@@ -58,8 +58,8 @@
                 $arr = search($conn, $_POST['input'], $type);
               
                 if($arr != NULL){
-                        ?>
-                        <form action="rank.php" method="POST">
+             ?>
+                        <form action="" method="POST">
                            <table class="table table-striped">
                                 <thead>
                                   <tr><th>SSO</th><th>First Name</th><th>Last Name</th><th>GPA</th><th>E-mail</th><th>Ranking</th><th>Add/Change Rank</th></tr>
@@ -69,17 +69,30 @@
                                 foreach ($arr as $t){
                                 $t = json_decode($t, TRUE);
                                 ?>
-                                  <tr><td><? echo $t['sso'];?></td><td><? echo $t['fname']; ?></td><td><? echo $t['lname']; ?></td><td><? echo $t['gpa']; ?></td><td><? echo $t['email']; ?><td><? echo $t['ranking']; ?></td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" value="Submit"></td></tr>
-                                <? } ?>
+                                  <tr><td><? echo $t['sso'];?></td><td><? echo $t['fname']; ?></td><td><? echo $t['lname']; ?></td><td><? echo $t['gpa']; ?></td><td><? echo $t['email']; ?><td><? echo $t['ranking']; ?></td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" name="submit2" value="Submit"></td></tr>
+                                <? }
+                                
+                                ?>
                                 </tbody>
                               </table>
                            </form>
-                           <?php 
-                                }
+                           <?php
+                                }  
                             }
+                                    
                 else {
                     echo "no results found";
+                    echo "<br>";
                 }
+                
+                if(isset($_POST['submit2'])){
+                    //include 'php/rank.php';
+                    echo "it's working";
+                     
+                    //addRank($_POST['sso'], $_POST['rank']);
+                }
+                
+                
                 ?>
        </div>
      </div>
@@ -136,19 +149,12 @@
           </form>
           <?php 
           include 'php/add_course.php';
+          include 'php/delete_course.php';
           if(isset($_POST['addCourse'])){
-              echo "made it here";
-              echo "<br>";
-              echo $_POST['courseID'];
-              echo "<br>";
-              echo $_POST['section'];
-              echo "<br>";
-              echo $_POST['position'];
-              
               addCourse($_POST['courseID'], $_POST['section'], $_POST['position']);
           }
           if (isset($_POST['delCourse'])){
-              include 'delete_course.php';
+              deleteCourse($_POST['courseID'], $_POST['section']);
           }
           ?>
           
@@ -198,11 +204,13 @@
             
           </form>
            <?php 
-          if(isset($_GET['addInst'])){
-              include 'add_instructor.php';
+           include 'php/add_instructor.php';
+           include 'php/delete_instructor.php';
+          if(isset($_POST['addInst'])){
+              addInstructor($_POST['sso'], $_POST['fname'], $_POST['lname']);
           }
-          if (isset($_GET['delInst'])){
-              include 'delete_instructor.php';
+          if (isset($_POST['delInst'])){
+              deleteInstructor($_POST['sso']);
           }
           ?>
           
