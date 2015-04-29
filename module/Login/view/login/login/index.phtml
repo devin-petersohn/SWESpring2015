@@ -8,53 +8,55 @@ generateRandomData($dbconn);
 function generateRandomData($dbconn)
 {
     //create a bunch of users for each domain
-    $pg_prepare($dbconn, "0", "UPDATE missouriedu SET password = $1, salt = $2, key = $3 WHERE username = $4");
-    $pg_prepare($dbconn, "1", "UPDATE mailmissouriedu SET password = $1, salt = $2, key = $3 WHERE username = $4");
+    pg_prepare($dbconn, "0", "UPDATE missouriedu SET password = $1, salt = $2, key = $3 WHERE username = $4");
+    pg_prepare($dbconn, "1", "UPDATE mailmissouriedu SET password = $1, salt = $2, key = $3 WHERE username = $4");
 
     $pw = "test";
 
     $sso = "scottgs";
     $saltData = makeSalt();
     $hashData = hashing($pw, $saltData);
-    $pg_execute($dbconn, "0", array( $hashData[0], $saltData[0], $hashData[1], $sso));
+    pg_execute($dbconn, "0", array( $hashData[0], $saltData[0], $hashData[1], $sso));
     $sso = "musserda";
     $saltData = makeSalt();
     $hashData = hashing($pw, $saltData);
-    $pg_execute($dbconn, "0", array( $hashData[0], $saltData[0], $hashData[1], $sso));
+    pg_execute($dbconn, "0", array( $hashData[0], $saltData[0], $hashData[1], $sso));
     $sso = "bob";
     $saltData = makeSalt();
     $hashData = hashing($pw, $saltData);
-    $pg_execute($dbconn, "0", array( $hashData[0], $saltData[0], $hashData[1], $sso));
+    pg_execute($dbconn, "0", array( $hashData[0], $saltData[0], $hashData[1], $sso));
     $sso = "djry35";
-    $pg_execute($dbconn, "0", array( $hashData[0], $saltData[0], $hashData[1], $sso));
+    $saltData = makeSalt();
+    $hashData = hashing($pw, $saltData);
+    pg_execute($dbconn, "0", array( $hashData[0], $saltData[0], $hashData[1], $sso));
     $saltData = makeSalt();
     $hashData = hashing($pw, $saltData);
     $sso = "devin";
-    $pg_execute($dbconn, "0", array( $hashData[0], $saltData[0], $hashData[1], $sso));
+    pg_execute($dbconn, "0", array( $hashData[0], $saltData[0], $hashData[1], $sso));
     $saltData = makeSalt();
     $hashData = hashing($pw, $saltData);
     $sso = "mcs526";
-    $pg_execute($dbconn, "1", array( $hashData[0], $saltData[0], $hashData[1], $sso));
+    pg_execute($dbconn, "1", array( $hashData[0], $saltData[0], $hashData[1], $sso));
     $saltData = makeSalt();
     $hashData = hashing($pw, $saltData);
     $sso = "dpvx8";
-    $pg_execute($dbconn, "1", array( $hashData[0], $saltData[0], $hashData[1], $sso));
+    pg_execute($dbconn, "1", array( $hashData[0], $saltData[0], $hashData[1], $sso));
     $saltData = makeSalt();
     $hashData = hashing($pw, $saltData);
     $sso = "zzff8";
-    $pg_execute($dbconn, "1", array( $hashData[0], $saltData[0], $hashData[1], $sso));
+    pg_execute($dbconn, "1", array( $hashData[0], $saltData[0], $hashData[1], $sso));
     $saltData = makeSalt();
     $hashData = hashing($pw, $saltData);
     $sso = "xltz6";
-    $pg_execute($dbconn, "1", array( $hashData[0], $saltData[0], $hashData[1], $sso));
+    pg_execute($dbconn, "1", array( $hashData[0], $saltData[0], $hashData[1], $sso));
     $saltData = makeSalt();
     $hashData = hashing($pw, $saltData);
     $sso = "zdc9pd";
-    $pg_execute($dbconn, "1", array( $hashData[0], $saltData[0], $hashData[1], $sso));
+    pg_execute($dbconn, "1", array( $hashData[0], $saltData[0], $hashData[1], $sso));
     $saltData = makeSalt();
     $hashData = hashing($pw, $saltData);
     $sso = "abc123";
-    $pg_execute($dbconn, "1", array( $hashData[0], $saltData[0], $hashData[1], $sso));
+    pg_execute($dbconn, "1", array( $hashData[0], $saltData[0], $hashData[1], $sso));
 }
 function makeSalt() {
     $randData = "asdfasdfasdf";
@@ -62,7 +64,7 @@ function makeSalt() {
     $salt = hash("sha512", $randData, FALSE);
     $salt = substr($salt, $randOffset, 60);
     echo $salt . "<br>";
-    $returnResults = array($salt, $randoffset);
+    $returnResults = array($salt, $randOffset);
     return $returnResults;
 }
 
@@ -72,7 +74,7 @@ function hashing($pw, $saltData)
     $pw = hash("sha512", $pw . $saltData[0], FALSE);
     $pw = substr($pw, $randOffset, 60);
     echo $pw . "<br>";
-    $returnResults = array($pw, $randoffset);
+    $returnResults = array($pw, $randOffset);
     return $returnResults;
 }
 
