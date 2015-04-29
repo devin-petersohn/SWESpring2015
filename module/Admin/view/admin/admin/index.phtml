@@ -71,11 +71,13 @@
                                 ?>
                                   <tr><td><input type="hidden" name="test" value="<? $t['sso']?>"><? echo $t['sso'];?></td><td><? echo $t['fname']; ?></td><td><? echo $t['lname']; ?></td><td><? echo $t['gpa']; ?></td><td><? echo $t['email']; ?><td><? echo $t['ranking']; ?></td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" name="submit2" value="Submit"></td></tr>
                                 <? }
+                                
                                 ?>
                                 </tbody>
                               </table>
                            </form>
                            <?php
+                         
                            if(isset($_POST['submit2'])){
                                //include 'php/rank.php';
                                echo "it's working";
@@ -83,13 +85,14 @@
                                 
                                //addRank($_POST['sso'], $_POST['rank']);
                            }
+                           else {
+                               echo "no results found";
+                               echo "<br>";
+                           }
                                 }  
                             }
                                     
-                else {
-                    echo "no results found";
-                    echo "<br>";
-                }
+                
               
                 
                 ?>

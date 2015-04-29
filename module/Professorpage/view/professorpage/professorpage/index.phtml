@@ -101,10 +101,11 @@ if($status == PHP_SESSION_NONE){
                                        </form>
                                        <?php 
                                             }
+                                            else {
+                                                echo "no results found";
+                                            }
                                         }
-                            else {
-                                echo "no results found";
-                            }
+                           
                             ?>
        </div>
      </div>
@@ -115,6 +116,7 @@ if($status == PHP_SESSION_NONE){
      <div class="panel panel-default" style="margin-top: 400px; height:300px;">
         <div class="panel-heading"><h4 style="text-align: left;">Courses You Are teaching this Semester</h4></div>
             <?php 
+            if(isset($_SESSION['username'])){
             $connectionString = "user=admin1xtduwt password=zVd4BSi4JdIJ host=127.13.165.130 dbname=ta_application";
             $DBconn = pg_connect($connectionString);
                 if (!$DBconn) {
@@ -133,7 +135,12 @@ if($status == PHP_SESSION_NONE){
                                    while (($row = pg_fetch_assoc($result)) != false) {    
                                    ?>
                                    <tr><td><? echo $row['course_id'];?></td><td><? echo $row['section']; ?></td></tr>
-                                   <?php } ?>
+                                   <?php } 
+            }
+            else {
+                echo '<font color="red">' . "Please login to see the courses you are teaching this semester." . '</font><br>';
+            }
+                                   ?>
                                </tbody>
                            </table>
             
@@ -149,6 +156,7 @@ if($status == PHP_SESSION_NONE){
                     </thead> 
                     <tbody>
                         <?php
+                        if(isset($_SESSION['username'])){
                             //php script to find applicants
                             require 'php/functions.php';
                             
@@ -183,9 +191,16 @@ if($status == PHP_SESSION_NONE){
                                         } ?></td><td><?echo $row['gpa']?></td><td><?echo $row['grade_received']?></td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary" id="bSession" name="sso" value="<?echo $row['sso']?>" onclick="buildSession()">Add/View Comments</button></form></td><tr><?
 
                                     }
+                                    
                                 }
+                                
+                            }
+                            else {
+                                echo '<font color="red">' . "Please login to see applicants interested in teaching your course." . '</font><br>';
                             }
                             
+                        }
+                        
                         ?>
                     </tbody>
                     
