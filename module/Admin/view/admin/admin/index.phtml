@@ -69,7 +69,7 @@
                                 foreach ($arr as $t){
                                 $t = json_decode($t, TRUE);
                                 ?>
-                                  <tr><td><input type="hidden" name="test" value="<? $t['sso']?>"><? echo $t['sso'];?></td><td><? echo $t['fname']; ?></td><td><? echo $t['lname']; ?></td><td><? echo $t['gpa']; ?></td><td><? echo $t['email']; ?><td><? echo $t['ranking']; ?></td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" name="submit2" value="Submit"></td></tr>
+                                  <tr><td><input type="hidden" name="sso" value="<? $t['sso']?>"><? echo $t['sso'];?></td><td><? echo $t['fname']; ?></td><td><? echo $t['lname']; ?></td><td><? echo $t['gpa']; ?></td><td><? echo $t['email']; ?><td><? echo $t['ranking']; ?></td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" name="submit2" value="Submit"></td></tr>
                                 <? }
                                 
                                 ?>
@@ -81,7 +81,7 @@
                            if(isset($_POST['submit2'])){
                                //include 'php/rank.php';
                                echo "it's working";
-                               echo $_POST['test'];
+                               echo $_POST['sso'];
                                 
                                //addRank($_POST['sso'], $_POST['rank']);
                            }
