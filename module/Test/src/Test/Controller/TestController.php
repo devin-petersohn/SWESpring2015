@@ -13,6 +13,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Test\Model\Profile;
 use Zend\Validator\File\Size;
 use Test\Form\ProfileForm;
+session_start();
 
 class TestController extends AbstractActionController
 {
@@ -51,21 +52,38 @@ class TestController extends AbstractActionController
                     $form->setMessages(array('fileupload'=>$error ));
                 } else {
                     $env_var = getenv('OPENSHIFT_DATA_DIR');
-                    $filename=(string)$profile->fileupload;
-                    echo $filename.'<br>';
-                    $uploadfilter=explode("t", $filename);
-                    print_r($uploadfilter);
-                    if(strcmp($uploadfilter[1],"pdf")==0)
-                    {
-                        $adapter->setDestination($env_var);
-                        if ($adapter->receive($File['name'])) {
-                            $profile->exchangeArray($form->getData());
-                            echo 'Profile Name '.$profile->profilename.' upload '.$profile->fileupload;
+                    $filename=(string)$File['name'];
+                    $uploadfilter=explode(".", $filename);
+                    if(!isset($_SESSION['username'])){
+                        echo "You have to login before started!".'<br>';
+                        
+                    }
+                    else {
+                        echo $_SESSION["username"];
+                        if(strcmp($uploadfilter[1],"pdf")==0)
+                        {
+                            if (file_exists($env_var.$_SESSION["username"])) {
+                                echo "The file $filename exists";
+                            }
+                            else
+                            {
+                                mkdir($env_var.$_SESSION["username"]);
+                            }
+                            $adapter->setDestination($env_var.$_SESSION["username"]);
+                            if ($adapter->receive($File['name'])) {
+                                $profile->exchangeArray($form->getData());
+                                $filename=(string)$profile->fileupload;
+                                
+                                echo 'Profile Name '.$profile->profilename.' upload '.$profile->fileupload;
+                            }
+                            
+                        }
+                        else{
+                            echo "You should upload pdf!";
                         }
                     }
-                    else{
-                        echo "You should upload pdf!";
-                    }
+                    
+                    
                 }  
             } 
         }

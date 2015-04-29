@@ -1,16 +1,340 @@
-<?php 
-$form = $this->form;
-$form->setAttribute('action',
-                    $this->url('test', //your route name ...
-                               array('controller'=>'test', 'action' => 'index'))); 
-$form->prepare();
- 
-echo $this->form()->openTag($form);
-echo $this->formRow($form->get('profilename'));
- 
-echo $this->formRow($form->get('fileupload'));
- 
-echo $this->formSubmit($form->get('submit'));
-echo $this->form()->closeTag();
+<!DOCTYPE html>
+<html lang="en">
 
-?>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <!-- Bootstrap Core CSS -->
+
+      
+    <!-- Custom CSS -->
+
+    <!-- Custom Fonts -->
+<!--     <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script> -->
+<!--     <script src="//code.jquery.com/jquery-1.10.2.js"></script> -->
+<!--     <script src="js/jquery.js"></script> -->
+    
+    	 <?php echo $this->headLink()->prependStylesheet($this->basePath() . 'css/bootstrap.min.css')
+	           ->prependStylesheet($this->basePath().'css/stylish-portfolio.css')
+	           ->prependStylesheet($this->basePath().'font-awesome/css/font-awesome.min.css')
+	           ->prependStylesheet('http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic')
+	           ->prependStylesheet('http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css')
+	           ->prependStylesheet($this->basePath().'css/upload-style.css');
+    ?>
+    <?php echo $this->headScript()
+        ->prependFile($this->basePath() . 'js/jquery-1.11.0.min.js')
+        ->prependFile($this->basePath() . 'js/jquery.js')
+    ;
+    
+    
+         ?>   
+    
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+    <nav id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+            <li class="sidebar-brand">
+                <a href="#top"  onclick = $("#menu-close").click(); >Hexo Start</a>
+            </li>
+            <li>
+                <a href="index.php" onclick = $("#menu-close").click(); >Home</a>
+            </li>
+            <li>
+                <a href="#about" onclick = $("#menu-close").click(); >View process</a>
+            </li>
+
+            <li>
+                <a href="../ff/Demos/index.html" onclick = $("#menu-close").click(); >Hexoskin File Management System</a>
+            </li>
+       
+            <li>
+                <a id="modal_trigger" href="#modal"  onclick = $("#menu-close").click();>Add user</a>
+            </li>
+        </ul>
+    </nav>
+    
+    <!-- Header -->
+    <header id="top" class="header">
+        <div class="text-vertical-center">
+            <h1>Hexoskin</h1>
+
+            <?php 
+                $form = $this->form;
+                $form->setAttribute('action',
+                                    $this->url('test', //your route name ...
+                                               array('controller'=>'test', 'action' => 'index'))); 
+                $form->prepare();
+                 
+                echo $this->form()->openTag($form);
+                echo $this->formRow($form->get('profilename'));
+                 
+                echo $this->formRow($form->get('fileupload'));
+                 
+                echo $this->formSubmit($form->get('submit'));
+                echo $this->form()->closeTag();
+                
+            ?>
+              <br>
+
+            <br>
+            
+            
+        </div>
+    </header>
+
+    <!-- About -->
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+            
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+
+
+    <div class="container">
+   <!-- <a id="modal_trigger" href="#modal" class="btn">Click here to Login or register</a> -->
+
+    <div id="modal" class="popupContainer" style="display:none;">
+        <header class="popupHeader">
+            <span class="header_title">Login</span>
+            <span class="modal_close"><i class="fa fa-times"></i></span>
+        </header>
+        
+        <section class="popupBody">
+            <!-- Social Login 
+            <div class="social_login">
+                <div class="">
+                    <a href="#" class="social_box fb">
+                        <span class="icon"><i class="fa fa-facebook"></i></span>
+                        <span class="icon_title">Connect with Facebook</span>
+                        
+                    </a>
+
+                    <a href="#" class="social_box google">
+                        <span class="icon"><i class="fa fa-google-plus"></i></span>
+                        <span class="icon_title">Connect with Google</span>
+                    </a>
+                </div>
+
+                <div class="centeredText">
+                    <span>Or use your Email address</span>
+                </div>
+
+                <div class="action_btns">
+                    <div class="one_half"><a href="#" id="login_form" class="btn">Login</a></div>
+                    <div class="one_half last"><a href="#" id="register_form" class="btn">Sign up</a></div>
+                </div>
+            </div>
+-->
+            <!-- Username & Password Login form 
+            <div class="user_login">
+                <form>
+                    <label>Email / Username</label>
+                    <input type="text" />
+                    <br />
+
+                    <label>Password</label>
+                    <input type="password" />
+                    <br />
+
+                    <div class="checkbox">
+                        <input id="remember" type="checkbox" />
+                        <label for="remember">Remember me on this computer</label>
+                    </div>
+
+                    <div class="action_btns">
+                        <div class="one_half"><a href="#" class="btn back_btn"><i class="fa fa-angle-double-left"></i> Back</a></div>
+                        <div class="one_half last"><a href="#" class="btn btn_red">Login</a></div>
+                    </div>
+                </form>
+
+                <a href="#" class="forgot_password">Forgot password?</a>
+            </div>
+-->
+            <!-- Register Form -->
+            <div class="user_register">
+                <form>
+                    <label>user name</label>
+                    <input type="text" id="usr" />
+                    <br />
+
+                    <label>password</label>
+                    <input type="password" id="pas" />
+                    <br />
+
+                    <label>Public key</label>
+                    <input type="text" id="pubk"/>
+                    <br />
+
+                    <label>private key</label>
+                    <input type="text" id="prik"/>
+                    <br />
+
+                    <div class="checkbox">
+                        <input id="send_updates" type="checkbox" />
+                    </div>
+
+                    <div class="action_btns">
+                        <div class="one_half"></div>
+                        <div class="one_half last"><a href="sql.php" class="btn btn_red" id="registeruser">Register</a></div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>
+ 
+    <!-- Services -->
+    <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+   
+
+    <!-- jQuery -->
+    
+    <?php echo $this->headScript()
+        ->prependFile($this->basePath() . 'js/bootstrap.min.js')
+        ->prependFile($this->basePath() . 'js/jquery.js')
+        ->prependFile($this->basePath() . 'js/jquery.leanModal.min.js')
+        
+    ;
+    
+    
+         ?>   
+<!--     <script src="js/jquery.js"></script> -->
+
+    <!-- Bootstrap Core JavaScript -->
+<!--     <script src="js/bootstrap.min.js"></script> -->
+
+    <!-- Custom Theme JavaScript -->
+
+<!--     <script type="text/javascript" src="js/jquery.leanModal.min.js"></script> -->
+
+
+    <script>
+    // Closes the sidebar menu
+    $("#menu-close").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    // Opens the sidebar menu
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+    });
+
+    // Scrolls to the selected menu item on the page
+    $(function() {
+        $('a[href*=#]:not([href=#])').click(function() {
+            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                if (target.length) {
+                    $('html,body').animate({
+                        scrollTop: target.offset().top
+                    }, 1000);
+                    return false;
+                }
+            }
+        });
+    });
+
+    $("#modal_trigger").leanModal({top : 200, overlay : 0.6, closeButton: ".modal_close" });
+
+    $(function(){
+        // Calling Login Form
+        $("#login_form").click(function(){
+            $(".social_login").hide();
+            $(".user_login").show();
+            return false;
+        });
+
+        // Calling Register Form
+        $("#modal_trigger").click(function(){
+            $(".social_login").hide();
+            $(".user_register").show();
+            $(".header_title").text('Register');
+            return false;
+        });
+
+        // Going back to Social Forms
+        $(".back_btn").click(function(){
+            $(".user_login").hide();
+            $(".user_register").hide();
+            $(".social_login").show();
+            $(".header_title").text('Login');
+            return false;
+        });
+
+
+//pubk prik usr pas
+        $("#registeruser").click(function(){
+            $newstring=$("#sel1").html();
+            $newstring+="<option>"+$("#usr").val()+"</option>";
+            $("#sel1").html($newstring);
+            $.post("sql.php",
+                    {
+                        usr: $("#usr").val(),
+                        pas: $("#pas").val(),
+                        pubk: $("#pubk").val(),
+                        prik: $("#prik").val()
+                    },
+                    function(data){
+                 //       console.log(data);
+                    //    alert("Success!");
+                    }
+            );
+            alert("success!");
+           
+            
+        });
+        
+        $("#update").click(function(){
+           
+            $.post("sql.php",
+                    {
+                        usr: $("#usr").val(),
+                        pas: $("#pas").val(),
+                        pubk: $("#pubk").val(),
+                        prik: $("#prik").val()
+                    },
+                    function(data){
+                 //       console.log(data);
+                    //    alert("Success!");
+                    }
+            );
+        });
+
+    });
+    </script>
+
+</body>
+
+</html>
+
+

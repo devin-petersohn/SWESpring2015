@@ -12,6 +12,7 @@ class ProfileForm extends Form
         $this->setAttribute('enctype','multipart/form-data');
          
         $this->add(array(
+            'id' => 'profilename',
             'name' => 'profilename',
             'attributes' => array(
                 'type'  => 'text',
@@ -23,6 +24,8 @@ class ProfileForm extends Form
  
          
         $this->add(array(
+            'id' => 'fileupload',
+            
             'name' => 'fileupload',
             'attributes' => array(
                 'type'  => 'file',
@@ -34,6 +37,7 @@ class ProfileForm extends Form
          
          
         $this->add(array(
+            'id' => 'submit',
             'name' => 'submit',
             'attributes' => array(
                 'type'  => 'submit',
