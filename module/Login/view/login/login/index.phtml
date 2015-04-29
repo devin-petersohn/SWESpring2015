@@ -170,7 +170,7 @@ session_start();
         pg_prepare($dbconn, "1", "UPDATE mailmissouriedu SET password = $1, salt = $2, key = $3 WHERE username = $4");
     
         $pw = "test";
-    
+        echo "<br>aalsdfhasodf<br>";
         $sso = "scottgs";
         $saltData = makeSalt();
         $hashData = hashing($pw, $saltData);
