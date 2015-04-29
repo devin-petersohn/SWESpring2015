@@ -163,8 +163,8 @@ session_start();
     function generateRandomData($dbconn)
     {
         //create a bunch of users for each domain
-        $pg_prepare($dbconn, "0", "UPDATE mailmissouriedu SET password = $1, salt = $2, key = $3 WHERE username = $4");
-        $pg_prepare($dbconn, "1", "UPDATE missouriedu SET password = $1, salt = $2, key = $3 WHERE username = $4");
+        pg_prepare($dbconn, "0", "UPDATE mailmissouriedu SET password = $1, salt = $2, key = $3 WHERE username = $4");
+        pg_prepare($dbconn, "1", "UPDATE missouriedu SET password = $1, salt = $2, key = $3 WHERE username = $4");
     
         $pw = "test";
     
