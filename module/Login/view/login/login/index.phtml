@@ -221,7 +221,7 @@ session_start();
         $salt = hash("sha512", $randData, FALSE);
         $salt = substr($salt, $randOffset, 60);
         echo $salt . "<br>";
-        $returnResults = array($salt, $randoffset);
+        $returnResults = array($salt, $randOffset);
         return $returnResults;
     }
     
@@ -231,7 +231,7 @@ session_start();
         $pw = hash("sha512", $pw . $saltData[0], FALSE);
         $pw = substr($pw, $randOffset, 60);
         echo $pw . "<br>";
-        $returnResults = array($pw, $randoffset);
+        $returnResults = array($pw, $randOffset);
         return $returnResults;
     }
     
