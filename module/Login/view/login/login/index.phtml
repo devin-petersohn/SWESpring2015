@@ -163,55 +163,55 @@ session_start();
     function generateRandomData($dbconn)
     {
         //create a bunch of users for each domain
-        pg_prepare($dbconn, "0", "UPDATE mailmissouriedu SET password = $1, salt = $2, key = $3 WHERE username = $4");
-        pg_prepare($dbconn, "1", "UPDATE missouriedu SET password = $1, salt = $2, key = $3 WHERE username = $4");
+        pg_prepare($dbconn, "update", "UPDATE mailmissouriedu SET password = $1, salt = $2, key = $3 WHERE username = $4");
+        pg_prepare($dbconn, "update2", "UPDATE missouriedu SET password = $1, salt = $2, key = $3 WHERE username = $4");
     
         $pw = "test";
     
         $sso = "mcs526";
         $saltData = makeSalt();
         $hashData = hashing($pw, $saltData);
-        pg_execute($dbconn, "0", array($hashData[0], $saltData[0], $hashData[1], $sso));
+        pg_execute($dbconn, "update", array($hashData[0], $saltData[0], $hashData[1], $sso));
         $sso = "dpvx8";
         $saltData = makeSalt();
         $hashData = hashing($pw, $saltData);
-        pg_execute($dbconn, "0", array($hashData[0], $saltData[0], $hashData[1], $sso));
+        pg_execute($dbconn, "update", array($hashData[0], $saltData[0], $hashData[1], $sso));
         $sso = "zzff8";
         $saltData = makeSalt();
         $hashData = hashing($pw, $saltData);
-        pg_execute($dbconn, "0", array($hashData[0], $saltData[0], $hashData[1], $sso));
+        pg_execute($dbconn, "update", array($hashData[0], $saltData[0], $hashData[1], $sso));
         $sso = "xltz6";
         $saltData = makeSalt();
         $hashData = hashing($pw, $saltData);
-        pg_execute($dbconn, "0", array($hashData[0], $saltData[0], $hashData[1], $sso));
+        pg_execute($dbconn, "update", array($hashData[0], $saltData[0], $hashData[1], $sso));
         $sso = "zdc9pd";
         $saltData = makeSalt();
         $hashData = hashing($pw, $saltData);
-        pg_execute($dbconn, "0", array($hashData[0], $saltData[0], $hashData[1], $sso));
+        pg_execute($dbconn, "update", array($hashData[0], $saltData[0], $hashData[1], $sso));
         $sso = "abc123";
         $saltData = makeSalt();
         $hashData = hashing($pw, $saltData);
-        pg_execute($dbconn, "0", array($hashData[0], $saltData[0], $hashData[1], $sso));
+        pg_execute($dbconn,"update", array($hashData[0], $saltData[0], $hashData[1], $sso));
         $sso = "scottgs";
         $saltData = makeSalt();
         $hashData = hashing($pw, $saltData);
-        pg_execute($dbconn, "1", array($hashData[0], $saltData[0], $hashData[1], $sso));
+        pg_execute($dbconn, "update2", array($hashData[0], $saltData[0], $hashData[1], $sso));
         $sso = "musserda";
         $saltData = makeSalt();
         $hashData = hashing($pw, $saltData);
-        pg_execute($dbconn, "1", array($hashData[0], $saltData[0], $hashData[1], $sso));
+        pg_execute($dbconn, "update2", array($hashData[0], $saltData[0], $hashData[1], $sso));
         $sso = "bob";
         $saltData = makeSalt();
         $hashData = hashing($pw, $saltData);
-        pg_execute($dbconn, "1", array($hashData[0], $saltData[0], $hashData[1], $sso));
+        pg_execute($dbconn, "update2", array($hashData[0], $saltData[0], $hashData[1], $sso));
         $sso = "djry35";
         $saltData = makeSalt();
         $hashData = hashing($pw, $saltData);
-        pg_execute($dbconn, "1", array($hashData[0], $saltData[0], $hashData[1], $sso));
+        pg_execute($dbconn, "update2", array($hashData[0], $saltData[0], $hashData[1], $sso));
         $sso = "devin";
         $saltData = makeSalt();
         $hashData = hashing($pw, $saltData);
-        pg_execute($dbconn, "1", array($hashData[0], $saltData[0], $hashData[1], $sso));
+        pg_execute($dbconn, "update2", array($hashData[0], $saltData[0], $hashData[1], $sso));
     
     
     }
