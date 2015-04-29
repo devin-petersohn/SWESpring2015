@@ -20,20 +20,29 @@
 <!--     <script src="//code.jquery.com/jquery-1.10.2.js"></script> -->
 <!--     <script src="js/jquery.js"></script> -->
     
-    	 <?php echo $this->headLink()->prependStylesheet($this->basePath() . 'css/bootstrap.min.css')
-	           ->prependStylesheet($this->basePath().'css/stylish-portfolio.css')
-	           ->prependStylesheet($this->basePath().'font-awesome/css/font-awesome.min.css')
+    	 <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
+	           ->prependStylesheet($this->basePath().'/css/stylish-portfolio.css')
+	           ->prependStylesheet($this->basePath().'/font-awesome/css/font-awesome.min.css')
 	           ->prependStylesheet('http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic')
 	           ->prependStylesheet('http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css')
-	           ->prependStylesheet($this->basePath().'css/upload-style.css');
+	           ->prependStylesheet($this->basePath().'/css/upload-style.css')
+    	       
+    	 ;
     ?>
     <?php echo $this->headScript()
-        ->prependFile($this->basePath() . 'js/jquery-1.11.0.min.js')
-        ->prependFile($this->basePath() . 'js/jquery.js')
-    ;
+        ->prependFile($this->basePath() . '/js/jquery-1.11.0.min.js')
+        ->prependFile('//code.jquery.com/jquery-1.10.2.js')
+        ->prependFile($this->basePath() . '/js/jquery.js')        
+        ->prependFile($this->basePath() . '/js/bootstrap.min.js')
+        ->prependFile($this->basePath() . '/js/jquery.leanModal.min.js')
+        
+        
+        
+       ;
     
     
          ?>   
+         <script type="text/javascript" src="js/jquery.leanModal.min.js"></script>
     
     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -43,44 +52,25 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+     <script>
+      $('.text-vertical-center').css("height","600px");
+     </script>
 </head>
 
 <body>
 
     <!-- Navigation -->
-    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
-    <nav id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
-            <li class="sidebar-brand">
-                <a href="#top"  onclick = $("#menu-close").click(); >Hexo Start</a>
-            </li>
-            <li>
-                <a href="index.php" onclick = $("#menu-close").click(); >Home</a>
-            </li>
-            <li>
-                <a href="#about" onclick = $("#menu-close").click(); >View process</a>
-            </li>
-
-            <li>
-                <a href="../ff/Demos/index.html" onclick = $("#menu-close").click(); >Hexoskin File Management System</a>
-            </li>
-       
-            <li>
-                <a id="modal_trigger" href="#modal"  onclick = $("#menu-close").click();>Add user</a>
-            </li>
-        </ul>
-    </nav>
+    
     
     <!-- Header -->
     <header id="top" class="header">
         <div class="text-vertical-center">
-            <h1>Hexoskin</h1>
+            <h1>STEP ONE: UPLOAD YOUR RESUME!</h1>
 
             <?php 
                 $form = $this->form;
                 $form->setAttribute('action',
-                                    $this->url('test', //your route name ...
+                                    $this->url('applicationform', //your route name ...
                                                array('controller'=>'test', 'action' => 'index'))); 
                 $form->prepare();
                  
@@ -215,15 +205,7 @@
 
     <!-- jQuery -->
     
-    <?php echo $this->headScript()
-        ->prependFile($this->basePath() . 'js/bootstrap.min.js')
-        ->prependFile($this->basePath() . 'js/jquery.js')
-        ->prependFile($this->basePath() . 'js/jquery.leanModal.min.js')
-        
-    ;
-    
-    
-         ?>   
+   
 <!--     <script src="js/jquery.js"></script> -->
 
     <!-- Bootstrap Core JavaScript -->

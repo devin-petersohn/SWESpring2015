@@ -254,7 +254,7 @@ $(function(){
     
     
     $('#progress_text').html('0% Complete');
-     $("#container").css("height", "440px");
+     $("#container").css("height", "540px");
     $("#container label").css("line-height", "27px");
     
     //first_step
