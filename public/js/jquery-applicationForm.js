@@ -116,14 +116,22 @@ $(function(){
         $('.sigPad').signaturePad();
 
         var iCnt = 0;
-
+        var divnum=0;
         // CREATE A "DIV" ELEMENT AND DESIGN IT USING JQUERY ".css()" CLASS.
-        var container = $(document.createElement('div')).css({
-            padding: '5px', margin: '20px', width: '80px',
-            borderTopColor: '#999', borderBottomColor: '#999',
-            borderLeftColor: '#999', borderRightColor: '#999'
-        });
-
+        if(!$('#container_curr').length)
+        	{
+		        var container = $(document.createElement('div')).css({
+		            padding: '5px', margin: '20px', width: '80px',
+		            borderTopColor: '#999', borderBottomColor: '#999',
+		            borderLeftColor: '#999', borderRightColor: '#999'
+		        });
+		        $(container).attr('id','container_curr');
+		     
+        
+        	
+        console.log("div number is"+ divnum);
+        divnum++;
+        
         if (iCnt <= 19) {
 
                 iCnt = iCnt + 1;
@@ -134,6 +142,7 @@ $(function(){
                     // <option value="PLA">PLA (undergrad student)!</option>
       
                     // </select>
+                console.log("the count is "+ iCnt);
                 $(container).append('<select name="courseLike'+iCnt+'" id="courseLike'+iCnt+'" value="courseLike'+iCnt+'" > '+'<option value="default">Choose the current courses..</option>'+'</select>');
 
                 $(container).append('<select name="grade_course'+iCnt+'" id="grade_course'+iCnt+'" value="grade_course'+iCnt+'" > '+'<option value="default">Choose your GPA..</option>'+'<option value="A">A</option>'+'<option value="B">B</option>'+'<option value="C">C</option>'+'<option value="D">D</option>'+'</select>');
@@ -169,7 +178,8 @@ $(function(){
                 $(container).append('<select name="courseLike'+iCnt+'" id="courseLike'+iCnt+'" value="courseLike'+iCnt+'" > '+'<option value="default">Choose the current courses..</option>'+'</select>');
 
                 $(container).append('<select name="grade_course'+iCnt+'" id="grade_course'+iCnt+'" value="grade_course'+iCnt+'" > '+'<option value="default">Choose your GPA..</option>'+'<option value="A">A</option>'+'<option value="B">B</option>'+'<option value="C">C</option>'+'<option value="D">D</option>'+'</select>');
-
+//                console.log("the count is "+ iCnt);
+//                
 
 
                 if (iCnt == 1) {        // SHOW SUBMIT BUTTON IF ATLEAST "1" ELEMENT HAS BEEN CREATED.
@@ -215,6 +225,8 @@ $(function(){
 
             }
         });
+        
+        	}
 
         
     });
@@ -268,6 +280,7 @@ $(function(){
                 error++;
             } else {
                 $(this).addClass('valid');
+                
             }
         });        
         
@@ -281,7 +294,7 @@ $(function(){
                         gpa: $("#gpa").val()
                     },
                     function(data){
-                        console.log(data);
+                        
                         alert("This page has been sent to database!");
                     }
             );
@@ -419,7 +432,7 @@ $(function(){
                             email: $("#email").val()
                         },
                         function(data){
-                            console.log(data);
+                            
                             alert("This page has been sent to database!");
                         }
                 );
@@ -478,7 +491,7 @@ $(function(){
                         currCourses: $("#currCourses").val()
                     },
                     function(data){
-                        console.log(data);
+                        
                         alert("This page has been sent to database!");
                     }
             );
@@ -574,7 +587,7 @@ $(function(){
                         otherPlace: $("#otherPlace").val()
                     },
                     function(data){
-                        console.log(data);
+                        
                         alert("This page has been sent to database!");
                     }
             );
@@ -658,7 +671,7 @@ $(function(){
                         
                     },
                     function(data){
-                        console.log(data);
+                        
                         alert("This page has been sent to database!");
                     }
             );
@@ -814,7 +827,7 @@ $(function(){
                         
                     },
                     function(data){
-                        console.log(data);
+                        
                         alert("This page has been sent to database!");
                     }
             );
@@ -834,7 +847,7 @@ $(function(){
 
                 $('#progress_text').html('64% Complete');
                 $('#progress').css('width','216px');
-                $("#container").css("height", sixth_height);
+                $("#container").css("height", $sixth_height);
                 //slide steps
                 $('#seventh_step').slideUp();
                 $('#sixth_step').slideDown(); 
@@ -894,7 +907,7 @@ $(function(){
                         
                     },
                     function(data){
-                        console.log(data);
+                        
                         alert("This page has been sent to database!");
                     }
             );

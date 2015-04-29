@@ -37,7 +37,7 @@ class TestController extends AbstractActionController
               
             if ($form->isValid()) {
                  
-                $size = new Size(array('min'=>1000)); //minimum bytes filesize
+                $size = new Size(array('max'=>1000000)); //minimum bytes filesize
                  
                 $adapter = new \Zend\File\Transfer\Adapter\Http(); 
                 $adapter->setValidators(array($size), $File['name']);
@@ -50,10 +50,21 @@ class TestController extends AbstractActionController
                     }
                     $form->setMessages(array('fileupload'=>$error ));
                 } else {
-                    $adapter->setDestination(dirname('./data/tmpuploads'));
-                    if ($adapter->receive($File['name'])) {
-                        $profile->exchangeArray($form->getData());
-                        echo 'Profile Name '.$profile->profilename.' upload '.$profile->fileupload;
+                    $env_var = getenv('OPENSHIFT_DATA_DIR');
+                    $filename=(string)$profile->fileupload;
+                    echo $filename.'<br>';
+                    $uploadfilter=explode("t", $filename);
+                    print_r($uploadfilter);
+                    if(strcmp($uploadfilter[1],"pdf")==0)
+                    {
+                        $adapter->setDestination($env_var);
+                        if ($adapter->receive($File['name'])) {
+                            $profile->exchangeArray($form->getData());
+                            echo 'Profile Name '.$profile->profilename.' upload '.$profile->fileupload;
+                        }
+                    }
+                    else{
+                        echo "You should upload pdf!";
                     }
                 }  
             } 
