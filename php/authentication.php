@@ -52,10 +52,9 @@ function authenticate($username, $password, $dbconn)
 	{
 		if($success[$resultCount])
 		{
-		    $hash = hash("sha512", $results[$resultCount]['password']
-		         . $results[$resultCount]['salt'], FALSE);
+		    $hash = hash("sha512", $pw . $results[$resultCount]['salt'], FALSE);
 		    $hash = substr($hash, $results[$resultCount]['key'], 60);
-			if(strcmp($password, $hash) == 0)
+			if(strcmp($results[$resultCount]['password'], $hash) == 0)
 			{
 				$results[$resultCount]['loggedin'] = true;
 				$valid = true;
