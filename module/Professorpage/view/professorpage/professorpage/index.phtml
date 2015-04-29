@@ -29,11 +29,29 @@ if($status == PHP_SESSION_NONE){
 		</style>
 	</head>
 	<script type="text/javascript">
+	   jQuery(document).ready(function() {
+	   /*
 	   function buildSession(){
 		   var sso = document.getElementById('bSession').value
 		   console.dir(sso);
 		   '<%Session["sso"] = "' + sso + '"; %>';
 		}
+	   */
+		   function save_var() {
+			    var stu_sso = document.getElementById('bSession').value
+		        
+		        alert(stu_sso);
+		        jQuery.ajax({
+		          type: 'post',
+		          url: 'php/save_var.php',
+		          data: stu_sso,
+		          complete: function(){
+		              jQuery("#bSession").submit(); //submit the form after ajax completes
+		          }
+		        });
+		        return false; //stop the form from initially submitting
+		      }
+		    });
 	</script>
 	<body>
 <!-- Header -->
