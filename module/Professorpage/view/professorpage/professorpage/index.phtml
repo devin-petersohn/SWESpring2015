@@ -28,13 +28,7 @@ if($status == PHP_SESSION_NONE){
 		}
 		</style>
 	</head>
-	<script type="text/javascript">
-	   function buildSession(){
-		   var sso = document.getElementById('bSession').value
-		   console.dir(sso);
-		   '<%Session["sso"] = "' + sso + '"; %>';
-		}
-	</script>
+	
 	<body>
 <!-- Header -->
 <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
@@ -175,7 +169,7 @@ if($status == PHP_SESSION_NONE){
                                         else {
                                             
                                             echo 'TA';
-                                        } ?></td><td><?echo $row['gpa']?></td><td><?echo $row['grade_received']?></td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary" id="bSession" name="sso" value="<?echo $row['sso']?>" onclick="buildSession()">Add/View Comments</button></form></td><tr><?
+                                        } ?></td><td><?echo $row['gpa']?></td><td><?echo $row['grade_received']?></td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" id="stusso" method="POST"><button type="submit" class="btn btn-primary" id="bSession" name="sso" value="<?echo $row['sso']?>">Add/View Comments</button></form></td><tr><?
 
                                     }
                                 }
