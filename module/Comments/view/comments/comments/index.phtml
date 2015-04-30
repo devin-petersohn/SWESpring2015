@@ -15,8 +15,7 @@
     	          $.ajax({
     	        	  type: "POST",
     	              url: "../../../../add_comment.php",
-    	              //data: $("#addcomments").serialize(),
-    	              //data:{course:$("#course").val(),comment:$("#comment").val()},
+    	              data: {student_sso:$("#stu_sso").val(),course:$("#course").val(),date_taught:$("#dateTaught").val(),comment:$("#comment").val()},
 	                  dataType: "json",
 	                  success: function(response){
 		                  console.log(response);
@@ -89,7 +88,7 @@
                 <h4><strong>Add Comments</strong></h4>
                 <div class="well" style="height: 340px; width:900px">
                 <form role="form" style="margin-top:20px" id="addcomments" >
-                    <input type="hidden" name="sso" value="<?php echo $_POST['sso']?>">
+                    <input type="hidden" id="stu_sso" name="sso" value="<?php echo $_POST['sso']?>">
                     <div class="col-md-8">
                         <label for="course_id">Course:</label>
                         <input type="text" id="course" name="course_id">
@@ -99,7 +98,7 @@
                     <br>
                      <div class="col-md-8">
                         <label for="date_taught">Date Taught:</label>
-                        <input type="text" name="dates_taught">
+                        <input type="text" id="dateTaught" name="dates_taught">
                     </div> 
                     <br>
                     <br>
