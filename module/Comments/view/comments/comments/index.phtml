@@ -14,16 +14,17 @@
   	        $("#add").click(function(){
     	          $.ajax({
     	        	  type: "POST",
-    	              url: "../../../../php/add_comment.php",
+    	              url: "../../../../../add_comment.php",
     	              data: $("#addcomments").serialize(),
 	                  dataType: "json",
 	                  success: function(response){
+		                  console.log(response);
 	                      if(response.success == "1"){
 	                          $(".addhere").append("<tr><td>"+response.course_id+"</td><td>"+response.instructor_sso+"</td><td>"+response.comment+"</td></tr>");
 	                          
 			              }
 		              },
-		              error: function(res){
+		              error: function(response){
 		                  alert("Unexpected error! Try again.");
 			          }
         	      });
@@ -104,7 +105,7 @@
                     <div class="col-md-8">
                         <label for="comment">Comment:</label>
                             <textarea class="form-control" name="stu_comment" rows="5" id="comment" ></textarea>
-                        <button name="add_comment" id="add" value="Add Comment">Add Comment</button>
+                        <button id="add">Add Comment</button>
                     </div>
                 </form>
                 </div>
