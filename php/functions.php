@@ -14,11 +14,11 @@ function db_connect() {
 
 //TODO: get data for admin offer confirmation
 
-function addRank($dbconn, $applicant, $rank)
-{
-    pg_prepare($dbconn, "addition", "UPDATE applicant SET ranking = $1 WHERE sso LIKE $applicant");
-    pg_execute($dbconn, "addition", array(htmlspecialchars($rank)));
-}
+//function addRank($dbconn, $applicant, $rank)
+//{
+  //  pg_prepare($dbconn, "addition", "UPDATE applicant SET ranking = $1 WHERE sso LIKE $applicant");
+    //pg_execute($dbconn, "addition", array(htmlspecialchars($rank)));
+//}
 
 function offerPosition($dbconn, $applicant, $course, $section)
 {

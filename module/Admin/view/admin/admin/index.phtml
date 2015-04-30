@@ -69,28 +69,33 @@
                                 foreach ($arr as $t){
                                 $t = json_decode($t, TRUE);
                                 ?>
-                                  <tr><td><input type="hidden" name="test" value="<? $t['sso']?>"><? echo $t['sso'];?></td><td><? echo $t['fname']; ?></td><td><? echo $t['lname']; ?></td><td><? echo $t['gpa']; ?></td><td><? echo $t['email']; ?><td><? echo $t['ranking']; ?></td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" name="submit2" value="Submit"></td></tr>
-                                <? }
+                                  <tr><td><input type="hidden" name="test" value="<? echo $t['sso']?>"><? echo $t['sso'];?></td><td><? echo $t['fname']; ?></td><td><? echo $t['lname']; ?></td><td><? echo $t['gpa']; ?></td><td><? echo $t['email']; ?><td><? echo $t['ranking']; ?></td><td><input type="text" name="rank" placeholder="Add Rank"><input type="submit" name="submit2" value="Submit"></td></tr>
+                                  <? 
+                                }
                                 
                                 ?>
                                 </tbody>
                               </table>
                            </form>
-                           <?php
-                         
-                           if(isset($_POST['submit2'])){
-                               //include 'php/rank.php';
-                               echo "it's working";
-                               echo $_POST['test'];
-                                
-                               //addRank($_POST['sso'], $_POST['rank']);
-                           }
+          <?php }
+          
                            else {
                                echo "no results found";
                                echo "<br>";
-                           }
-                                }  
-                            }
+                           }         
+            }
+            if(isset($_POST['submit2'])){
+                include 'php/rank.php';
+                //echo "it's working";
+                //echo $_POST['test'];
+                //echo (int)$_POST['rank'];
+            
+                 
+            
+                addRank($_POST['test'], (int)$_POST['rank']);
+            }
+                          
+                            
                                     
                 
               
