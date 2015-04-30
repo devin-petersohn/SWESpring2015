@@ -14,8 +14,9 @@
   	        $("#add").click(function(){
     	          $.ajax({
     	        	  type: "POST",
-    	              url: "../../../../../add_comment.php",
-    	              data: $("#addcomments").serialize(),
+    	              url: "../../../../add_comment.php",
+    	              //data: $("#addcomments").serialize(),
+    	              //data:{course:$("#course").val(),comment:$("#comment").val()},
 	                  dataType: "json",
 	                  success: function(response){
 		                  console.log(response);
@@ -25,6 +26,7 @@
 			              }
 		              },
 		              error: function(response){
+			              console.dir(response);
 		                  alert("Unexpected error! Try again.");
 			          }
         	      });
@@ -105,7 +107,7 @@
                     <div class="col-md-8">
                         <label for="comment">Comment:</label>
                             <textarea class="form-control" name="stu_comment" rows="5" id="comment" ></textarea>
-                        <button id="add">Add Comment</button>
+                        <button type="button" id="add">Add Comment</button>
                     </div>
                 </form>
                 </div>
