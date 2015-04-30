@@ -1,6 +1,5 @@
 <?php
-print ("hello world");
-/*require 'functions.php';
+require 'functions.php';
 $conn = db_connect();
 if($conn) {
     $sso = $_POST['sso'];
@@ -16,7 +15,7 @@ if($conn) {
     '; 
     /*$qry = 'INSERT INTO applicant_comments (sso, course_id, instructor_sso, comment)
                 VALUES ('.$sso.','. $course_id.','. $instructor_sso.','. $comment.')
-               ';
+               ';*/
     
     pg_prepare($conn, "add_comment", $qry);
     
@@ -29,5 +28,6 @@ if($conn) {
     
     echo json_encode($arr);
         
-}*/
+    
+}
 ?>
