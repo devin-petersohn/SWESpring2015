@@ -7,8 +7,8 @@ include "functions.php";
 
 function addRank($sso, $rank) {
     $dbconn = db_connect();
-    pg_prepare($dbconn, "addition", "UPDATE applicant SET ranking = $1 WHERE sso = $sso");
-    pg_execute($dbconn, "addition", array(htmlspecialchars($rank), $sso));
+    pg_prepare($dbconn, "rank", "UPDATE applicant SET ranking = $1 WHERE sso = '$sso'");
+    pg_execute($dbconn, "rank", array(htmlspecialchars($rank)));
 }
 
 //this might not be the url
