@@ -19,7 +19,8 @@ $(function(){
             'speakScore' : 'speak score',
             'semesterLast' : 'enter the semster',
             'timetoregister' : 'enter the time',
-            'phoneNum' : 'phone number'
+            'phoneNum' : 'phone number',
+            'presentDate' : 'Date'
     };
 
 
@@ -46,6 +47,7 @@ $(function(){
     $('input#semesterLast').inputfocus({ value: field_values['semesterLast'] }); 
     $('input#timetoregister').inputfocus({ value: field_values['timetoregister'] }); 
     $('input#phoneNum').inputfocus({ value: field_values['phoneNum'] }); 
+    $('input#presentDate').inputfocus({ value: field_values['presentDate'] }); 
 
 
 
@@ -86,6 +88,13 @@ $(function(){
         $(function() {
             $("#timetoregister").datepicker();
             });
+
+        $(function() {
+            $("#presentDate").datepicker();
+            });
+
+
+
         
 
 
@@ -100,20 +109,29 @@ $(function(){
     $('.bt').css('width','130px');
     $('.bt').css('margin','0px');
     $('.bt').css('float','none');
-    $('#container input').css('float','none');
+  //  $('#container input').css('float','none');
 
 
     $(document).ready(function() {
+        $('.sigPad').signaturePad();
 
         var iCnt = 0;
-
+        var divnum=0;
         // CREATE A "DIV" ELEMENT AND DESIGN IT USING JQUERY ".css()" CLASS.
-        var container = $(document.createElement('div')).css({
-            padding: '5px', margin: '20px', width: '80px',
-            borderTopColor: '#999', borderBottomColor: '#999',
-            borderLeftColor: '#999', borderRightColor: '#999'
-        });
-
+        if(!$('#container_curr').length)
+        	{
+		        var container = $(document.createElement('div')).css({
+		            padding: '5px', margin: '20px', width: '80px',
+		            borderTopColor: '#999', borderBottomColor: '#999',
+		            borderLeftColor: '#999', borderRightColor: '#999'
+		        });
+		        $(container).attr('id','container_curr');
+		     
+        
+        	
+        console.log("div number is"+ divnum);
+        divnum++;
+        
         if (iCnt <= 19) {
 
                 iCnt = iCnt + 1;
@@ -124,12 +142,9 @@ $(function(){
                     // <option value="PLA">PLA (undergrad student)!</option>
       
                     // </select>
-                // $(container).append('<select name="courseLike'+iCnt+'" id="courseLike'+iCnt+'" value="courseLike'+iCnt+'" > '+'<option value="default">Choose the current courses..</option>'+'</select>');
+                console.log("the count is "+ iCnt);
+                $(container).append('<select name="courseLike'+iCnt+'" id="courseLike'+iCnt+'" value="courseLike'+iCnt+'" > '+'<option value="default">Choose the current courses..</option>'+'</select>');
 
-                $.get("getCurrentCourses.php", function(data, status){
-                    console.log(data);
-                    echo(data);
-                });
                 $(container).append('<select name="grade_course'+iCnt+'" id="grade_course'+iCnt+'" value="grade_course'+iCnt+'" > '+'<option value="default">Choose your GPA..</option>'+'<option value="A">A</option>'+'<option value="B">B</option>'+'<option value="C">C</option>'+'<option value="D">D</option>'+'</select>');
 
 
@@ -163,7 +178,8 @@ $(function(){
                 $(container).append('<select name="courseLike'+iCnt+'" id="courseLike'+iCnt+'" value="courseLike'+iCnt+'" > '+'<option value="default">Choose the current courses..</option>'+'</select>');
 
                 $(container).append('<select name="grade_course'+iCnt+'" id="grade_course'+iCnt+'" value="grade_course'+iCnt+'" > '+'<option value="default">Choose your GPA..</option>'+'<option value="A">A</option>'+'<option value="B">B</option>'+'<option value="C">C</option>'+'<option value="D">D</option>'+'</select>');
-
+//                console.log("the count is "+ iCnt);
+//                
 
 
                 if (iCnt == 1) {        // SHOW SUBMIT BUTTON IF ATLEAST "1" ELEMENT HAS BEEN CREATED.
@@ -209,6 +225,8 @@ $(function(){
 
             }
         });
+        
+        	}
 
         
     });
@@ -236,7 +254,7 @@ $(function(){
     
     
     $('#progress_text').html('0% Complete');
-     $("#container").css("height", "440px");
+     $("#container").css("height", "540px");
     $("#container label").css("line-height", "27px");
     
     //first_step
@@ -262,6 +280,7 @@ $(function(){
                 error++;
             } else {
                 $(this).addClass('valid');
+                
             }
         });        
         
@@ -275,7 +294,7 @@ $(function(){
                         gpa: $("#gpa").val()
                     },
                     function(data){
-                        console.log(data);
+                        
                         alert("This page has been sent to database!");
                     }
             );
@@ -413,7 +432,7 @@ $(function(){
                             email: $("#email").val()
                         },
                         function(data){
-                            console.log(data);
+                            
                             alert("This page has been sent to database!");
                         }
                 );
@@ -472,7 +491,7 @@ $(function(){
                         currCourses: $("#currCourses").val()
                     },
                     function(data){
-                        console.log(data);
+                        
                         alert("This page has been sent to database!");
                     }
             );
@@ -542,7 +561,7 @@ $(function(){
 
     $('#submit_fourth').click(function(){
         //send information to server
-        $fourth_height=$('#fourth_step').height();
+        $fourth_height=$('#container').height();
        
         
         $('#fourth_step input').removeClass('error').removeClass('valid');
@@ -568,7 +587,7 @@ $(function(){
                         otherPlace: $("#otherPlace").val()
                     },
                     function(data){
-                        console.log(data);
+                        
                         alert("This page has been sent to database!");
                     }
             );
@@ -630,7 +649,7 @@ $(function(){
         $('#sixth_step input').removeClass('error').removeClass('valid');
         var fields = $('#sixth_step input[type=text]');
         var error = 0;
-        $sixth_height=$('#sixth_step').height();
+        $sixth_height=$('#container').height();
         fields.each(function(){
             var value = $(this).val();
             if( value.length<1 || value==field_values[$(this).attr('id')] || $('#selectionifinternational').val()=="default") {
@@ -652,7 +671,7 @@ $(function(){
                         
                     },
                     function(data){
-                        console.log(data);
+                        
                         alert("This page has been sent to database!");
                     }
             );
@@ -759,7 +778,7 @@ $(function(){
     $('#submit_seventh').click(function(){
         //send information to server
         
-
+        $seventh_height=$('#container').height();
         var fields1 = $('#seventh_step input[name=sub1]');
         var fields2 = $('#seventh_step input[name=sub2]');
         var error = 0;
@@ -808,7 +827,7 @@ $(function(){
                         
                     },
                     function(data){
-                        console.log(data);
+                        
                         alert("This page has been sent to database!");
                     }
             );
@@ -828,7 +847,7 @@ $(function(){
 
                 $('#progress_text').html('64% Complete');
                 $('#progress').css('width','216px');
-                $("#container").css("height", sixth_height);
+                $("#container").css("height", $sixth_height);
                 //slide steps
                 $('#seventh_step').slideUp();
                 $('#sixth_step').slideDown(); 
@@ -836,7 +855,7 @@ $(function(){
 
     $('#submit_eighth').click(function(){
         //send information to server
-        $eighth_height=$('#eighth_step').height();
+        $eighth_height=$('#container').height();
         $('#eighth_step input').removeClass('error').removeClass('valid');
         var fields = $('#eighth_step input[type=text]');
         var error = 0;
@@ -888,7 +907,7 @@ $(function(){
                         
                     },
                     function(data){
-                        console.log(data);
+                        
                         alert("This page has been sent to database!");
                     }
             );
@@ -923,7 +942,7 @@ $(function(){
 
                 $('#progress_text').html('80% Complete');
                 $('#progress').css('width','288px');
-                $("#container").css("height", "630px");
+                $("#container").css("height", $seventh_height);
         
                 //slide steps
                 $('#eighth_step').slideUp();
@@ -954,7 +973,7 @@ $(function(){
 
     $('#submit_ninth').click(function(){
         //send information to server
-        $("#container").css("height", "570px");
+        $ninth_height=$('#container').height();
         $('#ninth_step input').removeClass('error').removeClass('valid');
         var fields = $('#ninth_step input[type=text]');
         var error = 0;
@@ -971,6 +990,7 @@ $(function(){
         });
 
         if(!error) {
+                $("#container").css("height", "370px");
                 //update progress bar
                 $('#progress_text').html('100% Complete');
                 $('#progress').css('width','360px');
@@ -980,5 +1000,21 @@ $(function(){
                 $('#sign_step').slideDown();       
         } else return false;
     });
+
+
+    $('#submit_sign_back').click(function(){
+        //send information to server
+                $('#progress_text').html('100% Complete');
+                $('#progress').css('width','360px');
+                $("#container").css("height", $ninth_height);
+                //slide steps
+                $('#sign_step').slideUp();
+                $('#ninth_step').slideDown(); 
+
+            });
+    $('#submit_sign').click(function(){
+        window.location.href='studentpage';
+    });
+
 
 });

@@ -1,21 +1,12 @@
 <?php
-require 'functions.php';
+include 'functions.php';
 
-//grab variables/ input from user
-$cid = $_POST['cid'];
-$inst_sso = $_POST['insutructor_sso'];
-$slots_open = $_POST['slots'];
-//not sure what else needs to be grabbed
+$db = db_connect();
 
-$conn = db_connect();
-if($conn){
-    $qry = null;
-    pg_prepare($conn,"add_course",$qry);
-    if(pg_execute($conn,"add_course",array())) {
-        echo "success";
-    }
-    else {
-        echo "fail";
-    }
+function addCourse($course_id, $section, $slots) {
+    $db = db_connect();
+    pg_prepare($db, "q1", "INSERT INTO Course (course_id, section, slots_available) VALUES ($1,$2,$3)");
+    pg_execute($db, "q1", array($course_id, $section, $slots));
 }
+
 ?>

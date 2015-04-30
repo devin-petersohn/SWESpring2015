@@ -1,29 +1,6 @@
 <?php
 //TODO: figure out conflicts with returning the array as is
 
-//The following 2 functions are for testing purposes only
-function connect()
-{
-	//Insert the server information into their respective fields to connect to the db.  
-	$dbconn = pg_connect("host= dbname= user= password=")
-		or die("Could not connect: " . pg_last_error());
-
-	echo "Connected.<br>";
-	return $dbconn;
-}
-
-function test($dbconn)
-{
-	$result = array();
-	//This call is used to verify that the user 'asdf' can login.
-	$result[1] = authenticate("mcs526", "test", $dbconn);
-	//TODO: can $dbconn be global?
-
-	//test the array that comes from authenticate()
-	print_r($result);
-}
-
-
 function authenticate($username, $password, $dbconn)
 { 
 	$returnResults = array();
@@ -56,6 +33,8 @@ function authenticate($username, $password, $dbconn)
 		{
 			$results[$queryNum]['domain'] = $domains[$queryNum];
 			$results[$queryNum]['password'] = $line['password'];
+			$results[$queryNum]['salt'] = $line['salt'];
+			$results[$queryNum]['key'] = $line['key'];
 			$success[$queryNum] = true;
 		}
 		else
@@ -73,7 +52,9 @@ function authenticate($username, $password, $dbconn)
 	{
 		if($success[$resultCount])
 		{
-			if(strcmp($password, $results[$resultCount]['password']) == 0)
+		    $hash = hash("sha512", $password . $results[$resultCount]['salt'], FALSE);
+		    $hash = substr($hash, $results[$resultCount]['key'], 60);
+			if(strcmp($results[$resultCount]['password'], $hash) == 0)
 			{
 				$results[$resultCount]['loggedin'] = true;
 				$valid = true;
@@ -119,10 +100,24 @@ function authenticate($username, $password, $dbconn)
 		}
 		else
 		{
+		    pg_prepare($dbconn, "userQ",
+		    "SELECT * FROM users WHERE domain LIKE 'missouri.edu'"
+		          . "AND sso LIKE $1") or die(pg_last_error());
+		    pg_prepare($dbconn, "instructorQ",
+		    "SELECT * FROM instructor WHERE sso LIKE $1") or die(pg_last_error());
+		    pg_prepare($dbconn, "adminQ",
+		    "SELECT * FROM admin WHERE sso LIKE $1") or die(pg_last_error());
+		    pg_prepare($dbconn, "sysAdminQ",
+		    "SELECT * FROM sys_admin WHERE sso LIKE $1") or die(pg_last_error());
+		    pg_prepare($dbconn, "applicantQ",
+	       	    "SELECT sso FROM users WHERE sso LIKE $1 AND domain LIKE 'mail.missouri.edu'")
+	       	    or die(pg_last_error());
+		    
+		    $queries = array("userQ", "instructorQ", "adminQ", "sysAdminQ", "applicantQ");
 			$flag = false;
 			for($Ftypes = 0; $Ftypes < 3; $Ftypes++)
 			{
-				if(isInSystem($username, $facultyType[$Ftypes], $dbconn))
+				if(isInSystem($username, $facultyType[$Ftypes], $dbconn, $queries))
 				{
 					$returnResults['type'] = $facultyType[$Ftypes];
 					$flag = true;
@@ -149,17 +144,14 @@ function authenticate($username, $password, $dbconn)
 	return $returnResults;
 }
 
-function isInSystem($user, $domain_intended, $dbconn)
+function isInSystem($user, $domain_intended, $dbconn, $queries)
 {
     if(strcmp($domain_intended, "instructor") == 0
         | strcmp($domain_intended, "admin") == 0
         | strcmp($domain_intended, "sysAdmin") == 0)
     {
-        pg_prepare($dbconn, "userQ",
-        "SELECT * FROM users WHERE domain LIKE 'missouri.edu'"
-			. "AND sso LIKE $1");
-
-        $SR = pg_execute($dbconn, "userQ",
+      
+        $SR = pg_execute($dbconn, $queries[0],
             array(htmlspecialchars($user)));
 
         if(pg_num_rows($SR) == 0)
@@ -167,25 +159,18 @@ function isInSystem($user, $domain_intended, $dbconn)
             return false;
         }
         else
-        {
-            pg_prepare($dbconn, "instructorQ",
-            "SELECT * FROM instructor WHERE sso LIKE $1");
-            $SR = pg_execute($dbconn, "instructorQ",
+        {   
+            $SR = pg_execute($dbconn, $queries[1],
                 array(htmlspecialchars($user)));
             	
             if(pg_num_rows($SR) == 0)
             {
-                pg_prepare($dbconn, "adminQ",
-                "SELECT * FROM admin WHERE sso LIKE $1");
-                $SR = pg_execute($dbconn, "adminQ",
+                $SR = pg_execute($dbconn, $queries[2],
                     array(htmlspecialchars($user)));
                 	
                 if(pg_num_rows($SR) == 0)
                 {
-                    pg_prepare($dbconn, "sysAdminQ",
-                    "SELECT * FROM sys_admin WHERE sso LIKE $1");
-                    	
-                    $SR = pg_execute($dbconn, "sysAdminQ",
+                    $SR = pg_execute($dbconn, $queries[3],
                         array(htmlspecialchars($user)));
                     	
                     if(pg_num_rows($SR) == 0)
@@ -231,10 +216,7 @@ function isInSystem($user, $domain_intended, $dbconn)
     }
     else if(strcmp($domain_intended, "applicant") == 0)
     {
-        pg_prepare($dbconn, "applicantQ",
-        "SELECT sso FROM users WHERE sso LIKE $1 AND domain LIKE 'mail.missouri.edu'");
-        	
-        $SR = pg_execute($dbconn, "applicantQ",
+        $SR = pg_execute($dbconn, $queries[4],
             array(htmlspecialchars($user)));
         	
         if(pg_num_rows($SR) == 0)

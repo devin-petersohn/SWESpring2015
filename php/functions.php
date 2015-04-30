@@ -12,9 +12,17 @@ function db_connect() {
     return $DBconn;
 }
 
+//TODO: get data for admin offer confirmation
+
+function addRank($dbconn, $applicant, $rank)
+{
+    pg_prepare($dbconn, "addition", "UPDATE applicant SET ranking = $1 WHERE sso LIKE $applicant");
+    pg_execute($dbconn, "addition", array(htmlspecialchars($rank)));
+}
+
 function offerPosition($dbconn, $applicant, $course, $section)
 {
-    pg_prepare($dbconn, "position", "INSERT INTO applicant_offer_received VALUES($1, $2, $3, NULL, NULL)");
+    pg_prepare($dbconn, "position", "INSERT INTO applicant_offer_received VALUES($1, $2, $3)");
     pg_execute($dbconn, "position", array($applicant, $course, $section));
 }
 

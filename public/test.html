@@ -1,0 +1,34 @@
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.signaturepad.js"></script>
+<script src="js/json2.min.js"></script>
+
+<link rel="stylesheet" href="css/jquery.signaturepad.css">
+<style>
+    body { font: normal 100.01%/1.375 "Helvetica Neue",Helvetica,Arial,sans-serif; 
+      overflow: hidden;
+
+  }
+    .typeItDesc{
+      border-top:none;
+      padding:0px;
+    }
+  </style>
+  <body>
+<form method="post" action="" class="sigPad">
+    <label for="name">Electronic signature here:</label>
+    <input type="text" name="name" id="name" class="name">
+    <br>
+    <div class="sig sigWrapper">
+      <div class="typed"></div>
+      <canvas class="pad" width="198" height="55"></canvas>
+      <input type="hidden" name="output" class="output">
+    </div>
+  </form>
+
+  <script>
+    $(document).ready(function() {
+      $('.sigPad').signaturePad();
+    });
+  </script>
+
+  </body>

@@ -28,7 +28,33 @@ if($status == PHP_SESSION_NONE){
 		}
 		</style>
 	</head>
-	
+
+	<!--  <script type="text/javascript">
+	   jQuery(document).ready(function() {
+	   /*
+	   function buildSession(){
+		   var sso = document.getElementById('bSession').value
+		   console.dir(sso);
+		   '<%Session["sso"] = "' + sso + '"; %>';
+		}
+	   */
+		   function save_var() {
+			    var stu_sso = document.getElementById('bSession').value
+		        
+		        alert(stu_sso);
+		        jQuery.ajax({
+		          type: 'post',
+		          url: 'php/save_var.php',
+		          data: stu_sso,
+		          complete: function(){
+		              jQuery("#bSession").submit(); //submit the form after ajax completes
+		          }
+		        });
+		        return false; //stop the form from initially submitting
+		      }
+		    });
+	</script>  -->
+
 	<body>
 <!-- Header -->
 <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
@@ -37,14 +63,6 @@ if($status == PHP_SESSION_NONE){
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
           <span class="icon-toggle"></span>
       </button> 
-      <?php 
-        if(isset($_SESSION['username'])){
-            echo "Welcome," . $_SESSION["username"];
-        }
-        else {
-            echo "";
-        }
-      ?>
       <form id='logout' action='' method='post' accept-charset='UTF-8' style="padding-top: 200px;">
       <input type='submit' name='logout' value='Logout' /> 
       </form>
@@ -55,19 +73,7 @@ if($status == PHP_SESSION_NONE){
       ?>
       
     </div>
-    <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
-        
-        <li class="dropdown">
-          <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
-            <i class="glyphicon glyphicon-user"></i> Grant Scott <span class="caret"></span></a>
-          <ul id="g-account-menu" class="dropdown-menu" role="menu">
-            <li><a href="#">My Profile</a></li>
-            <li><a href="#"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
+    
   </div><!-- /container -->
 </div>
 <!-- /Header -->
@@ -77,46 +83,88 @@ if($status == PHP_SESSION_NONE){
   
   <!-- upper section -->
   
-    <div class="col-md-9" style="margin-bottom: 20px;">
-       <div class="well">
+    <div class="col-md-12" style="margin-top: 40px;">
+       <div class="well" style="height:300px;">
             <h3>Search for an Applicant</h3>
-            <form>
-                <input type="radio" name="choice" value="pawprint">Search by PawPrint
+            <form id='search' action='' method='post' accept-charset='UTF-8'>
+                <input type="radio" name="choice" id="pawprint" value="pawprint">Search by PawPrint
                 <br>
-                <input type="radio" name="choice" value="name">Search by Applicant Name
+                <input type="radio" name="choice" id="name" value="name">Search by Applicant Name
                 <br>
                 <input type="text" name="input">
-                <input type="submit" value="Submit">
+                <input type='submit' name='submit' value='Submit'>
             </form>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
+            <?php 
+            if(isset($_POST['submit'])){
+                include 'php/functions.php';
+                include 'php/DB_Search.php';
+                $type = $_POST['choice'];
+                $conn = db_connect();
+                $arr = search($conn, $_POST['input'], $type);
+            
+                if($arr != NULL){
+                    ?>
+                                    <form action="rank.php" method="POST">
+                                       <table class="table table-striped">
+                                            <thead>
+                                              <tr><th>SSO</th><th>First Name</th><th>Last Name</th><th>GPA</th><th>E-mail</th><th>Ranking</th><th>Add/Change Rank</th></tr>
+                                            </thead>
+                                            <tbody>
+                                            <?php 
+                                            foreach ($arr as $t){
+                                            $t = json_decode($t, TRUE);
+                                            ?>
+                                              <tr><td><? echo $t['sso'];?></td><td><? echo $t['fname']; ?></td><td><? echo $t['lname']; ?></td><td><? echo $t['gpa']; ?></td><td><? echo $t['email']; ?><td><? echo $t['ranking']; ?></td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" value="Submit"></td></tr>
+                                            <? } ?>
+                                            </tbody>
+                                          </table>
+                                       </form>
+                                       <?php 
+                                            }
+                                            else {
+                                                echo "no results found";
+                                            }
+                                        }
+                           
+                            ?>
        </div>
      </div>
      <hr>
      <hr>
      <hr>
      <hr>
-     <div class="panel panel-default" style="margin-top: 200px; height:300px;">
-        <div class="panel-heading"><h4 style="text-align: left;">Courses Taught this Semester</h4></div>
+     <div class="panel panel-default" style="margin-top: 400px; height:300px;">
+        <div class="panel-heading"><h4 style="text-align: left;">Courses You Are teaching this Semester</h4></div>
             <?php 
+            if(isset($_SESSION['username'])){
             $connectionString = "user=admin1xtduwt password=zVd4BSi4JdIJ host=127.13.165.130 dbname=ta_application";
             $DBconn = pg_connect($connectionString);
                 if (!$DBconn) {
                 echo "Error.\n" . pg_last_error() . "\n";
                 die; // kill the app if no connection
                }
-            else $query = "SELECT course_id, slots_available FROM course;";
-            $result = pg_query($DBconn, $query);
-        while (($row = pg_fetch_assoc($result)) != false) {
-        
-        print $row['course_id'] . "<br>";
-	    print $row['slots_available'] . "<br>";
-}            
+               else 
+                $result = pg_query($DBconn, "SELECT course_id, section FROM instructor_teaches WHERE instructor_sso='".$_SESSION['username']."';");
+               ?>
+                           <table class="table table-striped">
+                               <thead>
+                                   <tr><th>Course ID</th><th>Section</th></tr>
+                               </thead>
+                               <tbody>
+                                   <?php 
+                                   while (($row = pg_fetch_assoc($result)) != false) {    
+                                   ?>
+                                   <tr><td><? echo $row['course_id'];?></td><td><? echo $row['section']; ?></td></tr>
+                                   <?php } 
+            }
+            else {
+                echo '<font color="red">' . "Please login to see the courses you are teaching this semester." . '</font><br>';
+            }
+                                   ?>
+                               </tbody>
+                           </table>
             
-            ?>
+            
      </div>                 
  
     <div class="panel panel-default">
@@ -125,19 +173,10 @@ if($status == PHP_SESSION_NONE){
                 <table class="table table-striped">
                     <thead>
                         <tr><th>Applicant Name</th><th>Wish List Course</th><th>TA/PLA</th><th>GPA</th><th>Grade Recieved</th><th>Make Offer</th><th>Add Comments</th></tr>
-                    </thead>
-                    <!--
-                    <tbody>
-                      <tr><td>Sam Walker</td><td>CS4320</td><td>TA</td><td>4.0</td><td>A</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary">Add/View Comments</button></form></td></tr>
-                      <tr><td>Tory White</td><td>CS4320</td><td>PLA</td><td>3.7</td><td>A</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary">Add/View Comments</button></form></td></tr>
-                      <tr><td>Tylor Jones</td><td>CS4320</td><td>TA</td><td>3.4</td><td>B</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary">Add/View Comments</button></form></td></tr>
-                      <tr><td>Jerry Smith</td><td>CS4320</td><td>PLA</td><td>3.6</td><td>A</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="button" class="btn btn-primary">Add/View Comments</button></form></td></tr>
-                      <tr><td>Mary Test</td><td>CS4320</td><td>TA</td><td>3.7</td><td>B</td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" method="POST"><button type="button" class="btn btn-primary">Add/View Comments</button></form></td></tr>
-                    </tbody>
-                    -->
-                    
+                    </thead> 
                     <tbody>
                         <?php
+                        if(isset($_SESSION['username'])){
                             //php script to find applicants
                             require 'php/functions.php';
                             
@@ -172,9 +211,16 @@ if($status == PHP_SESSION_NONE){
                                         } ?></td><td><?echo $row['gpa']?></td><td><?echo $row['grade_received']?></td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" id="stusso" method="POST"><button type="submit" class="btn btn-primary" id="bSession" name="sso" value="<?echo $row['sso']?>">Add/View Comments</button></form></td><tr><?
 
                                     }
+                                    
                                 }
+                                
+                            }
+                            else {
+                                echo '<font color="red">' . "Please login to see applicants interested in teaching your course." . '</font><br>';
                             }
                             
+                        }
+                        
                         ?>
                     </tbody>
                     

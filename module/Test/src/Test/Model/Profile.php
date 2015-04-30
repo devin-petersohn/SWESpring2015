@@ -33,6 +33,8 @@ class Profile implements InputFilterAwareInterface
             $inputFilter->add(
                 $factory->createInput(array(
                     'name'     => 'profilename',
+                    'id'       => 'profilename',
+                    
                     'required' => true,
                     'filters'  => array(
                         array('name' => 'StripTags'),
@@ -54,6 +56,8 @@ class Profile implements InputFilterAwareInterface
             $inputFilter->add(
                 $factory->createInput(array(
                     'name'     => 'fileupload',
+                    'id'     => 'fileupload',
+                    
                     'required' => true,
                 ))
             );
