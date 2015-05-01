@@ -18,7 +18,7 @@ if($conn) {
                 VALUES ('.$sso.','. $course_id.','. $instructor_sso.','. $comment.')
                ';*/
     
-    pg_prepare($conn, "add_comment", $qry);
+    pg_query($conn,$qry);
     
     $arr = array(
             "success" => "1",
