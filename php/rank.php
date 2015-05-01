@@ -1,7 +1,7 @@
 <?php
 
 include "functions.php";
-
+//this is a test
 
 //addRank($dbconn, $_POST['sso'], $_POST['rank']);
 
