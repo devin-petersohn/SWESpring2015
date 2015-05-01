@@ -231,29 +231,40 @@
     
   </div><!--/row-->
   
-  <div class="row">
+  <div class="panel panel-default" style="margin-top: 400px; height:300px;">
+        <div class="panel-heading"><h4 style="text-align: left;">Assign Applicants</h4></div>
+            <?php 
+            if(isset($_SESSION['username'])){
+            $connectionString = "user=admin1xtduwt password=zVd4BSi4JdIJ host=127.13.165.130 dbname=ta_application";
+            $DBconn = pg_connect($connectionString);
+                if (!$DBconn) {
+                echo "Error.\n" . pg_last_error() . "\n";
+                die; // kill the app if no connection
+               }
+               else 
+                $res = pg_query($DBconn, "SELECT * FROM applicant_offer_received WHERE offer_accpeted IS NULL");
+               ?>
+                           <table class="table table-striped">
+                               <thead>
+                                   <tr><th>SSO</th><th>Course</th></tr>
+                               </thead>
+                               <tbody>
+                                   <?php 
+                                   while (($offer = pg_fetch_assoc($res)) != false) {    
+                                   ?>
+                                   <tr><td><? echo $offer['sso'];?></td><td><? echo $row['course_id']; ?></td></tr>
+                                   <?php } 
+            }
+            else {
+                echo '<font color="red">' . "Please login to see the courses you are teaching this semester." . '</font><br>';
+            }
+                                   ?>
+                               </tbody>
+                           </table>
+            
+            
+     </div>
     
-    <div class="col-md-12">
-      <hr>
-		<h4><strong>Assign TA</strong></h4>  
-         
-    </div>
-    <div class="col-md-12">
-      
-      <table class="table table-striped">
-        <thead>
-          <tr><th>Applicants</th><th>Course</th><th>Grade</th><th>TA/PLA</th><th>GPA</th><th>Offer Status</th><th>Assign</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Sam Walker</td><td>CS4320</td><td>89</td><td>TA</td><td>3.7</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-danger btn-large" href="#">Reject</button></td></tr>
-          <tr><td>Tory White</td><td>CS4320</td><td>90</td><td>TA</td><td>3.8</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-danger btn-large" href="#">Reject</button></td></tr>
-          <tr><td>Tylor</td><td>CS4320</td><td>86</td><td>PLA</td><td>3.5</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-danger btn-large" href="#">Reject</button></td></tr>
-          <tr><td>Jerry Smith</td><td>CS4820</td><td>92</td><td>PLA</td><td>3.6</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-danger btn-large" href="#">Reject</button></td></tr>
-          <tr><td>Tiana </td><td>CS4820</td><td>83</td><td>TA</td><td>3.4</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-danger btn-large" href="#">Reject</button></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>  
   <hr>              
   
   
