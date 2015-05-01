@@ -167,12 +167,12 @@ if($status == PHP_SESSION_NONE){
             
      </div>                 
  
-    <div class="panel panel-default">
+    <div class="panel panel-default" style="height:400px;">
         <div class="row">
             <div class="col-sm-12">
                 <table class="table table-striped">
                     <thead>
-                        <tr><th>Applicant Name</th><th>Wish List Course</th><th>TA/PLA</th><th>GPA</th><th>Grade Recieved</th><th>Make Offer</th><th>Add Comments</th></tr>
+                        <tr><th>SSO</th><th>Applicant Name</th><th>Wish List Course</th><th>TA/PLA</th><th>GPA</th><th>Grade Recieved</th><th>Make Offer</th><th>Add Comments</th></tr>
                     </thead> 
                     <tbody>
                         <?php
@@ -199,7 +199,7 @@ if($status == PHP_SESSION_NONE){
                                     $qry = "SELECT * FROM applicant_is_a_ugrad WHERE sso like $1";
                                     $is_ugrad = pg_prepare($conn,"ugrad_search",$qry);
                                     while($row =  pg_fetch_array($results, null, PGSQL_ASSOC)) {
-                                        ?><tr><td><?echo $row['fname'].' '. $row['lname']?></td><td><?echo $row['course']?></td><td><?php 
+                                        ?><tr><form action="" method=POST id="offer"><td><input type="hidden" name="pprint" value="<? echo $row['sso']?>"><? echo $row['sso'];?></td><td><?echo $row['fname'].' '. $row['lname']?></td><td><input type="hidden" name="wishCourse" value="<? echo $row['course']?>"><? echo $row['course'];?></td><td><?php 
                                         $is_ugrad = pg_execute($conn,"ugrad_search",array($row['sso']));
                                         $is_ugrad =pg_fetch_array($is_ugrad,null,PGSQL_ASSOC);
                                         if($is_ugrad['program']!=null){
@@ -208,23 +208,34 @@ if($status == PHP_SESSION_NONE){
                                         else {
                                             
                                             echo 'TA';
-                                        } ?></td><td><?echo $row['gpa']?></td><td><?echo $row['grade_received']?></td><td><button type="button" class="btn btn-primary">Offer</button></td><td><form action="comments" id="stusso" method="POST"><button type="submit" class="btn btn-primary" id="bSession" name="sso" value="<?echo $row['sso']?>">Add/View Comments</button></form></td><tr><?
+
+                                        } ?></td><td><?echo $row['gpa']?></td><td><?echo $row['grade_received']?></td><td><input type="submit" name="offer" value="Offer"></form></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary" id="bSession" name="sso" value="<?echo $row['sso']?>" onclick="buildSession()">Add/View Comments</button></form></td><tr><?
+
 
                                     }
                                     
+                                    
                                 }
+                                
                                 
                             }
                             else {
                                 echo '<font color="red">' . "Please login to see applicants interested in teaching your course." . '</font><br>';
                             }
-                            
+                                
                         }
+                        if(isset($_POST['offer'])){
+                            include 'php/offer.php';
+                            makeOffer($_POST['pprint'], $_POST['wishCourse']);
+                        }
+                        
+                        
                         
                         ?>
                     </tbody>
                     
                 </table>
+                
           </div>
        </div>
    </div>
