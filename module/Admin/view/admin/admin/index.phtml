@@ -59,7 +59,7 @@
               
                 if($arr != NULL){
              ?>
-                        <form action="" method="POST">
+                        
                            <table class="table table-striped">
                                 <thead>
                                   <tr><th>SSO</th><th>First Name</th><th>Last Name</th><th>GPA</th><th>E-mail</th><th>Ranking</th><th>Add/Change Rank</th></tr>
@@ -70,14 +70,29 @@
                                 $t = json_decode($t, TRUE);
                                 ?>
 
-                                  <tr><td><input type="hidden" name="test" value="<? echo $t['sso']?>"><? echo $t['sso'];?></td><td><? echo $t['fname']; ?></td><td><? echo $t['lname']; ?></td><td><? echo $t['gpa']; ?></td><td><? echo $t['email']; ?><td><? echo $t['ranking']; ?></td><td><input type="text" name="rank" placeholder="Add Rank"><input type="submit" name="submit2" value="Submit"></td></tr>
+                                  <tr><form action="" method="POST">
+                                    <td>
+                                        <input type="hidden" name="test" value="<? echo $t['sso']?>">
+                                            <? echo $t['sso'];?>
+                                   </td>
+                                   <td><? echo $t['fname']; ?>
+                                   </td>
+                                   <td><? echo $t['lname']; ?></td>
+                                   <td><? echo $t['gpa']; ?></td>
+                                   <td><? echo $t['email']; ?><td><? echo $t['ranking']; ?></td>
+                                   <td>
+                                   <input type="text" name="rank" placeholder="Add Rank">
+                                   <input type="submit" name="submit2" value="Submit">
+                                   </td> </form>
+                                   </tr>
+
                                   <? 
                                 }
                                 
                                 ?>
                                 </tbody>
                               </table>
-                           </form>
+                          
           <?php }
           
                            else {
