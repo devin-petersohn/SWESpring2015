@@ -11,14 +11,12 @@ if($conn) {
     //echo $_POST['course_id'];
     //echo $_SESSION['username'];
     
-     $qry = 'INSERT INTO applicant_comments (sso, course_id, dates_taught, instructor_sso, comment)
-     VALUES ('.$sso.','. $course_id.','. $dates_taught.','. $instructor_sso.','. $comment.')
-    '; 
+    // $qry = '; 
     /*$qry = 'INSERT INTO applicant_comments (sso, course_id, instructor_sso, comment)
                 VALUES ('.$sso.','. $course_id.','. $instructor_sso.','. $comment.')
                ';*/
     
-    pg_prepare($conn, "add_comment", $qry);
+    pg_query($conn,"INSERT INTO applicant_comments VALUES ('". $sso ."','". $course_id ."','". $dates_taught . "','". $instructor_sso ."','". $comment ."');");
     
     $arr = array(
             "success" => "1",
