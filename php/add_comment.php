@@ -8,8 +8,8 @@ if($conn) {
     $dates_taught = $_POST['dates_taught'];
     $comment = $_POST['stu_comment'];
     $instructor_sso = $_SESSION['username'];
-    //echo $_POST['course_id'];
-    //echo $_SESSION['username'];
+    echo $_POST['course_id'];
+    echo $_SESSION['username'];
     
      $qry = 'INSERT INTO applicant_comments (sso, course_id, dates_taught, instructor_sso, comment)
      VALUES ('.$sso.','. $course_id.','. $dates_taught.','. $instructor_sso.','. $comment.')
