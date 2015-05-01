@@ -20,7 +20,7 @@
  	                  success: function(response){
  	                      console.log(response);
  	                      if(response.success == "1"){
-                        	  $(".addhere").append("<tr><td>"+response.course_id+"</td><td>"+response.instructor_sso+"</td><td>"+response.comment+"</td><td><input type='button' id="+response.comment_id+" class='del' value='delete'></td></tr>");
+                        	  $(".addhere").append("<tr><td>"+response.course_id+"</td><td>"+response.instructor_sso+"</td><td>"+response.comment+"</td><td><input type='button' id="+response.comment_id+" class='btn btn-info del' value='delete'></td></tr>");
                       	      console.log(response);
  	                          
  	    	              }
@@ -44,7 +44,7 @@
  	                      console.log(response);
  	                      if(response.success == "1"){
  	                          var comment_id = response.comment_id;
-                      	      $("#"+row_id).closest("tr").fadeout();
+                      	      $("#"+comment_id).closest("tr").fadeout();
  	    	              }
  	                  },
  	                  error: function(response){
@@ -67,7 +67,7 @@
     
                 <div class="col-md-12">
                     <hr>
-                    <h3><strong>Student Name</strong></h3>
+                    <h3><strong>Student: <?php echo $_POST['sso']?>></strong></h3>
                     <hr>
                     <table class="table table-striped addhere">
                         <thead>
