@@ -5,9 +5,9 @@ $conn = db_connect();
 if($conn) {
     $sso = $_POST['sso'];
     $course_id = $_POST['course_id'];
-    $dates_taught = $_POST['dates-taught'];
-    $instructor_sso = $_SESSION['username'];
+    $dates_taught = $_POST['dates_taught'];
     $comment = $_POST['stu_comment'];
+    $instructor_sso = $_SESSION['username'];
     //echo $_POST['course_id'];
     //echo $_SESSION['username'];
     

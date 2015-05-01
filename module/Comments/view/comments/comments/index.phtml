@@ -15,7 +15,7 @@
     	          $.ajax({
     	        	  type: "POST",
     	              url: "../../../../add_comment.php",
-    	              data: {sso:$("#stu_sso").val(),course_id:$("#course").val(),date-taught:$("#dateTaught").val(),stu_comment:$("#comment").val()},
+    	              data: {sso:$("#stu_sso").val(),course_id:$("#course").val(),date_taught:$("#dateTaught").val(),stu_comment:$("#comment").val()},
 	                  dataType: "json",
 	                  success: function(response){
 		                  console.log(response);
