@@ -1,8 +1,4 @@
-<?php
-$status = session_status();
-if($status == PHP_SESSION_NONE) { header("Location:Login") } 
-?>
-
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -13,59 +9,6 @@ if($status == PHP_SESSION_NONE) { header("Location:Login") }
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/prof_styles.css')
     ?>
-
-    
-    <script>
-        $(document).ready(function(){
-  	        $("#add").click(function(){
- 	        	 $.ajax({
- 	            	  type: "POST",
- 	                  url: "../../../../add_comment.php",
- 	                  data: {action:'add', sso:$("#stu_sso").val(),course_id:$("#course").val(),dates_taught:$("#dateTaught").val(),stu_comment:$("#comment").val()}, 
- 	                  dataType: "json",
- 	                  success: function(response){
- 	                      console.log(response);
- 	                      if(response.success == "1"){
-                        	  $(".addhere").append("<tr><td>"+response.course_id+"</td><td>"+response.instructor_sso+"</td><td>"+response.comment+"</td><td><input type='button' id="+response.comment_id+" class='btn btn-info del' value='delete'></td></tr>");
-                      	      console.log(response);
- 	                          
- 	    	              }
- 	                  },
- 	                  error: function(response){
- 	    	              console.dir(response);
- 	    	              console.log(response.action);
- 	                      alert("Unexpected error! Try again.");
- 	    	          }
- 		        });
-  	        });
-  	        $(".del").click(function(){
-  	  	         var row_id = $(this).attr("id");
-  	  	         console.log(row_id);
- 	        	 $.ajax({
- 	            	  type: "POST",
- 	                  url: "../../../../add_comment.php",
- 	                  data:  {action:'delete',comment_id: row_id,sso:$("#stu_sso").val(),course_id:$("#course").val(),dates_taught:$("#dateTaught").val(),stu_comment:$("#comment").val()}, 
- 	                  dataType: "json",
- 	                  success: function(response){
- 	                      console.log(response);
- 	                      if(response.success == "1"){
- 	                          var comment_id = response.comment_id;
-                      	      $("#"+comment_id).closest("tr").fadeout();
- 	    	              }
- 	                  },
- 	                  error: function(response){
- 	    	              console.dir(response);
- 	    	              console.log(response.action);
- 	                      alert("Unexpected error! Try again.");
- 	    	          }
- 		        });
-  	        });
-  	  	    
-  	        
-  	    });
-  	    
-    </script>
-
         
     </head>
 	<body>
@@ -74,7 +17,7 @@ if($status == PHP_SESSION_NONE) { header("Location:Login") }
     
                 <div class="col-md-12">
                     <hr>
-                    <h3><strong>Student: <?php echo $_POST['sso']?>></strong></h3>
+                    <h3><strong>Student Name</strong></h3>
                     <hr>
                     <table class="table table-striped">
                         <thead>

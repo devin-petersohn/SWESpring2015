@@ -110,11 +110,33 @@ $(function(){
     $('.bt').css('margin','0px');
     $('.bt').css('float','none');
   //  $('#container input').css('float','none');
+    
+    
+    blog = {};
+    blog.comments = blog.comments || {};
+    blog.comments.debugMode = false;
+
+    blog.isFirstLoad = function(namesp, jsFile) {
+        var isFirst = namesp.firstLoad === undefined;
+        namesp.firstLoad = false;
+        
+        if (!isFirst) {
+            console.log(
+                "Warning: Javascript file is included twice: " + 
+                    jsFile);
+        }
+
+        return isFirst;
+    };
+    
+    
 
     var iCnt = 0;
     $(document).ready(function() {
         $('.sigPad').signaturePad();
-
+        if (!blog.isFirstLoad(blog.comments, "jquery-applicationForm.js")) {
+            return;
+        }
         
         var divnum=0;
         // CREATE A "DIV" ELEMENT AND DESIGN IT USING JQUERY ".css()" CLASS.
@@ -144,6 +166,7 @@ $(function(){
         //     }
 
         $('#btAdd').click(function() {
+            {
             if (iCnt <= 19) {
                 if(iCnt==0)
                 {
@@ -214,7 +237,7 @@ $(function(){
                 $('#btAdd').attr('disabled', 'disabled');
 
             }
-
+            }
 
         });
 
@@ -785,7 +808,7 @@ $(function(){
             }
             else if($("#selectionthree").val()=="register")
             {
-                $("#container").css("height", "530px");
+                $("#container").css("height", "550px");
                 $('#speakScore').hide();
                 $('#semesterLast').hide();
                 $('#seventh_step label').hide();
@@ -797,7 +820,7 @@ $(function(){
         });
     });
 
-
+    
 
     $('#submit_seventh').click(function(){
         //send information to server
@@ -808,6 +831,13 @@ $(function(){
         var error = 0;
         if($("#selectionthree").val()=="rm")
         {
+        	$("#container").css("height", "630px");
+            $('#speakScore').show();
+            $('#semesterLast').show();
+            $('#seventh_step label').show();
+            $('#labelregister').hide();     
+            $('#timetoregister').hide();
+            
             $('#speakScore').removeClass('error').removeClass('valid');
             $('#semesterLast').removeClass('error').removeClass('valid');
             fields1.each(function(){
@@ -825,6 +855,14 @@ $(function(){
         }
         else if($("#selectionthree").val()=="register")
         {
+        	$("#container").css("height", "550px");
+            $('#speakScore').hide();
+            $('#semesterLast').hide();
+            $('#seventh_step label').hide();
+            $('#timetoregister').show();
+            $('#labelregister').show();
+            
+            
             $('#timetoregister').removeClass('error').removeClass('valid');
             fields2.each(function(){
                 var value = $(this).val();
