@@ -20,11 +20,11 @@ function db_connect() {
     //pg_execute($dbconn, "addition", array(htmlspecialchars($rank)));
 //}
 
-function offerPosition($dbconn, $applicant, $course, $section)
-{
-    pg_prepare($dbconn, "position", "INSERT INTO applicant_offer_received VALUES($1, $2, $3)");
-    pg_execute($dbconn, "position", array($applicant, $course, $section));
-}
+//function offerPosition($dbconn, $applicant, $course, $section)
+//{
+  //  pg_prepare($dbconn, "position", "INSERT INTO applicant_offer_received VALUES($1, $2, $3)");
+    //pg_execute($dbconn, "position", array($applicant, $course, $section));
+//}
 
 function updateOfferStatus($dbconn, $applicant, $course, $section, $didAccept)
 {
