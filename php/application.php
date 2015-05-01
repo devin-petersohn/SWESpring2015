@@ -33,7 +33,7 @@
 		
 	}
 
-	if( $_POST['ID'] && $_POST['selectionmajor'] && $_POST['advisorname'] && $_POST['email'] && $_POST['masterphd']&& $_POST['selection']){
+	if( $_POST['ID'] && $_POST['selectionmajor'] && $_POST['advisorname'] && $_POST['email'] && $_POST['masterphd'] && $_POST['selection']){
 		pg_prepare($db, "q5", 'UPDATE Applicant SET id = $1, email = $2 WHERE sso = $3;');
 		pg_execute($db, "q5", array($_POST['ID'], $_POST['email'], $sso));
 		#pg_query($db, "UPDATE Applicant SET id = '". $_POST['ID']."', email = '". $_POST['email']. "' WHERE sso = '".$sso."';");
@@ -60,20 +60,35 @@
 		#	VALUES ('".$sso."', '". $_POST['currCourses'] ."');");
 	}
 
-	if( $_POST['precourse'] && $_POST['courseLike'] && $_POST['otherPlace']){
-		#need to fix semester taught
+	if( $_POST['iCnt'] && $_POST['courseLike'] && $_POST['grade'] && $_POST['precourse'] && $_POST['otherPlace']) {
+		$wish_courses = $_POST['courseLike'];
+		$grades = $_POST['grade'];
+
 		pg_prepare($db, "q10", 'INSERT INTO applicant_prev_taught_courses (sso, course_id, semester_taught) 
 			VALUES ($1, $2, $3;');
-		pg_execute($db, "q10", array($sso, $_POST['courseLike'], $_POST['grade']));
+		pg_execute($db, "q10", array($sso, $_POST['precourse']));
+		
+		pg_prepare($db, "q11", 'INSERT INTO applicant_other_workpalces (sso, workplace) VALUES ($1, $2)');
+		pg_execute($db, "q11", array($sso, $_POST['otherPlace']));
+		//pg_query($db, "INSERT INTO applicant_other_workpalces (sso, workplace) 
+		//	VALUES ('". $sso."', '". $_POST['otherPlace'] ."');");
+
+		for($i=0;$i<$_POST['iCnt'];$i++){
+			pg_prepare($db, "q12", 'INSERT INTO applicant_wish_course (sso, course_id, grade_received) VALUES ($1, $2, $3)');
+			pg_execute($db, "q12", array($sso, $wish_courses[$i], $grades[$i]));
+		}
+	}
+/*
+	if( $_POST['precourse'] && $_POST['courseLike'] && $_POST['otherPlace']){
+		#need to fix semester taught
 		#pg_query($db, "INSERT INTO applicant_prev_taught_courses (sso, course_id, semester_taught) 
 		#	VALUES ('".$sso."', '".$_POST['precourse']."', '". $_POST['precourse']."');");
 		#need to fix grade received
 		pg_query($db, "INSERT INTO applicant_wish_courses (sso, course_id, grade_received) 
 			VALUES ('".$sso."', '". $_POST['courseLike'] ."', '". "A+" ."');");
-		pg_query($db, "INSERT INTO applicant_other_workpalces (sso, workplace) 
-			VALUES ('". $sso."', '". $_POST['otherPlace'] ."');");
+		
 	}
-
+*/
 	if( $_POST['selectiontwo']){
 		if($_POST['selectiontwo'] == "rm"){
 			pg_query($db, "UPDATE Applicant SET gato_req_met = TRUE WHERE sso = '".$sso."';");
