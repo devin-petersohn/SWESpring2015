@@ -252,14 +252,14 @@
         <div class="panel-heading"><h4 style="text-align: left;">Assign Applicants</h4></div>
             <?php 
             if(isset($_SESSION['username'])){
-            $connectionString = "user=admin1xtduwt password=zVd4BSi4JdIJ host=127.13.165.130 dbname=ta_application";
-            $DBconn = pg_connect($connectionString);
-                if (!$DBconn) {
+            include 'php/functions.php';
+            $db = db_connect();
+                if (!$db) {
                 echo "Error.\n" . pg_last_error() . "\n";
                 die; // kill the app if no connection
                }
-               else 
-                $res = pg_query($DBconn, "SELECT * FROM applicant_offer_received WHERE offer_accpeted IS NULL");
+               else {
+                /*$res = pg_query($DBconn, "SELECT * FROM applicant_offer_received WHERE offer_accpeted IS NULL AND assigned_to_course IS NULL");
                ?>
                            <table class="table table-striped">
                                <thead>
@@ -269,11 +269,13 @@
                                    <?php 
                                    while (($offer = pg_fetch_assoc($res)) != false) {    
                                    ?>
-                                   <tr><td><? echo $offer['sso'];?></td><td><? echo $row['course_id']; ?></td></tr>
-                                   <?php } 
+                                   <tr><td><? echo $offer['sso'];?></td><td><? echo $offer['course_id']; ?></td></tr>
+                                   <?php } */
+                                       echo "connection works.";
+                } 
             }
             else {
-                echo '<font color="red">' . "Please login to see the courses you are teaching this semester." . '</font><br>';
+                echo '<font color="red">' . "There are no currently no applicants that need to be assigned." . '</font><br>';
             }
                                    ?>
                                </tbody>
