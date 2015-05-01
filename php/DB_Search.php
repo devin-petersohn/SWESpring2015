@@ -3,10 +3,6 @@ function search($dbconn, $string, $type)
 {
     $returnResults = array();
 
-//temp test for encryption
-include "test2.php"
-
-
     if(strcmp($type, "pawprint") == 0)
     {
         $test = strtok($string, " \n");
