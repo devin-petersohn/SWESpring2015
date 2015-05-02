@@ -16,7 +16,7 @@ if($conn) {
                 VALUES ('.$sso.','. $course_id.','. $instructor_sso.','. $comment.')
                ';*/
     
-    pg_query($conn,"INSERT INTO applicant_comments (sso,course_id,dates_taught,comment) VALUES ('". $sso ."','". $course_id ."','". $dates_taught . "','". $instructor_sso ."','". $comment ."');");
+    pg_query($conn,"INSERT INTO applicant_comments (sso,course_id,dates_taught,instructor_sso,comment) VALUES ('". $sso ."','". $course_id ."','". $dates_taught . "','". $instructor_sso ."','". $comment ."');");
     
     $arr = array(
             "success" => "1",
