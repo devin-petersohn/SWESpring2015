@@ -54,7 +54,7 @@ input[type="submit"]:focus, input[type="button"]:focus { outline : none; }
     }
     
     #container table {
-        margin: 20px 40px;
+        margin: 0px;
         font-size: 14px;
         font-weight: bold;
     }
