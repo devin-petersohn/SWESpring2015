@@ -1,4 +1,3 @@
-<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -9,6 +8,32 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/prof_styles.css')
     ?>
+    
+    <script>
+        $(document).ready(function(){
+  	        $("#add").click(function(){
+    	          $.ajax({
+    	        	  type: "POST",
+    	              url: "../../../../add_comment.php",
+    	              data: {sso:$("#stu_sso").val(),course_id:$("#course").val(),dates_taught:$("#dateTaught").val(),stu_comment:$("#comment").val()},
+	                  dataType: "json",
+	                  success: function(response){
+		                  console.log(response);
+	                      if(response.success == "1"){
+	                          $(".addhere").append("<tr><td>"+response.course_id+"</td><td>"+response.instructor_sso+"</td><td>"+response.comment+"</td></tr>");
+	                          
+			              }
+		              },
+		              error: function(response){
+			              console.dir(response);
+		                  alert("Unexpected error! Try again.");
+			          }
+        	      });
+  	        });
+  	        
+  	  });
+  	    
+    </script>
         
     </head>
 	<body>
@@ -19,7 +44,7 @@
                     <hr>
                     <h3><strong>Student Name</strong></h3>
                     <hr>
-                    <table class="table table-striped">
+                    <table class="table table-striped addhere">
                         <thead>
                           <tr><th>Course</th><th>Instructor</th><th>Comments</th></tr>
                         </thead>
@@ -37,15 +62,9 @@
                                 //php script to grab all comments for a particular sso/ student
                                 require 'php/functions.php';
                                 $conn = db_connect();
-                                //$sso = $_POST['sso'];
-                               // if ($_POST['sso']){
-                               //     $sso = $_POST['sso'];
-                               // }
-                               // else {
-                                $sso = $_SESSION['stu_sso'];
-                               // }
+                                $sso = $_POST['sso'];
                                 echo $sso;
-                                $qry = 'SELECT comment, instructor_sso, course_id 
+                                $qry = 'SELECT comment, instructor_sso, course_id
                                   FROM applicant_comments
                                   WHERE (sso like $1)
                                  ';
@@ -54,7 +73,7 @@
                                 //fields for printing:  Author, comment, Date, course || DB values:  instructor_sso, comment
                                 if($result) {
                                     while($row =  pg_fetch_array($result, null, PGSQL_ASSOC)) {?>
-                                        <tr><td><?echo $row[course_id]?></td><td><?echo $row['instructor_sso']?></td><td><?echo $row['comment']?></td></tr> <?
+                                        <tr><td><?echo $row['course_id']?></td><td><?echo $row['instructor_sso']?></td><td><?echo $row['comment']?></td></tr> <?
                                     }
                                 }
                             ?>
@@ -65,54 +84,29 @@
             </div>   <!-- end row -->
                   
             <hr> 
-            <?php 
-            if(isset($_POST['add_comment'])) {
-                require 'php/functions.php';
-                $conn = db_connect();
-                if($conn) {
-                    //$sso = $_POST['stu_sso'];
-                    $sso = $_SESSION['stu_sso'];
-                    //echo $sso;
-                    $course_id = $_POST['course_id'];
-                    //$dates_taught = $_POST['dates-taught'];
-                    $instructor_sso = $_SESSION['username'];
-                    $comment = $_POST['stu_comment'];
-                
-                    /* $qry = 'INSERT INTO applicant_comments (sso, course_id, dates_taught, instructor_sso, comment)
-                     VALUES ('.$sso.','. $course_id.','. $dates_taught.','. $instructor_sso.','. $comment.')
-                    '; */
-                    $qry = 'INSERT INTO applicant_comments (sso, course_id, instructor_sso, comment)
-                    VALUES ($1, $2, $3, $4)
-                    ';
-                
-                    pg_prepare($conn, "add_comment", $qry);
-                    if(pg_execute($conn, "add_comment", array($sso, $course_id, $instructor_sso, $comment))) {
-                        echo "Comment added.\n";     
-                    }
-                    else {
-                        echo "Insert Failed <br />";
-                    }
-                }
-                
-            }
-            
-            ?>
             <div class="row"> 
                 <h4><strong>Add Comments</strong></h4>
-                <div class="well" style="height: 225px; width:900px">
-                <form role="form" style="margin-top:20px" action="#" method="POST">
-                    <input type="hidden" name="stu_sso" value="<?php echo $_POST['sso']?>">
+                <div class="well" style="height: 340px; width:900px">
+                <form role="form" style="margin-top:20px" id="addcomments" >
+                    <input type="hidden" id="stu_sso" name="sso" value="<?php echo $_POST['sso']?>">
                     <div class="col-md-8">
                         <label for="course_id">Course:</label>
-                        <input type="text" name="course_id">
+                        <input type="text" id="course" name="course_id">
                     </div>   
+                    <br>
+                    <br>
+                    <br>
+                     <div class="col-md-8">
+                        <label for="date_taught">Date Taught:</label>
+                        <input type="text" id="dateTaught" name="dates_taught">
+                    </div> 
                     <br>
                     <br>
                     <br>
                     <div class="col-md-8">
                         <label for="comment">Comment:</label>
-                            <textarea class="form-control" name="stu_comment" rows="5" id="comment"></textarea>
-                        <input type="submit" name="add_comment" value="Add Comment" >
+                            <textarea class="form-control" name="stu_comment" rows="5" id="comment" ></textarea>
+                        <button type="button" id="add">Add Comment</button>
                     </div>
                 </form>
                 </div>
