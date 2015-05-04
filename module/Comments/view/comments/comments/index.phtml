@@ -44,7 +44,7 @@
                                // else {
                                 $sso = $_SESSION['stu_sso'];
                                // }
-                                echo $sso;
+                                //echo $sso;
                                 $qry = 'SELECT comment, instructor_sso, course_id 
                                   FROM applicant_comments
                                   WHERE (sso like $1)
@@ -54,7 +54,7 @@
                                 //fields for printing:  Author, comment, Date, course || DB values:  instructor_sso, comment
                                 if($result) {
                                     while($row =  pg_fetch_array($result, null, PGSQL_ASSOC)) {?>
-                                        <tr><td><?echo $row[course_id]?></td><td><?echo $row['instructor_sso']?></td><td><?echo $row['comment']?></td></tr> <?
+                                        <tr><td><?echo $row['course_id']?></td><td><?echo $row['instructor_sso']?></td><td><?echo $row['comment']?></td></tr> <?
                                     }
                                 }
                             ?>
