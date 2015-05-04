@@ -111,63 +111,66 @@ $(function(){
     $('.bt').css('float','none');
   //  $('#container input').css('float','none');
 
-
+    var iCnt = 0;
     $(document).ready(function() {
         $('.sigPad').signaturePad();
 
-        var iCnt = 0;
+        
         var divnum=0;
         // CREATE A "DIV" ELEMENT AND DESIGN IT USING JQUERY ".css()" CLASS.
         if(!$('#container_curr').length)
-        	{
-		        var container = $(document.createElement('div')).css({
-		            padding: '5px', margin: '20px', width: '80px',
-		            borderTopColor: '#999', borderBottomColor: '#999',
-		            borderLeftColor: '#999', borderRightColor: '#999'
-		        });
-		        $(container).attr('id','container_curr');
-		     
-        
-        	
-        console.log("div number is"+ divnum);
-        divnum++;
-        
-        if (iCnt <= 19) {
-
-                iCnt = iCnt + 1;
-
-                // ADD TEXTBOX.
-                //<select name="selection" id="selection" value="selection" >
-                    // <option value="TA">TA (grad student)</option>
-                    // <option value="PLA">PLA (undergrad student)!</option>
-      
-                    // </select>
-                console.log("the count is "+ iCnt);
-                $(container).append('<select name="courseLike'+iCnt+'" id="courseLike'+iCnt+'" value="courseLike'+iCnt+'" > '+'<option value="default">Choose the current courses..</option>'+'</select>');
-
-                $(container).append('<select name="grade_course'+iCnt+'" id="grade_course'+iCnt+'" value="grade_course'+iCnt+'" > '+'<option value="default">Choose your GPA..</option>'+'<option value="A">A</option>'+'<option value="B">B</option>'+'<option value="C">C</option>'+'<option value="D">D</option>'+'</select>');
-
-
-                if (iCnt == 1) {        // SHOW SUBMIT BUTTON IF ATLEAST "1" ELEMENT HAS BEEN CREATED.
-
-                    var divSubmit = $(document.createElement('div'));
-
-                }
-
-                $('#btRemove').after(container, divSubmit);   // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
-            }
-            else {      // AFTER REACHING THE SPECIFIED LIMIT, DISABLE THE "ADD" BUTTON. (20 IS THE LIMIT WE HAVE SET)
+            {
                 
-                $(container).append('<label>Reached the limit</label>'); 
-                $('#btAdd').attr('class', 'bt-disable'); 
-                $('#btAdd').attr('disabled', 'disabled');
+                
 
-            }
+        // ADD TEXTBOX.
+        //<select name="selection" id="selection" value="selection" >
+            // <option value="TA">TA (grad student)</option>
+            // <option value="PLA">PLA (undergrad student)!</option>
+
+            // </select>
+        
+        // $(container).append('<select name="grade_course'+iCnt+'" id="grade_course'+iCnt+'" value="grade_course'+iCnt+'" > '+'<option value="default">Choose your GPA..</option>'+'<option value="A">A</option>'+'<option value="B">B</option>'+'<option value="C">C</option>'+'<option value="D">D</option>'+'</select>');
+
+
+
+        // $('#btRemove').after(container, divSubmit);   // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
+        // else {      // AFTER REACHING THE SPECIFIED LIMIT, DISABLE THE "ADD" BUTTON. (20 IS THE LIMIT WE HAVE SET)
+                
+        //         $(container).append('<label>Reached the limit</label>'); 
+        //         $('#btAdd').attr('class', 'bt-disable'); 
+        //         $('#btAdd').attr('disabled', 'disabled');
+
+        //     }
 
         $('#btAdd').click(function() {
             if (iCnt <= 19) {
+                if(iCnt==0)
+                {
+                    $('#btAdd').val("Add a Course");
+                }
+                if(divnum==0)
+                {
+                    var container=$(document.createElement('div'));
+                    $(container).attr('id','container_curr');
+                    divnum++;
+                }
+
+                if(iCnt==0)
+                    {$(container).append('<table><tbody id="myTable"></tbody></table>');}
+
 
                 iCnt = iCnt + 1;
+                // $.ajax({
+                // type: "POST",
+                // url: "gerCurrentCourses.php",
+                // data: {
+                //     iCnt: iCnt
+                // },
+                // success: function(data){
+                //     $(container).append(data);   
+                // }
+                // });
 
                 // ADD TEXTBOX.
                 //<select name="selection" id="selection" value="selection" >
@@ -175,23 +178,34 @@ $(function(){
                     // <option value="PLA">PLA (undergrad student)!</option>
       
                     // </select>
-                $(container).append('<select name="courseLike'+iCnt+'" id="courseLike'+iCnt+'" value="courseLike'+iCnt+'" > '+'<option value="default">Choose the current courses..</option>'+'</select>');
+                $('#myTable').css('margin','0px');
+                $.ajax({
+                type: "POST",
+                url: "../../getCurrentCourses.php",
+                data: {
+                    iCnt: iCnt
+                },
+                success: function(data){
+                    $('#myTable').append('<tr id="tr'+iCnt+'">'+'<td>'+data+'</td><td><select name="grade_course'+iCnt+'" id="grade_course'+iCnt+'" value="grade_course'+iCnt+'" > '+'<option value="default">Choose your GPA..</option>'+'<option value="A">A</option>'+'<option value="B">B</option>'+'<option value="C">C</option>'+'<option value="D">D</option>'+'</select></td></tr>');
+                }
+                });console.log("icnt="+iCnt);
+                // $(container).append('<select name="courseLike'+iCnt+'" id="courseLike'+iCnt+'" value="courseLike'+iCnt+'" > '+'<option value="default">Choose the current courses..</option>'+'</select>');
 
-                $(container).append('<select name="grade_course'+iCnt+'" id="grade_course'+iCnt+'" value="grade_course'+iCnt+'" > '+'<option value="default">Choose your GPA..</option>'+'<option value="A">A</option>'+'<option value="B">B</option>'+'<option value="C">C</option>'+'<option value="D">D</option>'+'</select>');
+                // $(container).append('<select name="grade_course'+iCnt+'" id="grade_course'+iCnt+'" value="grade_course'+iCnt+'" > '+'<option value="default">Choose your GPA..</option>'+'<option value="A">A</option>'+'<option value="B">B</option>'+'<option value="C">C</option>'+'<option value="D">D</option>'+'</select>');
 //                console.log("the count is "+ iCnt);
 //                
 
-
-                if (iCnt == 1) {        // SHOW SUBMIT BUTTON IF ATLEAST "1" ELEMENT HAS BEEN CREATED.
-
-                    var divSubmit = $(document.createElement('div'));
-
-                }
                 $height=$('#container').height();
                 $height+=150;
                 $("#container").css("height", $height);
 
-                $('#btRemove').after(container, divSubmit);   // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
+                if (iCnt == 1) {        // SHOW SUBMIT BUTTON IF ATLEAST "1" ELEMENT HAS BEEN CREATED.
+
+                    var divSubmit = $(document.createElement('div'));
+           
+                }
+
+                $('#buttontable').after(divSubmit,container);  // ADD BOTH THE DIV ELEMENTS TO THE "main" CONTAINER.
             }
             else {      // AFTER REACHING THE SPECIFIED LIMIT, DISABLE THE "ADD" BUTTON. (20 IS THE LIMIT WE HAVE SET)
                 
@@ -200,14 +214,14 @@ $(function(){
                 $('#btAdd').attr('disabled', 'disabled');
 
             }
+
+
         });
 
         $('#btRemove').click(function() {   // REMOVE ELEMENTS ONE PER CLICK.
             console.log(iCnt);
-            if (iCnt != 0) { 
-                $('#courseLike' + iCnt).remove();
-
-                $('#grade_course' + iCnt).remove(); 
+            if (iCnt != 1) { 
+                $('#tr'+iCnt).remove(); 
 
                 $height=$('#container').height();
                 $height-=150;
@@ -216,17 +230,15 @@ $(function(){
                  iCnt = iCnt - 1;
              }
         
-            if (iCnt == 0) { $(container).empty(); 
+            if (iCnt == 1) { 
         
-                $(container).remove(); 
-                $('#btSubmit').remove(); 
                 $('#btAdd').removeAttr('disabled'); 
                 $('#btAdd').attr('class', 'bt') 
 
             }
         });
         
-        	}
+            }
 
         
     });
@@ -254,7 +266,7 @@ $(function(){
     
     
     $('#progress_text').html('0% Complete');
-     $("#container").css("height", "540px");
+     $("#container").css("height", "440px");
     $("#container label").css("line-height", "27px");
     
     //first_step
@@ -578,12 +590,24 @@ $(function(){
                 $(this).addClass('valid');
             }
         });
+        var i=0;
+        var courseLikearr=[];
+        var gradearr=[];
+        
+        for(i=2;i<=iCnt;i++)
+        {
+            courseLikearr.push($('#'+'courseLike'+i).val());
 
+
+            gradearr.push($('#'+'grade_course'+i).val());
+        }
         if(!error) {
             $.post("../../application.php",
                     {
                         precourse: $("#precourse").val(),
-                        courseLike: $("#courseLike").val(),
+
+                        courseLike: courseLikearr,
+                        grade : gradearr,
                         otherPlace: $("#otherPlace").val()
                     },
                     function(data){

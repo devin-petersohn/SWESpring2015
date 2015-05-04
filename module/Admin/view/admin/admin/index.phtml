@@ -1,3 +1,12 @@
+<?php 
+$status = session_status();
+if($status == PHP_SESSION_NONE){
+    //There is no active session
+    session_start();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -257,19 +266,20 @@
                 die; // kill the app if no connection
                }
                else {
-                /*$res = pg_query($DBconn, "SELECT * FROM applicant_offer_received WHERE offer_accpeted IS NULL AND assigned_to_course IS NULL");
+                $res = pg_query($db, "SELECT R.sso, R.course_id, W.grade_received FROM applicant_offer_received R, applicant_wish_course W WHERE R.sso = W.sso AND R.course_id = W.course_id AND R.offer_accepted = TRUE AND R.assigned_to_course IS NULL;");
+                
                ?>
                            <table class="table table-striped">
                                <thead>
-                                   <tr><th>SSO</th><th>Course</th></tr>
+                                   <tr><th>SSO</th><th>Course</th><th>Grade Received</th><th>GPA</th><th>Full Application</th><th>Accept Offer</th><th>Reject Offer</th></tr>
                                </thead>
                                <tbody>
                                    <?php 
-                                   while (($offer = pg_fetch_assoc($res)) != false) {    
-                                   ?>
-                                   <tr><td><? echo $offer['sso'];?></td><td><? echo $offer['course_id']; ?></td></tr>
-                                   <?php } */
-                                       echo "connection works.";
+                                   while (($offer = pg_fetch_assoc($res))) {    
+                                   echo "<tr><td>".$offer['sso']."</td><td>".$offer['course_id']."</td><td>".$offer['grade_received']."</td><td> blank </td><td> blank </td><td><button type='submit' class='btn btn-primary' name='acceptOffer'>Accept</button></td><td><button type='submit' class='btn btn-danger' name='rejectOffer'>Reject</button></td></tr>";
+                                   
+                                   } 
+                                       
                 } 
             }
             else {

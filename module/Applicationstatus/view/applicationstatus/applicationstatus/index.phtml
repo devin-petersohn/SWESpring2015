@@ -1,9 +1,17 @@
+<?php 
+$status = session_status();
+if($status == PHP_SESSION_NONE){
+    //There is no active session
+    session_start();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
-		<title>Student Page</title>
+		<title>Application Status</title>
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     </head>
@@ -66,8 +74,52 @@
     
     <div id="bground">
     <div class="container">
+    <?php 
+    include 'php/window.php';
+    include 'php/functions.php';
+    $db = db_connect();
+    $window = searchForWindow($db);
+    if(empty($window)){
+        echo "no time window";
+    }
+    elseif (strcmp($window, "apply") == 0){
+        if(isset($_POST['username'])){
+            $getOffer = pg_query($db, "SELECT * FROM applicant_offer_received WHERE sso = '".$_POST['username']."' AND offer_accepted IS NULL AND assigned_to_course IS NULL");
+            while (($row = pg_fetch_assoc($getOffer)) != false){
+                echo 'You have been selected as an assistant for'. $row['course_id'];
+                '<form action="" method=POST><button type="submit" class="btn btn-primary" name="acceptOffer">Accept</button><button type="submit" class="btn btn-danger" name="rejectOffer">Reject</button></form>'; 
+            }
+        }
+    
+    elseif (strcmp($window, "selection") == 0){
+        echo "in offer window";
+    }
+    elseif (strcmp($window, "accept") == 0){
+        echo "in assign TA window";
+    }
+    
+    }
+    
+    
+    
+    ?>
+    
         <div id="application_time"></div>
+        
         <div id="offer_time"></div>
-        <div id="notice_tiem"></div>
+        <div id="notice_time"></div>
     </div>
     </div>
+    
+    
+    <footer class="text-center"> Copyright &copy; Software Engineering Group H, Spring 201</footer>
+
+
+
+
+  
+	<!-- script references 
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>-->
+	</body>
+</html>
