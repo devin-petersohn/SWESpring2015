@@ -73,7 +73,7 @@ if($status == PHP_SESSION_NONE){
     </nav>
     
     <div id="bground">
-    <div class="container">
+    <div class="container" style="height: 400px; margin-top:100px;">
     <?php 
     include 'php/window.php';
     include 'php/functions.php';
@@ -82,26 +82,60 @@ if($status == PHP_SESSION_NONE){
     if(empty($window)){
         echo "no time window";
     }
+    
     elseif (strcmp($window, "apply") == 0){
-        if(isset($_POST['username'])){
-            $getOffer = pg_query($db, "SELECT * FROM applicant_offer_received WHERE sso = '".$_POST['username']."' AND offer_accepted IS NULL AND assigned_to_course IS NULL");
-            while (($row = pg_fetch_assoc($getOffer)) != false){
-                echo 'You have been selected as an assistant for'. $row['course_id'];
-                '<form action="" method=POST><button type="submit" class="btn btn-primary" name="acceptOffer">Accept</button><button type="submit" class="btn btn-danger" name="rejectOffer">Reject</button></form>'; 
+        /*if(isset($_SESSION['username'])){
+            $appSubmitted = pg_query($db, "SELECT app_submitted FROM applicant WHERE sso = '".$_SESSION['username']."'");
+            if(pg_fetch_array($appSubmitted)[0] == TRUE){
+               
+                echo "<div style='text-align:center; font-size:20pt; margin-top:100px;'>";
+                   echo "Your application has been submitted and is pending review.";
+                   echo "</div>";
+            }
+            else {
+                echo "<div style='text-align:center; font-size:20pt; margin-top:100px;'>";
+                echo "You have not yet submitted an application";
+                echo "</div>";
             }
         }
+    }*/
+        
+        if(isset($_SESSION['username'])){
+            $getOffer = pg_query($db, "SELECT * FROM applicant_offer_received WHERE sso = '".$_SESSION['username']."' AND offer_accepted IS NULL AND assigned_to_course IS NULL");
+            if($getOffer != NULL){
+                while (($row = pg_fetch_assoc($getOffer))){
+                    echo "<div style='text-align:center; font-size:20pt; margin-top:100px;'>";
+                    echo 'You have been selected as an assistant for '. $row['course_id'];
+                    echo "</div>";
+                    echo "<form action='' method=POST><button type='submit' class='btn btn-primary' name='acceptOffer' style='margin-left:475px; margin-right:20px; margin-top:20px;'>Accept</button><button type='submit' class='btn btn-danger'' name='rejectOffer' style='margin-top:20px;'>Reject</button></form>";
+                             
+                            }    
+                    }
+                    else {
+                        echo 'Your application under review.  Please check back later.';
+                    }
+                }
+            }
     
     elseif (strcmp($window, "selection") == 0){
-        echo "in offer window";
+     if(isset($_SESSION['username'])){
+            $getOffer = pg_query($db, "SELECT * FROM applicant_offer_received WHERE sso = '".$_SESSION['username']."' AND offer_accepted IS NULL AND assigned_to_course IS NULL");
+            if($getOffer != NULL){
+                while (($row = pg_fetch_assoc($getOffer))){
+                    echo 'You have been selected as an assistant for '. $row['course_id'];
+                    ?><form action="" method=POST><button type="submit" class="btn btn-primary" name="acceptOffer">Accept</button><button type="submit" class="btn btn-danger" name="rejectOffer">Reject</button></form>
+                    <?php 
+                    }    
+            }
+            else {
+                echo 'Your application under review.  Please check back later.';
+            }
+        }
     }
     elseif (strcmp($window, "accept") == 0){
         echo "in assign TA window";
     }
-    
-    }
-    
-    
-    
+  
     ?>
     
         <div id="application_time"></div>
