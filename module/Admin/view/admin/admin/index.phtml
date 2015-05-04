@@ -288,9 +288,13 @@ if($status == PHP_SESSION_NONE){
                            
           <?php 
           if(isset($_POST['acceptOffer'])){
-              include '../assignApplicant.php';
+              include 'php/assignApplicant.php';
               echo $_POST['sso'];
-          }                 
+          }
+          elseif(isset($_POST['rejectOffer'])) {
+              include 'php/rejectApplicant.php';
+              echo $_POST['sso'];
+          }            
                            ?>
             
             
