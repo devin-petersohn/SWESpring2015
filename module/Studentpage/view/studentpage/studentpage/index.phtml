@@ -63,32 +63,33 @@
         </div>
         <!-- /.container -->
     </nav>
-	<div id="bground">
+	<div id="bground" style="margin-top: 50px; border-radius:12px;">
     <div class="container">
-		<div class="startApp">
-			<form action="applicationform" method="POST"><button class="btn btn-info btn-large">Start Application Form Now</button></form>
-			
-			<form action="applicationstatus" method="POST">
-			<input type="hidden" name="username" value="<?echo $_SESSION['username']?>"></input>
-			<button class="btn btn-info btn-large appstatus">View Application Status</button>
-			</form>
-			
-		</div>
         <!-- First Featurette -->
         <div class="featurette1" >
 			
-            <h5 class="featurette-heading">Application Instruction</h5>
+            <h5 class="featurette-heading">Application Instructions</h5>
             <div class="lead">
-				<li>Begin filling the Application Form.</li>
-				<li>Submit before Deadline: Friday, April 3nd.</li>
-				<li>Need specific information like GPA.</li>
+				<li>Click the link below to being filling out the Application Form.</li>
+				<li>Only one application is needed per applicant</li>
+				<li>All applications must be submitted by the deadline - April 3, 2015</li>
+				<li>To view the status of your application, use the "View Application Status" button below.</li>
 			</div>
-        </div>
+			<div>
+			     <form action="applicationform" method="POST"><button class="btn btn-success">Start Application</button></form>
+			</div>
+			<div style="margin-top: -33px; margin-left:175px;">
+			     <form action="applicationstatus" method="POST">
+    			     <input type="hidden" name="username" value="<?echo $_SESSION['username']?>"></input>
+    			     <button class="btn btn-info">View Application Status</button>
+			     </form>	
+		    </div>
+    </div>
 
 
 
         <!-- Footer -->
-        <footer>
+        <footer style="text-align: center;">
             <div class="row">
                 <div class="col-lg-12">
                     <p>Copyright &copy; Software Engineering Group H, Spring 2015</p>
