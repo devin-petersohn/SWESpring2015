@@ -54,18 +54,16 @@ lname VARCHAR(50)
 
 CREATE TABLE Course (
 course_id VARCHAR(50) NOT NULL,
-section VARCHAR(50) NOT NULL,
 slots_available int,
-PRIMARY KEY (course_id, section)
+PRIMARY KEY (course_id)
 );
 
 
 CREATE TABLE instructor_teaches (
 instructor_sso VARCHAR(50) REFERENCES Instructor(sso) ON DELETE CASCADE,
 course_id VARCHAR(50),
-section VARCHAR(50),
-FOREIGN KEY (course_id, section) REFERENCES Course(course_id, section) ON DELETE CASCADE,
-PRIMARY KEY (instructor_sso, course_id, section)
+FOREIGN KEY (course_id) REFERENCES Course(course_id) ON DELETE CASCADE,
+PRIMARY KEY (instructor_sso, course_id)
 );
 
 
@@ -121,20 +119,19 @@ PRIMARY KEY (sso, course_id, section)
 CREATE TABLE applicant_wish_course (
 sso VARCHAR(50) REFERENCES Applicant(sso) ON DELETE CASCADE,
 course_id VARCHAR(50),
-section VARCHAR(50),
 grade_received CHAR(2),
-FOREIGN KEY (course_id, section) REFERENCES Course(course_id, section) ON DELETE CASCADE,
-PRIMARY KEY (sso,course_id, section)
+FOREIGN KEY (course_id) REFERENCES Course(course_id) ON DELETE CASCADE,
+PRIMARY KEY (sso,course_id)
 );
 
 
-CREATE TABLE appliant_comments (
+CREATE TABLE applicant_comments (
+comment_id SERIAL PRIMARY KEY,
 sso VARCHAR(50) REFERENCES Applicant(sso) ON DELETE CASCADE,
 course_id VARCHAR(50),
 dates_taught VARCHAR(50),
 instructor_sso VARCHAR(50) REFERENCES Instructor(sso) ON DELETE CASCADE,
-comment VARCHAR(3000),
-PRIMARY KEY (sso, course_id, dates_taught)
+comment VARCHAR(3000)
 );
 
 
@@ -171,8 +168,6 @@ endTime DATE
 
 CREATE TABLE applicant_course_assignments (
 sso VARCHAR(50) REFERENCES Applicant(sso) ON DELETE CASCADE,
-course_id VARCHAR(50),
-section VARCHAR(50),
-FOREIGN KEY (course_id, section) REFERENCES Course(course_id, section) ON DELETE CASCADE,
-PRIMARY KEY (sso, course_id, section)
+course_id VARCHAR(50) REFERENCES Course(course_id) ON DELETE CASCADE,
+PRIMARY KEY (sso, course_id)
 );
