@@ -11,19 +11,20 @@
     
     <script>
         $(document).ready(function(){
+            var data;
   	        $("#add").click(function(){
     	          ajax("add");
   	        });
-  	        $(".del").live("click",function(){
+  	        $(".del").click(function(){
   	        	ajax("delete",$(this).attr("id"));
   	  	    });
   	  	    
   	  	    function ajax(action, id){
     	          if(action == "add"){
-    	        	  var data = 'action='+ action + '&sso=' + $("#stu_sso").val() + '&course_id=' + $("#course").val() + '&dates_taught=' + $("#dateTaught").val() + '&stu_comment=' + $("#comment").val();
+    	        	  data = 'action='+ action + '&sso=' + $("#stu_sso").val() + '&course_id=' + $("#course").val() + '&dates_taught=' + $("#dateTaught").val() + '&stu_comment=' + $("#comment").val();
         	      }
     	          else if(action == "delete"){
-    	        	  var data = 'action=' + aciton + '&comment_id=' + id;
+    	        	  data = 'action=' + aciton + '&comment_id=' + id;
         	      }
   	  	  	}
 
@@ -36,7 +37,7 @@
                       console.log(response);
                       if(response.success == "1"){
                           if(action == "add"){
-                        	  $(".addhere").append("<tr><td>"+response.course_id+"</td><td>"+response.instructor_sso+"</td><td>"+response.comment+"</td><td><input type='button' id="+response.comment_id+" class='del'>delete</td></tr>");
+                        	  $(".addhere").append("<tr><td>"+response.course_id+"</td><td>"+response.instructor_sso+"</td><td>"+response.comment+"</td><td><input type='button' id="+response.comment_id+" class='del' value='delete'></td></tr>");
                           }
                           else if(action == "delete"){
                       	      var comment_id = response.comment_id;
@@ -84,7 +85,7 @@
                                 //fields for printing:  Author, comment, Date, course || DB values:  instructor_sso, comment
                                 if($result) {
                                     while($row =  pg_fetch_array($result, null, PGSQL_ASSOC)) {?>
-                                        <tr><td><?echo $row['course_id']?></td><td><?echo $row['instructor_sso']?></td><td><?echo $row['comment']?></td><td><input type="button" id="<?echo $row['comment_id']?>" class="btn btn_info del">delete</td></tr> <?
+                                        <tr><td><?echo $row['course_id']?></td><td><?echo $row['instructor_sso']?></td><td><?echo $row['comment']?></td><td><input type="button" id="<?echo $row['comment_id']?>" class="btn btn_info del" value="delete"></td></tr> <?
                                     }
                                 }
                             ?>
