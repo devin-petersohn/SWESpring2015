@@ -11,45 +11,50 @@
     
     <script>
         $(document).ready(function(){
-            var data;
   	        $("#add").click(function(){
-    	          ajax("add");
+ 	        	 $.ajax({
+ 	            	  type: "POST",
+ 	                  url: "../../../../add_comment.php",
+ 	                  data: {action:'add', sso:$("#stu_sso").val(),course_id:$("#course").val(),dates_taught:$("#dateTaught").val(),stu_comment:$("#comment").val()}, 
+ 	                  dataType: "json",
+ 	                  success: function(response){
+ 	                      console.log(response);
+ 	                      if(response.success == "1"){
+                        	  $(".addhere").append("<tr><td>"+response.course_id+"</td><td>"+response.instructor_sso+"</td><td>"+response.comment+"</td><td><input type='button' id="+response.comment_id+" class='del' value='delete'></td></tr>");
+                      	      console.log(response);
+ 	                          
+ 	    	              }
+ 	                  },
+ 	                  error: function(response){
+ 	    	              console.dir(response);
+ 	    	              console.log(response.action);
+ 	                      alert("Unexpected error! Try again.");
+ 	    	          }
+ 		        });
   	        });
   	        $(".del").click(function(){
-  	        	ajax("delete",$(this).attr("id"));
-  	  	    });
+  	  	         var row_id = $(this).attr("id");
+  	  	         console.log(row_id);
+ 	        	 $.ajax({
+ 	            	  type: "POST",
+ 	                  url: "../../../../add_comment.php",
+ 	                  data:  {action:'delete',comment_id: row_id,sso:$("#stu_sso").val(),course_id:$("#course").val(),dates_taught:$("#dateTaught").val(),stu_comment:$("#comment").val()}, 
+ 	                  dataType: "json",
+ 	                  success: function(response){
+ 	                      console.log(response);
+ 	                      if(response.success == "1"){
+ 	                          var comment_id = response.comment_id;
+                      	      $("#"+row_id).closest("tr").fadeout();
+ 	    	              }
+ 	                  },
+ 	                  error: function(response){
+ 	    	              console.dir(response);
+ 	    	              console.log(response.action);
+ 	                      alert("Unexpected error! Try again.");
+ 	    	          }
+ 		        });
+  	        });
   	  	    
-  	  	    function ajax(action, id){
-    	          if(action == "add"){
-    	        	  data = 'action='+ action + '&sso=' + $("#stu_sso").val() + '&course_id=' + $("#course").val() + '&dates_taught=' + $("#dateTaught").val() + '&stu_comment=' + $("#comment").val();
-        	      }
-    	          else if(action == "delete"){
-    	        	  data = 'action=' + aciton + '&comment_id=' + id;
-        	      }
-  	  	  	}
-
- 	        $.ajax({
-            	  type: "POST",
-                  url: "../../../../add_comment.php",
-                  data: data ,
-                  dataType: "json",
-                  success: function(response){
-                      console.log(response);
-                      if(response.success == "1"){
-                          if(action == "add"){
-                        	  $(".addhere").append("<tr><td>"+response.course_id+"</td><td>"+response.instructor_sso+"</td><td>"+response.comment+"</td><td><input type='button' id="+response.comment_id+" class='del' value='delete'></td></tr>");
-                          }
-                          else if(action == "delete"){
-                      	      var comment_id = response.comment_id;
-                      	      $("a[id='"+comment_id+"']").closest("tr").fadeout();
-                          }
-    	              }
-                  },
-                  error: function(response){
-    	              console.dir(response);
-                      alert("Unexpected error! Try again.");
-    	          }
-	        });
   	        
   	    });
   	    
