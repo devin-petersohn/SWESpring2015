@@ -4,7 +4,7 @@ include 'functions.php';
 
 function deleteInstructor($sso){
 	$db = db_connect();
-	pg_prepare($db, "q5", "DELETE FROM Instructor WHERE sso = $1");
+	pg_prepare($db, "q5", "DELETE FROM Users WHERE sso = $1");
 	pg_execute($db, "q5", array($sso));
 }
 
