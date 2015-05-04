@@ -808,7 +808,7 @@ $(function(){
             }
             else if($("#selectionthree").val()=="register")
             {
-                $("#container").css("height", "530px");
+                $("#container").css("height", "550px");
                 $('#speakScore').hide();
                 $('#semesterLast').hide();
                 $('#seventh_step label').hide();
@@ -820,7 +820,7 @@ $(function(){
         });
     });
 
-
+    
 
     $('#submit_seventh').click(function(){
         //send information to server
@@ -831,6 +831,13 @@ $(function(){
         var error = 0;
         if($("#selectionthree").val()=="rm")
         {
+        	$("#container").css("height", "630px");
+            $('#speakScore').show();
+            $('#semesterLast').show();
+            $('#seventh_step label').show();
+            $('#labelregister').hide();     
+            $('#timetoregister').hide();
+            
             $('#speakScore').removeClass('error').removeClass('valid');
             $('#semesterLast').removeClass('error').removeClass('valid');
             fields1.each(function(){
@@ -848,6 +855,14 @@ $(function(){
         }
         else if($("#selectionthree").val()=="register")
         {
+        	$("#container").css("height", "550px");
+            $('#speakScore').hide();
+            $('#semesterLast').hide();
+            $('#seventh_step label').hide();
+            $('#timetoregister').show();
+            $('#labelregister').show();
+            
+            
             $('#timetoregister').removeClass('error').removeClass('valid');
             fields2.each(function(){
                 var value = $(this).val();
