@@ -84,7 +84,7 @@
                                 //fields for printing:  Author, comment, Date, course || DB values:  instructor_sso, comment
                                 if($result) {
                                     while($row =  pg_fetch_array($result, null, PGSQL_ASSOC)) {?>
-                                        <tr><td><?echo $row['course_id']?></td><td><?echo $row['instructor_sso']?></td><td><?echo $row['comment']?></td><td><input type="button" id="comment_id" class="btn btn_info del">delete</td></tr> <?
+                                        <tr><td><?echo $row['course_id']?></td><td><?echo $row['instructor_sso']?></td><td><?echo $row['comment']?></td><td><input type="button" id="<?echo $row['comment_id']?>" class="btn btn_info del">delete</td></tr> <?
                                     }
                                 }
                             ?>
