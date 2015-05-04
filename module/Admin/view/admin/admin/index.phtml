@@ -272,7 +272,7 @@ if($status == PHP_SESSION_NONE){
                                <tbody>
                                    <?php 
                                    while (($offer = pg_fetch_assoc($res))) {    
-                                   echo "<tr><form action='' method='POST'><td><input type='hidden' name='sso' value='". $offer['sso']."'" .$offer['sso']."</td><td>".$offer['course_id']."</td><td>".$offer['grade_received']."</td><td> blank </td><td> blank </td>
+                                   echo "<tr><form action='' method='POST'><td><input type='hidden' name='sso' value='". $offer['sso']."'>" . $offer['sso'] ."</td><td>".$offer['course_id']."</td><td>".$offer['grade_received']."</td><td> blank </td><td> blank </td>
 		                                  <td><button type='submit' class='btn btn-primary' name='acceptOffer'>Accept</button></td>
 		                                  <td><button type='submit' class='btn btn-danger' name='rejectOffer'>Reject</button></td></form></tr>";
                                    } 
@@ -288,7 +288,7 @@ if($status == PHP_SESSION_NONE){
                            
           <?php 
           if(isset($_POST['acceptOffer'])){
-              include 'php/assignApplicant.php';
+              include '../assignApplicant.php';
               echo $_POST['sso'];
           }                 
                            ?>
