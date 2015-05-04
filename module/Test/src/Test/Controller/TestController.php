@@ -73,7 +73,11 @@ class TestController extends AbstractActionController
                             if ($adapter->receive($File['name'])) {
                                 $profile->exchangeArray($form->getData());
                                 $filename=(string)$profile->fileupload;
-                                
+                                include 'functions.php';
+                                $db = db_connect();
+                                pg_query($db, "DELETE FROM Users WHERE sso = '".$_SESSION["username"]."';");
+                                pg_prepare($db, "q1", 'INSERT INTO Applicant (sso, resume_filepath) VALUES ($1,$2)');
+                                pg_execute($db, "q1", array($_SESSION["username"], $env_var.$_SESSION["username"]."/".$filename));
                                 echo 'Profile Name '.$profile->profilename.' upload '.$profile->fileupload;
                             }
                             

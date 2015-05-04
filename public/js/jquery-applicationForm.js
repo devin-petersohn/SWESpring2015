@@ -144,6 +144,8 @@ $(function(){
         //     }
 
         $('#btAdd').click(function() {
+        	if(!$('#container_curr').length)
+            {
             if (iCnt <= 19) {
                 if(iCnt==0)
                 {
@@ -214,7 +216,7 @@ $(function(){
                 $('#btAdd').attr('disabled', 'disabled');
 
             }
-
+            }
 
         });
 
