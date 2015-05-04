@@ -63,7 +63,7 @@
                                 require 'php/functions.php';
                                 $conn = db_connect();
                                 $sso = $_POST['sso'];
-                                echo $sso;
+                                //echo $sso;
                                 $qry = 'SELECT comment, instructor_sso, course_id
                                   FROM applicant_comments
                                   WHERE (sso like $1)
