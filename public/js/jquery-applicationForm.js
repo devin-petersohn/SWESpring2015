@@ -110,11 +110,33 @@ $(function(){
     $('.bt').css('margin','0px');
     $('.bt').css('float','none');
   //  $('#container input').css('float','none');
+    
+    
+    blog = {};
+    blog.comments = blog.comments || {};
+    blog.comments.debugMode = false;
+
+    blog.isFirstLoad = function(namesp, jsFile) {
+        var isFirst = namesp.firstLoad === undefined;
+        namesp.firstLoad = false;
+        
+        if (!isFirst) {
+            console.log(
+                "Warning: Javascript file is included twice: " + 
+                    jsFile);
+        }
+
+        return isFirst;
+    };
+    
+    
 
     var iCnt = 0;
     $(document).ready(function() {
         $('.sigPad').signaturePad();
-
+        if (!blog.isFirstLoad(blog.comments, "jquery-applicationForm.js")) {
+            return;
+        }
         
         var divnum=0;
         // CREATE A "DIV" ELEMENT AND DESIGN IT USING JQUERY ".css()" CLASS.
@@ -144,7 +166,6 @@ $(function(){
         //     }
 
         $('#btAdd').click(function() {
-        	if(!$('#container_curr').length)
             {
             if (iCnt <= 19) {
                 if(iCnt==0)
