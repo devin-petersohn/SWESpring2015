@@ -20,35 +20,35 @@ session_start();
             
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="/swespring2015">Home</a>
-                    </li>
-                    <li>
-                        <a href="login">Login</a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-					<a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
-						<i class="glyphicon glyphicon-user"></i> 
+<!--             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> -->
+<!--                 <ul class="nav navbar-nav"> -->
+<!--                     <li> -->
+<!--                         <a href="/swespring2015">Home</a> -->
+<!--                     </li> -->
+<!--                     <li> -->
+<!--                         <a href="login">Login</a> -->
+<!--                     </li> -->
+<!--                 </ul> -->
+<!--                 <ul class="nav navbar-nav navbar-right"> -->
+<!-- 					<li class="dropdown"> -->
+<!-- 					<a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"> -->
+<!-- 						<i class="glyphicon glyphicon-user"></i>  -->
 						<?php 
-						if(isset($_SESSION['username'])){
-    						echo $_SESSION["username"];
-						}
-						else {
-						    echo "";
-						}
+// 						if(isset($_SESSION['username'])){
+//     						echo $_SESSION["username"];
+// 						}
+// 						else {
+// 						    echo "";
+// 						}
 						?> 
-						<span class="caret"></span></a>
-					<ul id="g-account-menu" class="dropdown-menu" role="menu">
-						<li><a href="#"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-					</ul>
-				</ul>
-				</ul>
-            </div>
+<!-- 						<span class="caret"></span></a> -->
+<!-- 					<ul id="g-account-menu" class="dropdown-menu" role="menu"> -->
+<!-- 						<li><a href="#"><i class="glyphicon glyphicon-lock"></i> Logout</a></li> -->
+<!-- 						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li> -->
+<!-- 					</ul> -->
+<!-- 				</ul> -->
+<!-- 				</ul> -->
+<!--             </div> -->
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
@@ -110,21 +110,21 @@ session_start();
         {
             
         }
-        echo "<br>YOU HAVE LOGGED IN!";
+       
         
     }
     
     function CheckLoginInDB($pawprint,$password)
     {
         
+        
         require "php/functions.php";
         $DBconn = db_connect();
         require "php/authentication.php";
         $results = authenticate($pawprint, $password, $DBconn);
-        echo "<br>" . $results['error'];
         if($results['error'] == 1)
         {
-            echo "<p>Incorrect username or password</p>";
+            echo "<p style='color:red; text-align:center;'>Incorrect username or password</p>";
             return false;
         }
         else if($results['error'] == 2)
@@ -135,22 +135,26 @@ session_start();
            echo $results['type'];
            if(strcmp($results['type'], "instructor") == 0){
                $_SESSION['username'] = $pawprint;
+               $_SESSION['status']= "instructor";
                header('Location:professorpage');
                exit;
             }
             
             else if(strcmp($results['type'], "applicant") == 0){
                 $_SESSION['username'] = $pawprint;
+                $_SESSION['status']= "applicant";
                 header('Location:studentpage');
                 exit;
             }
             else if(strcmp($results['type'], "admin") == 0){
                 $_SESSION['username'] = $pawprint;
+                $_SESSION['status']= "admin";
                 header('Location:admin');
                 exit;
             }
             else if(strcmp($results['type'], "new") == 0){
                 $_SESSION['username'] = $pawprint;
+                $_SESSION['status']= "new";
                 header('Location:studentpage');
                 exit;
             }

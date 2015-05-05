@@ -29,41 +29,41 @@ if($status == PHP_SESSION_NONE) { header("Location:Login"); }
             
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="/swespring2015">Home</a>
-                    </li>
-                    <li>
-                        <a href="login">Login</a>
-                    </li>
-                    <li>
-                        <a href="applicationform">Application Form</a>
-                    </li>
-                    <li>
-                        <a href="studentpage">Student page</a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-					<a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
-						<i class="glyphicon glyphicon-user"></i> 
+<!--             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> -->
+<!--                 <ul class="nav navbar-nav"> -->
+<!--                     <li> -->
+<!--                         <a href="/swespring2015">Home</a> -->
+<!--                     </li> -->
+<!--                     <li> -->
+<!--                         <a href="login">Login</a> -->
+<!--                     </li> -->
+<!--                     <li> -->
+<!--                         <a href="applicationform">Application Form</a> -->
+<!--                     </li> -->
+<!--                     <li> -->
+<!--                         <a href="studentpage">Student page</a> -->
+<!--                     </li> -->
+<!--                 </ul> -->
+<!--                 <ul class="nav navbar-nav navbar-right"> -->
+<!-- 					<li class="dropdown"> -->
+<!-- 					<a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"> -->
+<!-- 						<i class="glyphicon glyphicon-user"></i>  -->
 						<?php 
-						if(isset($_SESSION['username'])){
-    						echo $_SESSION["username"];
-						}
-						else {
-						    echo "";
-						}
+// 						if(isset($_SESSION['username'])){
+//     						echo $_SESSION["username"];
+// 						}
+// 						else {
+// 						    echo "";
+// 						}
 						?> 
-						<span class="caret"></span></a>
-					<ul id="g-account-menu" class="dropdown-menu" role="menu">
-						<li><a href="#"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-					</ul>
-				</ul>
-				</ul>
-            </div>
+<!-- 						<span class="caret"></span></a> -->
+<!-- 					<ul id="g-account-menu" class="dropdown-menu" role="menu"> -->
+<!-- 						<li><a href="#"><i class="glyphicon glyphicon-lock"></i> Logout</a></li> -->
+<!-- 						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li> -->
+<!-- 					</ul> -->
+<!-- 				</ul> -->
+<!-- 				</ul> -->
+<!--             </div> -->
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
