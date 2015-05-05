@@ -71,6 +71,7 @@ class TestController extends AbstractActionController
                             }
                             $adapter->setDestination($env_var.$_SESSION["username"]);
                             if ($adapter->receive($File['name'])) {
+                                $_SESSION['uploadComplete'] = $filename;
                                 $profile->exchangeArray($form->getData());
                                 $filename=(string)$profile->fileupload;
                                 include 'functions.php';
@@ -85,7 +86,6 @@ class TestController extends AbstractActionController
                         else{
                             $message = "You should upload pdf!";
                             echo "<script type='text/javascript'>alert('$message');</script>";
-                            header("Location:test");                            
                         }
                     }
                     
