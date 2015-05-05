@@ -2,7 +2,7 @@
 return array(
     // This should be an array of module namespaces used in the application.
     'modules' => array(
-        'Application','Applicationform','Homepage','Professorpage','Admin','Login','Studentpage','Testing','Test','Comments','Applicationstatus'
+        'Application','Applicationform','Homepage','Professorpage','Admin','Login','Studentpage','Test','Comments','Applicationstatus'
     ),
 
     // These are various options for the listeners attached to the ModuleManager
