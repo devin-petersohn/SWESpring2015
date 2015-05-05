@@ -1,6 +1,13 @@
 <?php 
 $status = session_status();
-if($status == PHP_SESSION_NONE){ header("Location:Login"); }
+if($status == PHP_SESSION_NONE){ header("Location:Login"); 
+$uploadComplete = empty($_SESSION['uploadComplete']) ? false : $_SESSION['uploadComplete'];
+
+if (!$uploadComplete) {
+    header("Location: test");
+    exit;
+}
+}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
