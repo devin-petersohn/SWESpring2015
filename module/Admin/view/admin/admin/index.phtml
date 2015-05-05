@@ -137,7 +137,7 @@ header("Location:Login");
       
   
               
-      <div class="panel panel-default" id="addcourse" style="width:40%; ">
+      <div class="panel panel-default" id="addcourse" style="width:40%; height:400px; ">
         <div class="panel-heading">
           <div class="panel-title">
             <i class="glyphicon glyphicon-wrench pull-right"></i>
@@ -163,7 +163,7 @@ header("Location:Login");
             </div>      
             
             <br>    
-            <div class="control-group">
+            <div class="control-group" style="padding-top:90px;>
               <div class="controls">
                 <button type="submit" class="btn btn-primary" name="addCourse">Add Course</button>
                 <button type="submit" class="btn btn-danger" name="delCourse">Delete Course</button>
@@ -175,11 +175,12 @@ header("Location:Login");
           include 'php/add_course.php';
           include 'php/delete_course.php';
           if(isset($_POST['addCourse'])){
-              addCourse($_POST['courseID'], $_POST['section'], $_POST['position']);
+              addCourse($_POST['courseID'], $_POST['position']);
           }
           if (isset($_POST['delCourse'])){
-              deleteCourse($_POST['courseID'], $_POST['section']);
+              deleteCourse($_POST['courseID']);
           }
+          
           ?>
           
           
