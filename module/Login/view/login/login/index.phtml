@@ -110,7 +110,7 @@ session_start();
         {
             
         }
-        echo "<br>YOU HAVE LOGGED IN!";
+       
         
     }
     
@@ -121,10 +121,9 @@ session_start();
         $DBconn = db_connect();
         require "php/authentication.php";
         $results = authenticate($pawprint, $password, $DBconn);
-        echo "<br>" . $results['error'];
         if($results['error'] == 1)
         {
-            echo "<p>Incorrect username or password</p>";
+            echo "<p style='color:red; text-align:center;'>Incorrect username or password</p>";
             return false;
         }
         else if($results['error'] == 2)
