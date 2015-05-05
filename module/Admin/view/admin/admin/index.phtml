@@ -47,7 +47,7 @@ if($status == PHP_SESSION_NONE){
       
   	</div><!-- /span-3 -->
     
-    <div class="col-md-12" style="margin-top: 40px;">
+    <div class="col-md-12" style="margin-top: 40px; width:95%; margin-left:auto; margin-right:auto;">
        <div class="well" style="height:300px;">
             <h3>Search for an Applicant</h3>
             <form id='search' action='' method='post' accept-charset='UTF-8'>
@@ -133,12 +133,11 @@ if($status == PHP_SESSION_NONE){
   
   
   <!-- lower section -->
-  <hr>            
+  <hr style="border-color: black; width:97%; margin-left:0px;">            
       
-  <div class="row">    
-    <div class="col-md-4">
+  
               
-      <div class="panel panel-default" id="addcourse">
+      <div class="panel panel-default" id="addcourse" style="width:40%; ">
         <div class="panel-heading">
           <div class="panel-title">
             <i class="glyphicon glyphicon-wrench pull-right"></i>
@@ -151,21 +150,15 @@ if($status == PHP_SESSION_NONE){
             <div class="control-group">
               <label>Course ID</label>
               <div class="controls">
-                <input type="text" class="form-control" name="courseID" placeholder="Enter Course ID (ex: CMP_SC 3050)">
+                <input type="text" class="form-control" name="courseID" placeholder="Enter Course ID (ex: CMP_SC 3050)" style="width: 400px;">
               </div>
-            </div>   
-            <br>
-            <div class="control-group">
-              <label>Course Section</label>
-              <div class="controls">
-                <input type="text" class="form-control" name="section" placeholder="Enter Course ID (ex: CMP_SC 3050)">
-              </div>
-            </div>
+            </div>  
+           
             <br>   
             <div class="control-group">
               <label>Positions Available</label>
               <div class="controls">
-                <input type="text" class="form-control" name="position" placeholder="Enter Number of Positions Available">
+                <input type="text" class="form-control" name="position" placeholder="Enter Number of Positions Available" style="width: 400px;">
               </div>
             </div>      
             
@@ -192,9 +185,8 @@ if($status == PHP_SESSION_NONE){
           
         </div><!--/panel content-->
       </div><!--/panel-->
-      <hr>
               
-      <div class="panel panel-default" id="deletecourse">
+      <div class="panel panel-default" id="deletecourse" style="width:40%; margin-left:57%; margin-top:-36%;" >
         <div class="panel-heading">
           <div class="panel-title">
             <i class="glyphicon glyphicon-wrench pull-right"></i>
@@ -207,21 +199,21 @@ if($status == PHP_SESSION_NONE){
             <div class="control-group">
               <label>Instructor SSO</label>
               <div class="controls">
-                <input type="text" class="form-control" name="sso" placeholder="Enter Instructor SSO">
+                <input type="text" class="form-control" name="sso" placeholder="Enter Instructor SSO" style="width: 400px;">
               </div>
             </div>
             <br>
             <div class="control-group">
               <label>Instructor First Name</label>
               <div class="controls">
-                <input type="text" class="form-control" name="fname" placeholder="Enter Instructor First Name">
+                <input type="text" class="form-control" name="fname" placeholder="Enter Instructor First Name" style="width: 400px;">
               </div>
             </div>
             <br>
             <div class="control-group">
               <label>Instructor Last Name</label>
               <div class="controls">
-                <input type="text" class="form-control" name="lname" placeholder="Enter Instructor Last Name">
+                <input type="text" class="form-control" name="lname" placeholder="Enter Instructor Last Name" style="width: 400px;">
               </div>
             </div>       
             <br>  
@@ -251,7 +243,9 @@ if($status == PHP_SESSION_NONE){
     </div><!--/col-->
   </div><!--/row-->
   
-  <div class="panel panel-default" style="margin-top: 100px; height:300px;">
+  <hr style="border-color: black; width:80%; margin-left:auto; margin-right:auto;">
+  
+  <div class="panel panel-default" style="margin-top: 70px; height:300px; width:80%; margin-left:auto; margin-right:auto;">
         <div class="panel-heading"><h4 style="text-align: left;">Assign Applicants</h4></div>
             <?php 
             if(isset($_SESSION['username'])){
@@ -272,7 +266,7 @@ if($status == PHP_SESSION_NONE){
                                <tbody>
                                    <?php 
                                    while (($offer = pg_fetch_assoc($res))) {    
-                                   echo "<tr><form action='' method='POST'><td><input type='hidden' name='sso' value='". $offer['sso']."'>" . $offer['sso'] ."</td><td>".$offer['course_id']."</td><td>".$offer['grade_received']."</td><td> blank </td><td> blank </td>
+                                   echo "<tr><form action='' method='POST'><td><input type='hidden' name='sso' value='". $offer['sso']."'>" . $offer['sso'] ."</td><td><input type='hidden' name='course' value='".$offer['course_id']."'>" . $offer['course_id'] . "</td><td>".$offer['grade_received']."</td><td> blank </td><td> blank </td>
 		                                  <td><button type='submit' class='btn btn-primary' name='acceptOffer'>Accept</button></td>
 		                                  <td><button type='submit' class='btn btn-danger' name='rejectOffer'>Reject</button></td></form></tr>";
                                    } 
@@ -289,7 +283,7 @@ if($status == PHP_SESSION_NONE){
           <?php 
           if(isset($_POST['acceptOffer'])){
               include 'php/assignApplicant.php';
-              echo $_POST['sso'];
+              assignApp($_POST['sso'], $_POST['course']);
           }
           elseif(isset($_POST['rejectOffer'])) {
               include 'php/rejectApplicant.php';
