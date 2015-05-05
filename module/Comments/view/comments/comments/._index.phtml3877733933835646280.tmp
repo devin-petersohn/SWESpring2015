@@ -1,0 +1,121 @@
+<?php session_start();?>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<title>Faculty Comments Page</title>
+		<meta name="generator" content="Bootply" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/prof_styles.css')
+    ?>
+        
+    </head>
+	<body>
+	   <div class="container">
+	       <div class="row">
+    
+                <div class="col-md-12">
+                    <hr>
+                    <h3><strong>Student Name</strong></h3>
+                    <hr>
+                    <table class="table table-striped">
+                        <thead>
+                          <tr><th>Course</th><th>Instructor</th><th>Comments</th></tr>
+                        </thead>
+                        <!--
+                        <tbody>
+                          <tr><td>CS4320</td><td>Grant Scott</td><td></td></tr>
+                          <tr><td>CS4320</td><td>Grant Scott</td><td></td></tr>
+                          <tr><td>CS4320</td><td>Grant Scott</td><td></td></tr>
+                          <tr><td>CS4820</td><td>Grant Scott</td><td></td></tr>
+                          <tr><td>CS4820</td><td>Grant Scott</td><td></td></tr>
+                        </tbody>
+                        -->
+                        <tbody>
+                            <?php  
+                                //php script to grab all comments for a particular sso/ student
+                                require 'php/functions.php';
+                                $conn = db_connect();
+                                //$sso = $_POST['sso'];
+                               // if ($_POST['sso']){
+                               //     $sso = $_POST['sso'];
+                               // }
+                               // else {
+                                $sso = $_SESSION['stu_sso'];
+                               // }
+                                //echo $sso;
+                                $qry = 'SELECT comment, instructor_sso, course_id 
+                                  FROM applicant_comments
+                                  WHERE (sso like $1)
+                                 ';
+                                $result = pg_prepare($conn, "comment_search", $qry);
+                                $result = pg_execute($conn, "comment_search", array($sso));
+                                //fields for printing:  Author, comment, Date, course || DB values:  instructor_sso, comment
+                                if($result) {
+                                    while($row =  pg_fetch_array($result, null, PGSQL_ASSOC)) {?>
+                                        <tr><td><?echo $row['course_id']?></td><td><?echo $row['instructor_sso']?></td><td><?echo $row['comment']?></td></tr> <?
+                                    }
+                                }
+                            ?>
+                        </tbody>
+                       
+                    </table>
+                </div>
+            </div>   <!-- end row -->
+                  
+            <hr> 
+            <?php 
+            if(isset($_POST['add_comment'])) {
+                require 'php/functions.php';
+                $conn = db_connect();
+                if($conn) {
+                    //$sso = $_POST['stu_sso'];
+                    $sso = $_SESSION['stu_sso'];
+                    //echo $sso;
+                    $course_id = $_POST['course_id'];
+                    //$dates_taught = $_POST['dates-taught'];
+                    $instructor_sso = $_SESSION['username'];
+                    $comment = $_POST['stu_comment'];
+                
+                    /* $qry = 'INSERT INTO applicant_comments (sso, course_id, dates_taught, instructor_sso, comment)
+                     VALUES ('.$sso.','. $course_id.','. $dates_taught.','. $instructor_sso.','. $comment.')
+                    '; */
+                    $qry = 'INSERT INTO applicant_comments (sso, course_id, instructor_sso, comment)
+                    VALUES ($1, $2, $3, $4)
+                    ';
+                
+                    pg_prepare($conn, "add_comment", $qry);
+                    if(pg_execute($conn, "add_comment", array($sso, $course_id, $instructor_sso, $comment))) {
+                        echo "Comment added.\n";     
+                    }
+                    else {
+                        echo "Insert Failed <br />";
+                    }
+                }
+                
+            }
+            
+            ?>
+            <div class="row"> 
+                <h4><strong>Add Comments</strong></h4>
+                <div class="well" style="height: 225px; width:900px">
+                <form role="form" style="margin-top:20px" action="#" method="POST">
+                    <input type="hidden" name="stu_sso" value="<?php echo $_POST['sso']?>">
+                    <div class="col-md-8">
+                        <label for="course_id">Course:</label>
+                        <input type="text" name="course_id">
+                    </div>   
+                    <br>
+                    <br>
+                    <br>
+                    <div class="col-md-8">
+                        <label for="comment">Comment:</label>
+                            <textarea class="form-control" name="stu_comment" rows="5" id="comment"></textarea>
+                        <input type="submit" name="add_comment" value="Add Comment" >
+                    </div>
+                </form>
+                </div>
+                
+            </div>          
+	   </div>

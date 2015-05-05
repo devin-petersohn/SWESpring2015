@@ -1,3 +1,15 @@
+<?php 
+$status = session_status();
+if($status == PHP_SESSION_NONE){ header("Location:Login"); 
+$uploadComplete = empty($_SESSION['uploadComplete']) ? false : $_SESSION['uploadComplete'];
+
+if (!$uploadComplete) {
+    header("Location: test");
+    exit;
+}
+}
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
@@ -36,7 +48,7 @@
 
                     <select name="selection" id="selection" value="selection" >
                     <option value="TA">TA (grad student)</option>
-                    <option value="PLA">PLA (undergrad student)!</option>
+                    <option value="PLA">PLA (undergrad student)</option>
       
                     </select>
                     
@@ -232,7 +244,6 @@
                     
                     
                     <br>
-                    <li class="note">Please return this form to 244 EBW along with a current resume!</li>
 
 
                  
@@ -266,9 +277,9 @@
                <!-- Had to changed sub1 to sub1, sub2, sub3: ZDC9PD -->
                      <input type="text" name="sub1" id="speakScore" value="speak score" />
                     <label for="speakScore">SPEAK/OPT score, if applicable</label>
-                    <p><input type="text" name="sub2" id="semesterLast" value="enter the semster" /></p>
+                    <p><input type="text" name="sub1" id="semesterLast" value="enter the semster" /></p>
                     <label for="semesterLast">Time of last test</label>
-                    <p><input type="text" name="sub3" id="timetoregister" value="enter the time" /></p>
+                    <p><input type="text" name="sub2" id="timetoregister" value="enter the time" /></p>
                     <label for="timetoregister" id="labelregister">Time to register</label>
                     
 

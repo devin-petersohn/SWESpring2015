@@ -1,5 +1,6 @@
 <?php
 //TODO: figure out conflicts with returning the array as is
+include "asserts.php";
 
 function authenticate($username, $password, $dbconn)
 { 

@@ -71,15 +71,21 @@ class TestController extends AbstractActionController
                             }
                             $adapter->setDestination($env_var.$_SESSION["username"]);
                             if ($adapter->receive($File['name'])) {
+                                $_SESSION['uploadComplete'] = $filename;
                                 $profile->exchangeArray($form->getData());
                                 $filename=(string)$profile->fileupload;
-                                
+                                include 'functions.php';
+                                $db = db_connect();
+                                pg_query($db, "DELETE FROM Users WHERE sso = '".$_SESSION["username"]."';");
+                                pg_prepare($db, "q1", 'INSERT INTO Applicant (sso, resume_filepath) VALUES ($1,$2)');
+                                pg_execute($db, "q1", array($_SESSION["username"], $env_var.$_SESSION["username"]."/".$filename));
                                 echo 'Profile Name '.$profile->profilename.' upload '.$profile->fileupload;
                             }
                             
                         }
                         else{
-                            echo "You should upload pdf!";
+                            $message = "You should upload pdf!";
+                            echo "<script type='text/javascript'>alert('$message');</script>";
                         }
                     }
                     

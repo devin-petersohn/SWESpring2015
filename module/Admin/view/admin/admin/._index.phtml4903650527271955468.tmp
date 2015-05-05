@@ -1,12 +1,3 @@
-<?php 
-$status = session_status();
-if($status == PHP_SESSION_NONE){
-    //There is no active session
-header("Location:Login");
-}
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -47,7 +38,7 @@ header("Location:Login");
       
   	</div><!-- /span-3 -->
     
-    <div class="col-md-12" style="margin-top: 40px; width:95%; margin-left:auto; margin-right:auto;">
+    <div class="col-md-12" style="margin-top: 40px;">
        <div class="well" style="height:300px;">
             <h3>Search for an Applicant</h3>
             <form id='search' action='' method='post' accept-charset='UTF-8'>
@@ -68,7 +59,7 @@ header("Location:Login");
               
                 if($arr != NULL){
              ?>
-                        
+                        <form action="" method="POST">
                            <table class="table table-striped">
                                 <thead>
                                   <tr><th>SSO</th><th>First Name</th><th>Last Name</th><th>GPA</th><th>E-mail</th><th>Ranking</th><th>Add/Change Rank</th></tr>
@@ -78,51 +69,31 @@ header("Location:Login");
                                 foreach ($arr as $t){
                                 $t = json_decode($t, TRUE);
                                 ?>
-
-                                  <tr><form action="" method="POST">
-                                    <td>
-                                        <input type="hidden" name="test" value="<? echo $t['sso']?>">
-                                            <? echo $t['sso'];?>
-                                   </td>
-                                   <td><? echo $t['fname']; ?>
-                                   </td>
-                                   <td><? echo $t['lname']; ?></td>
-                                   <td><? echo $t['gpa']; ?></td>
-                                   <td><? echo $t['email']; ?><td><? echo $t['ranking']; ?></td>
-                                   <td>
-                                   <input type="text" name="rank" placeholder="Add Rank">
-                                   <input type="submit" name="submit2" value="Submit">
-                                   </td> </form>
-                                   </tr>
-
-                                  <? 
-                                }
+                                  <tr><td><input type="hidden" name="test" value="<? $t['sso']?>"><? echo $t['sso'];?></td><td><? echo $t['fname']; ?></td><td><? echo $t['lname']; ?></td><td><? echo $t['gpa']; ?></td><td><? echo $t['email']; ?><td><? echo $t['ranking']; ?></td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" name="submit2" value="Submit"></td></tr>
+                                <? }
                                 
                                 ?>
                                 </tbody>
                               </table>
-                          
-          <?php }
-          
+                           </form>
+                           <?php
+                         
+                           if(isset($_POST['submit2'])){
+                               //include 'php/rank.php';
+                               echo "it's working";
+                               echo $_POST['test'];
+                                
+                               //addRank($_POST['sso'], $_POST['rank']);
+                           }
                            else {
                                echo "no results found";
                                echo "<br>";
-                           }         
-            }
-
-            if(isset($_POST['submit2'])){
-                include 'php/rank.php';
-                //echo "it's working";
-                //echo $_POST['test'];
-                //echo (int)$_POST['rank'];
-            
-                 
-            
-                addRank($_POST['test'], (int)$_POST['rank']);
-            }
-                          
-                            
+                           }
+                                }  
+                            }
                                     
+                
+              
                 
                 ?>
        </div>
@@ -133,11 +104,12 @@ header("Location:Login");
   
   
   <!-- lower section -->
-  <hr style="border-color: black; width:97%; margin-left:0px;">            
+  <hr>            
       
-  
+  <div class="row">    
+    <div class="col-md-4">
               
-      <div class="panel panel-default" id="addcourse" style="width:40%; height:400px; ">
+      <div class="panel panel-default" id="addcourse">
         <div class="panel-heading">
           <div class="panel-title">
             <i class="glyphicon glyphicon-wrench pull-right"></i>
@@ -150,20 +122,26 @@ header("Location:Login");
             <div class="control-group">
               <label>Course ID</label>
               <div class="controls">
-                <input type="text" class="form-control" name="courseID" placeholder="Enter Course ID (ex: CMP_SC 3050)" style="width: 400px;">
+                <input type="text" class="form-control" name="courseID" placeholder="Enter Course ID (ex: CMP_SC 3050)">
               </div>
-            </div>  
-           
+            </div>   
+            <br>
+            <div class="control-group">
+              <label>Course Section</label>
+              <div class="controls">
+                <input type="text" class="form-control" name="section" placeholder="Enter Course ID (ex: CMP_SC 3050)">
+              </div>
+            </div>
             <br>   
             <div class="control-group">
               <label>Positions Available</label>
               <div class="controls">
-                <input type="text" class="form-control" name="position" placeholder="Enter Number of Positions Available" style="width: 400px;">
+                <input type="text" class="form-control" name="position" placeholder="Enter Number of Positions Available">
               </div>
             </div>      
             
             <br>    
-            <div class="control-group" style="padding-top:90px;>
+            <div class="control-group">
               <div class="controls">
                 <button type="submit" class="btn btn-primary" name="addCourse">Add Course</button>
                 <button type="submit" class="btn btn-danger" name="delCourse">Delete Course</button>
@@ -175,19 +153,19 @@ header("Location:Login");
           include 'php/add_course.php';
           include 'php/delete_course.php';
           if(isset($_POST['addCourse'])){
-              addCourse($_POST['courseID'], $_POST['position']);
+              addCourse($_POST['courseID'], $_POST['section'], $_POST['position']);
           }
           if (isset($_POST['delCourse'])){
-              deleteCourse($_POST['courseID']);
+              deleteCourse($_POST['courseID'], $_POST['section']);
           }
-          
           ?>
           
           
         </div><!--/panel content-->
       </div><!--/panel-->
+      <hr>
               
-      <div class="panel panel-default" id="deletecourse" style="width:40%; margin-left:57%; margin-top:-36%;" >
+      <div class="panel panel-default" id="deletecourse">
         <div class="panel-heading">
           <div class="panel-title">
             <i class="glyphicon glyphicon-wrench pull-right"></i>
@@ -200,21 +178,21 @@ header("Location:Login");
             <div class="control-group">
               <label>Instructor SSO</label>
               <div class="controls">
-                <input type="text" class="form-control" name="sso" placeholder="Enter Instructor SSO" style="width: 400px;">
+                <input type="text" class="form-control" name="sso" placeholder="Enter Instructor SSO">
               </div>
             </div>
             <br>
             <div class="control-group">
               <label>Instructor First Name</label>
               <div class="controls">
-                <input type="text" class="form-control" name="fname" placeholder="Enter Instructor First Name" style="width: 400px;">
+                <input type="text" class="form-control" name="fname" placeholder="Enter Instructor First Name">
               </div>
             </div>
             <br>
             <div class="control-group">
               <label>Instructor Last Name</label>
               <div class="controls">
-                <input type="text" class="form-control" name="lname" placeholder="Enter Instructor Last Name" style="width: 400px;">
+                <input type="text" class="form-control" name="lname" placeholder="Enter Instructor Last Name">
               </div>
             </div>       
             <br>  
@@ -241,60 +219,36 @@ header("Location:Login");
           
         </div><!--/panel content-->
       </div><!--/panel-->
+      
+      
+    
     </div><!--/col-->
+    
   </div><!--/row-->
   
-  <hr style="border-color: black; width:80%; margin-left:auto; margin-right:auto;">
-  
-  <div class="panel panel-default" style="margin-top: 70px; height:300px; width:80%; margin-left:auto; margin-right:auto;">
-        <div class="panel-heading"><h4 style="text-align: left;">Assign Applicants</h4></div>
-            <?php 
-            if(isset($_SESSION['username'])){
-            include 'php/functions.php';
-            $db = db_connect();
-               if (!$db) {
-                echo "Error.\n" . pg_last_error() . "\n";
-                die; // kill the app if no connection
-                }
-               else {
-                $res = pg_query($db, "SELECT R.sso, R.course_id, W.grade_received FROM applicant_offer_received R, applicant_wish_course W WHERE R.sso = W.sso AND R.course_id = W.course_id AND R.offer_accepted = TRUE AND R.assigned_to_course IS NULL;");
-                
-               ?>
-                           <table class="table table-striped">
-                               <thead>
-                                   <tr><th>SSO</th><th>Course</th><th>Grade Received</th><th>GPA</th><th>Full Application</th><th>Accept Offer</th><th>Reject Offer</th></tr>
-                               </thead>
-                               <tbody>
-                                   <?php 
-                                   while (($offer = pg_fetch_assoc($res))) {    
-                                   echo "<tr><form action='' method='POST'><td><input type='hidden' name='sso' value='". $offer['sso']."'>" . $offer['sso'] ."</td><td><input type='hidden' name='course' value='".$offer['course_id']."'>" . $offer['course_id'] . "</td><td>".$offer['grade_received']."</td><td> blank </td><td> blank </td>
-		                                  <td><button type='submit' class='btn btn-primary' name='acceptOffer'>Accept</button></td>
-		                                  <td><button type='submit' class='btn btn-danger' name='rejectOffer'>Reject</button></td></form></tr>";
-                                   } 
-                                       
-                } 
-            }
-            else {
-                echo '<font color="red">' . "There are no currently no applicants that need to be assigned." . '</font><br>';
-            }
-                                   ?>
-                               </tbody>
-                           </table>
-                           
-          <?php 
-          if(isset($_POST['acceptOffer'])){
-              include 'php/assignApplicant.php';
-              assignApp($_POST['sso'], $_POST['course']);
-          }
-          elseif(isset($_POST['rejectOffer'])) {
-              include 'php/rejectApplicant.php';
-              echo $_POST['sso'];
-          }            
-                           ?>
-            
-            
-     </div>
+  <div class="row">
     
+    <div class="col-md-12">
+      <hr>
+		<h4><strong>Assign TA</strong></h4>  
+         
+    </div>
+    <div class="col-md-12">
+      
+      <table class="table table-striped">
+        <thead>
+          <tr><th>Applicants</th><th>Course</th><th>Grade</th><th>TA/PLA</th><th>GPA</th><th>Offer Status</th><th>Assign</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Sam Walker</td><td>CS4320</td><td>89</td><td>TA</td><td>3.7</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-danger btn-large" href="#">Reject</button></td></tr>
+          <tr><td>Tory White</td><td>CS4320</td><td>90</td><td>TA</td><td>3.8</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-danger btn-large" href="#">Reject</button></td></tr>
+          <tr><td>Tylor</td><td>CS4320</td><td>86</td><td>PLA</td><td>3.5</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-danger btn-large" href="#">Reject</button></td></tr>
+          <tr><td>Jerry Smith</td><td>CS4820</td><td>92</td><td>PLA</td><td>3.6</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-danger btn-large" href="#">Reject</button></td></tr>
+          <tr><td>Tiana </td><td>CS4820</td><td>83</td><td>TA</td><td>3.4</td><td>Received</td><td><button class="btn btn-info btn-large" href="#">Assign</button><button style="margin-left:5px" class="btn btn-danger btn-large" href="#">Reject</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>  
   <hr>              
   
   
@@ -303,6 +257,30 @@ header("Location:Login");
 
 
 <footer class="text-center"> Copyright &copy; Software Engineering Group H, Spring 2015</footer>
+
+
+<div class="modal" id="addWidgetModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Add Widget</h4>
+      </div>
+      <div class="modal-body">
+        <p>Add a widget stuff here..</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn">Close</a>
+        <a href="#" class="btn btn-primary">Save changes</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dalog -->
+</div><!-- /.modal -->
+
+
+
+  
+	<!-- script references -->
 	
 	</body>
 </html>
