@@ -4,6 +4,16 @@ if($status == PHP_SESSION_NONE)
 {
 header("Location:Login");
 }
+
+
+
+// Check to see if the user has already logged in
+$uploadComplete = empty($_SESSION['uploadComplete']) ? false : $_SESSION['uploadComplete'];
+
+if ($uploadComplete) {
+    header("Location: applicationform");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -78,7 +88,7 @@ header("Location:Login");
             <?php 
                 $form = $this->form;
                 $form->setAttribute('action',
-                                    $this->url('applicationform', //your route name ...
+                                    $this->url('test', //your route name ...
                                                array('controller'=>'test', 'action' => 'index'))); 
                 $form->prepare();
                  
