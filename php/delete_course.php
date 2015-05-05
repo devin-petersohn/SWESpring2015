@@ -2,10 +2,10 @@
 
 include 'functions.php';
 
-function deleteCourse($courseID, $section){
+function deleteCourse($courseID){
 	$db = db_connect();
-	pg_prepare($db, "q1", "DELETE FROM Course WHERE course_id = $1 AND section= $2");
-	pg_execute($db, "q1", array($courseID, $section));
+	pg_prepare($db, "q1", "DELETE FROM Course WHERE course_id = $1");
+	pg_execute($db, "q1", array($courseID));
 }
 
 
