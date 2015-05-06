@@ -2,6 +2,14 @@
 session_start();
 use Studentpage\Module;
 ?>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/login_css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/login_css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="css/login_css/component.css" />
+		<link rel="stylesheet" type="text/css" href="css/login_css/content.css" />
+		<script src="js/login_js/modernizr.custom.js"></script>
+</head>
 <!-- <nav class="navbar navbar-inverse navbar-fixed-top navbars" role="navigation"> -->
 <!-- 		<img id="images" src="http://web.missouri.edu/~sykutam/images/mizzou_logo.gif" alt="tigermark" href="http://missouri.edu/"> -->
 <!--         <div class="container" id="contain"> -->
@@ -53,24 +61,51 @@ use Studentpage\Module;
 <!--     </nav> -->
 
 <div style="width:300px; height:300px; margin-left:auto; margin-right:auto; margin-top:100px; background-color:#E0E0EB; border-radius:12px;">
-    <form id='login' action=' ' method='post' accept-charset='UTF-8'>
+    
+    
+    
+<!--     <form id='login' action=' ' method='post' accept-charset='UTF-8'> -->
         <fieldset style="text-align:center;" >
         <legend style="font-size: 25pt;">Login</legend>
-        <input type='hidden' name='submitted' id='submitted' value='1'/>
+<!--         <input type='hidden' name='submitted' id='submitted' value='1'/> -->
          
-        <label for='username' >PawPrint:</label>
-        <input type='text' name='pawprint' id='pawprint'  maxlength="50" />
-        <br>
-        <br>
-        <label for='password' >Password:</label>
-        <input type='password' name='password' id='password' maxlength="50" />
-        <br>
-        <br>
-        <button type='submit' class="btn btn-primary" name='login'/>Login</button>
-        </fieldset>
-    </form>
-</div>
+<!--         <label for='username' >PawPrint:</label> -->
+<!--         <input type='text' name='pawprint' id='pawprint'  maxlength="50" /> -->
+<!--         <br> -->
+<!--         <br> -->
+<!--         <label for='password' >Password:</label> -->
+<!--         <input type='password' name='password' id='password' maxlength="50" /> -->
+<!--         <br> -->
+<!--         <br> -->
+<!--         <button type='submit' class="btn btn-primary" name='login'/>Login</button> -->
+<!--         </fieldset> -->
+<!--     </form> -->
+<!-- </div> -->
 
+<div class="mockup-content">
+				
+					<div class="morph-button morph-button-modal morph-button-modal-2 morph-button-fixed">
+						<button type="button">Login</button>
+						<div class="morph-content">
+							<div>
+								<div class="content-style-form content-style-form-1">
+									<span class="icon icon-close">Close the dialog</span>
+									<h2>Login</h2>
+									<form id='login' action=' ' method='post' accept-charset='UTF-8'>
+										<p><label>pawprint</label><input type="text" name='pawprint' id='pawprint'  maxlength="50" /></p>
+										<p><label>Password</label><input type="password" name='password' id='password' maxlength="50" /></p>
+										<p><button type='submit' name="login">Login</button></p>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div><!-- morph-button -->
+					<strong class="joiner">or</strong>
+					
+					
+				</div><!-- /form-mockup -->
+        
+        
 <!-- Footer -->
     <footer style="position:fixed; bottom:0; margin-left:450px;">
         <div class="row">
@@ -159,6 +194,74 @@ use Studentpage\Module;
         }
     }
     ?>
+    
+   		<script src="js/login_js/classie.js"></script>
+		<script src="js/login_js/uiMorphingButton_fixed.js"></script>
+		<script>
+			(function() {
+				var docElem = window.document.documentElement, didScroll, scrollPosition;
+
+				// trick to prevent scrolling when opening/closing button
+				function noScrollFn() {
+					window.scrollTo( scrollPosition ? scrollPosition.x : 0, scrollPosition ? scrollPosition.y : 0 );
+				}
+
+				function noScroll() {
+					window.removeEventListener( 'scroll', scrollHandler );
+					window.addEventListener( 'scroll', noScrollFn );
+				}
+
+				function scrollFn() {
+					window.addEventListener( 'scroll', scrollHandler );
+				}
+
+				function canScroll() {
+					window.removeEventListener( 'scroll', noScrollFn );
+					scrollFn();
+				}
+
+				function scrollHandler() {
+					if( !didScroll ) {
+						didScroll = true;
+						setTimeout( function() { scrollPage(); }, 60 );
+					}
+				};
+
+				function scrollPage() {
+					scrollPosition = { x : window.pageXOffset || docElem.scrollLeft, y : window.pageYOffset || docElem.scrollTop };
+					didScroll = false;
+				};
+
+				scrollFn();
+
+				[].slice.call( document.querySelectorAll( '.morph-button' ) ).forEach( function( bttn ) {
+					new UIMorphingButton( bttn, {
+						closeEl : '.icon-close',
+						onBeforeOpen : function() {
+							// don't allow to scroll
+							noScroll();
+						},
+						onAfterOpen : function() {
+							// can scroll again
+							canScroll();
+						},
+						onBeforeClose : function() {
+							// don't allow to scroll
+							noScroll();
+						},
+						onAfterClose : function() {
+							// can scroll again
+							canScroll();
+						}
+					} );
+				} );
+
+				// for demo purposes only
+				[].slice.call( document.querySelectorAll( 'form button' ) ).forEach( function( bttn ) { 
+					bttn.addEventListener( 'click', function( ev ) { ev.preventDefault(); } );
+				} );
+			})();
+		</script>
   
 <!-- jQuery -->
 <!-- Bootstrap Core JavaScript -->
