@@ -30,4 +30,24 @@ function add_instructor_teaches($sso, $course_id) {
     pg_execute($db, "q1", array($sso, $course_id));
 }
 
+function test_dropdown() {
+	$db = db_connect();
+	$instructor = pg_query($db, "SELECT sso FROM instructor;");
+		echo "<select name='selectInstructors' id='selection' value='selection' >";
+		echo "<div class='btn-group'>
+  			<button type='button' class='btn btn-default dropdown-toggle' data-toggle='dropdown' aria-expanded='false'>
+    			Action <span class='caret'></span>
+  			</button>
+  			<ul class='dropdown-menu' role='menu'>";
+		while ($printedInstructor = pg_fetch_row($instructor)) {
+		    echo "<li><option value = '".$printedInstructor[0]."'>".$printedInstructor[0]."</option></li>";
+		}
+		echo "</ul>
+		</div>";
+		echo "<\select>";
+
+
+
+}
+
 ?>
