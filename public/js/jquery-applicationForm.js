@@ -423,7 +423,21 @@ $(function(){
         var error = 0;
         if($("#selection").val()=="TA")
         {
+            
+            
             fields1.each(function(){
+            var value = $(this).val();
+            if( value.length<1 || value==field_values[$(this).attr('id')] ) {
+                $(this).addClass('error');
+                $(this).effect("shake", { times:3 }, 50);
+                
+                error++;
+            } else {
+                $(this).addClass('valid');
+            }
+        });
+
+            filedpub.each(function(){
             var value = $(this).val();
             if( value.length<1 || value==field_values[$(this).attr('id')] ||  (($(this).attr('id')=='email')&&(!emailPattern.test(value))) ) {
                 $(this).addClass('error');
@@ -437,8 +451,22 @@ $(function(){
             
         }
         else{
-
+        
+            
+           
             fields2.each(function(){
+            var value = $(this).val();
+            if( value.length<1 || value==field_values[$(this).attr('id')] ) {
+                $(this).addClass('error');
+                $(this).effect("shake", { times:3 }, 50);
+                
+                error++;
+            } else {
+                $(this).addClass('valid');
+            }
+        });
+
+            filedpub.each(function(){
             var value = $(this).val();
             if( value.length<1 || value==field_values[$(this).attr('id')] ||  (($(this).attr('id')=='email')&&(!emailPattern.test(value))) ) {
                 $(this).addClass('error');

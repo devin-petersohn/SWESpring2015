@@ -101,15 +101,15 @@ $uploadComplete = empty($_SESSION['uploadComplete']) ? false : $_SESSION['upload
 
                 <div class="form">
                 <!--<input type="text" name="ID" id="ID" value="stu ID" />  Had to change this to the right name-->
-                    <input type="text" name="pub" id="ID" value="stu ID" />
+                    <input type="text" class="sub1 sub2" name="pub" id="ID" value="stu ID" />
                     <label for="ID">Your student ID. </label>
 
                     
                     
-                    <input type="text" name="advisorname" id="advisorname" value="advisor name" />
+                    <input type="text" name="pub1" id="advisorname" class="sub1" value="advisor name" />
                     <label for="advisorname" id="label_advisor">Your advisor name</label>
                     
-                    <select name="masterphd" id="masterphd" value="masterphd" >
+                    <select name="pub1" id="masterphd" value="masterphd" class="sub1">
                     <option value="default">choose one..</option>
                     <option value="master">master</option>
                     <option value="phd">phd</option> 
@@ -117,7 +117,7 @@ $uploadComplete = empty($_SESSION['uploadComplete']) ? false : $_SESSION['upload
                         
                     </select>
 
-                    <select name="selectionmajor" id="selectionmajor" value="selectionmajor" >
+                    <select name="pub2" id="selectionmajor" value="selectionmajor" class="class2">
                     <option value="BSIT">BS IT</option>
                     <option value="BACS">BA CS</option> 
                     <option value="BAIT">BA IT</option> 
@@ -135,7 +135,7 @@ $uploadComplete = empty($_SESSION['uploadComplete']) ? false : $_SESSION['upload
                     
                     
              -->          
-                    <input type="text" name="pub" id="email" value="email address" />
+                    <input type="text" name="pub" id="email" value="email address" class="sub1 sub2"/>
                     <label for="email">Your email address. We send important administration notices to this address. </label>                    
                 </div>      <!-- clearfix --><div class="clear"></div><!-- /clearfix -->
 
