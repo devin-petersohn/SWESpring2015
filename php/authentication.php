@@ -29,7 +29,7 @@ function authenticate($username, $password, $dbconn)
 	for($queryNum = 0; $queryNum < 5; $queryNum++)
 	{
 		$queries[$queryNum] = pg_execute($dbconn, $queryNum, array(htmlspecialchars($username))) or die(header("Location:Error"));
-		$line = pg_fetch_array($queries[$queryNum], null, PGSQL_ASSOC) or die(header("Location:Error"));
+		$line = pg_fetch_array($queries[$queryNum], null, PGSQL_ASSOC);
 		if($line)
 		{
 			$results[$queryNum]['domain'] = $domains[$queryNum];
@@ -73,7 +73,7 @@ function authenticate($username, $password, $dbconn)
 		}
 	}
 	$results['error'] = 0;
-	assert($badflag != 2);
+	//assert($badflag != 2);
 	//successful login
 	if($valid)
 	{
