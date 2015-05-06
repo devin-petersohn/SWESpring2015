@@ -7,6 +7,7 @@
     
     function Login()
     {
+        echo "Login here!";
         if(empty($_POST['pawprint']))
         {
             echo "<br>password is empty!";
