@@ -2,7 +2,7 @@
 $status = session_status();
 if($status == PHP_SESSION_NONE){
     //There is no active session
-    session_start();
+    header('Location:login');
 }
 echo $this->doctype(); ?>
 
@@ -32,6 +32,49 @@ echo $this->doctype(); ?>
         ; ?>
         
 
+        <script>
+        $.ajax({
+            type: "POST",
+            url: "../checkstatus.php",
+            success: function(data){
+                console.log(data);
+                if(data=="instructor"){
+                	$("li.ins").show();
+                  	 $("li.stu").hide();
+                  	 $("li.adm").hide();
+                  	 $("li.log").hide();
+                 }
+                 
+                 else if(data=="applicant"){
+                	 $("li.ins").hide();
+                	 $("li.stu").show();
+                	 $("li.adm").hide();
+                	 $("li.log").hide();
+                 }
+                 else if(data=="admin"){
+                	 $("li.ins").hide();
+                	 $("li.stu").hide();
+                	 $("li.adm").show();
+                	 $("li.log").hide();
+                 }
+                 else if(data=="new"){
+                	 $("li.ins").hide();
+                	 $("li.stu").show();
+                	 $("li.adm").hide();
+                	 $("li.log").hide();
+                 }
+                 else{
+                	 $("li.ins").hide();
+                	 $("li.stu").hide();
+                	 $("li.adm").hide();
+                	 $("li.log").show();
+                 }
+                
+                 
+            }
+        
+            });
+        </script>
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-fixed-top navbars" role="navigation">
@@ -51,26 +94,27 @@ echo $this->doctype(); ?>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            
                 <ul class="nav navbar-nav">
                     <li>
                         <a href="/swespring2015">Home</a>
                     </li>
-                    <li>
+                    <li class="log">
                         <a href="login">Login</a>
                     </li>
-                    <li>
-                        <a href="applicationform">Application Form</a>
+                    <li class="stu">
+                        <a href="test">Start Application</a>
                     </li>
-                    <li>
+                    <li class="stu">
                         <a href="studentpage">Student page</a>
                     </li>
-                    <li>
+                    <li class="ins">
                         <a href="professorpage">Professor page</a>
                     </li>
-                    <li>
+                    <li class="ins">
                         <a href="comments">View Comments page</a>
                     </li>
-                    <li>
+                    <li class="adm">
                         <a href="admin">Admin Page</a>
                     </li>
                 </ul>
@@ -88,7 +132,7 @@ echo $this->doctype(); ?>
 						?> 
 						<span class="caret"></span></a>
 					<ul id="g-account-menu" class="dropdown-menu" role="menu">
-						<li><a href='php/logout.php'><i class="glyphicon glyphicon-lock"></i>Logout</a></li>
+						<li><a href='../logout.php'><i class="glyphicon glyphicon-lock"></i>Logout</a></li>
 					</ul>
 				</ul>
 				

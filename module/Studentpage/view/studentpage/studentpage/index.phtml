@@ -13,61 +13,61 @@ if($status == PHP_SESSION_NONE) { header("Location:Login"); }
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     </head>
 	<body>
-	<nav class="navbar navbar-inverse navbar-fixed-top navbars" role="navigation">
-		<img id="images" src="http://web.missouri.edu/~sykutam/images/mizzou_logo.gif" alt="tigermark" href="http://missouri.edu/">
-        <div class="container" id="contain">
+<!-- 	<nav class="navbar navbar-inverse navbar-fixed-top navbars" role="navigation"> -->
+<!-- 		<img id="images" src="http://web.missouri.edu/~sykutam/images/mizzou_logo.gif" alt="tigermark" href="http://missouri.edu/"> -->
+<!--         <div class="container" id="contain"> -->
             <!-- Brand and toggle get grouped for better mobile display -->
 			
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+<!--             <div class="navbar-header"> -->
+<!--                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> -->
+<!--                     <span class="sr-only">Toggle navigation</span> -->
+<!--                     <span class="icon-bar"></span> -->
+<!--                     <span class="icon-bar"></span> -->
+<!--                     <span class="icon-bar"></span> -->
+<!--                 </button> -->
 				
             
-            </div>
+<!--             </div> -->
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="/swespring2015">Home</a>
-                    </li>
-                    <li>
-                        <a href="login">Login</a>
-                    </li>
-                    <li>
-                        <a href="applicationform">Application Form</a>
-                    </li>
-                    <li>
-                        <a href="studentpage">Student page</a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-					<a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
-						<i class="glyphicon glyphicon-user"></i> 
+<!--             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> -->
+<!--                 <ul class="nav navbar-nav"> -->
+<!--                     <li> -->
+<!--                         <a href="/swespring2015">Home</a> -->
+<!--                     </li> -->
+<!--                     <li> -->
+<!--                         <a href="login">Login</a> -->
+<!--                     </li> -->
+<!--                     <li> -->
+<!--                         <a href="applicationform">Application Form</a> -->
+<!--                     </li> -->
+<!--                     <li> -->
+<!--                         <a href="studentpage">Student page</a> -->
+<!--                     </li> -->
+<!--                 </ul> -->
+<!--                 <ul class="nav navbar-nav navbar-right"> -->
+<!-- 					<li class="dropdown"> -->
+<!-- 					<a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"> -->
+<!-- 						<i class="glyphicon glyphicon-user"></i>  -->
 						<?php 
-						if(isset($_SESSION['username'])){
-    						echo $_SESSION["username"];
-						}
-						else {
-						    echo "";
-						}
+// 						if(isset($_SESSION['username'])){
+//     						echo $_SESSION["username"];
+// 						}
+// 						else {
+// 						    echo "";
+// 						}
 						?> 
-						<span class="caret"></span></a>
-					<ul id="g-account-menu" class="dropdown-menu" role="menu">
-						<li><a href="#"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-					</ul>
-				</ul>
-				</ul>
-            </div>
+<!-- 						<span class="caret"></span></a> -->
+<!-- 					<ul id="g-account-menu" class="dropdown-menu" role="menu"> -->
+<!-- 						<li><a href="#"><i class="glyphicon glyphicon-lock"></i> Logout</a></li> -->
+<!-- 						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li> -->
+<!-- 					</ul> -->
+<!-- 				</ul> -->
+<!-- 				</ul> -->
+<!--             </div> -->
             <!-- /.navbar-collapse -->
-        </div>
+<!--         </div> -->
         <!-- /.container -->
-    </nav>
+<!--     </nav> -->
 	<div id="bground" style="margin-top: 50px; border-radius:12px;">
     <div class="container">
         <!-- First Featurette -->
