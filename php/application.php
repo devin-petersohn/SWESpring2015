@@ -11,7 +11,7 @@
 	if( $_POST['selection'] && $_POST['fname'] && $_POST['lname'] && $_POST['gpa']){
 		#pg_query($db, "INSERT INTO Applicant (sso) VALUES ('".$sso."');");
 		pg_prepare($db, "q2", 'UPDATE Applicant SET fname = $1, lname = $2, gpa = $3 WHERE sso = $4;');
-		pg_execute($db, "q2", array($_POST['fname'], $_POST['lname'], $_POST['gpa']), $sso);
+		pg_execute($db, "q2", array($_POST['fname'], $_POST['lname'], $_POST['gpa'], $sso));
 		#pg_query($db, "UPDATE Applicant SET fname = '". $_POST['fname'] ."', lname = '". $_POST['lname'] ."', 
 		#	gpa = '". $_POST['gpa'] ."' WHERE sso = '". $sso ."';");
 		if($_POST['selection'] != "TA"){
