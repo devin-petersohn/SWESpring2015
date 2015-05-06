@@ -60,13 +60,11 @@ use Studentpage\Module;
         <!-- /.container -->
 <!--     </nav> -->
 
-<div style="width:300px; height:300px; margin-left:auto; margin-right:auto; margin-top:100px; background-color:#E0E0EB; border-radius:12px;">
     
     
     
 <!--     <form id='login' action=' ' method='post' accept-charset='UTF-8'> -->
-        <fieldset style="text-align:center;" >
-        <legend style="font-size: 25pt;">Login</legend>
+  
 <!--         <input type='hidden' name='submitted' id='submitted' value='1'/> -->
          
 <!--         <label for='username' >PawPrint:</label> -->
@@ -91,16 +89,15 @@ use Studentpage\Module;
 								<div class="content-style-form content-style-form-1">
 									<span class="icon icon-close">Close the dialog</span>
 									<h2>Login</h2>
-									<form id='login' action=' ' method='post' accept-charset='UTF-8'>
+									<form id='login' action='login' method='post' accept-charset='UTF-8'>
 										<p><label>pawprint</label><input type="text" name='pawprint' id='pawprint'  maxlength="50" /></p>
 										<p><label>Password</label><input type="password" name='password' id='password' maxlength="50" /></p>
-										<p><button type='submit' name="login">Login</button></p>
+										<button type='submit' name='login'>Login</button>
 									</form>
 								</div>
 							</div>
 						</div>
 					</div><!-- morph-button -->
-					<strong class="joiner">or</strong>
 					
 					
 				</div><!-- /form-mockup -->
@@ -197,7 +194,20 @@ use Studentpage\Module;
     
    		<script src="js/login_js/classie.js"></script>
 		<script src="js/login_js/uiMorphingButton_fixed.js"></script>
+		<script src="js/jquery.js"></script>
 		<script>
+		    $('#login').click(function(){
+		    	$.ajax({
+		            type: 'POST',
+		            url: 'login.php',
+		            data: {
+			            pawprint: $('#pawprint').val(),
+			            password: $('#password').val()
+			            },
+		            success: function(data) { /* Do something here?? */ },
+		            error: function(xhr, ajaxOptions, thrownerror) { }
+		        });
+			});
 			(function() {
 				var docElem = window.document.documentElement, didScroll, scrollPosition;
 
