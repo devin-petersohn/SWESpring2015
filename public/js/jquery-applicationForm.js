@@ -423,8 +423,6 @@ $(function(){
         var error = 0;
         if($("#selection").val()=="TA")
         {
-            
-            
             fields1.each(function(){
             var value = $(this).val();
             if( value.length<1 || value==field_values[$(this).attr('id')] ||  (($(this).attr('id')=='email')&&(!emailPattern.test(value))) ) {
@@ -439,9 +437,7 @@ $(function(){
             
         }
         else{
-        
-            
-           
+
             fields2.each(function(){
             var value = $(this).val();
             if( value.length<1 || value==field_values[$(this).attr('id')] ||  (($(this).attr('id')=='email')&&(!emailPattern.test(value))) ) {
