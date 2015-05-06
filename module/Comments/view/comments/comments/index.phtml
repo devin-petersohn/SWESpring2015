@@ -73,7 +73,7 @@ session_start();
     
                 <div class="col-md-12">
                     <hr>
-                    <h3><strong>Student: <?php echo $_POST['sso']?>></strong></h3>
+                    <h3><strong>Student: <?php echo $_POST['sso']?></strong></h3>
                     <hr>
                     <table class="table table-striped addhere">
                         <thead>
@@ -86,7 +86,8 @@ session_start();
                                 require 'php/functions.php';
                                 $conn = db_connect();
                                 $sso = $_POST['sso'];
-                                echo $sso;
+                                $instru_sso = $_SESSION['username'];
+                               // echo $sso;
                                 $qry = 'SELECT comment_id, comment, instructor_sso, course_id
                                   FROM applicant_comments
                                   WHERE (sso like $1)
@@ -99,7 +100,7 @@ session_start();
                                         <tr><td><?echo $row['course_id']?></td><td><?echo $row['instructor_sso']?></td><td><?echo $row['comment']?></td>
 					
 					<td>
-					<?php if(strcmp($row['instructor_sso'], $_SESSION['username']) == 0) { ?>
+					<?php if(strcmp($row['instructor_sso'], $instru_sso) == 0) { ?>
 					<input type="button" id="<?echo $row['comment_id']?>" class="btn btn_info del" value="delete"></td>
 					<?php } ?>
 					</tr> <?

@@ -1,13 +1,12 @@
     <?php 
     session_start();
-//     if(isset($_POST['login']))
-//     {
+    if(isset($_POST['login']))
+    {
         Login();
-//     }
+    }
     
     function Login()
     {
-        echo "Login here!";
         if(empty($_POST['pawprint']))
         {
             echo "<br>password is empty!";
@@ -36,9 +35,9 @@
     {
         
         
-        require "functions.php";
+        require "php/functions.php";
         $DBconn = db_connect();
-        require "authentication.php";
+        require "php/authentication.php";
         $results = authenticate($pawprint, $password, $DBconn);
         if($results['error'] == 1)
         {
