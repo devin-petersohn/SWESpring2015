@@ -296,7 +296,7 @@ $(function(){
     $('form').submit(function(){ return false; });
     $('#submit_first').click(function(){
         //remove classes
-        $first_height=$('#container').height();
+        
         $("#container label").css("line-height", "14px");
     
         $("#container").css("height", "370px");
@@ -320,6 +320,7 @@ $(function(){
         });        
         
         if(!error) {
+        	$first_height=$('#container').height();
 
             $.post("../../application.php",
                     {
@@ -438,7 +439,7 @@ $(function(){
             }
         });
 
-            filedpub.each(function(){
+            fieldspub.each(function(){
             var value = $(this).val();
             if( value.length<1 || value==field_values[$(this).attr('id')] ||  (($(this).attr('id')=='email')&&(!emailPattern.test(value))) ) {
                 $(this).addClass('error');
@@ -467,7 +468,7 @@ $(function(){
             }
         });
 
-            filedpub.each(function(){
+            fieldspub.each(function(){
             var value = $(this).val();
             if( value.length<1 || value==field_values[$(this).attr('id')] ||  (($(this).attr('id')=='email')&&(!emailPattern.test(value))) ) {
                 $(this).addClass('error');
