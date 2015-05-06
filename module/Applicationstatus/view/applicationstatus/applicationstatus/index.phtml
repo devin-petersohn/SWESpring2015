@@ -16,64 +16,10 @@ if($status == PHP_SESSION_NONE){
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     </head>
 	<body>
-	<nav class="navbar navbar-inverse navbar-fixed-top navbars" role="navigation">
-		<img id="images" src="http://web.missouri.edu/~sykutam/images/mizzou_logo.gif" alt="tigermark" href="http://missouri.edu/">
-        <div class="container" id="contain">
-            <!-- Brand and toggle get grouped for better mobile display -->
-			
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-				
-            
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="/swespring2015">Home</a>
-                    </li>
-                    <li>
-                        <a href="login">Login</a>
-                    </li>
-                    <li>
-                        <a href="applicationform">Application Form</a>
-                    </li>
-                    <li>
-                        <a href="studentpage">Student page</a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-					<a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
-						<i class="glyphicon glyphicon-user"></i> 
-						<?php 
-						if(isset($_SESSION['username'])){
-    						echo $_SESSION["username"];
-						}
-						else {
-						    echo "";
-						}
-						?> 
-						<span class="caret"></span></a>
-					<ul id="g-account-menu" class="dropdown-menu" role="menu">
-						<li><a href="#"><i class="glyphicon glyphicon-lock"></i> Logout</a></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-					</ul>
-				</ul>
-				</ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+	
     
     <div id="bground">
-    <div class="container" style="height: 400px; margin-top:100px;">
+    <div class="container" id="divcontainer" style="margin-top:100px; padding-bottom:25px;">
     <?php 
     include 'php/window.php';
     include 'php/functions.php';
@@ -84,7 +30,7 @@ if($status == PHP_SESSION_NONE){
     }
     
     elseif (strcmp($window, "apply") == 0){
-        /*if(isset($_SESSION['username'])){
+       /* if(isset($_SESSION['username'])){
             $appSubmitted = pg_query($db, "SELECT app_submitted FROM applicant WHERE sso = '".$_SESSION['username']."'");
             if(pg_fetch_array($appSubmitted)[0] == TRUE){
                
@@ -105,14 +51,14 @@ if($status == PHP_SESSION_NONE){
             if($getOffer != NULL){
                 while (($row = pg_fetch_assoc($getOffer))){
                     echo "<div style='text-align:center; font-size:20pt; margin-top:100px;'>";
-                    echo 'You have been selected as an assistant for '. $row['course_id'];
+                    echo "You have been selected as an assistant for ". $row['course_id'];
                     echo "</div>";
                     echo "<form action='' method=POST><button type='submit' class='btn btn-primary' name='acceptOffer' style='margin-left:475px; margin-right:20px; margin-top:20px;'>Accept</button><button type='submit' class='btn btn-danger'' name='rejectOffer' style='margin-top:20px;'>Reject</button></form>";
                              
                             }    
                     }
                     else {
-                        echo 'Your application under review.  Please check back later.';
+                        echo "Your application under review.  Please check back later.";
                     }
                 }
             }
@@ -148,12 +94,20 @@ if($status == PHP_SESSION_NONE){
     
     <footer class="text-center"> Copyright &copy; Software Engineering Group H, Spring 201</footer>
 
-
+    <script>
+//     $(document).ready(function() {
+//           var height=$('#divcontainer').height();
+//           height+=30;
+//           $('divcontainer').height(height);
+//         });
+   
+    </script>
 
 
   
 	<!-- script references 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>-->
+		
 	</body>
 </html>
