@@ -20,10 +20,10 @@ if($conn) {
         $instructor_sso = $_SESSION['username'];
         $comment_id = time();
         
-        //pg_query($conn,"INSERT INTO applicant_comments (sso,course_id,dates_taught,instructor_sso,comment,comment_id) VALUES ('". $sso ."','". $course_id ."','". $dates_taught . "','". $instructor_sso ."','". $comment ."','". $comment_id ."');") or die(header("Location:Error"));
+        pg_query($conn,"INSERT INTO applicant_comments (sso,course_id,dates_taught,instructor_sso,comment,comment_id) VALUES ('". $sso ."','". $course_id ."','". $dates_taught . "','". $instructor_sso ."','". $comment ."','". $comment_id ."');") or die(header("Location:Error"));
       
-      	pg_prepare($conn, "add", "INSERT INTO applicant_comments VALUES($1, $2, $3, $4, $5, $6)") or die(header("Location:Error"));
-	pg_execute($conn, "add, array($sso, $course_id, $dates_taught, $instructor_sso, $comment, $comment_id) or die(header("Location:Error"));
+      	//pg_prepare($conn, "add", "INSERT INTO applicant_comments VALUES($1, $2, $3, $4, $5, $6)") or die(header("Location:Error"));
+	//pg_execute($conn, "add, array($sso, $course_id, $dates_taught, $instructor_sso, $comment, $comment_id) or die(header("Location:Error"));
 
         $arr = array(
                 "success" => "1",
@@ -38,9 +38,9 @@ if($conn) {
      
     else if($action == "delete"){
         $comment_id = $_POST['comment_id'];
-        //pg_query($conn, "DELETE FROM applicant_comments WHERE comment_id = ".$comment_id) or die(header("Location:Error"));
-	pg_prepare($conn, "del", DELETE FROM applicant_comments WHERE comment_id = $1) or die(header("Location:Error"));
-	pg_execute($conn, "del", array($comment_id)) or die(header("Location:Error"));
+        pg_query($conn, "DELETE FROM applicant_comments WHERE comment_id = ".$comment_id) or die(header("Location:Error"));
+	//pg_prepare($conn, "del", DELETE FROM applicant_comments WHERE comment_id = $1) or die(header("Location:Error"));
+	//pg_execute($conn, "del", array($comment_id)) or die(header("Location:Error"));
 
         $arr = array(
                 "success" => "1",
