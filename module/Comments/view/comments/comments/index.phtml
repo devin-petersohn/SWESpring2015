@@ -50,7 +50,7 @@ if($status == PHP_SESSION_NONE) { header("Location:Login"); }
  	                      console.log(response);
  	                      if(response.success == "1"){
  	                          var comment_id = response.comment_id;
-                      	      $("#"+comment_id).closest("tr").fadeout();
+                      	      $("#"+comment_id).closest("tr").fadeOut();
  	    	              }
  	                  },
  	                  error: function(response){
