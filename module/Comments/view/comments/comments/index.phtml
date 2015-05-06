@@ -1,6 +1,5 @@
 <?php
-$status = session_status();
-if($status == PHP_SESSION_NONE) { header("Location:Login"); } 
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -84,7 +83,7 @@ if($status == PHP_SESSION_NONE) { header("Location:Login"); }
                         <tbody>
                             <?php  
                                 //php script to grab all comments for a particular sso/ student
-                                require 'php/.php';
+                                require 'php/functions.php';
                                 $conn = db_connect();
                                 $sso = $_POST['sso'];
                                 echo $sso;
