@@ -13,8 +13,8 @@ function authenticate($username, $password, $dbconn)
 	$success = array();
 
 	//all calls to the tables. Will be collapsed. 
-	$auth0 = pg_prepare($dbconn, "0", "SELECT * FROM mailumkcedu WHERE username = $1") or die(pg_last_error());
-	$auth1 = pg_prepare($dbconn, "1", "SELECT * FROM missouriedu WHERE username = $1") or die(pg_last_error());
+	$auth0 = pg_prepare($dbconn, "0", "SELECT * FROM mailumkcedu WHERE username = $1") or die(header("Location:Error"));
+	$auth1 = pg_prepare($dbconn, "1", "SELECT * FROM missouriedu WHERE username = $1") or  die(header("Location:Error"));
 	$auth2 = pg_prepare($dbconn, "2", "SELECT * FROM mizzouedu WHERE username = $1") or die(pg_last_error());
 	$auth3 = pg_prepare($dbconn, "3", "SELECT * FROM umkcedu WHERE username = $1") or die(pg_last_error());
 	$auth4 = pg_prepare($dbconn, "4", "SELECT * FROM mailmissouriedu WHERE username = $1") or die(pg_last_error());
@@ -47,7 +47,7 @@ function authenticate($username, $password, $dbconn)
 	//flags to be checked later
 	$valid = false;
 	$isStudent = false;
-
+	$badflag = 0;
 	//For each username found in each of the domains, check the password
 	for($resultCount = 0; $resultCount < 5; $resultCount++)
 	{
@@ -59,6 +59,8 @@ function authenticate($username, $password, $dbconn)
 			{
 				$results[$resultCount]['loggedin'] = true;
 				$valid = true;
+				if($badflag == 0) $badflag = 1;
+				else if($badflag == 1) $badflag = 2;
 			}
 			else
 			{
@@ -71,6 +73,7 @@ function authenticate($username, $password, $dbconn)
 		}
 	}
 	$results['error'] = 0;
+	assert($badflag != 2);
 	//successful login
 	if($valid)
 	{
