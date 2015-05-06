@@ -1,4 +1,5 @@
 <?php
+
 $var = (include 'functions.php');
 if($var != 'OK') header("Location:Error");
 $db = db_connect();
