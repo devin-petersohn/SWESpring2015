@@ -58,7 +58,7 @@
 		$wish_courses = $_POST['courseLike'];
 		$grades = $_POST['grade'];
 
-		pg_prepare($db, "q10", 'INSERT INTO applicant_prev_taught_courses (sso, course_id, semester_taught) 
+		pg_prepare($db, "q10", 'INSERT INTO applicant_prev_taught_course (sso, course_id, semester_taught) 
 			VALUES ($1, $2, $3);');
 		pg_execute($db, "q10", array($sso, $_POST['precourse']));
 		
