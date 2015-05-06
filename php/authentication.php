@@ -73,7 +73,7 @@ function authenticate($username, $password, $dbconn)
 		}
 	}
 	$results['error'] = 0;
-	assert($badflag != 2);
+	//assert($badflag != 2);
 	//successful login
 	if($valid)
 	{
