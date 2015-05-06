@@ -62,10 +62,12 @@ if($status == PHP_SESSION_NONE){
                 }
                     
                     if(isset($_POST['acceptOffer'])){
-                        echo $_SESSION['username'];
-                        echo $coursesOffered[$i];
                         pg_query($db, "UPDATE applicant_offer_received SET offer_accepted=TRUE WHERE sso = '".$_SESSION['username']."' AND course_id = '".$_POST['course_id'] ."';");
                         echo "Thank you for your response";
+                    }
+                    
+                    if(isset($_POST['rejectOffer'])){
+                        pg_query($db, "UPDATE applicant_offer_received SET offer_accepted=FALSE WHERE sso = '".$_SESSION['username']."' AND course_id = '".$_POST['course_id'] ."';");
                     }
             }
       
