@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'functions.php';
+if((include 'functions.php') != 1) { header("Location:Error"); }
 $conn = db_connect();
 if($conn) {
     $action = $_POST['action'];
@@ -20,7 +20,7 @@ if($conn) {
         $instructor_sso = $_SESSION['username'];
         $comment_id = time();
         
-        pg_query($conn,"INSERT INTO applicant_comments (sso,course_id,dates_taught,instructor_sso,comment,comment_id) VALUES ('". $sso ."','". $course_id ."','". $dates_taught . "','". $instructor_sso ."','". $comment ."','". $comment_id ."');");
+        pg_query($conn,"INSERT INTO applicant_comments (sso,course_id,dates_taught,instructor_sso,comment,comment_id) VALUES ('". $sso ."','". $course_id ."','". $dates_taught . "','". $instructor_sso ."','". $comment ."','". $comment_id ."');") or die(header("Location:Error");
        
         $arr = array(
                 "success" => "1",
@@ -35,7 +35,7 @@ if($conn) {
      
     else if($action == "delete"){
         $comment_id = $_POST['comment_id'];
-        pg_query($conn, "DELETE FROM applicant_comments WHERE comment_id = ".$comment_id);
+        pg_query($conn, "DELETE FROM applicant_comments WHERE comment_id = ".$comment_id) or die(header("Location:Error");
         $arr = array(
                 "success" => "1",
                 "comment_id" => $comment_id
@@ -50,5 +50,9 @@ if($conn) {
         );
         echo json_encode($arr);
     }
+}
+else
+{
+header("Location:Error");
 }
 ?>
