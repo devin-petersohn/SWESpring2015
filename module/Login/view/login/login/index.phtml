@@ -3,13 +3,7 @@ session_start();
 use Studentpage\Module;
 ?>
 
-<head>
-    <link rel="stylesheet" type="text/css" href="css/login_css/normalize.css" />
-		<link rel="stylesheet" type="text/css" href="css/login_css/demo.css" />
-		<link rel="stylesheet" type="text/css" href="css/login_css/component.css" />
-		<link rel="stylesheet" type="text/css" href="css/login_css/content.css" />
-		<script src="js/login_js/modernizr.custom.js"></script>
-</head>
+
 <!-- <nav class="navbar navbar-inverse navbar-fixed-top navbars" role="navigation"> -->
 <!-- 		<img id="images" src="http://web.missouri.edu/~sykutam/images/mizzou_logo.gif" alt="tigermark" href="http://missouri.edu/"> -->
 <!--         <div class="container" id="contain"> -->
@@ -60,27 +54,26 @@ use Studentpage\Module;
         <!-- /.container -->
 <!--     </nav> -->
 
-    
-    
-    
-<!--     <form id='login' action=' ' method='post' accept-charset='UTF-8'> -->
-  
-<!--         <input type='hidden' name='submitted' id='submitted' value='1'/> -->
+  <div style="width:300px; margin-left:auto; margin-right:auto; margin-top:200px;">
+    <form id='login' action=' ' method='post' accept-charset='UTF-8'>
+        <fieldset style="text-align:center;" >
+        <legend>Login</legend>
+        <input type='hidden' name='submitted' id='submitted' value='1'/>
          
-<!--         <label for='username' >PawPrint:</label> -->
-<!--         <input type='text' name='pawprint' id='pawprint'  maxlength="50" /> -->
-<!--         <br> -->
-<!--         <br> -->
-<!--         <label for='password' >Password:</label> -->
-<!--         <input type='password' name='password' id='password' maxlength="50" /> -->
-<!--         <br> -->
-<!--         <br> -->
-<!--         <button type='submit' class="btn btn-primary" name='login'/>Login</button> -->
-<!--         </fieldset> -->
-<!--     </form> -->
-<!-- </div> -->
+        <label for='username' >PawPrint:</label>
+        <input type='text' name='pawprint' id='pawprint'  maxlength="50" />
+        <br>
+        <br>
+        <label for='password' >Password:</label>
+        <input type='password' name='password' id='password' maxlength="50" />
+        <br>
+        <br>
+        <input type='submit' name='login' value='Login' />
+        </fieldset>
+    </form>
+</div>
 
-<div class="mockup-content">
+<!--<div class="mockup-content">
 				
 					<div class="morph-button morph-button-modal morph-button-modal-2 morph-button-fixed">
 						<button type="button" id="open">Login</button>
@@ -97,10 +90,10 @@ use Studentpage\Module;
 								</div>
 							</div>
 						</div>
-					</div><!-- morph-button -->
+					</div>--><!-- morph-button -->
 					
 					
-				</div><!-- /form-mockup -->
+				<!-- </div> </form-mockup -->
         
         
 <!-- Footer -->
@@ -194,47 +187,47 @@ use Studentpage\Module;
 		<script src="js/login_js/uiMorphingButton_fixed.js"></script>
 		<script src="js/jquery.js"></script>
 		<script>
-		   $('#open').click(function(){
-			   var infomation=$('#info').html();
-				infomation="Login";
-				$('#info').html(infomation);
-		   });
+// 		   $('#open').click(function(){
+// 			   var infomation=$('#info').html();
+// 				infomation="Login";
+// 				$('#info').html(infomation);
+// 		   });
 			
-		    $('#login').click(function(){
-		    	$.ajax({
-		            type: "POST",
-		            url: "../login.php",
-		            data: {
-		                pawprint: $("#pawprint").val(),
-		                password: $("#password").val()
-			            },
-		            success: function(data){
-		                console.log(data);
-		                if(data=="instructor"){
-		                	window.location.href = 'professorpage';
-		                 }
+// 		    $('#login').click(function(){
+// 		    	$.ajax({
+// 		            type: "POST",
+// 		            url: "../login.php",
+// 		            data: {
+// 		                pawprint: $("#pawprint").val(),
+// 		                password: $("#password").val()
+// 			            },
+// 		            success: function(data){
+// 		                console.log(data);
+// 		                if(data=="instructor"){
+// 		                	window.location.href = 'professorpage';
+// 		                 }
 		                 
-		                 else if(data=="applicant"){
-		                	 window.location.href = 'studentpage';
+// 		                 else if(data=="applicant"){
+// 		                	 window.location.href = 'studentpage';
 		                	 
-		                 }
-		                 else if(data=="admin"){
-		                	 window.location.href = 'adminpage';
-		                 }
-		                 else if(data=="new"){
-		                	 window.location.href = 'studentpage';
-		                 }
-		                 else{
-		                	 var infomation=$('#info').html();
-			     				infomation="Login"+data;
-			     				$('#info').html(infomation);
-		                 }
+// 		                 }
+// 		                 else if(data=="admin"){
+// 		                	 window.location.href = 'adminpage';
+// 		                 }
+// 		                 else if(data=="new"){
+// 		                	 window.location.href = 'studentpage';
+// 		                 }
+// 		                 else{
+// 		                	 var infomation=$('#info').html();
+// 			     				infomation="Login"+data;
+// 			     				$('#info').html(infomation);
+// 		                 }
 		                
 		                 
-		            }
+// 		            }
 		        
-		            });
-			});
+// 		            });
+// 			});
 			(function() {
 				var docElem = window.document.documentElement, didScroll, scrollPosition;
 
