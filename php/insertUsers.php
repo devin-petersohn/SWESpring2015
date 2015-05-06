@@ -7,14 +7,14 @@ function generateRandomData($pw, $username, $statement, $dbconn)
 	
 	$saltData = makesalt();
 	$hashData = hashing($pw, $saltData);
-       pg_execute($dbconn,$satement, array($username, $hashData[0], $saltData[0], $hashData[1]); 	
+    pg_execute($dbconn,$statement, array($username, $hashData[0], $saltData[0], $hashData[1]));
 } 
 function makeSalt() {
 	$randData = "asdfasdfasdf";
 	$randOffset = mt_rand(0, 452);
 	$salt = hash("sha512", $randData, FALSE);
 	$salt = substr($salt, $randOffset, 60);
-	$returnResults = array($salt, $randoffset);
+	$returnResults = array($salt, $randOffset);
 	return $returnResults;
 }
 
@@ -23,7 +23,7 @@ function hashing($pw, $saltData)
 	$randOffset = mt_rand(0, 68);
 	$pw = hash("sha512", $pw . $saltData[0], FALSE);
 	$pw = substr($pw, $randOffset, 60);
-	$returnResults = array($pw, $randoffset);
+	$returnResults = array($pw, $randOffset);
 	return $returnResults;
 }
 
