@@ -35,9 +35,9 @@
     {
         
         
-        require "php/functions.php";
+        require "functions.php";
         $DBconn = db_connect();
-        require "php/authentication.php";
+        require "authentication.php";
         $results = authenticate($pawprint, $password, $DBconn);
         if($results['error'] == 1)
         {
