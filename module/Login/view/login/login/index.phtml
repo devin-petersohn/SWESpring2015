@@ -92,7 +92,7 @@ use Studentpage\Module;
 									<form id='login' action='login' method='post' accept-charset='UTF-8'>
 										<p><label>pawprint</label><input type="text" name='pawprint' id='pawprint'  maxlength="50" /></p>
 										<p><label>Password</label><input type="password" name='password' id='password' maxlength="50" /></p>
-										<button type='submit' name='login'>Login</button>
+										<button type='submit' name='login' id="login">Login</button>
 									</form>
 								</div>
 							</div>
@@ -204,6 +204,10 @@ use Studentpage\Module;
 		    	$.ajax({
 		            type: "POST",
 		            url: "../login.php",
+		            data: {
+		                pawprint: $("#pawprint").val(),
+		                password: $("#password").val()
+			            },
 		            success: function(data){
 		                console.log(data);
 		                if(data=="instructor"){
