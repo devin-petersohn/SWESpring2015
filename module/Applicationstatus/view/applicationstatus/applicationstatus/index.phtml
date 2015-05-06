@@ -45,7 +45,7 @@ if($status == PHP_SESSION_NONE){
             }
         }
     }*/
-        
+ 
         if(isset($_SESSION['username'])){
             $getOffer = pg_query($db, "SELECT * FROM applicant_offer_received WHERE sso = '".$_SESSION['username']."' AND offer_accepted IS NULL AND assigned_to_course IS NULL");
             if($getOffer != NULL){
@@ -53,15 +53,22 @@ if($status == PHP_SESSION_NONE){
                     echo "<div style='text-align:center; font-size:20pt; margin-top:100px;'>";
                     echo "You have been selected as an assistant for ". $row['course_id'];
                     echo "</div>";
-                    echo "<form action='' method=POST><button type='submit' class='btn btn-primary' name='acceptOffer' style='margin-left:475px; margin-right:20px; margin-top:20px;'>Accept</button><button type='submit' class='btn btn-danger'' name='rejectOffer' style='margin-top:20px;'>Reject</button></form>";
-                             
-                            }    
+                    echo "<form action='' method='POST'><button type='submit' class='btn btn-primary' name='acceptOffer' style='margin-left:475px; margin-right:20px; margin-top:20px;'>Accept</button><button type='submit' class='btn btn-danger'' name='rejectOffer' style='margin-top:20px;'>Reject</button><input type='hidden' name='course_id' value='" . $row['course_id'] . "'></form>";    
+                }    
                     }
                     else {
                         echo "Your application under review.  Please check back later.";
                     }
                 }
+                    
+                    if(isset($_POST['acceptOffer'])){
+                        echo $_SESSION['username'];
+                        echo $coursesOffered[$i];
+                        pg_query($db, "UPDATE applicant_offer_received SET offer_accepted=TRUE WHERE sso = '".$_SESSION['username']."' AND course_id = '".$_POST['course_id'] ."';");
+                        echo "Thank you for your response";
+                    }
             }
+      
     
     elseif (strcmp($window, "selection") == 0){
      if(isset($_SESSION['username'])){
@@ -69,7 +76,7 @@ if($status == PHP_SESSION_NONE){
             if($getOffer != NULL){
                 while (($row = pg_fetch_assoc($getOffer))){
                     echo 'You have been selected as an assistant for '. $row['course_id'];
-                    ?><form action="" method=POST><button type="submit" class="btn btn-primary" name="acceptOffer">Accept</button><button type="submit" class="btn btn-danger" name="rejectOffer">Reject</button></form>
+                    ?><form action='' method=POST><button type="submit" class="btn btn-primary" name="acceptOffer">Accept</button><button type="submit" class="btn btn-danger" name="rejectOffer">Reject</button></form>
                     <?php 
                     }    
             }
