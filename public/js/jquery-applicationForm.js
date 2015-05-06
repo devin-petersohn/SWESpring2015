@@ -417,8 +417,9 @@ $(function(){
         
         $('#second_step input').removeClass('error').removeClass('valid');
         var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;  
-        var fields1 = $('#second_step input[name=pub]','#second_step input[name=advisorname]');
-        var fields2 = $('#second_step input[name=pub]','#second_step input[name=selectionmajor]');
+        var fields1 = $('#second_step input[name=pub1]');
+        var fields2 = $('#second_step input[name=pub2]');
+        var fieldspub = $('#second_step input[name=pub]');
         
         var error = 0;
         if($("#selection").val()=="TA")
