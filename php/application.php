@@ -59,7 +59,7 @@
 		$grades = $_POST['grade'];
 
 		pg_prepare($db, "q10", 'INSERT INTO applicant_prev_taught_courses (sso, course_id, semester_taught) 
-			VALUES ($1, $2, $3;');
+			VALUES ($1, $2, $3);');
 		pg_execute($db, "q10", array($sso, $_POST['precourse']));
 		
 		pg_prepare($db, "q11", 'INSERT INTO applicant_other_workpalces (sso, workplace) VALUES ($1, $2)');
