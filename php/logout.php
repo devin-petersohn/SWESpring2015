@@ -1,7 +1,9 @@
 <?php
 session_destroy();
 
-header('Location: Login');
-exit();
+
+header('Location:swespring2015/login');
+exit;
+
 
 ?>
