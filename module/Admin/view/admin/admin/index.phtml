@@ -250,15 +250,22 @@ session_start();
             <table class="table">
                 <thead>
                     <tr><th>Instructor</th><th>Course</th><th></th></tr>
-                    <tr><td>
+                    <form action='' method='POST'><tr><td>
                     <?php include 'php/add_instructor_teaches.php';                       
                             instructor_dropdown();
-                         ?></td><td><?course_dropdown(); ?>></td></tr>
+                         ?></td><td><?course_dropdown(); ?>></td><td><button type="submit" class="btn btn-primary" name="toCourse">Submit</button></td></tr></form>
                 </thead>
             </table>
          </div>
-    
   </div>
+  <?php 
+  if(isset($_POST['toCourse'])){
+      include 'php/add_instructor_teaches.php';
+      add_instructor_teaches($_POST['selectInstructors'], $_POST['selectCourses']);
+  }
+  
+  
+  ?>
   
   
   

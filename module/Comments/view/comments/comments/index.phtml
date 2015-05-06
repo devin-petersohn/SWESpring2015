@@ -1,6 +1,5 @@
 <?php
-$status = session_status();
-if($status == PHP_SESSION_NONE) { header("Location:Login"); } 
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -97,7 +96,13 @@ if($status == PHP_SESSION_NONE) { header("Location:Login"); }
                                 //fields for printing:  Author, comment, Date, course || DB values:  instructor_sso, comment
                                 if($result) {
                                     while($row =  pg_fetch_array($result, null, PGSQL_ASSOC)) {?>
-                                        <tr><td><?echo $row['course_id']?></td><td><?echo $row['instructor_sso']?></td><td><?echo $row['comment']?></td><td><input type="button" id="<?echo $row['comment_id']?>" class="btn btn_info del" value="delete"></td></tr> <?
+                                        <tr><td><?echo $row['course_id']?></td><td><?echo $row['instructor_sso']?></td><td><?echo $row['comment']?></td>
+					
+					<td>
+					<?php if(strcmp($row['instructor_sso'], $_SESSION['username']) == 0) { ?>
+					<input type="button" id="<?echo $row['comment_id']?>" class="btn btn_info del" value="delete"></td>
+					<?php } ?>
+					</tr> <?
                                     }
                                 }
                             ?>

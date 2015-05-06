@@ -2,7 +2,7 @@
 return array(
     // This should be an array of module namespaces used in the application.
     'modules' => array(
-        'Application','Applicationform','Homepage','Professorpage','Admin','Login','Studentpage','Test','Comments','Applicationstatus'
+        'Application','Applicationform','Homepage','Professorpage','Admin','Login','Studentpage','Test','Comments','Applicationstatus','error'
     ),
 
     // These are various options for the listeners attached to the ModuleManager
@@ -13,7 +13,7 @@ return array(
         // Module class.
         'module_paths' => array(
             './module',
-            './vendor','./module','./module','./module','./module','./module','./module','./module','./module','./module','./module','./module','./module',
+            './vendor','./module','./module','./module','./module','./module','./module','./module','./module','./module','./module','./module','./module','./module',
         ),
 
         // An array of paths from which to glob configuration files after

@@ -11,7 +11,7 @@ function generateRandomData($pw, $username, $statement, $dbconn)
 } 
 function makeSalt() {
 	$randData = "asdfasdfasdf";
-	$randOffset = mt_rand(0, 452);
+	$randOffset = mt_rand(0, 68);
 	$salt = hash("sha512", $randData, FALSE);
 	$salt = substr($salt, $randOffset, 60);
 	$returnResults = array($salt, $randOffset);

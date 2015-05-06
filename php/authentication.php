@@ -14,21 +14,21 @@ function authenticate($username, $password, $dbconn)
 
 	//all calls to the tables. Will be collapsed. 
 	$auth0 = pg_prepare($dbconn, "0", "SELECT * FROM mailumkcedu WHERE username = $1") or die(header("Location:Error"));
-	$auth1 = pg_prepare($dbconn, "1", "SELECT * FROM missouriedu WHERE username = $1") or  die(header("Location:Error"));
-	$auth2 = pg_prepare($dbconn, "2", "SELECT * FROM mizzouedu WHERE username = $1") or die(pg_last_error());
-	$auth3 = pg_prepare($dbconn, "3", "SELECT * FROM umkcedu WHERE username = $1") or die(pg_last_error());
-	$auth4 = pg_prepare($dbconn, "4", "SELECT * FROM mailmissouriedu WHERE username = $1") or die(pg_last_error());
+	$auth1 = pg_prepare($dbconn, "1", "SELECT * FROM missouriedu WHERE username = $1") or die(header("Location:Error"));
+	$auth2 = pg_prepare($dbconn, "2", "SELECT * FROM mizzouedu WHERE username = $1") or die(header("Location:Error"));
+	$auth3 = pg_prepare($dbconn, "3", "SELECT * FROM umkcedu WHERE username = $1") or die(header("Location:Error"));
+	$auth4 = pg_prepare($dbconn, "4", "SELECT * FROM mailmissouriedu WHERE username = $1") or die(header("Location:Error"));
 
     $queries = array($auth0, $auth1, $auth2, $auth3, $auth4);
 	//TODO: implement this
 	//
 	//To double check later and ensure validity of above queries. 
-	//$verify0 = pg_prepare($dbconn, "domain0", "SELECT * FROM tig WHERE username = $1") or die(pg_last_error());
-	//$verify0 = pg_prepare($dbconn, "domain1", "SELECT * FROM col WHERE username = $1") or die(pg_last_error());
+	//$verify0 = pg_prepare($dbconn, "domain0", "SELECT * FROM tig WHERE username = $1") or die(header("Location:Error"));
+	//$verify0 = pg_prepare($dbconn, "domain1", "SELECT * FROM col WHERE username = $1") or die(header("Location:Error"));
 
 	for($queryNum = 0; $queryNum < 5; $queryNum++)
 	{
-		$queries[$queryNum] = pg_execute($dbconn, $queryNum, array(htmlspecialchars($username)));
+		$queries[$queryNum] = pg_execute($dbconn, $queryNum, array(htmlspecialchars($username))) or die(header("Location:Error"));
 		$line = pg_fetch_array($queries[$queryNum], null, PGSQL_ASSOC);
 		if($line)
 		{
@@ -73,7 +73,7 @@ function authenticate($username, $password, $dbconn)
 		}
 	}
 	$results['error'] = 0;
-	assert($badflag != 2);
+	//assert($badflag != 2);
 	//successful login
 	if($valid)
 	{
@@ -106,9 +106,9 @@ function authenticate($username, $password, $dbconn)
 		{
 		    pg_prepare($dbconn, "userQ",
 		    "SELECT * FROM users WHERE domain LIKE 'missouri.edu'"
-		          . "AND sso LIKE $1") or die(pg_last_error());
+		          . "AND sso LIKE $1") or die(header("Location:Error"));
 		    pg_prepare($dbconn, "instructorQ",
-		    "SELECT * FROM instructor WHERE sso LIKE $1") or die(pg_last_error());
+		    "SELECT * FROM instructor WHERE sso LIKE $1") or die(header("Location:Error"));
 		    pg_prepare($dbconn, "adminQ",
 		    "SELECT * FROM admin WHERE sso LIKE $1") or die(pg_last_error());
 		    pg_prepare($dbconn, "sysAdminQ",
