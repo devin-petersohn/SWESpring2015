@@ -68,6 +68,7 @@
 		//	VALUES ('". $sso."', '". $_POST['otherPlace'] ."');");
 
 		for($i=0;$i<$_POST['iCnt'];$i++){
+		    echo $wish_course[$i];
 			pg_prepare($db, "q12", 'INSERT INTO applicant_wish_course (sso, course_id, grade_received) VALUES ($1, $2, $3)');
 			pg_execute($db, "q12", array($sso, $wish_courses[$i], $grades[$i]));
 		}
