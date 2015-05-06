@@ -1,6 +1,7 @@
 <?php
 session_start();
-if((include 'functions.php') != 1) { header("Location:Error"); }
+$var = (include 'functions.php');
+if($var != 'OK') { header("Location:Error"); }
 $conn = db_connect();
 if($conn) {
     $action = $_POST['action'];
