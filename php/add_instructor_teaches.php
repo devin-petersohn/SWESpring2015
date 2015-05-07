@@ -5,7 +5,7 @@ $db = db_connect();
 
 function course_dropdown() {	
 	$db = db_connect();
-	$course = pg_query($db, "SELECT course_id FROM course WHERE slots_available > 0 ORDER BY course_id DESC;") or die(header("Location:Error"));
+	$course = pg_query($db, "SELECT course_id FROM course WHERE slots_available > 0 ORDER BY course_id ASC;") or die(header("Location:Error"));
 		echo "<select name='selectCourses' id='selection' value='selection' >";
 		echo"<value='ERROR' disabled='disabled' seclected='selected'> Please select a course for the instructor to teach</option>";
 		while ($printedCourse = pg_fetch_row($course)) {
@@ -16,7 +16,7 @@ function course_dropdown() {
 
 function instructor_dropdown() {
 	$db = db_connect();
-	$instructor = pg_query($db, "SELECT sso FROM instructor ORDER BY sso DESC;") or die(header("Location:Error"));
+	$instructor = pg_query($db, "SELECT sso FROM instructor ORDER BY sso ASC;") or die(header("Location:Error"));
 		echo "<select name='selectInstructors' id='selection' value='selection' >";
 		echo"<value='ERROR' disabled='disabled' seclected='selected'> Please select an instructor</option>";
 		while ($printedInstructor = pg_fetch_row($instructor)) {
