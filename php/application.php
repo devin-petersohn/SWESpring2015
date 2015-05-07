@@ -66,9 +66,8 @@
 		pg_execute($db, "q11", array($sso, $_POST['otherPlace']));
 		//pg_query($db, "INSERT INTO applicant_other_workpalces (sso, workplace) 
 		//	VALUES ('". $sso."', '". $_POST['otherPlace'] ."');");
-
+		pg_prepare($db, "q12", 'INSERT INTO applicant_wish_course (sso, course_id, grade_received) VALUES ($1, $2, $3)');
 		for($i=0;$i<$_POST['iCnt'];$i++){
-			pg_prepare($db, "q12", 'INSERT INTO applicant_wish_course (sso, course_id, grade_received) VALUES ($1, $2, $3)');
 			pg_execute($db, "q12", array($sso, $wish_courses[$i], $grades[$i]));
 		}
 	}
