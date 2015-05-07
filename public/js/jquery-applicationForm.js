@@ -132,6 +132,7 @@ $(function(){
     
 
     var iCnt = 0;
+    var height=0;
     $(document).ready(function() {
         $('.sigPad').signaturePad();
         if (!blog.isFirstLoad(blog.comments, "jquery-applicationForm.js")) {
@@ -218,9 +219,9 @@ $(function(){
 //                console.log("the count is "+ iCnt);
 //                
 
-                $height=$('#container').height();
-                $height+=150;
-                $("#container").css("height", $height);
+                height=$('#container').height();
+                height+=150;
+                $("#container").css("height", height);
 
                 if (iCnt == 1) {        // SHOW SUBMIT BUTTON IF ATLEAST "1" ELEMENT HAS BEEN CREATED.
 
@@ -247,7 +248,7 @@ $(function(){
                 $('#tr'+iCnt).remove(); 
 
                 $height=$('#container').height();
-                $height-=150;
+                $height-=120;
                 $("#container").css("height", $height);
 
                  iCnt = iCnt - 1;
@@ -331,7 +332,6 @@ $(function(){
                     },
                     function(data){
                         
-                        alert("This page has been sent to database!");
                     }
             );
             /*
@@ -486,15 +486,16 @@ $(function(){
         if(!error) {
             $.post("../../application.php",
                         {
+            	
                             ID: $("#ID").val(),
                             advisorname: $("#advisorname").val(),
                             selectionmajor: $("#selectionmajor").val(),
+                            masterphd: $('#masterphd').val(),
                             selection: $("#selection").val(),
                             email: $("#email").val()
                         },
                         function(data){
                             
-                            alert("This page has been sent to database!");
                         }
                 );
 
@@ -515,7 +516,7 @@ $(function(){
 
                 $('#progress_text').html('0% Complete');
                 $('#progress').css('width','0px');
-                $("#container").css("height", $first_height);
+                $("#container").css("height", "440px");
                 $("#container label").css("line-height", "27px");
     
                 //slide steps
@@ -553,7 +554,6 @@ $(function(){
                     },
                     function(data){
                         
-                        alert("This page has been sent to database!");
                     }
             );
                 //update progress bar
@@ -622,7 +622,7 @@ $(function(){
 
     $('#submit_fourth').click(function(){
         //send information to server
-        $fourth_height=$('#container').height();
+        
        
         
         $('#fourth_step input').removeClass('error').removeClass('valid');
@@ -642,34 +642,38 @@ $(function(){
         var i=0;
         var courseLikearr=[];
         var gradearr=[];
-        
-        for(i=2;i<=iCnt;i++)
+        console.log(iCnt);
+        for(i=1;i<=iCnt;i++)
         {
             courseLikearr.push($('#'+'courseLike'+i).val());
-
 
             gradearr.push($('#'+'grade_course'+i).val());
         }
         if(!error) {
+        	console.log(courseLikearr);
+        	console.log(gradearr);
+        	
             $.post("../../application.php",
                     {
                         precourse: $("#precourse").val(),
-
+                        iCnt: iCnt,
                         courseLike: courseLikearr,
                         grade : gradearr,
                         otherPlace: $("#otherPlace").val()
                     },
                     function(data){
                         
-                        alert("This page has been sent to database!");
                     }
             );
                 //update progress bar
+            	$fourth_height=$('#container').height();
+            	console.log("four height is"+ $fourth_height);
                 $("#container").css("height", "420px");
                 $('#progress_text').html('64% Complete');
                 $('#progress').css('width','216px');
                 $('#submit_sixth').css('left','540px');
                 //slide steps
+                
                 $('#fourth_step').slideUp();
                 $('#sixth_step').slideDown();       
         } else return false;
@@ -745,7 +749,6 @@ $(function(){
                     },
                     function(data){
                         
-                        alert("This page has been sent to database!");
                     }
             );
                 //update progress bar
@@ -771,7 +774,7 @@ $(function(){
                 {
                     var fields = new Array(
                     $('#selection').val(),
-                    $('#name').val(),
+                    $('#fname').val()+" "+$('#lname').val(),
                     $('#gpa').val(),
                     $('#ID').val(),
                     $('#source').val(),
@@ -842,6 +845,14 @@ $(function(){
                 $('#labelregister').show();
                                 
 
+            }
+            else{
+            	$("#container").css("height", "500px");
+                $('#speakScore').hide();
+                $('#semesterLast').hide();
+                $('#seventh_step label').hide();
+                $('#timetoregister').show();
+                $('#labelregister').show();
             }
         });
     });
@@ -916,7 +927,6 @@ $(function(){
                     },
                     function(data){
                         
-                        alert("This page has been sent to database!");
                     }
             );
                 //update progress bar
@@ -996,7 +1006,6 @@ $(function(){
                     },
                     function(data){
                         
-                        alert("This page has been sent to database!");
                     }
             );
                 //update progress bar
@@ -1101,6 +1110,15 @@ $(function(){
 
             });
     $('#submit_sign').click(function(){
+    	$.post("../../application.php",
+                {
+               		submit_date: $('#presentDate').val()
+                    
+                },
+                function(data){
+                    alert(data);
+                }
+        );
         window.location.href='studentpage';
     });
 

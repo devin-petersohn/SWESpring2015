@@ -16,18 +16,30 @@ $uploadComplete = empty($_SESSION['uploadComplete']) ? false : $_SESSION['upload
     
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 	<title>Application Form</title>
+		 <link href="/swespring2015/css/jquery.signaturepad.css" media="screen" rel="stylesheet" type="text/css">
+<link href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" media="screen" rel="stylesheet" type="text/css">
+<link href="/swespring2015/css/swe-style.css" media="screen" rel="stylesheet" type="text/css">    <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript" src="/swespring2015/js/json2.min.js"></script>
+<script type="text/javascript" src="/swespring2015/js/jquery.signaturepad.js"></script>
+<script type="text/javascript" src="/swespring2015/js/jquery-applicationForm.js"></script>
+<script type="text/javascript" src="/swespring2015/js/jquery.inputfocus-0.9.min.js"></script>
+<script type="text/javascript" src="/swespring2015/js/jquery-ui.min.js"></script>   
+ 
+	
+	
 	 <?php echo $this->headLink()->prependStylesheet($this->basePath() . '/css/swe-style.css')
-	           ->prependStylesheet('//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css')
-	           ->prependStylesheet($this->basePath().'/css/jquery.signaturepad.css');
-    ?>
+// 	           ->prependStylesheet('//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css')
+// 	           ->prependStylesheet($this->basePath().'/css/jquery.signaturepad.css');
+//     ?>
     <?php echo $this->headScript()
-        ->prependFile($this->basePath() . '/js/jquery-ui.min.js')
-        ->prependFile($this->basePath() . '/js/jquery.inputfocus-0.9.min.js')
-        ->prependFile($this->basePath() . '/js/jquery-applicationForm.js')
-        ->prependFile($this->basePath() . '/js/jquery.signaturepad.js')
-        ->prependFile($this->basePath() . '/js/json2.min.js')
-        ->prependFile('//code.jquery.com/ui/1.11.4/jquery-ui.js')
-        ->prependFile('//code.jquery.com/jquery-1.10.2.js');
+//         ->prependFile($this->basePath() . '/js/jquery-ui.min.js')
+//         ->prependFile($this->basePath() . '/js/jquery.inputfocus-0.9.min.js')
+//         ->prependFile($this->basePath() . '/js/jquery-applicationForm.js')
+//         ->prependFile($this->basePath() . '/js/jquery.signaturepad.js')
+//         ->prependFile($this->basePath() . '/js/json2.min.js')
+//         ->prependFile('//code.jquery.com/ui/1.11.4/jquery-ui.js')
+//         ->prependFile('//code.jquery.com/jquery-1.10.2.js');
     
     
          ?>   
