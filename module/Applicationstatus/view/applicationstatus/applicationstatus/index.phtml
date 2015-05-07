@@ -44,8 +44,8 @@ if($status == PHP_SESSION_NONE){
                 echo "</div>";
             }
         }
-    }*/
- 
+    }
+ */
        if(isset($_SESSION['username'])){
             $getOffer = pg_query($db, "SELECT * FROM applicant_offer_received WHERE sso = '".$_SESSION['username']."' AND offer_accepted IS NULL AND assigned_to_course IS NULL");
             if($getOffer != NULL){
