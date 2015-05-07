@@ -53,7 +53,7 @@ session_start();
                 <input type="radio" name="choice" id="name" value="name">Search by Applicant Name
                 <br>
                 <input type="text" name="input">
-                <button type='submit' class="btn btn-danger" name='submit'>Submit</button>
+                <button type='submit' class="btn btn-primary" name='submit'>Submit</button>
             </form>
             <?php 
             if(isset($_POST['submit'])){
@@ -86,6 +86,10 @@ session_start();
                                    <td><? echo $t['lname']; ?></td>
                                    <td><? echo $t['gpa']; ?></td>
                                    <td><? echo $t['email']; ?><td><? echo $t['ranking']; ?></td>
+                                   <td>
+                                   <input type="text" name="rank" placeholder="Add Rank">
+                                   <button type="submit" class="btn btn-success" name="submit2">Submit</button>
+                                   </td>
                                    </form>
                                    </tr>
 
