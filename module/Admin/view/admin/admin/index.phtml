@@ -33,17 +33,18 @@ session_start();
       <h3><i class="glyphicon glyphicon-briefcase"></i> Toolbox</h3>
       
       <ul class="nav nav-stacked">
-		<li><a href="#rankta"> Rank TA</a></li>
-        <li><a href="#addcourse"> Add Courses</a></li>
-        <li><a href="#deletecourse"> Delete Courses</a></li>
-        <li><a href="javascript:;"> Assign TA</a></li>
+		<li><a href="#search"> Rank TA</a></li>
+        <li><a href="#addcourse"> Add/Delete Courses</a></li>
+        <li><a href="#addcourse"> Add/Delete Instructors</a></li>
+        <li><a href="#instructor">Add Instructor to Course</a></li>
+        <li><a href="#assign"> Assign Applicants</a></li>
       </ul>
       
-      <hr>
+      <hr style="border-color:black;">
       
   	</div><!-- /span-3 -->
     
-    <div class="col-md-12" style="margin-top: 40px; width:95%; margin-left:auto; margin-right:auto;">
+    <div id="search"class="col-md-12" style="margin-top: 40px; width:95%; margin-left:auto; margin-right:auto;">
        <div class="well" style="height:300px;">
             <h3>Search for an Applicant</h3>
             <form id='search' action='' method='post' accept-charset='UTF-8'>
@@ -52,7 +53,7 @@ session_start();
                 <input type="radio" name="choice" id="name" value="name">Search by Applicant Name
                 <br>
                 <input type="text" name="input">
-                <input type='submit' name='submit' value='Submit'>
+                <button type='submit' class="btn btn-danger" name='submit'>Submit</button>
             </form>
             <?php 
             if(isset($_POST['submit'])){
@@ -85,10 +86,7 @@ session_start();
                                    <td><? echo $t['lname']; ?></td>
                                    <td><? echo $t['gpa']; ?></td>
                                    <td><? echo $t['email']; ?><td><? echo $t['ranking']; ?></td>
-                                   <td>
-                                   <input type="text" name="rank" placeholder="Add Rank">
-                                   <input type="submit" name="submit2" value="Submit">
-                                   </td> </form>
+                                   </form>
                                    </tr>
 
                                   <? 
@@ -244,10 +242,13 @@ session_start();
   
   
   
-  <div class="row" >    
+      
     
-         <div class="panel panel-default" style="margin-top: 70px; height:300px; width:80%; margin-left:auto; margin-right:auto;">
-            <table class="table">
+         <div id="instructor" class="panel panel-default" style="margin-top: 70px; height:300px; width:80%; margin-left:auto; margin-right:auto;">
+            <div class="panel-heading"><h4 style="text-align: left;">Instructor Teaches Course</h4>
+            <p style="font-size:12px;">Please Select the Instructor and the Course they are Teaching</p>
+            </div>
+            <table class="table table-striped">
                 <thead>
                     <tr><th>Instructor</th><th>Course</th><th></th></tr>
                     <form action='' method='POST'><tr><td>
@@ -257,7 +258,6 @@ session_start();
                 </thead>
             </table>
          </div>
-  </div>
   <?php 
   if(isset($_POST['toCourse'])){
       include 'php/add_instructor_teaches.php';
@@ -269,7 +269,7 @@ session_start();
   
   
   
-  <div class="panel panel-default" style="margin-top: 100px; height:300px;">
+  <div id="assign" class="panel panel-default" style="margin-top: 75px; height:300px; width:80%; margin-left:auto; margin-right:auto;">
         <div class="panel-heading"><h4 style="text-align: left;">Assign Applicants</h4></div>
             <?php 
             if(isset($_SESSION['username'])){

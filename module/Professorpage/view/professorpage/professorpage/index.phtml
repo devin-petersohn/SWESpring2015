@@ -59,7 +59,7 @@
   
   <!-- upper section -->
   
-    <div class="col-md-12" style="margin-top: 40px;">
+    <div class="col-md-12" style="margin-top: 40px; margin-left:-10px;">
        <div class="well" style="height:300px;">
             <h3>Search for an Applicant</h3>
             <form id='search' action='' method='post' accept-charset='UTF-8'>
@@ -83,14 +83,14 @@
                                     <form action="rank.php" method="POST">
                                        <table class="table table-striped">
                                             <thead>
-                                              <tr><th>SSO</th><th>First Name</th><th>Last Name</th><th>GPA</th><th>E-mail</th><th>Ranking</th><th>Add/Change Rank</th></tr>
+                                              <tr><th>SSO</th><th>First Name</th><th>Last Name</th><th>GPA</th><th>E-mail</th><th>Ranking</th></tr>
                                             </thead>
                                             <tbody>
                                             <?php 
                                             foreach ($arr as $t){
                                             $t = json_decode($t, TRUE);
                                             ?>
-                                              <tr><td><? echo $t['sso'];?></td><td><? echo $t['fname']; ?></td><td><? echo $t['lname']; ?></td><td><? echo $t['gpa']; ?></td><td><? echo $t['email']; ?><td><? echo $t['ranking']; ?></td><td><input type="text" id="rank" placeholder="Add Rank"><input type="submit" value="Submit"></td></tr>
+                                              <tr><td><? echo $t['sso'];?></td><td><? echo $t['fname']; ?></td><td><? echo $t['lname']; ?></td><td><? echo $t['gpa']; ?></td><td><? echo $t['email']; ?></tr>
                                             <? } ?>
                                             </tbody>
                                           </table>
@@ -109,7 +109,7 @@
      <hr>
      <hr>
      <hr>
-     <div class="panel panel-default" style="margin-top: 400px; height:300px;">
+     <div class="panel panel-default" style="margin-top: 350px; height:300px; margin-left:auto; margin-right:auto;">
         <div class="panel-heading"><h4 style="text-align: left;">Courses You Are teaching this Semester</h4></div>
             <?php 
             if(isset($_SESSION['username'])){
@@ -120,17 +120,17 @@
                 die; // kill the app if no connection
                }
                else 
-                $result = pg_query($DBconn, "SELECT course_id, section FROM instructor_teaches WHERE instructor_sso='".$_SESSION['username']."';");
+                $result = pg_query($DBconn, "SELECT t.course_id, c.slots_available FROM instructor_teaches AS t INNER JOIN course AS c ON t.course_id = c.course_id WHERE t.instructor_sso='".$_SESSION['username']."';");
                ?>
                            <table class="table table-striped">
                                <thead>
-                                   <tr><th>Course ID</th><th>Section</th></tr>
+                                   <tr><th>Course ID</th><th>Slots Available</tr>
                                </thead>
                                <tbody>
                                    <?php 
                                    while (($row = pg_fetch_assoc($result)) != false) {    
                                    ?>
-                                   <tr><td><? echo $row['course_id'];?></td><td><? echo $row['section']; ?></td></tr>
+                                   <tr><td><? echo $row['course_id'];?></td><td><? echo $row['slots_available'];?></td></tr>
                                    <?php } 
             }
             else {
@@ -143,7 +143,7 @@
             
      </div>                 
  
-    <div class="panel panel-default" style="height:400px;">
+    <div class="panel panel-default" style="height:300px;">
         <div class="row">
             <div class="col-sm-12">
                 <table class="table table-striped">
@@ -185,7 +185,7 @@
                                             
                                             echo 'TA';
 
-                                        } ?></td><td><?echo $row['gpa']?></td><td><?echo $row['grade_received']?></td><td><input type="submit" name="offer" value="Offer"></form></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary" id="bSession" name="sso" value="<?echo $row['sso']?>" onclick="buildSession()">Add/View Comments</button></form></td><tr><?
+                                        } ?></td><td><?echo $row['gpa']?></td><td><?echo $row['grade_received']?></td><td><button type="submit" class="btn btn-primary" name="offer">Offer</button></form></td><td><form action="comments" method="POST"><button type="submit" class="btn btn-primary" id="bSession" name="sso" value="<?echo $row['sso']?>" onclick="buildSession()">Add/View Comments</button></form></td><tr><?
 
 
                                     }
