@@ -3,8 +3,8 @@ include 'insertUsers.php';
 include 'functions.php';
 
 $pw = 'test';
-$username = 'zzff8';
-$statement = 0;
+$username = 'fraserj';
+$statement = 1;
 $dbconn = db_connect();
 
 generateRandomData($pw, $username, $statement, $dbconn);
