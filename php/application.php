@@ -104,11 +104,11 @@
 
 	if( $_POST['selectionfour'] && $_POST['selectionfive']){
 		if($_POST['selectionfour'] == "rm"){
-
-		}
+		    pg_query($db, "UPDATE applicant SET gato_req_met = TRUE;");
+		} else pg_query($db, "UPDATE applicant SET gato_req_met = FALSE;");
 
 		if($_POST['selectionfive'] == "rm"){
-
-		}
+		    pg_query($db, "UPDATE applicant_is_international SET ointa_req_met = TRUE;");
+		}else pg_query($db, "UPDATE applicant_is_international SET ointa_req_met = FALSE;");
 	}
 ?>
