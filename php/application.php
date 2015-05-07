@@ -62,7 +62,7 @@
 			VALUES ($1, $2);');
 		pg_execute($db, "q10", array($sso, $_POST['precourse']));
 		
-		pg_prepare($db, "q11", 'INSERT INTO applicant_other_workpalces (sso, workplace) VALUES ($1, $2)');
+		pg_prepare($db, "q11", 'INSERT INTO applicant_other_workplaces (sso, workplace) VALUES ($1, $2)');
 		pg_execute($db, "q11", array($sso, $_POST['otherPlace']));
 		//pg_query($db, "INSERT INTO applicant_other_workpalces (sso, workplace) 
 		//	VALUES ('". $sso."', '". $_POST['otherPlace'] ."');");
