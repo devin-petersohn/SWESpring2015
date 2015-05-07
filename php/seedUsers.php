@@ -3,7 +3,7 @@ include 'insertUsers.php';
 include 'functions.php';
 
 $pw = 'test';
-$username = 'klaricm';
+$username = 'scottg';
 $statement = 1;
 $dbconn = db_connect();
 
