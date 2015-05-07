@@ -10,7 +10,7 @@ function addCourse($course_id, $slots) {
     $SR = pg_execute($db, "q0", array());
     while($SR2 = pg_fetch_array($SR, null, PGSQL_ASSOC))
     {
-        if(strcmp($SR2, $course_id) == 0)
+        if(strcmp($SR2['course_id'], $course_id) == 0)
         {
             echo "<p style='color:red;'>Error: Course already exists</p>";
             return;
