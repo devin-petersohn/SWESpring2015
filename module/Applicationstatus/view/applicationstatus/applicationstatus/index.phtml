@@ -30,7 +30,7 @@ if($status == PHP_SESSION_NONE){
     }
     
     elseif (strcmp($window, "apply") == 0){
-      /* if(isset($_SESSION['username'])){
+       if(isset($_SESSION['username'])){
             $appSubmitted = pg_query($db, "SELECT app_submitted FROM applicant WHERE sso = '".$_SESSION['username']."'");
             if(pg_fetch_array($appSubmitted)[0] == TRUE){
                
@@ -45,8 +45,8 @@ if($status == PHP_SESSION_NONE){
             }
         }
     }
- */
-       if(isset($_SESSION['username'])){
+ 
+       /*if(isset($_SESSION['username'])){
             $getOffer = pg_query($db, "SELECT * FROM applicant_offer_received WHERE sso = '".$_SESSION['username']."' AND offer_accepted IS NULL AND assigned_to_course IS NULL");
             if($getOffer != NULL){
                 while (($row = pg_fetch_assoc($getOffer))){
@@ -69,7 +69,7 @@ if($status == PHP_SESSION_NONE){
                     if(isset($_POST['rejectOffer'])){
                         pg_query($db, "UPDATE applicant_offer_received SET offer_accepted=FALSE WHERE sso = '".$_SESSION['username']."' AND course_id = '".$_POST['course_id'] ."';");
                     }
-            }
+            }*/
       
     
     elseif (strcmp($window, "selection") == 0){
