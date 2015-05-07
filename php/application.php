@@ -99,7 +99,7 @@
 	}
 	
 	if($_POST['submit_date']) {
-	    pg_query($db, "UPDATE applicant set submit_date = ".$_POST['submit_date']." WHERE sso = '".$sso."';");
+	    pg_query($db, "UPDATE applicant SET submit_date = NOW(), app_submitted = TRUE WHERE sso = '".$sso."';");
 	}
 
 	if( $_POST['selectionfour'] && $_POST['selectionfive']){
