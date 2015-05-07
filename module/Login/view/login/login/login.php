@@ -10,13 +10,13 @@
         echo "Login here!";
         if(empty($_POST['pawprint']))
         {
-            echo "<br><p style='text-align:center; color:red;'>Please enter a password</p>";
+            echo "<br><p style='text-align:center; color:red;'>Please enter your PawPrint</p>";
             return false;
         }
          
         if(empty($_POST['password']))
         {
-            echo "<br>password is empty!";
+            echo "<br><p style='text-align:center; color:red;'>Please enter a password</p>";
             return false;
         }
          
