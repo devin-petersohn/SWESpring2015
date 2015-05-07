@@ -16,7 +16,7 @@ function course_dropdown() {
 
 function instructor_dropdown() {
 	$db = db_connect();
-	$instructor = pg_query($db, "SELECT sso FROM instructor;") or die(header("Location:Error"));
+	$instructor = pg_query($db, "SELECT sso FROM instructor ORDER BY sso DESC;") or die(header("Location:Error"));
 		echo "<select name='selectInstructors' id='selection' value='selection' >";
 		echo"<value='ERROR' disabled='disabled' seclected='selected'> Please select an instructor</option>";
 		while ($printedInstructor = pg_fetch_row($instructor)) {
