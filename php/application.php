@@ -11,7 +11,7 @@
 	if( $_POST['selection'] && $_POST['fname'] && $_POST['lname'] && $_POST['gpa']){
 		#pg_query($db, "INSERT INTO Applicant (sso) VALUES ('".$sso."');");
 		pg_prepare($db, "q2", 'UPDATE Applicant SET fname = $1, lname = $2, gpa = $3 WHERE sso = $4;');
-		pg_execute($db, "q2", array($_POST['fname'], $_POST['lname'], $_POST['gpa']), $sso);
+		pg_execute($db, "q2", array($_POST['fname'], $_POST['lname'], $_POST['gpa'], $sso));
 		#pg_query($db, "UPDATE Applicant SET fname = '". $_POST['fname'] ."', lname = '". $_POST['lname'] ."', 
 		#	gpa = '". $_POST['gpa'] ."' WHERE sso = '". $sso ."';");
 		if($_POST['selection'] != "TA"){
@@ -58,17 +58,16 @@
 		$wish_courses = $_POST['courseLike'];
 		$grades = $_POST['grade'];
 
-		pg_prepare($db, "q10", 'INSERT INTO applicant_prev_taught_courses (sso, course_id, semester_taught) 
-			VALUES ($1, $2, $3;');
+		pg_prepare($db, "q10", 'INSERT INTO applicant_prev_taught_course (sso, course) 
+			VALUES ($1, $2);');
 		pg_execute($db, "q10", array($sso, $_POST['precourse']));
 		
-		pg_prepare($db, "q11", 'INSERT INTO applicant_other_workpalces (sso, workplace) VALUES ($1, $2)');
+		pg_prepare($db, "q11", 'INSERT INTO applicant_other_workplaces (sso, workplace) VALUES ($1, $2)');
 		pg_execute($db, "q11", array($sso, $_POST['otherPlace']));
 		//pg_query($db, "INSERT INTO applicant_other_workpalces (sso, workplace) 
 		//	VALUES ('". $sso."', '". $_POST['otherPlace'] ."');");
-
+		pg_prepare($db, "q12", 'INSERT INTO applicant_wish_course (sso, course_id, grade_received) VALUES ($1, $2, $3)');
 		for($i=0;$i<$_POST['iCnt'];$i++){
-			pg_prepare($db, "q12", 'INSERT INTO applicant_wish_course (sso, course_id, grade_received) VALUES ($1, $2, $3)');
 			pg_execute($db, "q12", array($sso, $wish_courses[$i], $grades[$i]));
 		}
 	}
@@ -89,7 +88,7 @@
 		} else pg_query($db, "UPDATE Applicant SET gato_req_met = FALSE WHERE sso = '".$sso."';");
 	}
 
-	if($_POST['speak_next_test_date'] && $_POST['selectionthree'] && $_POST['speakScore'] && $_POST['semesterLast']){
+	if($_POST['timetoregister'] && $_POST['selectionthree'] && $_POST['speakScore'] && $_POST['semesterLast']){
 		pg_query($db, "DELETE FROM applicant_is_international WHERE sso = ". $sso.";");
 		pg_query($db, "INSERT INTO applicant_is_international (sso) VALUES ('".$sso."');");
 		if($_POST['selectionthree'] == "rm"){
@@ -98,14 +97,18 @@
 		} else pg_query($db, "UPDATE applicant_is_international SET speak_req_met = FALSE,
 		     speak_next_test_date = ".$_POST['timetoregister']." WHERE sso = '".$sso."');");
 	}
+	
+	if($_POST['submit_date']) {
+	    pg_query($db, "UPDATE applicant set submit_date = ".$_POST['submit_date']." WHERE sso = '".$sso."';");
+	}
 
 	if( $_POST['selectionfour'] && $_POST['selectionfive']){
 		if($_POST['selectionfour'] == "rm"){
-
-		}
+		    pg_query($db, "UPDATE applicant SET gato_req_met = TRUE;");
+		} else pg_query($db, "UPDATE applicant SET gato_req_met = FALSE;");
 
 		if($_POST['selectionfive'] == "rm"){
-
-		}
+		    pg_query($db, "UPDATE applicant_is_international SET ointa_req_met = TRUE;");
+		}else pg_query($db, "UPDATE applicant_is_international SET ointa_req_met = FALSE;");
 	}
 ?>
