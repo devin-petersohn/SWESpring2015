@@ -6,7 +6,7 @@ $(function(){
             'lname'  : 'lname',
             'fname'  : 'fname',
             'gpa'  : 'gpa',
-            'ID' : 'stu ID',
+            'ID' : 'student ID',
             'source' : 'enter the full info',
             'email'  : 'email address',
             'advisorname' : 'advisor name',
@@ -1116,7 +1116,6 @@ $(function(){
                     
                 },
                 function(data){
-                    alert(data);
                 }
         );
         window.location.href='studentpage';
