@@ -88,7 +88,7 @@
 		} else pg_query($db, "UPDATE Applicant SET gato_req_met = FALSE WHERE sso = '".$sso."';");
 	}
 
-	if($_POST['speak_next_test_date'] && $_POST['selectionthree'] && $_POST['speakScore'] && $_POST['semesterLast']){
+	if($_POST['timetoregister'] && $_POST['selectionthree'] && $_POST['speakScore'] && $_POST['semesterLast']){
 		pg_query($db, "DELETE FROM applicant_is_international WHERE sso = ". $sso.";");
 		pg_query($db, "INSERT INTO applicant_is_international (sso) VALUES ('".$sso."');");
 		if($_POST['selectionthree'] == "rm"){
@@ -96,6 +96,10 @@
 				speak_last_test_date = '". $_POST['semesterLast'] ."', speak_req_met = TRUE WHERE sso = '".$sso."';");
 		} else pg_query($db, "UPDATE applicant_is_international SET speak_req_met = FALSE,
 		     speak_next_test_date = ".$_POST['timetoregister']." WHERE sso = '".$sso."');");
+	}
+	
+	if($_POST['submit_date']) {
+	    pg_query($db, "UPDATE applicant set submit_date = ".$_POST['submit_date']." WHERE sso = '".$sso."';");
 	}
 
 	if( $_POST['selectionfour'] && $_POST['selectionfive']){
