@@ -7,7 +7,7 @@
     $time=array();
     $i=0;
 		while ($printedCourse = pg_fetch_row($course)) {
-		    $time[$i]=$printedCourse;
+		    $time[$i]=$printedCourse[0];
 		    $i++;
 		}
 		echo $time[2];
