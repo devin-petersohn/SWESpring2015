@@ -162,7 +162,7 @@ session_start();
             
             <br>    
             <div class="control-group" style="padding-top:90px;>
-              <div class="controls">
+<!--               <div class="controls"> -->
                 <button type="submit" class="btn btn-primary" name="addCourse">Add Course</button>
                 <button type="submit" class="btn btn-danger" name="delCourse">Delete Course</button>
               </div>
@@ -257,8 +257,8 @@ session_start();
                     <tr><th>Instructor</th><th>Course</th><th></th></tr>
                     <form action='' method='POST'><tr>
                     <td>
-                            <?php include 'php/changeTimeWindow.php';                   
-                            get_timeWindow();
+                            <?php include 'php/add_instructor_teaches.php';                   
+                            instructor_dropdown();
                             ?></td>
                         <td>
                             <?course_dropdown(); 
@@ -327,17 +327,20 @@ session_start();
             
      </div>
     
-  <hr>     
+   <hr>  
   
-  <div id="search"class="col-md-12" style="margin-top: 40px; width:95%; margin-left:auto; margin-right:auto;">
+ <div id="search"class="col-md-12" style="margin-top: 40px; width:95%; margin-left:auto; margin-right:auto;">
        <div class="well" style="height:300px;">
-             
-       </div>
-  </div>        
+            <?php include 'php/changeTimeWindow.php';                   
+                          get_timeWindow(); 
+                            
+                           ?>
+ </div> -->
+  </div>          
   
   
 </div><!--/container-->
-<!-- /Main -->
+ <!-- /Main --> 
 
 
 <footer class="text-center"> Copyright &copy; Software Engineering Group H, Spring 2015</footer>

@@ -1,5 +1,5 @@
 <?php
-if((include 'functions.php') != 1) header("Location:Error");
+include 'functions.php';
 
 $db = db_connect();
 
