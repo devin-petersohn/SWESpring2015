@@ -63,6 +63,16 @@ session_start();
 	</div>
     	b<script>
 		$(document).ready(function() {
+			$.ajax({
+                type: "POST",
+                url: "../.php",
+                data: {
+                    iCnt: iCnt
+                },
+                success: function(data){
+                    $('#myTable').append('<tr id="tr'+iCnt+'">'+'<td>'+data+'</td><td><select name="grade_course'+iCnt+'" id="grade_course'+iCnt+'" value="grade_course'+iCnt+'" > '+'<option value="default">Choose your GPA..</option>'+'<option value="A">A</option>'+'<option value="B">B</option>'+'<option value="C">C</option>'+'<option value="D">D</option>'+'</select></td></tr>');
+                }
+                });
 			$("#countdown_def").countdown(	
 											{
 												dateEnd:'05/30/2015 18:01:30',
