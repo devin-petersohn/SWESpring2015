@@ -4,10 +4,13 @@
 	$db = db_connect();
 	
 	$course = pg_query($db, "SELECT endtime from time_window;;");
-		echo $course['apply'];
-// 		while ($printedCourse = pg_fetch_row($course)) {
-// 		    echo "<option value = '".$printedCourse[0]."'>".$printedCourse[0]."</option>";
-// 		}
+    $time=array();
+    $i=0;
+		while ($printedCourse = pg_fetch_row($course)) {
+		    $time[$i]=$printedCourse;
+		    $i++;
+		}
+		echo $time[2];
 // 		echo "<\select>"
 
 
