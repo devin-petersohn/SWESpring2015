@@ -329,14 +329,46 @@ session_start();
     
    <hr>  
   
- <div id="search"class="col-md-12" style="margin-top: 40px; width:95%; margin-left:auto; margin-right:auto;">
-       <div class="well" style="height:300px;">
-            <?php include 'php/changeTimeWindow.php';                   
-                          get_timeWindow(); 
-                            
-                           ?>
- </div> -->
-  </div>          
+       <div class="well" style="height:300px; width:1100px; margin-left:auto; margin-right:auto;">
+            <table class="table table-striped">
+                <thead>
+                    <tr><th>Time Window</th><th>Start Date</th><th>End Date</th><th>Submit</th></tr>
+                    <form action='' method='POST'><tr>
+                    <td>
+                            <?php include 'php/changeTimeWindow.php';                   
+                            get_timeWindow();
+                            ?></td>
+                        <td>
+                           <input type="text" name= "startDate" placeholder= "ex: 2015-01-01"/>
+                        </td>
+                        <td>
+                            <input type="text" name= "endDate" placeholder= "ex: 2015-03-01"/>
+                        </td>
+                        <td><button type="submit" class="btn btn-primary" name="submitWindow">Submit</button></td></tr></form>
+                </thead>
+            </table>
+            <?php 
+                include 'php/functions.php';
+                $db = db_connect();
+                $current = pg_query($db, "SELECT windowname FROM time_window WHERE current_date BETWEEN starttime AND endtime;");
+                $window = pg_fetch_assoc($current);
+                echo "Current Time Window: " . $window['windowname'];
+                echo "<br> <br>";
+                
+                if(isset($_POST['submitWindow'])){
+                    echo $_POST['selectWindow']; 
+                    echo "<br>";
+                    echo $_POST['startDate']; 
+                    echo "<br>";
+                    echo $_POST['endDate'];
+                    
+                    include 'php/changeTimeWindow.php';
+                    changeWindow($_POST['startDate'], $_POST['endDate'], $_POST['selectWindow']);
+                }
+            
+            ?>
+ </div>
+          
   
   
 </div><!--/container-->

@@ -15,7 +15,11 @@ function get_timeWindow() {
 }
 
 
-
+function changeWindow($starttime, $endtime, $windowname) {
+    $db = db_connect();
+    pg_prepare($db, $test, "UPDATE time_window SET starttime = $1, endtime = $2 WHERE windowname = $3;");
+    $thisQuery = pg_execute($db, $test, array());
+}
 
 
 
