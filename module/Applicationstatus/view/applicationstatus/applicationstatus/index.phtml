@@ -45,50 +45,47 @@ if($status == PHP_SESSION_NONE){
             }
         }
     }
- 
-       /*if(isset($_SESSION['username'])){
+    
+    elseif (strcmp($window, "selection") == 0){
+        if(isset($_SESSION['username'])){
             $getOffer = pg_query($db, "SELECT * FROM applicant_offer_received WHERE sso = '".$_SESSION['username']."' AND offer_accepted IS NULL AND assigned_to_course IS NULL");
             if($getOffer != NULL){
                 while (($row = pg_fetch_assoc($getOffer))){
                     echo "<div style='text-align:center; font-size:20pt; margin-top:100px;'>";
                     echo "You have been selected as an assistant for ". $row['course_id'];
                     echo "</div>";
-                    echo "<form action='' method='POST'><button type='submit' class='btn btn-primary' name='acceptOffer' style='margin-left:475px; margin-right:20px; margin-top:20px;'>Accept</button><button type='submit' class='btn btn-danger'' name='rejectOffer' style='margin-top:20px;'>Reject</button><input type='hidden' name='course_id' value='" . $row['course_id'] . "'></form>";    
-                }    
-                    }
-                    else {
-                        echo "Your application under review.  Please check back later.";
-                    }
+                    echo "<form action='' method='POST'><button type='submit' class='btn btn-primary' name='acceptOffer' style='margin-left:475px; margin-right:20px; margin-top:20px;'>Accept</button><button type='submit' class='btn btn-danger'' name='rejectOffer' style='margin-top:20px;'>Reject</button><input type='hidden' name='course_id' value='" . $row['course_id'] . "'></form>";
                 }
-                    
-                    if(isset($_POST['acceptOffer'])){
-                        pg_query($db, "UPDATE applicant_offer_received SET offer_accepted=TRUE WHERE sso = '".$_SESSION['username']."' AND course_id = '".$_POST['course_id'] ."';");
-                        echo "<p style='text-align:center;'>Thank you for your response.</p>";
-                    }
-                    
-                    if(isset($_POST['rejectOffer'])){
-                        pg_query($db, "UPDATE applicant_offer_received SET offer_accepted=FALSE WHERE sso = '".$_SESSION['username']."' AND course_id = '".$_POST['course_id'] ."';");
-                    }
-            }*/
-      
-    
-    elseif (strcmp($window, "selection") == 0){
-     if(isset($_SESSION['username'])){
-            $getOffer = pg_query($db, "SELECT * FROM applicant_offer_received WHERE sso = '".$_SESSION['username']."' AND offer_accepted IS NULL AND assigned_to_course IS NULL");
-            if($getOffer != NULL){
-                while (($row = pg_fetch_assoc($getOffer))){
-                    echo 'You have been selected as an assistant for '. $row['course_id'];
-                    ?><form action='' method=POST><button type="submit" class="btn btn-primary" name="acceptOffer">Accept</button><button type="submit" class="btn btn-danger" name="rejectOffer">Reject</button></form>
-                    <?php 
-                    }    
             }
             else {
-                echo 'Your application under review.  Please check back later.';
+                echo "Your application under review.  Please check back later.";
             }
         }
-    }
+        
+        if(isset($_POST['acceptOffer'])){
+            pg_query($db, "UPDATE applicant_offer_received SET offer_accepted=TRUE WHERE sso = '".$_SESSION['username']."' AND course_id = '".$_POST['course_id'] ."';");
+            echo "<p style='text-align:center;'>Thank you for your response.</p>";
+        }
+        
+        if(isset($_POST['rejectOffer'])){
+            pg_query($db, "UPDATE applicant_offer_received SET offer_accepted=FALSE WHERE sso = '".$_SESSION['username']."' AND course_id = '".$_POST['course_id'] ."';");
+        }
+      }
+    
     elseif (strcmp($window, "accept") == 0){
-        echo "in assign TA window";
+        if(isset($_SESSION['username'])) {
+            $assigned = pg_query($db, "SELECT * FROM applicant_offer_received WHERE sso = '".$_SESSION['username']."' AND offer_accepted IS TRUE AND assigned_to_course IS TRUE");
+            if(pg_num_rows($assigned) >= 1){
+                echo "<div style='text-align:center; font-size:20pt; margin-top:100px;'>";
+                while(($results = pg_fetch_assoc($assigned))){
+                    echo "Congratulations! You have been assigned to course ". $results['course_id']." for the upcoming semester.";
+                }
+            }
+            else  {
+                echo "<div style='text-align:center; font-size:20pt; margin-top:100px;'>";
+                echo "All positions have been filled for this semester.  Please apply again next semster.";
+            }
+        }
     }
   
     ?>

@@ -352,16 +352,14 @@ session_start();
                 $db = db_connect();
                 $current = pg_query($db, "SELECT windowname FROM time_window WHERE current_date BETWEEN starttime AND endtime;");
                 $window = pg_fetch_assoc($current);
-                echo "Current Time Window: " . $window['windowname'];
-                echo "<br> <br>";
+                ?>
+                <div style="text-align:center;"> <?php 
+                echo "System is currently in the " . $window['windowname'] . " time window"; 
+                echo "<br> <br>";?>
+                </div>
                 
+                <?php 
                 if(isset($_POST['submitWindow'])){
-                    echo $_POST['selectWindow']; 
-                    echo "<br>";
-                    echo $_POST['startDate']; 
-                    echo "<br>";
-                    echo $_POST['endDate'];
-                    
                     include 'php/changeTimeWindow.php';
                     changeWindow($_POST['startDate'], $_POST['endDate'], $_POST['selectWindow']);
                 }
