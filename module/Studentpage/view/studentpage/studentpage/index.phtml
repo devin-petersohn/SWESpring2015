@@ -11,7 +11,7 @@ session_start();
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<link rel="stylesheet" type="text/css" href="css/countdown.css"/>
-        <script type="text/javascript"  src="js/jquery-1.10.2.js"></script>
+        <script type="text/javascript"  src="js/jquery.js"></script>
         <script type="text/javascript"  src="js/jquery.knob.min.js"></script>
         <script type="text/javascript"  src="js/countdown.min.js"></script>
     </head>
@@ -61,39 +61,55 @@ session_start();
     </div>
     <!-- /.container -->
 	</div>
-    	b<script>
+    	<script>
+    	var finishtime;
 		$(document).ready(function() {
-			$("#countdown_def").countdown(	
-											{
-												dateEnd:'05/30/2015 18:01:30',
-												format:true,
-												callback:function(){}
-											},
-											{
-												timezone:false,
-												offset:0
-											}
-										);
+			$.ajax({
+                type: "POST",
+                url: "../getcurrenttime.php",
+               
+                success: function(data){
+                    finishtime=String(data);
+                    console.log(finishtime);
 
-			$("#countdown_knob").countdown(
-											{
-												skin: 'knob',
-												option:{
-														global:{thickness:0.1},
-														day:{thickness:0.2},
-														hour:{thickness:0.4},
-														second:{thickness:.0}
-													},
-												dateEnd:'05/30/2015 18:01:30',
-												dateStart:'05/07/2012 18:01:30',
-												format:true,
-												callback:function(){alert('Knob Ready')}
-											},
-											{
-												timezone:true,
-												offset:6
-											}
-										);
+                    var hey=finishtime.split("-");
+                    var finaltime=hey[1]+'/'+hey[2]+'/'+hey[0];
+                    console.log(finaltime);
+                    $("#countdown_def").countdown(	
+							{
+								dateEnd:'05/30/2015 18:01:30',
+								format:true,
+								callback:function(){}
+							},
+							{
+								timezone:false,
+								offset:0
+							}
+						);
+
+$("#countdown_knob").countdown(
+							{
+								skin: 'knob',
+								option:{
+										global:{thickness:0.1},
+										day:{thickness:0.2},
+										hour:{thickness:0.4},
+										second:{thickness:.0}
+									},
+								dateEnd:finaltime+' 18:01:30',
+								dateStart:'05/07/2012 18:01:30',
+								format:true,
+								callback:function(){alert('Knob Ready')}
+							},
+							{
+								timezone:true,
+								offset:6
+							}
+						);
+                }
+                });
+            
+			
 		});
 	</script>
 <div style="text-align:center;clear:both"><r><br><br><br><br>
